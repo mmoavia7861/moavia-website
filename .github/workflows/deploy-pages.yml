@@ -35,8 +35,11 @@ jobs:
           GITHUB_PAGES: 'true'
         run: bun run build
 
-      - name: Configure single-page fallback
+      - name: Verify build and create deployment marker
         run: |
+          test -f dist/index.html
+          test -d dist/assets
+          echo "Moavia SEO Pro: GitHub Actions Vite production build" > dist/deploy-status.txt
           cp dist/index.html dist/404.html
           touch dist/.nojekyll
 
