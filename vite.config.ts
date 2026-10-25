@@ -6,6 +6,8 @@ import {defineConfig} from 'vite';
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss()],
+    // GitHub Pages serves this project from /moavia-website/, not the domain root.
+    base: process.env.GITHUB_PAGES === 'true' ? '/moavia-website/' : '/',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
