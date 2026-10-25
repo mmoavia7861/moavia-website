@@ -11,8 +11,7 @@ import {
   ShieldCheck,
   MessageSquare,
 } from 'lucide-react';
-import { collection, addDoc } from 'firebase/firestore';
-import { db } from '../firebase';
+import { postFirestore, firestoreStringFields } from '../services/firestoreRest';
 
 interface ContactSectionProps {
   initialService?: string;
@@ -58,23 +57,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
     };
 
     try {
-      // Firestore writes can remain pending while the SDK cannot reach its
-      // backend. Give the UI a finite wait and avoid claiming success.
-      let timeoutId: ReturnType<typeof setTimeout> | undefined;
-      try {
-        await Promise.race([
-          addDoc(collection(db, 'leads'), leadPayload),
-          new Promise<never>((_resolve, reject) => {
-            timeoutId = setTimeout(
-              () => reject(new Error('FIRESTORE_CONFIRMATION_TIMEOUT')),
-              12000
-            );
-          }),
-        ]);
-        setSubmitted(true);
-      } finally {
-        if (timeoutId !== undefined) clearTimeout(timeoutId);
-      }
+      await postFirestore('/leads', {
+        fields: firestoreStringFields(leadPayload),
+      });
+      setSubmitted(true);
     } catch (err: unknown) {
       const code = typeof err === 'object' && err !== null && 'code' in err
         ? String((err as { code?: string }).code)
@@ -85,7 +71,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
       } else if (code.includes('permission-denied')) {
         setErrorMessage('Firebase permissions rejected the submission. Please contact us on WhatsApp.');
       } else {
-        setErrorMessage('Unable to confirm inquiry storage. Please contact us on WhatsApp or email.');
+        setErrorMessage(err instanceof Error ? err.message : 'Unable to confirm inquiry storage. Please use WhatsApp or email.');
       }
     } finally {
       setLoading(false);
