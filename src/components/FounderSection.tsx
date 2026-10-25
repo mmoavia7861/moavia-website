@@ -43,7 +43,7 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
               {/* Authentic Headshot of Moavia Hassan */}
               <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-[#5265D8]/20 bg-slate-100 aspect-[3/4]">
                 <img
-                  src="/assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png"
+                  src={`${import.meta.env.BASE_URL}assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png`}
                   alt="Moavia Hassan — Founder and Principal Specialist at Moavia SEO Pro"
                   className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
                 />
