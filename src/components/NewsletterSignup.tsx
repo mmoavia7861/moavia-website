@@ -9,7 +9,7 @@ import {
   BellRing,
   ArrowRight
 } from 'lucide-react';
-import { subscribeToNewsletter } from '../services/newsletter';
+import { subscribeToNewsletter, NewsletterTimeoutError } from '../services/newsletter';
 
 export const NewsletterSignup: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -32,9 +32,15 @@ export const NewsletterSignup: React.FC = () => {
       setStatus('success');
       setFeedbackMessage('Your email has been saved in our newsletter list.');
     } catch (error: unknown) {
-      console.warn('Newsletter Firestore submission was not confirmed:', error);
+      console.warn('Newsletter Firestore submission not confirmed:', error instanceof Error ? error.name : 'Unknown error');
       setStatus('error');
-      setFeedbackMessage('Your subscription could not be confirmed. If you have already subscribed, you do not need to sign up again. Otherwise please try later.');
+      if (error instanceof NewsletterTimeoutError) {
+        setFeedbackMessage('Firebase did not respond in 12 seconds. Your subscription is not confirmed. Please check your inbox or try later.');
+      } else if (error instanceof Error && /permission-denied/i.test((error as { code?: string }).code || '')) {
+        setFeedbackMessage('Firebase permissions are blocking subscriptions. Please contact us or try again later.');
+      } else {
+        setFeedbackMessage('Could not confirm subscription. Please try again later or contact us directly.');
+      }
     }
   };
 
