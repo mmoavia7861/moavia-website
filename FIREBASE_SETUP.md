@@ -37,3 +37,15 @@ Verify the exact CLI command and target using the installed firebase-tools versi
 - Content panels other than leads may contain initial sample/mock data; do not treat that content as verified Firebase records.
 - The AI tools call `/api/*` implemented in `server.ts`. Those endpoints do **not** run on GitHub Pages. Deploy a protected backend separately or disable these tools until configured.
 - No Firebase Auth, Firestore rule, or Cloud Functions production deployment has been performed by generating this file.
+
+## Newsletter subscription persistence (new)
+
+The footer newsletter form now writes to the `newsletterSubscribers` collection of the configured named Firestore database (instead of browser localStorage). Subscriptions use a SHA-256 email digest as the document ID to reduce duplicate registrations. The form does not claim success unless the Firestore write resolves.
+
+**Action required:** Deploy the updated `firestore.rules` to the named database above. Rules saved in GitHub do not automatically update the live Firebase Console. In the Firestore **Security/Rules** tab, carefully review and publish the new `newsletterSubscribers` rule in the correct named database, or deploy with an authenticated Firebase CLI. Until the rules are published, the form may display a submission error rather than misleading success.
+
+After deployment: open the live site, enter an email not previously registered, submit, then open Firestore **Data → newsletterSubscribers**. Confirm a new document exists with `email`, `status`, `source`, `consent`, and `createdAt`. Do not put subscriber lists in public website content.
+
+**Prior signups:** The old form saved emails only to each visitor's browser localStorage. Those records are **not** automatically migrated to Firebase. Previously entered addresses must be resubmitted with the person's permission.
+
+**Production note:** The direct Firestore client-write flow is not a robust anti-spam solution. Use a rate-limited server endpoint, Firebase App Check, permission-controlled reads, and double opt-in before running a public email marketing list at scale. This implementation does not send newsletters or verification emails by itself.
