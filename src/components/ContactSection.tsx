@@ -58,14 +58,35 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
     };
 
     try {
-      // 1. Submit to Firestore `leads` collection
-      await addDoc(collection(db, 'leads'), leadPayload);
-
-      // Firestore confirmation is the only success condition.
-      setSubmitted(true);
-    } catch (err: any) {
-      console.error('Lead submission error:', err);
-      setErrorMessage('Unable to submit inquiry right now. Please contact us on WhatsApp or email instead.');
+      // Firestore writes can remain pending while the SDK cannot reach its
+      // backend. Give the UI a finite wait and avoid claiming success.
+      let timeoutId: ReturnType<typeof setTimeout> | undefined;
+      try {
+        await Promise.race([
+          addDoc(collection(db, 'leads'), leadPayload),
+          new Promise<never>((_resolve, reject) => {
+            timeoutId = setTimeout(
+              () => reject(new Error('FIRESTORE_CONFIRMATION_TIMEOUT')),
+              12000
+            );
+          }),
+        ]);
+        setSubmitted(true);
+      } finally {
+        if (timeoutId !== undefined) clearTimeout(timeoutId);
+      }
+    } catch (err: unknown) {
+      const code = typeof err === 'object' && err !== null && 'code' in err
+        ? String((err as { code?: string }).code)
+        : '';
+      console.warn('Lead submission could not be confirmed:', code || (err instanceof Error ? err.message : 'unknown'));
+      if (err instanceof Error && err.message === 'FIRESTORE_CONFIRMATION_TIMEOUT') {
+        setErrorMessage('Firebase did not confirm your inquiry within 12 seconds. It may still be pending; please contact us on WhatsApp instead of submitting repeatedly.');
+      } else if (code.includes('permission-denied')) {
+        setErrorMessage('Firebase permissions rejected the submission. Please contact us on WhatsApp.');
+      } else {
+        setErrorMessage('Unable to confirm inquiry storage. Please contact us on WhatsApp or email.');
+      }
     } finally {
       setLoading(false);
     }
