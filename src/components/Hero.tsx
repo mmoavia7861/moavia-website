@@ -133,7 +133,7 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Founder Headshot & Verification Badge */}
             <div className="flex items-center gap-4 pt-4 border-t border-[#E7EAF2]">
               <img
-                src="/assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png"
+                src={`${import.meta.env.BASE_URL}assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png`}
                 alt="Moavia Hassan, Founder of Moavia SEO Pro"
                 className="w-13 h-13 rounded-full object-cover object-top border-2 border-[#5265D8] shadow-md"
               />
