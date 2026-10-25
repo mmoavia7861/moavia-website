@@ -1,0 +1,9 @@
+{
+  "firestore": [
+    {
+      "database": "ai-studio-moaviaseoprodigi-1ac5ad8a-6ad0-4d35-b8d4-22db21a03fe4",
+      "rules": "firestore.rules",
+      "indexes": "firestore.indexes.json"
+    }
+  ]
+}
