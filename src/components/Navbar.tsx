@@ -51,7 +51,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
           className="flex items-center gap-3 cursor-pointer group"
         >
           <img
-            src="/assets/aistudio/moavia_seopro_logo_720x720_10966138.png"
+            src={`${import.meta.env.BASE_URL}assets/aistudio/moavia_seopro_logo_720x720_10966138.png`}
             alt="Moavia SEO Pro Logo"
             className="w-11 h-11 rounded-xl shadow-md border border-[#E7EAF2] object-contain group-hover:scale-105 transition-transform"
           />
