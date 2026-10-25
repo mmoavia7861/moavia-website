@@ -40,6 +40,50 @@ service cloud.firestore {
     }
     match /adminEmailRegistry/{entry} { allow read, write: if false; }
     match /adminInvitations/{entry} { allow read, write: if false; }
+    // Newsletter signup: create-only, never expose the subscriber list.
+    // IDs are SHA-256 of normalized email on the client. No client updates.
+    // For large-scale marketing use, move ingestion behind a rate-limited API.
+    match /newsletterSubscribers/{subscriberId} {
+      allow get, list: if false;
+      allow create: if
+        request.resource.data.keys().hasOnly(['email','status','source','consent','createdAt']) &&
+        request.resource.data.keys().hasAll(['email','status','source','consent','createdAt']) &&
+        request.resource.data.email is string &&
+        request.resource.data.email.size() > 5 &&
+        request.resource.data.email.size() <= 254 &&
+        request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+
+      allow create: if validLead();
+      allow read: if admin();
+      allow update, delete: if canManageLeads();
+    }
+    match /clients/{id} { allow read, write: if canManageLeads(); }
+    match /projects/{id} { allow read, write: if canManageLeads(); }
+    match /portfolioProjects/{id} {
+      allow get, list: if (resource.data.published == true) || admin();
+      allow create, update, delete: if owner() || (approvedStaff() && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'Content Editor');
+    }
+    match /blogPosts/{id} {
+      allow get, list: if (resource.data.published == true) || admin();
+      allow create, update, delete: if owner() || (approvedStaff() && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'Content Editor');
+    }
+    match /siteSettings/{id} {
+      allow read: if true;
+      allow write: if owner();
+    }
+    match /auditLogs/{id} {
+      allow read: if owner();
+      allow write: if false;
+    }
+  }
+}
+) &&
+        request.resource.data.status == 'active' &&
+        request.resource.data.source == 'footer_signup' &&
+        request.resource.data.consent == true &&
+        request.resource.data.createdAt == request.time &&
+        subscriberId.size() == 64;
+      allow update, delete: if false;
+    }
     match /leads/{id} {
       allow create: if validLead();
       allow read: if admin();
