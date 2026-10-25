@@ -1039,7 +1039,7 @@ export const AiToolsSection: React.FC = () => {
 
               <div className="flex flex-col sm:flex-row items-center gap-4 p-4 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2]">
                 <img
-                  src="/assets/aistudio/moavia_seopro_logo_720x720_10966138.png"
+                  src={`${import.meta.env.BASE_URL}assets/aistudio/moavia_seopro_logo_720x720_10966138.png`}
                   alt="Selected Asset"
                   className="w-20 h-20 rounded-xl object-contain border border-[#E7EAF2] bg-white p-1"
                 />
