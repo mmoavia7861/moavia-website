@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Mail,
   Send,
@@ -9,48 +9,33 @@ import {
   BellRing,
   ArrowRight
 } from 'lucide-react';
-import { saveSubscriberToStorage, getStoredSubscribers } from '../utils/newsletter';
+import { subscribeToNewsletter } from '../services/newsletter';
 
 export const NewsletterSignup: React.FC = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [feedbackMessage, setFeedbackMessage] = useState('');
   const [alreadySubscribed, setAlreadySubscribed] = useState(false);
-  const [subscriberCount, setSubscriberCount] = useState(1280);
 
-  useEffect(() => {
-    const stored = getStoredSubscribers();
-    if (stored.length > 0) {
-      setSubscriberCount(1280 + stored.length);
-    }
-  }, []);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email.trim()) {
       setStatus('error');
       setFeedbackMessage('Please enter your email address.');
       return;
     }
-
     setStatus('loading');
-
-    // Small natural delay for feedback responsiveness
-    setTimeout(() => {
-      const result = saveSubscriberToStorage(email);
-
-      if (result.success) {
-        setStatus('success');
-        setFeedbackMessage(result.message);
-        setAlreadySubscribed(Boolean(result.alreadySubscribed));
-        if (!result.alreadySubscribed) {
-          setSubscriberCount((prev) => prev + 1);
-        }
-      } else {
-        setStatus('error');
-        setFeedbackMessage(result.message);
-      }
-    }, 400);
+    setFeedbackMessage('');
+    try {
+      await subscribeToNewsletter(email);
+      setAlreadySubscribed(false);
+      setStatus('success');
+      setFeedbackMessage('Your email has been saved in our newsletter list.');
+    } catch (error: unknown) {
+      console.warn('Newsletter Firestore submission was not confirmed:', error);
+      setStatus('error');
+      setFeedbackMessage('Your subscription could not be confirmed. If you have already subscribed, you do not need to sign up again. Otherwise please try later.');
+    }
   };
 
   const handleReset = () => {
@@ -95,7 +80,7 @@ export const NewsletterSignup: React.FC = () => {
             </span>
             <span className="flex items-center gap-1.5">
               <Shield className="w-3.5 h-3.5 text-slate-400" />
-              Zero spam, 1-click unsubscribe
+              No spam. Unsubscribe by email request
             </span>
           </div>
         </div>
@@ -116,7 +101,7 @@ export const NewsletterSignup: React.FC = () => {
               </p>
 
               <div className="pt-2 flex items-center justify-between text-[11px] text-slate-400">
-                <span>Joined {subscriberCount.toLocaleString()}+ readers</span>
+                <span>Your newsletter preferences can be changed by contacting us.</span>
                 <button
                   type="button"
                   onClick={handleReset}
@@ -178,10 +163,10 @@ export const NewsletterSignup: React.FC = () => {
               <div className="flex items-center justify-between text-[11px] text-slate-400 px-1 pt-1">
                 <span className="flex items-center gap-1.5">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block" />
-                  Delivered every Tuesday morning
+                  SEO tips and industry news
                 </span>
                 <span className="font-medium text-slate-300">
-                  {subscriberCount.toLocaleString()} subscribers
+                  Updates by email
                 </span>
               </div>
             </form>
