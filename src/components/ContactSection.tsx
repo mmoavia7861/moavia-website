@@ -61,29 +61,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
       // 1. Submit to Firestore `leads` collection
       await addDoc(collection(db, 'leads'), leadPayload);
 
-      // 2. Also send to server backend endpoint for logging and notification
-      try {
-        await fetch('/api/leads', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(leadPayload),
-        });
-      } catch (err) {
-        console.warn('Backend proxy log note:', err);
-      }
-
+      // Firestore confirmation is the only success condition.
       setSubmitted(true);
     } catch (err: any) {
       console.error('Lead submission error:', err);
-      // Fallback: If Firestore writes require auth or encounter network, record in localStorage
-      try {
-        const stored = JSON.parse(localStorage.getItem('moavia_leads_backup') || '[]');
-        stored.push({ ...leadPayload, id: `local-${Date.now()}` });
-        localStorage.setItem('moavia_leads_backup', JSON.stringify(stored));
-        setSubmitted(true);
-      } catch {
-        setErrorMessage('Unable to submit inquiry at this moment. Please use our direct WhatsApp button below.');
-      }
+      setErrorMessage('Unable to submit inquiry right now. Please contact us on WhatsApp or email instead.');
     } finally {
       setLoading(false);
     }
