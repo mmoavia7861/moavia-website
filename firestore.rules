@@ -56,9 +56,9 @@ service cloud.firestore {
       request.resource.data.businessName.size() <= 200 &&
       request.resource.data.websiteUrl is string &&
       request.resource.data.websiteUrl.size() <= 300 &&
-      request.resource.data.service is string &&
-      request.resource.data.service.size() > 0 &&
-      request.resource.data.service.size() <= 160 &&
+      request.resource.data['service'] is string &&
+      request.resource.data['service'].size() > 0 &&
+      request.resource.data['service'].size() <= 160 &&
       request.resource.data.budget is string &&
       request.resource.data.budget.size() <= 100 &&
       request.resource.data.description is string &&
