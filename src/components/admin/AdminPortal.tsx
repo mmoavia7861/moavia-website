@@ -49,6 +49,7 @@ import {
 import {
   collection,
   onSnapshot,
+  getDoc,
   query,
   orderBy,
   updateDoc,
@@ -91,6 +92,9 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
   // Authentication State
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [authLoading, setAuthLoading] = useState(true);
+  const [adminCheckLoading, setAdminCheckLoading] = useState(true);
+  const [authorizedRole, setAuthorizedRole] = useState<AdminRole | null>(null);
+  const [verificationRefreshKey, setVerificationRefreshKey] = useState(0);
   const [authError, setAuthError] = useState<string | null>(null);
   const [authSuccess, setAuthSuccess] = useState<string | null>(null);
 
@@ -118,7 +122,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
   >('overview');
 
   // Live Data Lists (synced from Firestore with fallback to sample data)
-  const [leads, setLeads] = useState<Lead[]>(sampleLeads);
+  const [leads, setLeads] = useState<Lead[]>([]);
   const [clients, setClients] = useState<Client[]>(sampleClients);
   const [projects, setProjects] = useState<Project[]>(sampleProjects);
   const [portfolio, setPortfolio] = useState<PortfolioItem[]>(initialPortfolio);
@@ -160,9 +164,42 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
     return () => unsubscribe();
   }, []);
 
-  // Real-time Firestore Listeners (only when authenticated and verified)
+  // Verify the role from Firebase before any private data subscription or dashboard render.
+  // Firebase Security Rules MUST independently enforce these same permissions.
   useEffect(() => {
-    if (!currentUser || !currentUser.emailVerified) return;
+    let cancelled = false;
+    const checkAccess = async () => {
+      setAdminCheckLoading(true);
+      if (!currentUser || !currentUser.emailVerified) {
+        setAuthorizedRole(null);
+        setAdminCheckLoading(false);
+        return;
+      }
+      try {
+        if (isPrimaryAdministrator(currentUser.email || '')) {
+          if (!cancelled) setAuthorizedRole('Super Admin');
+        } else {
+          const snapshot = await getDoc(doc(db, 'adminUsers', currentUser.uid));
+          const details = snapshot.data();
+          const claimedRole = details?.role as AdminRole;
+          const validRole = (['Super Admin', 'Manager', 'Content Editor', 'Viewer'] as string[]).includes(claimedRole);
+          const emailMatches = normalizeEmail(details?.email || '') === normalizeEmail(currentUser.email || '');
+          if (!cancelled) setAuthorizedRole(snapshot.exists() && details?.active === true && validRole && emailMatches ? claimedRole : null);
+        }
+      } catch (error) {
+        console.warn('Could not confirm administrator authorization:', error);
+        if (!cancelled) setAuthorizedRole(null);
+      } finally {
+        if (!cancelled) setAdminCheckLoading(false);
+      }
+    };
+    void checkAccess();
+    return () => { cancelled = true; };
+  }, [currentUser, verificationRefreshKey]);
+
+  // Real-time Firestore Listeners (only for verified, authorized admins)
+  useEffect(() => {
+    if (!currentUser || !currentUser.emailVerified || !authorizedRole) return;
 
     // Listen to Leads
     try {
@@ -170,27 +207,24 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
       const unsubLeads = onSnapshot(
         q,
         (snapshot) => {
-          if (!snapshot.empty) {
-            const items: Lead[] = [];
-            snapshot.forEach((doc) => {
-              items.push({ id: doc.id, ...(doc.data() as any) });
-            });
-            setLeads(items);
-          }
+          const items: Lead[] = [];
+          snapshot.forEach((leadDoc) => {
+            items.push({ id: leadDoc.id, ...(leadDoc.data() as any) });
+          });
+          setLeads(items);
         },
-        (error) => console.warn('Leads snapshot fallback note:', error)
+        (error) => { setLeads([]); console.warn('Unable to read Firestore leads:', error); }
       );
 
       return () => unsubLeads();
     } catch (e) {
       console.warn('Firestore subscription note:', e);
     }
-  }, [currentUser]);
+  }, [currentUser, authorizedRole]);
 
   // Determine Current User Role
   const currentEmail = currentUser?.email ? normalizeEmail(currentUser.email) : '';
-  const isFounderAdmin = isPrimaryAdministrator(currentEmail);
-  const userRole: AdminRole = isFounderAdmin ? 'Super Admin' : 'Manager';
+  const userRole: AdminRole = authorizedRole ?? 'Viewer';
   const permissions = getRolePermissions(userRole);
 
   // Handlers
@@ -222,8 +256,8 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
     setAuthError(null);
 
     const norm = normalizeEmail(emailInput);
-    if (!isPrimaryAdministrator(norm) && !invitationTokenInput) {
-      setAuthError('Open public registration is restricted. You must have an authorized staff invitation token to register.');
+    if (!isPrimaryAdministrator(norm)) {
+      setAuthError('Administrator self-registration is limited to the verified owner. Staff must be provisioned through a trusted administrator workflow.');
       return;
     }
 
@@ -253,7 +287,8 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
     if (!currentUser) return;
     try {
       await currentUser.reload();
-      setCurrentUser({ ...auth.currentUser! });
+      setCurrentUser(auth.currentUser);
+      setVerificationRefreshKey((key) => key + 1);
       if (auth.currentUser?.emailVerified) {
         setAuthSuccess('Email verified! Accessing dashboard...');
       } else {
@@ -276,15 +311,14 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
     }
   };
 
-  // Lead Actions
+  // Persist status in Firestore first; never pretend a rejected write succeeded.
   const handleUpdateLeadStatus = async (leadId: string, newStatus: any) => {
-    setLeads((prev) =>
-      prev.map((l) => (l.id === leadId ? { ...l, status: newStatus } : l))
-    );
     try {
       await updateDoc(doc(db, 'leads', leadId), { status: newStatus });
-    } catch {
-      // Local fallback updated
+      setLeads((prev) => prev.map((lead) => lead.id === leadId ? { ...lead, status: newStatus } : lead));
+    } catch (error) {
+      console.error('Lead status update failed:', error);
+      window.alert('Unable to update this lead. Please check Firebase access and try again.');
     }
   };
 
@@ -309,6 +343,10 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
     link.click();
     document.body.removeChild(link);
   };
+
+  if (authLoading) {
+    return <div className="fixed inset-0 z-50 bg-white flex items-center justify-center text-[#18243A] font-semibold">Checking Firebase sign-in...</div>;
+  }
 
   // --- RENDER 1: AUTHENTICATION GATE ---
   if (!currentUser) {
@@ -589,6 +627,24 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
             </button>
           </div>
 
+        </div>
+      </div>
+    );
+  }
+
+  if (adminCheckLoading) {
+    return <div className="fixed inset-0 z-50 bg-white flex items-center justify-center text-[#18243A] font-semibold">Verifying administrator permissions...</div>;
+  }
+
+  if (!authorizedRole) {
+    return (
+      <div className="fixed inset-0 z-50 bg-[#18243A]/70 flex items-center justify-center p-4">
+        <div className="max-w-md w-full bg-white rounded-3xl shadow-xl p-8 text-center space-y-4">
+          <ShieldCheck className="w-10 h-10 text-[#5265D8] mx-auto" />
+          <h2 className="text-xl font-bold">Administrator Access Required</h2>
+          <p className="text-sm text-slate-600">Your email is verified, but this account has no approved administrator role. Private business data is not accessible.</p>
+          <p className="text-xs text-slate-500">{currentUser.email}</p>
+          <button type="button" onClick={async () => { await logOut(); onClose(); }} className="px-5 py-3 rounded-xl bg-[#5265D8] text-white font-semibold">Sign Out</button>
         </div>
       </div>
     );
