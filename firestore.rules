@@ -4,105 +4,142 @@ service cloud.firestore {
     function verified() {
       return request.auth != null && request.auth.token.email_verified == true;
     }
+
+    // Only a verified owner identity can administer the entire database.
     function owner() {
       return verified() &&
         request.auth.token.email == 'moaviahassan124@gmail.com';
     }
-    function approvedStaff() {
+
+    function staff() {
       return verified() &&
         exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid)) &&
         get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.active == true &&
         get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.email == request.auth.token.email &&
         get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role in ['Manager', 'Content Editor', 'Viewer'];
     }
+
     function admin() {
-      return owner() || approvedStaff();
+      return owner() || staff();
     }
-    function canManageLeads() {
-      return owner() || (approvedStaff() && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'Manager');
+
+    function leadManager() {
+      return owner() ||
+        (staff() && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'Manager');
     }
+
+    function editor() {
+      return owner() ||
+        (staff() && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'Content Editor');
+    }
+
     function validLead() {
       return request.resource.data.keys().hasOnly([
-        'fullName','email','whatsapp','businessName','websiteUrl','service',
-        'budget','description','status','assignedManager','createdAt','updatedAt'
+        'fullName', 'email', 'whatsapp', 'businessName', 'websiteUrl',
+        'service', 'budget', 'description', 'status', 'assignedManager',
+        'createdAt', 'updatedAt'
       ]) &&
-      request.resource.data.fullName is string && request.resource.data.fullName.size() > 0 && request.resource.data.fullName.size() <= 120 &&
-      request.resource.data.email is string && request.resource.data.email.size() <= 254 &&
-      request.resource.data.service is string && request.resource.data.service.size() <= 160 &&
-      request.resource.data.description is string && request.resource.data.description.size() <= 3000 &&
+      request.resource.data.keys().hasAll([
+        'fullName', 'email', 'whatsapp', 'businessName', 'websiteUrl',
+        'service', 'budget', 'description', 'status', 'assignedManager',
+        'createdAt', 'updatedAt'
+      ]) &&
+      request.resource.data.fullName is string &&
+      request.resource.data.fullName.size() > 0 &&
+      request.resource.data.fullName.size() <= 120 &&
+      request.resource.data.email is string &&
+      request.resource.data.email.size() > 5 &&
+      request.resource.data.email.size() <= 254 &&
+      request.resource.data.whatsapp is string &&
+      request.resource.data.whatsapp.size() <= 40 &&
+      request.resource.data.businessName is string &&
+      request.resource.data.businessName.size() <= 200 &&
+      request.resource.data.websiteUrl is string &&
+      request.resource.data.websiteUrl.size() <= 300 &&
+      request.resource.data.service is string &&
+      request.resource.data.service.size() > 0 &&
+      request.resource.data.service.size() <= 160 &&
+      request.resource.data.budget is string &&
+      request.resource.data.budget.size() <= 100 &&
+      request.resource.data.description is string &&
+      request.resource.data.description.size() <= 3000 &&
       request.resource.data.status == 'New' &&
-      request.resource.data.assignedManager == 'Moavia Hassan';
+      request.resource.data.assignedManager == 'Moavia Hassan' &&
+      request.resource.data.createdAt is string &&
+      request.resource.data.updatedAt is string;
     }
-    match /{anyPath=**} { allow read, write: if false; }
+
+    function validNewsletterSignup() {
+      return request.resource.data.keys().hasOnly([
+        'email', 'status', 'source', 'consent', 'createdAt'
+      ]) &&
+      request.resource.data.keys().hasAll([
+        'email', 'status', 'source', 'consent', 'createdAt'
+      ]) &&
+      request.resource.data.email is string &&
+      request.resource.data.email.size() > 5 &&
+      request.resource.data.email.size() <= 254 &&
+      request.resource.data.email.matches('^[^@ ]+@[^@ ]+[.][^@ ]+$') &&
+      request.resource.data.status == 'active' &&
+      request.resource.data.source == 'footer_signup' &&
+      request.resource.data.consent == true &&
+      request.resource.data.createdAt == request.time;
+    }
+
+    // Any path not specifically granted below remains denied by default.
     match /adminUsers/{uid} {
-      allow read: if owner() || (verified() && request.auth.uid == uid);
-      allow write: if owner();
+      allow read: if owner() ||
+        (verified() && request.auth.uid == uid &&
+         resource.data.active == true &&
+         resource.data.email == request.auth.token.email);
+      allow create, update, delete: if owner();
     }
-    match /adminEmailRegistry/{entry} { allow read, write: if false; }
-    match /adminInvitations/{entry} { allow read, write: if false; }
-    // Newsletter signup: create-only, never expose the subscriber list.
-    // IDs are SHA-256 of normalized email on the client. No client updates.
-    // For large-scale marketing use, move ingestion behind a rate-limited API.
+
+    match /adminEmailRegistry/{entry} {
+      allow read, write: if false;
+    }
+
+    match /adminInvitations/{entry} {
+      allow read, write: if false;
+    }
+
     match /newsletterSubscribers/{subscriberId} {
-      allow get, list: if false;
-      allow create: if
-        request.resource.data.keys().hasOnly(['email','status','source','consent','createdAt']) &&
-        request.resource.data.keys().hasAll(['email','status','source','consent','createdAt']) &&
-        request.resource.data.email is string &&
-        request.resource.data.email.size() > 5 &&
-        request.resource.data.email.size() <= 254 &&
-        request.resource.data.email.matches('^[^@\\s]+@[^@\\s]+\\.[^@\\s]+
-      allow create: if validLead();
-      allow read: if admin();
-      allow update, delete: if canManageLeads();
+      // Anonymous visitors can subscribe, but cannot read the list or overwrite.
+      // Document IDs are SHA-256 digests of normalized email in the frontend.
+      allow create: if validNewsletterSignup() &&
+        subscriberId.matches('^[0-9a-f]{64}$');
+      allow read, update, delete: if owner();
     }
-    match /clients/{id} { allow read, write: if canManageLeads(); }
-    match /projects/{id} { allow read, write: if canManageLeads(); }
-    match /portfolioProjects/{id} {
-      allow get, list: if (resource.data.published == true) || admin();
-      allow create, update, delete: if owner() || (approvedStaff() && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'Content Editor');
-    }
-    match /blogPosts/{id} {
-      allow get, list: if (resource.data.published == true) || admin();
-      allow create, update, delete: if owner() || (approvedStaff() && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'Content Editor');
-    }
-    match /siteSettings/{id} {
-      allow read: if true;
-      allow write: if owner();
-    }
-    match /auditLogs/{id} {
-      allow read: if owner();
-      allow write: if false;
-    }
-  }
-}
-) &&
-        request.resource.data.status == 'active' &&
-        request.resource.data.source == 'footer_signup' &&
-        request.resource.data.consent == true &&
-        request.resource.data.createdAt == request.time &&
-        subscriberId.size() == 64;
-      allow update, delete: if false;
-    }
+
     match /leads/{id} {
       allow create: if validLead();
       allow read: if admin();
-      allow update, delete: if canManageLeads();
+      allow update, delete: if leadManager();
     }
-    match /clients/{id} { allow read, write: if canManageLeads(); }
-    match /projects/{id} { allow read, write: if canManageLeads(); }
+
+    match /clients/{id} {
+      allow read, write: if leadManager();
+    }
+
+    match /projects/{id} {
+      allow read, write: if leadManager();
+    }
+
     match /portfolioProjects/{id} {
-      allow get, list: if (resource.data.published == true) || admin();
-      allow create, update, delete: if owner() || (approvedStaff() && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'Content Editor');
+      allow read: if resource.data.published == true || admin();
+      allow create, update, delete: if editor();
     }
+
     match /blogPosts/{id} {
-      allow get, list: if (resource.data.published == true) || admin();
-      allow create, update, delete: if owner() || (approvedStaff() && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'Content Editor');
+      allow read: if resource.data.published == true || admin();
+      allow create, update, delete: if editor();
     }
+
     match /siteSettings/{id} {
       allow read: if true;
       allow write: if owner();
     }
+
     match /auditLogs/{id} {
       allow read: if owner();
       allow write: if false;
