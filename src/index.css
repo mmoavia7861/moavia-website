@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --brand-blue: #5265D8;
+    --brand-purple: #8B63D8;
+    --brand-teal: #17A99A;
+    --brand-coral: #F17F72;
+    --brand-gold: #E8B451;
+    --pearl-white: #F8F9FD;
+    --deep-ink: #18243A;
+    --muted-text: #65738B;
+    --border-subtle: #E7EAF2;
+  }
+
+  body {
+    background-color: var(--pearl-white);
+    color: var(--deep-ink);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Aurora Premium Glass and Background Gradient Classes */
+.aurora-bg {
+  background: radial-gradient(circle at 10% 20%, rgba(82, 101, 216, 0.08) 0%, transparent 40%),
+              radial-gradient(circle at 90% 15%, rgba(139, 99, 216, 0.09) 0%, transparent 40%),
+              radial-gradient(circle at 50% 80%, rgba(23, 169, 154, 0.06) 0%, transparent 50%),
+              #F8F9FD;
+}
+
+.aurora-gradient-text {
+  background: linear-gradient(135deg, #5265D8 0%, #8B63D8 50%, #17A99A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.aurora-border {
+  border-color: #E7EAF2;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(231, 234, 242, 0.9);
+}
+
+.glass-card {
+  background: #FFFFFF;
+  border: 1px solid #E7EAF2;
+  box-shadow: 0 4px 20px -2px rgba(82, 101, 216, 0.05);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  box-shadow: 0 12px 30px -4px rgba(82, 101, 216, 0.12);
+  border-color: rgba(139, 99, 216, 0.3);
+  transform: translateY(-2px);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F4F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}

@@ -1,0 +1,998 @@
+# MOAVIA SEO PRO — ADVANCED BACKEND & SECURE ADMIN DASHBOARD MASTER PROMPT
+
+## PROJECT OBJECTIVE
+
+Act as a Senior Backend Engineer, Firebase Architect, Database Security Specialist, Authentication Expert, Full-Stack Developer, and Professional Admin Dashboard UI/UX Designer.
+
+Develop a complete, secure, production-ready backend and administrative management system for the existing website **Moavia SEO Pro**.
+
+**Important: Do not rebuild or redesign the public website.**
+
+Integrate all backend functionality with the existing website while preserving its current design, SEO, services, pages, portfolio, and working features.
+
+The admin dashboard must use the existing Aurora Premium multi-color branding.
+
+This project must include robust email verification, one-account-per-email enforcement, secure registration, role-based permissions, password recovery, database management, and a fully functional administration dashboard.
+
+---
+
+# PART 1 — AUTHENTICATION AND ADMIN SECURITY
+
+## 1. ADMINISTRATOR ACCOUNT SYSTEM
+
+Use Firebase Authentication with secure, server-enforced administrator authorization.
+
+Primary Administrator:
+
+**moaviahassan124@gmail.com**
+
+Owner: Moavia Hassan
+
+The primary administrator should be securely provisioned as Super Admin using a trusted setup process.
+
+Never grant Super Admin privileges solely because someone enters or claims to own the configured email address.
+
+Disable unrestricted public administrator registration.
+
+Allow new staff administrators only through invitations or another securely authorized process.
+
+## 2. EMAIL VERIFICATION — MANDATORY
+
+Implement a complete email verification system.
+
+### Email and Password Registration
+
+When an authorized, invited administrator registers:
+
+1. Validate the invitation and registered email address.
+2. Validate the password against secure password requirements.
+3. Create the Firebase Authentication account.
+4. Send an email verification link to the registered email.
+5. Display a "Verify Your Email" screen.
+6. Require the user to verify ownership of the email address.
+7. Refresh the authentication state after verification.
+8. Recheck administrator authorization on the backend.
+9. Allow dashboard access only when the email is verified and the admin role is active.
+
+### Verification Email
+
+Send a branded verification email containing:
+
+- Moavia SEO Pro identity
+- Clear email verification instructions
+- Secure verification link
+- Appropriate expiry information
+- Support contact information
+
+Use Firebase's supported email verification flow or an equivalent secure, properly configured verification process.
+
+### Verification Screen
+
+Display:
+
+**Verify Your Email Address**
+
+"We've sent a verification link to your registered email address. Please verify your email before accessing the Moavia SEO Pro Admin Dashboard."
+
+Buttons:
+
+- Resend Verification Email
+- I've Verified My Email
+- Back to Login
+
+The "I've Verified My Email" button must refresh the authentication token or reload the current Firebase user and verify the updated state.
+
+Do not trust a frontend checkbox as proof of verification.
+
+### Google Sign-In
+
+If an administrator uses Google Sign-In, verify the email verification status supplied by Firebase Authentication and the trusted identity provider.
+
+Do not unnecessarily require a second email verification message when the provider has already verified the email.
+
+Still require valid administrator authorization.
+
+### Unverified Email Restrictions
+
+An unverified email must not allow access to:
+
+- Admin dashboard data
+- Client inquiries
+- Private leads
+- Project management
+- Blog publishing
+- Website settings
+- Admin role management
+- Media uploads
+- Sensitive reports
+
+Enforce these restrictions through server-side authorization and Firebase Security Rules, not only frontend navigation.
+
+## 3. ONE EMAIL — ONE ADMIN ACCOUNT
+
+**CRITICAL REQUIREMENT: A registered administrator email address must not be registered again as a separate administrator account.**
+
+Enforce unique administrator email registration.
+
+### Registration Rules
+
+1. Normalize email addresses by trimming surrounding whitespace and converting case consistently to lowercase.
+2. Check for an existing Firebase Authentication identity.
+3. Enforce administrator email uniqueness through a trusted backend process.
+4. Never create another admin identity record using the same normalized email address.
+5. Reject repeated registration attempts for an already registered admin.
+6. Direct an existing administrator to sign in rather than register again.
+7. Allow normal repeated sign-ins using the existing account.
+8. Prevent race conditions when two registration attempts occur simultaneously.
+9. Prevent duplicate staff invitations and duplicate admin role assignments.
+10. Apply uniqueness checks on the backend, not only in the browser.
+
+### Existing Account Response
+
+For an authorized user attempting to register again with an already registered email, show:
+
+**Account Already Registered**
+
+"This email address is already associated with an administrator account. Please sign in to continue."
+
+Buttons:
+
+- Sign In
+- Forgot Password
+
+Do not create a second account.
+
+For unauthenticated public requests, avoid revealing whether a particular email address has an admin account.
+
+### Firebase Implementation
+
+Use Firebase Authentication's existing-account behavior together with an admin email registry.
+
+Example:
+
+```text
+adminUsers/
+  {firebaseAuthUid}
+
+adminEmailRegistry/
+  {sha256OfNormalizedEmail}
+```
+
+The email registry must be private and accessible only through trusted backend operations.
+
+Use Firestore transactions for atomic uniqueness checks and registry creation.
+
+Account creation, invitation acceptance, and registry updates must be designed for retries and partial failures without leaving duplicate or orphaned admin records.
+
+Use an idempotent registration/finalization process.
+
+Do not use a simple frontend Firestore query as the sole uniqueness mechanism.
+
+### Multiple Authentication Providers
+
+If an email is associated with an existing administrator identity, do not create another admin profile when the user attempts Google Sign-In or email/password registration.
+
+Where appropriate, use Firebase's supported account linking process after securely confirming account ownership.
+
+Do not automatically merge different identities without verification.
+
+Maintain one authorized admin profile per unique approved email.
+
+### Account Email Changes
+
+Allow administrator email changes only through a secure, verified process.
+
+Reverify the new email and atomically update the private email registry and associated admin records.
+
+Prevent changing to an email already registered to another administrator.
+
+## 4. SECURE LOGIN SYSTEM
+
+Provide professional login functionality.
+
+Support:
+
+- Google Sign-In
+- Email and password login for approved invited accounts
+- Email verification checks
+- Administrator role checks
+- Persistent session handling
+- Logout
+- Auth loading indicators
+- Proper error handling
+
+### Login Page
+
+Heading:
+
+**Moavia SEO Pro — Admin Portal**
+
+Subheading:
+
+"Securely sign in to manage your business operations."
+
+Fields:
+
+- Email address
+- Password
+
+Buttons:
+
+- Sign In
+- Continue with Google
+- Forgot Password
+
+Only show registration or invitation-acceptance functionality to eligible invited administrators.
+
+Do not provide open public admin signup.
+
+## 5. FORGOT PASSWORD AND ACCOUNT RECOVERY
+
+Implement a secure password recovery system.
+
+### Forgot Password Workflow
+
+1. User clicks Forgot Password.
+2. User enters an email address.
+3. Firebase sends a supported password reset email where applicable.
+4. The user opens the secure reset link.
+5. The user sets a new password.
+6. The system confirms successful password reset.
+7. The user returns to the login page.
+
+Use generic responses where appropriate to avoid public email-account enumeration.
+
+Apply rate limiting and abuse protection.
+
+Never display or email an existing password.
+
+## 6. RESEND VERIFICATION EMAIL
+
+Include a functioning Resend Verification Email feature.
+
+Requirements:
+
+- Available to eligible unverified users
+- Respect Firebase rate limits
+- Prevent repeated rapid requests
+- Display appropriate confirmation messages
+- Handle expired verification links
+- Handle failed email delivery gracefully
+
+Example:
+
+"Verification email requested. Please check your inbox and spam folder."
+
+Do not claim delivery was completed unless the provider confirms the relevant request was accepted.
+
+## 7. ADMINISTRATOR ROLES
+
+Implement these roles:
+
+**Super Admin**
+- Full authorized access
+- Manage administrators
+- Control website settings
+- View and manage leads
+- Manage services, projects, pricing, blog, and media
+
+**Manager**
+- Manage permitted leads and projects
+- Access assigned operational reports
+
+**Content Editor**
+- Manage blog content
+- Manage portfolio descriptions
+- Update approved public content
+
+**Viewer**
+- Read permitted dashboard information
+- No editing or deletion rights
+
+Permissions must be enforced on trusted backend operations.
+
+Use Firebase custom claims or another secure role authorization mechanism.
+
+Ensure disabled or revoked administrators lose access appropriately.
+
+## 8. ADMIN INVITATION SYSTEM
+
+The Super Admin should be able to invite staff through a secure process.
+
+Workflow:
+
+1. Super Admin opens Admin Users.
+2. Enters the staff member's email.
+3. Selects an authorized role.
+4. The system checks for duplicate invitations and existing administrator registrations.
+5. Creates an expiring, single-use invitation.
+6. Sends the invitation securely.
+7. The invited user verifies ownership of the email.
+8. The user signs in or links an existing account.
+9. The backend activates the approved administrator role.
+
+Prevent unauthorized invitation creation.
+
+Store invitation tokens securely, with appropriate expiry and single-use enforcement.
+
+Log administrator invitations and role changes.
+
+---
+
+# PART 2 — FIREBASE BACKEND
+
+## 9. BACKEND TECHNOLOGY
+
+Use:
+
+- Firebase Authentication
+- Cloud Firestore
+- Firebase Cloud Storage
+- Firebase Cloud Functions
+- Firebase Security Rules
+- Firebase App Check where supported
+- Secure server-side validation
+- Transactional email integration
+- Firebase Emulator Suite
+
+Use a separate Firebase project for Moavia SEO Pro.
+
+Do not reuse an unrelated website's database.
+
+## 10. DATABASE STRUCTURE
+
+Create and document collections such as:
+
+```text
+firestore/
+├── adminUsers/
+├── adminEmailRegistry/
+├── adminInvitations/
+├── leads/
+├── clients/
+├── projects/
+├── serviceCatalog/
+├── pricingPackages/
+├── portfolioProjects/
+├── blogPosts/
+├── blogCategories/
+├── mediaAssets/
+├── testimonials/
+├── faqs/
+├── contactMessages/
+├── siteSettings/
+├── notifications/
+├── auditLogs/
+└── systemSettings/
+```
+
+Use proper indexes, consistent document schemas, server timestamps, and controlled access.
+
+Private collections must not be publicly readable.
+
+## 11. LEAD MANAGEMENT BACKEND
+
+Connect the existing website's inquiry forms to a secure lead submission endpoint.
+
+Each lead should contain:
+
+- Lead ID
+- Full name
+- Email
+- WhatsApp
+- Business name
+- Website URL
+- Requested service
+- Project budget
+- Project description
+- Submission date
+- Lead status
+- Internal notes
+- Assigned manager
+
+### Lead Statuses
+
+- New
+- Under Review
+- Contacted
+- Proposal Sent
+- Converted
+- Closed
+- Lost
+
+Use server-side validation, rate limiting, and secure Firestore writes.
+
+Do not allow public users to set private lead statuses or admin notes.
+
+## 12. CLIENT AND PROJECT DATABASE
+
+Create secure management for agency clients and projects.
+
+Project categories:
+
+- SEO
+- WordPress
+- AI Website Development
+- Web Development
+- Meta Ads
+- Google Ads
+
+Support project creation, assignments, deadlines, milestones, deliverables, internal notes, and completion tracking.
+
+Keep internal client information separate from public portfolio content.
+
+## 13. CONTENT MANAGEMENT BACKEND
+
+Allow authorized users to manage:
+
+- Services
+- Pricing
+- Portfolio
+- Blog posts
+- FAQs
+- Verified testimonials
+- Business settings
+- Public contact details
+- Homepage announcements
+
+Support Draft, Published, and Archived states.
+
+Ensure that published content can be reflected correctly in the public website's SEO-friendly output.
+
+For statically generated public pages, use a secure content publishing workflow that triggers a production rebuild when needed.
+
+## 14. MEDIA MANAGEMENT BACKEND
+
+Use Firebase Cloud Storage to manage:
+
+- Portfolio images
+- Blog images
+- Service graphics
+- Website logos
+- Promotional media
+
+Implement:
+
+- Authorized uploads
+- File validation
+- File-size limits
+- Secure storage paths
+- Image previews
+- Asset replacement
+- Asset deletion
+- Alt text management
+- Public/private visibility controls
+
+Never allow unauthorized uploads.
+
+## 15. BACKEND SECURITY
+
+Follow default-deny security principles.
+
+Implement:
+
+- Verified authentication
+- Server-enforced roles
+- Secure Firebase Security Rules
+- Input validation
+- Rate limiting
+- Private data protection
+- Protected administrative operations
+- Restricted media uploads
+- Audit logging
+- Safe error messages
+- Environment-based secret configuration
+
+Do not expose private API keys or admin credentials in frontend code.
+
+Do not treat Firebase public configuration values as proof of authorization.
+
+---
+
+# PART 3 — PROFESSIONAL ADMIN DASHBOARD
+
+## 16. DASHBOARD DESIGN
+
+Create a beautiful, responsive admin interface following Aurora Premium branding.
+
+Colors:
+
+- Blue: #5265D8
+- Purple: #8B63D8
+- Teal: #17A99A
+- Coral: #F17F72
+- Gold: #E8B451
+- White: #F8F9FD
+- Text: #18243A
+
+Use:
+
+- Premium sidebar navigation
+- Top navigation bar
+- Administrator profile menu
+- Notification indicator
+- Professional KPI cards
+- Charts based on real data
+- Modern tables
+- Search and filtering
+- Loading states
+- Status labels
+- Confirmation dialogs
+- Responsive mobile layouts
+
+Do not show fabricated statistics.
+
+## 17. DASHBOARD NAVIGATION
+
+```text
+MOAVIA SEO PRO — ADMIN PANEL
+
+Dashboard
+│
+├── Overview
+├── Leads & Inquiries
+├── Clients
+├── Projects
+├── Services
+├── Pricing Packages
+├── Portfolio Manager
+├── Blog Management
+├── Media Library
+├── Testimonials
+├── FAQs
+├── Contact Messages
+├── Notifications
+├── Reports & Analytics
+├── Admin Users & Invitations
+├── Email Verification Status
+├── Website Settings
+├── Security & Activity Logs
+└── Logout
+```
+
+Show menu items according to the authenticated administrator's permissions.
+
+## 18. DASHBOARD OVERVIEW
+
+Display genuine data:
+
+- Total leads
+- New leads
+- Active clients
+- Active projects
+- Completed projects
+- Pending inquiries
+- Published blog posts
+- Portfolio entries
+- Recent activities
+
+Include charts for lead trends and project status distribution.
+
+Allow date-range filters.
+
+## 19. LEADS DASHBOARD
+
+Provide:
+
+- Lead search
+- Lead details
+- Service filtering
+- Date filtering
+- Status updates
+- Assignment to managers
+- Private notes
+- WhatsApp contact links
+- CSV exports
+- Archiving and deletion
+
+Use pagination for large datasets.
+
+All operations must persist securely.
+
+## 20. CLIENT MANAGEMENT
+
+Allow authorized users to:
+
+- Add clients
+- Update contact details
+- View client projects
+- Track project status
+- Search clients
+- Archive inactive records
+
+## 21. PROJECT MANAGEMENT
+
+Implement:
+
+- New project creation
+- Project categories
+- Client association
+- Staff assignment
+- Deadlines
+- Milestones
+- Deliverables
+- Internal notes
+- Status updates
+- Completed project tracking
+
+Support professional table and optional Kanban views.
+
+## 22. SERVICES AND PRICING MANAGEMENT
+
+Allow administrators to:
+
+- Edit service descriptions
+- Add service features
+- Manage deliverables
+- Update pricing packages
+- Set custom quote mode
+- Edit FAQs
+- Change publication status
+- Manage service SEO metadata
+
+Preserve the existing public website's routes and content structure.
+
+## 23. PORTFOLIO MANAGER
+
+Provide:
+
+- Add project
+- Edit project
+- Upload screenshots
+- Assign category
+- Set technologies
+- Add verified project URL
+- Classify Real/Demonstration
+- Publish/unpublish
+- Delete with confirmation
+
+Protect private client information.
+
+## 24. BLOG MANAGEMENT
+
+Build a professional CMS with:
+
+- Blog editor
+- Draft saving
+- Featured images
+- Categories
+- Tags
+- SEO titles
+- Meta descriptions
+- URL slugs
+- Article previews
+- Publishing
+- Unpublishing
+- Archiving
+
+Where static generation is used, publishing must update the deployable public website.
+
+## 25. MEDIA LIBRARY
+
+Create:
+
+- Image upload
+- Asset preview
+- Asset search
+- File category filters
+- Alt text editing
+- URL copying
+- Asset replacement
+- File deletion
+- File-size display
+
+Use secure Firebase Storage access.
+
+## 26. FAQ AND TESTIMONIALS
+
+Support:
+
+- FAQ creation/editing
+- Categories
+- Publication status
+- Display order
+
+For testimonials, require genuine source information and authorized publication.
+
+Never generate fake reviews.
+
+## 27. CONTACT MESSAGES
+
+Provide:
+
+- Message list
+- Sender information
+- Submission timestamp
+- Read/replied/closed status
+- Internal notes
+- Contact actions
+- CSV export
+
+## 28. REPORTS AND ANALYTICS
+
+Display available business metrics, including:
+
+- Leads by date
+- Leads by service
+- Lead statuses
+- Project progress
+- Completed projects
+- Published content totals
+
+Do not invent revenue or website traffic.
+
+Provide CSV export where appropriate.
+
+## 29. NOTIFICATION CENTER
+
+Create admin notifications for:
+
+- New lead
+- New inquiry
+- Project updates
+- Upcoming deadlines
+- Publishing failures
+- Role changes
+- System alerts
+
+Support read/unread status.
+
+## 30. ADMIN USERS AND EMAIL VERIFICATION PANEL
+
+Create an administrator management page.
+
+### Required Columns
+
+- Administrator Name
+- Email Address
+- Firebase UID
+- Role
+- Email Verification Status
+- Account Status
+- Registration Date
+- Last Login, where supported
+- Actions
+
+### Administrator Actions
+
+- Invite admin
+- View verification status
+- Resend invitation
+- Resend verification email through an eligible secure flow
+- Change authorized role
+- Disable account
+- Revoke admin access
+- Remove administrative privileges
+
+Show these statuses:
+
+**Email Status**
+- Verified
+- Verification Pending
+
+**Account Status**
+- Invited
+- Pending Verification
+- Active
+- Disabled
+- Revoked
+
+The primary owner must retain appropriate recovery access.
+
+Never allow a normal administrator to grant themselves additional privileges.
+
+## 31. WEBSITE SETTINGS
+
+Allow Super Admin to update:
+
+- Business name
+- Business emails
+- WhatsApp
+- Location
+- Social media links
+- Footer details
+- Website announcements
+- Public logo
+- Basic SEO settings
+
+Validate and securely store all configuration changes.
+
+## 32. AUDIT AND SECURITY LOGS
+
+Record:
+
+- Administrator login events where available
+- Email verification completion
+- Administrator invitation acceptance
+- Role changes
+- Permission changes
+- Lead modifications
+- Content publication
+- Settings updates
+
+Avoid exposing unnecessary personal information in logs.
+
+Protect records from unauthorized modifications.
+
+---
+
+# PART 4 — INTEGRATION AND DEPLOYMENT
+
+## 33. CONNECT EXISTING WEBSITE
+
+Integrate:
+
+- Contact form → Secure backend
+- Consultation form → Leads collection
+- Services → Published content
+- Pricing → Pricing collection
+- Portfolio → Published projects
+- Blog → Blog collection
+- Admin login → Firebase Authentication
+- Admin users → Authorized admin records
+- Media manager → Firebase Storage
+
+Do not create a second disconnected website.
+
+## 34. HOSTING
+
+Support:
+
+- GitHub Pages for static public content
+- Firebase Cloud Functions for secure server logic
+- Firebase Authentication
+- Firestore
+- Firebase Storage
+- Vercel or Netlify when appropriate
+
+Remember: GitHub Pages cannot execute backend Node.js functions.
+
+Configure authorized authentication domains and proper deployment URLs.
+
+## 35. ENVIRONMENT SECURITY
+
+Maintain appropriate environment configuration.
+
+Do not store private Firebase Admin SDK keys, transactional email credentials, or privileged service tokens in frontend variables.
+
+Use secure backend secret management.
+
+Configure development and production environments separately.
+
+## 36. REQUIRED AUTHENTICATION TESTS
+
+Before completion, test all of the following:
+
+1. New invited admin can begin registration.
+2. Unverified email cannot access the dashboard.
+3. Valid email verification link works.
+4. Expired verification link is handled correctly.
+5. Resend verification email works within provider limits.
+6. Verified and authorized admin can log in.
+7. Google Sign-In correctly evaluates verified identity and administrator role.
+8. Existing admin can repeatedly sign in.
+9. Existing email cannot create a duplicate administrator account.
+10. Duplicate registration across authentication providers is safely handled.
+11. Two simultaneous registrations cannot create duplicate admin records.
+12. Forgot Password works for eligible accounts.
+13. Unauthorized users cannot view private leads.
+14. Non-admin users cannot create admin roles.
+15. Disabled administrators cannot use protected features.
+16. Role revocation is enforced.
+17. Invitation tokens cannot be reused.
+18. Account changes are correctly logged.
+19. Firestore Security Rules deny unauthorized operations.
+20. Frontend and backend correctly handle authentication errors.
+
+Use automated testing and Firebase Emulator Suite where appropriate.
+
+Never mark a feature as passed without executing the relevant test.
+
+---
+
+# PART 5 — DELIVERY AND HANDOFF
+
+## 37. REQUIRED DELIVERABLES
+
+Provide:
+
+- Complete backend source code
+- Firebase Authentication implementation
+- Email verification implementation
+- Duplicate registration prevention
+- Secure administrator invitations
+- Password reset functionality
+- Firestore schema
+- Firestore Security Rules
+- Storage Rules
+- Cloud Functions
+- Complete admin dashboard
+- Lead and client management
+- Project management
+- Services and pricing CMS
+- Portfolio CMS
+- Blog CMS
+- Media manager
+- Reports and notifications
+- Audit logging
+- Environment configuration template
+- Testing documentation
+- Deployment instructions
+- Admin user guide
+
+## 38. OWNER GUIDE
+
+Provide step-by-step instructions for:
+
+- Logging into the dashboard
+- Verifying an email
+- Handling an expired verification link
+- Resending verification instructions
+- Recovering a password
+- Inviting another administrator
+- Preventing duplicate admin registrations
+- Viewing and changing administrator roles
+- Managing client leads
+- Managing projects
+- Editing website services and pricing
+- Publishing blog posts
+- Uploading portfolio assets
+- Exporting reports
+- Managing website settings
+- Deploying backend updates
+
+## 39. FINAL VERIFICATION REPORT
+
+Report each system accurately:
+
+- Firebase Authentication
+- Email Verification
+- Duplicate Email Prevention
+- Google Sign-In
+- Password Reset
+- Admin Authorization
+- Admin Invitations
+- Firestore
+- Storage
+- Lead Management
+- Admin Dashboard
+- Project Management
+- Blog CMS
+- Media Library
+- Email Notifications
+- Production Deployment
+
+For each feature specify:
+
+**Implemented / Configured / Tested / Pending / Failed**
+
+Never claim success without verification.
+
+---
+
+# FINAL EXECUTION INSTRUCTIONS
+
+Implement a complete, secure, professional backend and admin dashboard for **Moavia SEO Pro**.
+
+**Highest-Priority Authentication Rules:**
+
+1. Only authorized administrators can register.
+2. Email ownership must be verified before dashboard access.
+3. One normalized email address must correspond to only one administrator account.
+4. Existing administrators must sign in instead of registering again.
+5. Duplicate registrations must be prevented through backend-enforced uniqueness.
+6. Google Sign-In and email/password authentication must not create duplicate administrative identities.
+7. Forgot Password and Resend Verification must function correctly.
+8. Role-based access must be enforced securely.
+9. Primary administrator privileges must be assigned through a trusted process.
+10. All sensitive operations must be protected by server-side permission checks.
+
+Maintain a premium Aurora-themed admin interface.
+
+Preserve the existing public website.
+
+Deliver actual working backend functionality, verified security controls, reliable database integrations, and accurate deployment documentation.
+
+Do not create mock administrative behavior, fake data, insecure admin registration, or simulated verification.
+
+**Build a secure, production-ready Moavia SEO Pro agency management system.**

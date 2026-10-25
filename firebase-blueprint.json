@@ -1,0 +1,217 @@
+{
+  "entities": {
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Authorized administrator user profile and role",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["Super Admin", "Manager", "Content Editor", "Viewer"] },
+        "status": { "type": "string", "enum": ["Active", "Pending Verification", "Disabled", "Revoked"] },
+        "emailVerified": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "role", "status"]
+    },
+    "AdminEmailRegistry": {
+      "title": "AdminEmailRegistry",
+      "description": "Registry for atomic one-account-per-email uniqueness validation",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "uid": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email", "uid"]
+    },
+    "AdminInvitation": {
+      "title": "AdminInvitation",
+      "description": "Expiring staff admin invitation records",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["Manager", "Content Editor", "Viewer"] },
+        "token": { "type": "string" },
+        "invitedBy": { "type": "string" },
+        "accepted": { "type": "boolean" },
+        "expiresAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["email", "role", "token", "accepted"]
+    },
+    "Lead": {
+      "title": "Lead",
+      "description": "Customer inquiry and consultation lead",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "format": "email" },
+        "whatsapp": { "type": "string", "maxLength": 30 },
+        "businessName": { "type": "string", "maxLength": 120 },
+        "websiteUrl": { "type": "string" },
+        "service": { "type": "string" },
+        "budget": { "type": "string" },
+        "description": { "type": "string", "maxLength": 2000 },
+        "status": { "type": "string", "enum": ["New", "Under Review", "Contacted", "Proposal Sent", "Converted", "Closed", "Lost"] },
+        "internalNotes": { "type": "string", "maxLength": 4000 },
+        "assignedManager": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["fullName", "email", "service", "status", "createdAt"]
+    },
+    "Client": {
+      "title": "Client",
+      "description": "Active agency client account",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "company": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "whatsapp": { "type": "string" },
+        "website": { "type": "string" },
+        "notes": { "type": "string" },
+        "status": { "type": "string", "enum": ["Active", "Paused", "Archived"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["name", "email", "status"]
+    },
+    "Project": {
+      "title": "Project",
+      "description": "Client service project tracking",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "category": { "type": "string", "enum": ["SEO", "WordPress", "AI Website Development", "Web Development", "Meta Ads", "Google Ads"] },
+        "clientName": { "type": "string" },
+        "clientId": { "type": "string" },
+        "assignedTo": { "type": "string" },
+        "deadline": { "type": "string" },
+        "status": { "type": "string", "enum": ["Planning", "In Progress", "In Review", "Completed", "On Hold"] },
+        "progress": { "type": "number" },
+        "deliverables": { "type": "string" },
+        "internalNotes": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "category", "clientName", "status"]
+    },
+    "PortfolioProject": {
+      "title": "PortfolioProject",
+      "description": "Public portfolio showcase project",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "clientName": { "type": "string" },
+        "isDemo": { "type": "boolean" },
+        "technologies": { "type": "string" },
+        "liveUrl": { "type": "string" },
+        "image": { "type": "string" },
+        "published": { "type": "boolean" },
+        "order": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["title", "category", "isDemo", "published"]
+    },
+    "BlogPost": {
+      "title": "BlogPost",
+      "description": "Agency blog article and SEO guide",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "slug": { "type": "string" },
+        "excerpt": { "type": "string" },
+        "content": { "type": "string" },
+        "category": { "type": "string" },
+        "tags": { "type": "string" },
+        "featuredImage": { "type": "string" },
+        "seoTitle": { "type": "string" },
+        "seoDescription": { "type": "string" },
+        "published": { "type": "boolean" },
+        "author": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["title", "slug", "content", "published"]
+    },
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "General website configuration and public contact details",
+      "type": "object",
+      "properties": {
+        "businessName": { "type": "string" },
+        "founderName": { "type": "string" },
+        "primaryEmail": { "type": "string" },
+        "secondaryEmail": { "type": "string" },
+        "whatsapp": { "type": "string" },
+        "location": { "type": "string" },
+        "linkedinUrl": { "type": "string" },
+        "facebookUrl": { "type": "string" },
+        "upworkUrl": { "type": "string" },
+        "githubUrl": { "type": "string" },
+        "announcement": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["businessName", "primaryEmail", "whatsapp"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Security and administrative activity trail",
+      "type": "object",
+      "properties": {
+        "action": { "type": "string" },
+        "performedBy": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["action", "performedBy", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/adminUsers/{uid}": {
+      "schema": "AdminUser",
+      "description": "Registered and authorized admin user accounts"
+    },
+    "/adminEmailRegistry/{emailHash}": {
+      "schema": "AdminEmailRegistry",
+      "description": "SHA-256 hashed admin emails to prevent duplicate account creation"
+    },
+    "/adminInvitations/{invitationId}": {
+      "schema": "AdminInvitation",
+      "description": "Active and consumed staff invitations"
+    },
+    "/leads/{leadId}": {
+      "schema": "Lead",
+      "description": "Website client consultation and inquiry submissions"
+    },
+    "/clients/{clientId}": {
+      "schema": "Client",
+      "description": "Active agency clients and business records"
+    },
+    "/projects/{projectId}": {
+      "schema": "Project",
+      "description": "Client deliverable projects and timelines"
+    },
+    "/portfolioProjects/{projectId}": {
+      "schema": "PortfolioProject",
+      "description": "Published agency case studies and showcase projects"
+    },
+    "/blogPosts/{postId}": {
+      "schema": "BlogPost",
+      "description": "Articles, SEO insights, and marketing guides"
+    },
+    "/siteSettings/{settingsId}": {
+      "schema": "SiteSettings",
+      "description": "Agency business settings and contact info"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Immutable security activity records"
+    }
+  }
+}

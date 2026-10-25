@@ -1,0 +1,1261 @@
+# MOAVIA SEO PRO — ULTIMATE PREMIUM DIGITAL AGENCY WEBSITE
+## Complete Website Development, SEO, Branding, Admin Dashboard & Deployment Specification
+
+### MASTER INSTRUCTION
+
+Act as an elite team consisting of:
+
+- Principal Full-Stack Software Engineer
+- Award-Winning UI/UX Designer
+- Senior Creative Director
+- Digital Agency Branding Expert
+- Senior Technical SEO Specialist
+- AI-Powered Web Development Specialist
+- Conversion Rate Optimization Expert
+- Website Security Engineer
+- Quality Assurance Engineer
+- Performance Optimization Specialist
+
+**PROJECT:** MOAVIA SEO PRO
+
+Create a complete, original, visually exceptional, highly professional, production-ready digital agency website.
+
+The website must compete visually and functionally with premium modern digital marketing agencies.
+
+Build a real business website that demonstrates expertise, attracts client inquiries, provides excellent navigation, and presents services through beautiful, distinctive landing pages.
+
+This is a complete new website specification.
+
+Do not copy the visual appearance of an earlier design, generic AI template, or existing competitor website.
+
+Deliver a premium, sophisticated, decent multi-color design with exceptional visual hierarchy and excellent functionality.
+
+**Do not stop after creating a homepage or prototype. Implement the complete website.**
+
+---
+
+# PART A — COMPLETE WEBSITE BUILD REQUIREMENTS
+
+## 1. OFFICIAL BUSINESS INFORMATION
+
+**Brand Name:** Moavia SEO Pro
+
+**Founder:** Moavia Hassan
+
+**Business Location:** Islamabad, Pakistan
+
+**Professional Position:**
+Digital Marketing Specialist | SEO Specialist | WordPress & AI Website Developer | Meta Ads & Google Ads Specialist
+
+**Business WhatsApp:** +923234313869
+
+**Primary Email:** moaviahassan124@gmail.com
+
+**Secondary Email:** moavia400@gmail.com
+
+**LinkedIn:** https://www.linkedin.com/in/moavia-hassan-seo/
+
+**Facebook:** https://www.facebook.com/profile.php?id=61594226902693
+
+**Upwork:** https://www.upwork.com/freelancers/~01c3735023b2f296fa
+
+**GitHub Username:** mmoavia7861
+
+I will supply a real professional headshot of founder Moavia Hassan.
+
+Use the uploaded image as the founder's official photograph.
+
+Preserve authentic facial features and identity.
+
+Use English throughout the public-facing website.
+
+Do not invent client names, experience duration, agency certifications, performance statistics, testimonials, awards, or business achievements.
+
+## 2. BRAND IDENTITY & VISUAL DIRECTION
+
+### Official Design Theme: AURORA PREMIUM
+
+Create a visually impressive, premium, light-first, multi-color digital agency website.
+
+The website must feel:
+
+- Elegant
+- Innovative
+- Professional
+- Premium
+- Technologically advanced
+- Trustworthy
+- Visually memorable
+- Minimal but engaging
+- Well-organized
+- Sophisticated rather than excessively colorful
+
+### Color Palette
+
+**Primary Brand Blue:** #5265D8
+
+**Premium Purple:** #8B63D8
+
+**Jade Teal:** #17A99A
+
+**Soft Coral:** #F17F72
+
+**Champagne Gold:** #E8B451
+
+**Pearl White Background:** #F8F9FD
+
+**Pure White:** #FFFFFF
+
+**Deep Ink Text:** #18243A
+
+**Muted Text:** #65738B
+
+**Subtle Border:** #E7EAF2
+
+### Color Usage Guidelines
+
+Use white and pearl-white as the dominant backgrounds.
+
+Use primary blue for branding, primary CTAs, and important navigation elements.
+
+Use purple for AI development and technological innovation.
+
+Use teal for SEO services and growth-related features.
+
+Use coral for paid advertising services.
+
+Use warm gold selectively for highlights and visual accents.
+
+Use a controlled 70/20/10 visual balance: approximately 70% neutral surfaces, 20% primary brand styling, and 10% supporting accent colors.
+
+Avoid colorful backgrounds behind every section.
+
+Never make the website look like a gaming website or a children's template.
+
+### Gradient System
+
+Create subtle gradients such as:
+
+- Blue to purple
+- Purple to pale lavender
+- Teal to pale mint
+- Coral to soft peach
+- Multi-color pastel aurora backgrounds
+
+Use gradients selectively.
+
+Ensure the colors look balanced on all devices.
+
+## 3. ADVANCED UI/UX DESIGN SYSTEM
+
+Design a custom professional component system.
+
+### Typography
+
+Use a premium font pairing such as:
+
+**Headings:** Plus Jakarta Sans
+
+**Body:** Inter
+
+Create a consistent typography scale.
+
+Large, bold, attention-grabbing headings.
+
+Highly readable body text.
+
+Clear visual hierarchy.
+
+Appropriate line heights.
+
+Excellent contrast.
+
+### UI Components
+
+Develop reusable:
+
+- Buttons
+- Service cards
+- Portfolio cards
+- Pricing cards
+- FAQ accordions
+- Testimonial components for future verified testimonials
+- Hero layouts
+- Navigation menus
+- Contact form elements
+- Modal dialogs
+- Badges
+- Tabs
+- Breadcrumbs
+- Blog cards
+- Call-to-action sections
+- Admin interface components
+
+Every component must follow the same design system.
+
+### Layout Style
+
+Use:
+
+- Spacious layouts
+- Bento grids
+- Asymmetric editorial layouts
+- Beautiful split-screen sections
+- Soft rounded corners
+- Refined borders
+- Modern shadows
+- Premium illustrations
+- Device mockups
+- Well-designed empty states
+- Consistent alignment
+- Smooth section transitions
+
+Avoid repetitive service cards on every page.
+
+Different sections should feel purposefully designed.
+
+### Theme Modes
+
+Implement a premium light mode as the default.
+
+Optionally include a coordinated dark mode that preserves the same brand identity.
+
+If implemented, the theme switcher must work correctly and persist the user's preference.
+
+## 4. PROFESSIONAL WEBSITE ARCHITECTURE
+
+Create all required pages with unique SEO-friendly routes.
+
+### Main Pages
+
+- Home `/`
+- About `/about/`
+- Services `/services/`
+- Portfolio `/portfolio/`
+- Case Studies `/case-studies/`
+- Pricing `/pricing/`
+- Blog `/blog/`
+- Contact `/contact/`
+- FAQs `/faq/`
+- Privacy Policy `/privacy-policy/`
+- Terms `/terms/`
+- Thank You `/thank-you/`
+- Custom 404
+
+### SEO Services
+
+- SEO Services `/services/seo/`
+- On-Page SEO
+- Off-Page SEO
+- Technical SEO
+- Local SEO
+- SEO Audits
+- Keyword Research
+- Link Building
+- E-commerce SEO
+- WordPress SEO
+- SEO Content Optimization
+- Website Migration SEO
+
+### Website Development Services
+
+- Web Development
+- WordPress Website Development
+- AI-Generated Website Development
+- Custom Business Websites
+- Landing Page Development
+- E-commerce Website Development
+- Website Redesign
+- Website Speed Optimization
+- Website Maintenance
+
+### Meta Ads Services
+
+- Meta Ads Management
+- Facebook Advertising
+- Instagram Advertising
+- Lead Generation Campaigns
+- Conversion Tracking
+- Retargeting Campaigns
+
+### Google Ads Services
+
+- Google Ads Management
+- Search Advertising
+- Display Advertising
+- Remarketing
+- Conversion Tracking
+- PPC Campaign Optimization
+
+Each important service must have a dedicated landing page.
+
+Do not create empty pages, broken routes, or duplicate content.
+
+## 5. PREMIUM HOMEPAGE
+
+Create a high-impact homepage with excellent storytelling and conversion architecture.
+
+### Header
+
+Include:
+
+- Professional Moavia SEO Pro logo
+- Home
+- Services mega-menu
+- Portfolio
+- About
+- Pricing
+- Blog
+- Contact
+- Get a Free Consultation
+
+Use a premium floating or sticky navigation style.
+
+Add responsive navigation and keyboard-accessible menus.
+
+### Hero Section
+
+**Headline:**
+
+"Your Digital Growth Starts With Smarter Solutions."
+
+**Supporting Heading:**
+
+"SEO, AI-Powered Websites & Performance Marketing."
+
+**Description:**
+
+"Moavia SEO Pro combines search engine optimization, professional website development, AI-assisted design, Meta Ads, and Google Ads to build stronger digital experiences for modern businesses."
+
+### Hero Buttons
+
+Primary: **Get a Free Consultation**
+
+Secondary: **Explore Our Services**
+
+### Hero Design
+
+Use:
+
+- Pearl-white background
+- Subtle aurora gradients
+- Blue and purple premium typography highlights
+- Beautiful website interface mockups
+- SEO analytics-inspired visual elements
+- Modern technology illustrations
+- Smooth entrance animation
+- Carefully balanced whitespace
+- Professional CTA buttons
+
+The hero must clearly communicate business value within the first few seconds of viewing.
+
+### Homepage Content Sections
+
+1. Premium Hero
+2. Services Introduction
+3. Main Services Bento Grid
+4. Featured AI Website Development
+5. SEO Growth Solutions
+6. WordPress and Custom Development
+7. Performance Advertising
+8. Why Choose Moavia SEO Pro
+9. Our Working Process
+10. Technologies and Tools
+11. Featured Portfolio
+12. Genuine Case Studies or Labeled Demos
+13. Meet the Founder
+14. Service Pricing Preview
+15. Frequently Asked Questions
+16. Latest Blog Articles
+17. Free Consultation CTA
+18. Premium Footer
+
+Every section must have excellent content hierarchy and distinct visual treatment.
+
+## 6. COMPLETE SEO SERVICE SYSTEM
+
+SEO is one of the primary specialties of Moavia SEO Pro.
+
+Create detailed landing pages with original professional content.
+
+### SEO Service Categories
+
+**On-Page SEO**
+- Keyword research
+- Search intent optimization
+- Title and meta optimization
+- Content improvements
+- Heading structure
+- Internal linking
+- Image SEO
+- URL optimization
+
+**Technical SEO**
+- Crawlability
+- Indexability
+- Website architecture
+- Core Web Vitals
+- Structured data
+- XML sitemaps
+- Robots directives
+- Canonical tags
+- Redirects
+- Technical auditing
+
+**Off-Page SEO**
+- Backlink research
+- Link-building strategies
+- Guest post outreach
+- Competitor analysis
+- Brand mentions
+- Digital PR
+
+**Local SEO**
+- Google Business Profile optimization
+- Local keyword strategy
+- Local landing pages
+- Citation consistency
+- Business listing optimization
+
+**SEO Audits**
+- Technical audits
+- On-page analysis
+- Keyword gap analysis
+- Backlink evaluation
+- Content gap analysis
+- Competitor research
+- Improvement roadmaps
+
+Also cover e-commerce SEO, WordPress SEO, and SEO content strategy.
+
+### Requirements for Every SEO Landing Page
+
+Include:
+
+- Dedicated premium hero
+- Service explanation
+- Key features
+- Deliverables
+- Business benefits
+- Professional methodology
+- Relevant tools
+- FAQs
+- Related services
+- Consultation CTA
+
+Use keyword-focused copy naturally without stuffing.
+
+## 7. AI-GENERATED WEBSITE DEVELOPMENT — PREMIUM FEATURED SERVICE
+
+Make AI-Generated Website Development one of the website's most prominent services.
+
+### Main Heading
+
+"Next-Generation Websites, Built With AI and Human Expertise."
+
+### Services
+
+Offer:
+
+- AI-generated business websites
+- AI-assisted WordPress websites
+- AI-powered landing pages
+- AI-generated agency websites
+- AI portfolio websites
+- AI-assisted e-commerce sites
+- AI-based website prototypes
+- AI-assisted UI/UX design
+- AI-assisted React development
+- AI web application development
+- AI website redesign
+- AI-assisted website optimization
+- Responsive website development
+- SEO-friendly AI websites
+- AI website deployment
+
+### Technologies
+
+Include relevant tools:
+
+- Google AI Studio
+- Gemini
+- Claude
+- ChatGPT
+- React
+- TypeScript
+- HTML
+- CSS
+- JavaScript
+- Tailwind CSS
+- WordPress
+- GitHub
+- Vercel
+- Netlify
+
+### Dedicated Page Design
+
+Use premium purple as the primary accent.
+
+Include modern device mockups, clean interface examples, subtle AI visual elements, and professional development illustrations.
+
+### Development Process
+
+Explain:
+
+1. Project discovery
+2. Website planning
+3. AI-assisted prototyping
+4. UI/UX refinement
+5. Development
+6. SEO implementation
+7. Functional testing
+8. Deployment
+9. Handoff
+
+Do not portray AI-generated output as automatically production-ready without professional testing.
+
+## 8. WORDPRESS AND WEB DEVELOPMENT
+
+Build beautiful, dedicated service pages covering:
+
+- WordPress business sites
+- Professional company websites
+- Elementor development
+- Landing pages
+- E-commerce storefronts
+- Custom websites
+- Website redesign
+- Mobile optimization
+- Website maintenance
+- Speed optimization
+- Technical SEO integration
+
+Each page should contain relevant examples, deliverables, process information, and CTA buttons.
+
+Use blue as the primary visual accent for these services.
+
+## 9. META ADS MANAGEMENT
+
+Create a premium Meta Ads landing page with coral accents.
+
+Include:
+
+- Facebook Ads
+- Instagram Ads
+- Lead generation
+- Campaign strategy
+- Audience research
+- Custom audiences
+- Lookalike audiences
+- Retargeting
+- Meta Pixel
+- Conversions API
+- Campaign tracking
+- Creative testing
+- Performance optimization
+- Reporting
+
+Include an attractive campaign inquiry form.
+
+Avoid guaranteed ROI or lead-generation claims.
+
+## 10. GOOGLE ADS MANAGEMENT
+
+Create professional Google Ads pages featuring:
+
+- Search Ads
+- Display Ads
+- Remarketing
+- Keyword Planner
+- Negative keywords
+- Bidding strategy
+- Conversion tracking
+- Google Tag Manager
+- Campaign optimization
+- Landing page strategy
+- Reporting
+
+Use warm gold as a selective supporting accent with primary blue.
+
+## 11. HIGH-CONVERTING SERVICE LANDING PAGES
+
+Every service page must follow a conversion-oriented structure.
+
+Required components:
+
+- Clear value proposition
+- Service-specific imagery
+- Relevant benefits
+- Detailed deliverables
+- Process explanation
+- Tools used
+- Related portfolio projects
+- Service FAQs
+- Related internal links
+- Consultation form or CTA
+
+Do not fill pages with generic marketing language.
+
+Write valuable, specific, credible content.
+
+## 12. PROFESSIONAL PORTFOLIO
+
+Create a premium portfolio with advanced filtering.
+
+### Categories
+
+- SEO
+- Technical SEO
+- WordPress
+- AI Websites
+- Web Development
+- Landing Pages
+- Meta Ads
+- Google Ads
+
+### Portfolio Features
+
+- Professional cards
+- Desktop website mockups
+- Mobile previews
+- Project details
+- Services delivered
+- Technology stack
+- Project objectives
+- Screenshots
+- Verified live links
+- Contact CTA
+
+Make the portfolio content editable.
+
+Clearly label sample projects as Demonstration Projects.
+
+Do not create fake client results or fabricated case studies.
+
+## 13. ABOUT THE FOUNDER
+
+Founder: Moavia Hassan
+
+Create a beautifully designed About page.
+
+Use the uploaded authentic professional photograph.
+
+### Founder Skills
+
+- SEO
+- Technical SEO
+- Local SEO
+- Keyword Research
+- Backlink Analysis
+- WordPress
+- AI Website Development
+- Web Development
+- Meta Ads
+- Google Ads
+
+Include a professional founder biography, working philosophy, technology stack, and direct consultation CTA.
+
+Avoid fabricated experience durations or professional credentials.
+
+## 14. PROFESSIONAL PRICING SYSTEM
+
+Create a pricing page for:
+
+- SEO
+- WordPress
+- AI Website Development
+- Web Development
+- Meta Ads
+- Google Ads
+
+Use professional cards with Starter, Growth, and Advanced scopes where appropriate.
+
+Make pricing editable through centralized data or the admin dashboard.
+
+Display Custom Quote until real prices are provided.
+
+Each plan should include clear deliverables and a consultation CTA.
+
+## 15. CONTACT AND LEAD GENERATION
+
+Create a premium, functional lead-generation system.
+
+### Contact Form Fields
+
+- Full Name
+- Email
+- WhatsApp Number
+- Company Name
+- Website URL
+- Service Required
+- Project Budget
+- Project Description
+- Preferred Contact Method
+
+### Technical Requirements
+
+- Real form submission
+- Validation
+- Anti-spam protection
+- Loading indicators
+- Success and error handling
+- Secure database storage or approved form service
+- Consent checkbox where appropriate
+- Thank-you page
+- Privacy handling
+
+### WhatsApp Widget
+
+Use:
+
+https://wa.me/923234313869
+
+Add a premium floating WhatsApp widget.
+
+Prefilled message:
+
+"Hello Moavia, I visited Moavia SEO Pro and would like to discuss your professional digital services."
+
+## 16. PROFESSIONAL ADMIN DASHBOARD
+
+Create a secure, optional administrative management system connected to a real backend.
+
+The dashboard should allow authorized administrators to manage website operations without editing source code.
+
+### Admin Features
+
+**Dashboard Overview**
+- Total inquiries
+- New inquiries
+- Contact submissions
+- Requested services
+- Recent activity
+
+**Lead Management**
+- View inquiries
+- Search and filter
+- Change inquiry status
+- Add admin notes
+- Export records to CSV
+- Review submission dates
+
+**Services Management**
+- Edit descriptions
+- Update service highlights
+- Adjust display order
+- Manage related FAQs
+
+**Portfolio Management**
+- Add projects
+- Upload screenshots through secure media storage
+- Edit project descriptions
+- Mark projects as demonstrations
+- Update project links
+- Publish or unpublish entries
+
+**Pricing Management**
+- Edit package descriptions
+- Change prices
+- Update service scope
+
+**Blog Management**
+- Create blog articles
+- Edit drafts
+- Publish and unpublish
+- Manage categories
+- Set SEO metadata
+- Manage featured images
+
+**Media Management**
+- Upload authorized assets
+- Replace images
+- Manage alt text
+- Delete unused media
+
+**Website Settings**
+- Business contact details
+- Social links
+- WhatsApp number
+- Announcement messages
+- Basic SEO settings
+
+### Authentication and Security
+
+Use a secure authentication system.
+
+Firebase Authentication and Firestore may be used when appropriately configured.
+
+Require actual server-enforced authorization, not merely hidden frontend buttons.
+
+Use secure Firestore rules, restricted administrator permissions, and protected media storage.
+
+Do not rely on a hardcoded email check alone for administrator security.
+
+Do not expose private inquiries publicly.
+
+If a backend cannot be implemented in the available environment, clearly separate unconfigured admin features from working website features.
+
+## 17. PREMIUM BLOG AND CONTENT MANAGEMENT
+
+Create an organized blog with these categories:
+
+- Search Engine Optimization
+- Technical SEO
+- WordPress
+- AI Website Development
+- Meta Ads
+- Google Ads
+- Website Performance
+- Digital Marketing
+
+Create at least five useful launch articles.
+
+Each article must include:
+
+- Unique title
+- SEO meta description
+- Featured image
+- Clear heading structure
+- Original content
+- Relevant internal links
+- Related posts
+- Professional author attribution
+- CTA
+
+Use a maintainable content structure or CMS integration.
+
+## 18. ADVANCED TECHNICAL SEO
+
+This is a critical project requirement.
+
+Follow Google Search Essentials and modern technical SEO practices.
+
+### Architecture
+
+Make all important public pages crawlable and indexable.
+
+Prefer static generation or prerendering for SEO-relevant pages.
+
+Avoid relying exclusively on a client-rendered blank HTML shell.
+
+### On-Page SEO
+
+- Unique title tags
+- Unique meta descriptions
+- Proper H1 and H2 hierarchy
+- Clean URLs
+- Descriptive internal links
+- Keyword mapping
+- Natural content optimization
+- Image optimization
+
+### Technical SEO
+
+- XML sitemap
+- Robots.txt
+- Canonical URLs
+- Correct HTTP statuses
+- Proper redirects
+- Mobile optimization
+- 404 handling
+- Breadcrumbs
+- Open Graph metadata
+- Social sharing images
+- Correct asset paths
+- No broken links
+
+### Structured Data
+
+Use valid JSON-LD where appropriate:
+
+- Organization
+- Person
+- Service
+- BreadcrumbList
+- Article
+
+Do not fabricate ratings, reviews, certifications, or achievements.
+
+### SEO Content
+
+Write original professional content for each service page.
+
+Prevent unnecessary duplicate content.
+
+Build logical internal links between related services.
+
+## 19. PERFORMANCE OPTIMIZATION
+
+Aim for strong Core Web Vitals:
+
+- LCP: 2.5 seconds or less
+- INP: 200 milliseconds or less
+- CLS: 0.1 or less
+
+Implement:
+
+- WebP and AVIF images
+- Responsive image loading
+- Code splitting
+- Efficient CSS
+- Font optimization
+- Lazy loading
+- Reduced JavaScript
+- Optimized animations
+- Stable page layouts
+- Appropriate caching
+
+Do not claim Lighthouse results unless actually measured.
+
+## 20. ADVANCED ASSET MANAGEMENT
+
+Implement a clean, scalable asset-management system.
+
+### Asset Folder Structure
+
+```text
+public/assets/
+├── brand/
+│   ├── logo.svg
+│   ├── logo-dark.svg
+│   ├── favicon.svg
+│   └── og-image.webp
+├── founder/
+│   ├── moavia-hassan.webp
+│   └── founder-thumbnail.webp
+├── homepage/
+├── services/
+│   ├── seo/
+│   ├── ai-websites/
+│   ├── wordpress/
+│   ├── meta-ads/
+│   └── google-ads/
+├── portfolio/
+├── case-studies/
+├── blog/
+├── icons/
+├── videos/
+└── placeholders/
+```
+
+### Asset Requirements
+
+- Meaningful file names
+- Optimized file sizes
+- Descriptive alt text
+- Original image preservation
+- Proper aspect ratios
+- Responsive images
+- Image loading optimization
+- Documented licensing
+- Centralized asset registry
+- Suitable fallback graphics
+- Correct production asset paths
+
+Use the actual supplied founder image.
+
+Do not replace it with a generated person's portrait.
+
+## 21. PREMIUM ANIMATIONS AND MICRO-INTERACTIONS
+
+Add:
+
+- Smooth navigation
+- Elegant section reveals
+- Service card hover effects
+- Button micro-interactions
+- Portfolio hover previews
+- FAQ animations
+- Beautiful transition states
+- Scroll-to-top
+- Accessible dropdowns
+- Subtle animated hero graphics
+
+Keep animations lightweight and professional.
+
+Respect reduced-motion preferences.
+
+## 22. AI CHAT SUPPORT
+
+Provide an optional professional website assistant.
+
+The chatbot should assist with:
+
+- SEO inquiries
+- Web development
+- AI websites
+- WordPress
+- Meta Ads
+- Google Ads
+- Pricing inquiries
+- Consultation requests
+
+Use a secure server-side AI integration.
+
+Never expose Gemini or other API keys in frontend code.
+
+If AI integration is unavailable, provide a clearly labeled FAQ assistant instead.
+
+## 23. WEBSITE ACCESSIBILITY
+
+Target WCAG 2.2 AA where feasible.
+
+Implement:
+
+- Keyboard navigation
+- Semantic HTML
+- Visible focus indicators
+- Accessible form labels
+- Readable contrast
+- Screen-reader-friendly content
+- Mobile accessibility
+- Reduced-motion preferences
+- Correct button semantics
+
+## 24. DEVELOPMENT ARCHITECTURE
+
+Use a maintainable, secure architecture suitable for the selected hosting environment.
+
+Preferred stack:
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- Reusable UI components
+- Centralized configuration
+- Static generation or prerendering for public SEO pages
+
+Use an appropriate secure backend for server-side functionality.
+
+Store secrets outside public source code.
+
+Maintain clean separation between UI components, content, services, and backend logic.
+
+## 25. COMPLETE QUALITY ASSURANCE
+
+Before treating the website as complete, verify:
+
+- Every page loads
+- All routes work
+- Navigation works
+- Buttons work
+- Mobile layouts are correct
+- Founder image displays
+- Portfolio images load
+- Forms validate
+- Submissions actually save
+- Admin authentication is secure
+- Authorized users can manage records
+- Unauthorized users cannot access private records
+- WhatsApp links work
+- SEO metadata is correct
+- Sitemap works
+- Robots.txt works
+- Assets load after deployment
+- Production build succeeds
+- No critical console errors occur
+- No blank screens occur
+
+Test actual behavior rather than assuming it works.
+
+---
+
+# PART B — DELIVERY AND HANDOFF REQUIREMENTS
+
+## 26. COMPLETE SOURCE CODE
+
+Deliver all source files required to run the website.
+
+Include:
+
+- Complete project
+- Components
+- Pages
+- Content
+- Styles
+- Assets
+- Configuration
+- Package files
+- Build scripts
+- Environment variable examples
+- Deployment workflows
+
+No missing imports, placeholder dependencies, or incomplete source files.
+
+## 27. GITHUB DEPLOYMENT
+
+GitHub Username: mmoavia7861
+
+Prepare the project for a new GitHub repository.
+
+Requirements:
+
+- Production-ready build
+- Correct asset paths
+- GitHub Actions deployment
+- Compatible routing
+- Correct base URL
+- No unnecessary Jekyll workflow
+- No blank-screen deployment
+- No exposed credentials
+
+If GitHub Pages is used, only deploy static-compatible functionality.
+
+For server-side functions, AI integrations, or secure backend operations, use a suitable supported backend host.
+
+Support Vercel or Netlify deployment where appropriate.
+
+Include instructions for connecting a future custom domain.
+
+## 28. ADMIN AND DATABASE HANDOFF
+
+Document:
+
+- Admin login procedure
+- Authentication requirements
+- Database collections
+- Lead storage
+- Media storage
+- Access permissions
+- Security rules
+- Website content management
+- Backup/export procedure
+
+Provide the actual configured project information.
+
+Do not invent database credentials.
+
+## 29. WEBSITE OWNER DOCUMENTATION
+
+Create a beginner-friendly management guide explaining how to:
+
+- Update business information
+- Change contact details
+- Add portfolio projects
+- Upload images
+- Publish blogs
+- Edit pricing
+- Update services
+- Check leads
+- Use the admin dashboard
+- Manage SEO metadata
+- Deploy website updates
+
+## 30. ASSET HANDOFF
+
+Provide:
+
+- Asset folder inventory
+- Logo files
+- Founder photo derivatives
+- Service graphics
+- Portfolio images
+- Blog images
+- Social sharing assets
+- Asset registry
+- Image replacement instructions
+- Licensing and attribution details
+
+## 31. SEO HANDOFF
+
+Provide:
+
+- SEO checklist
+- Indexable URL list
+- Sitemap URL
+- Robots.txt URL
+- Canonical configuration
+- Metadata inventory
+- Structured data inventory
+- Keyword map
+- Internal linking overview
+
+Do not claim that pages are indexed or ranking without actual verification.
+
+## 32. FINAL TESTING REPORT
+
+Report each major feature as:
+
+- Passed
+- Failed
+- Not Tested
+- Requires Configuration
+
+Include real results for:
+
+- Homepage
+- Service pages
+- Portfolio
+- Blog
+- Contact forms
+- Lead storage
+- Admin dashboard
+- SEO
+- Accessibility
+- Performance
+- Production deployment
+
+Clearly disclose unresolved issues.
+
+## 33. FINAL DELIVERY SUMMARY
+
+Provide the final project handoff with:
+
+1. Website overview
+2. Completed pages
+3. Implemented functionality
+4. Final design system
+5. Asset inventory
+6. Technical SEO implementation
+7. Admin and database configuration
+8. GitHub repository
+9. Verified live website URL, if deployed
+10. Testing results
+11. Remaining configuration requirements
+12. Owner management instructions
+
+---
+
+# FINAL DEVELOPMENT DIRECTIVE
+
+Build the complete Moavia SEO Pro website to the highest practical professional standard.
+
+The website must have:
+
+- Beautiful multi-color design
+- Premium typography
+- Exceptional UI/UX
+- Modern homepage
+- Fully developed service landing pages
+- Advanced SEO
+- AI Website Development as a featured service
+- WordPress Development
+- Meta Ads Management
+- Google Ads Management
+- Professional portfolio
+- Genuine lead-generation functionality
+- Secure administrative management where configured
+- Optimized images
+- Excellent mobile experience
+- Fast loading performance
+- Professional content
+- Secure architecture
+- Reliable deployment
+- Complete owner documentation
+
+**CRITICAL QUALITY STANDARD:**
+
+The final result should look and function like a custom-designed professional digital agency website, not an ordinary AI-generated template.
+
+Prioritize original design, real functionality, clarity, consistency, trustworthiness, performance, and maintainability.
+
+Do not leave unfinished sections, fake buttons, broken routes, placeholder submissions, or blank pages.
+
+Do not invent factual claims or project results.
+
+Do not merely explain how to create the website. Generate and implement the actual complete project within the capabilities of the development environment.
+
+If a feature requires external credentials or services, clearly identify that dependency instead of falsely reporting it as complete.
+
+**Build the best possible production-ready Moavia SEO Pro website with the complete Aurora Premium visual identity and the requirements above.**

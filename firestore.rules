@@ -1,0 +1,93 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isBootstrappedAdmin() {
+      return isVerified() && (
+        request.auth.token.email == 'moavia400@gmail.com' ||
+        request.auth.token.email == 'moaviahassan124@gmail.com'
+      );
+    }
+
+    function isAdmin() {
+      return isBootstrappedAdmin() || (
+        isVerified() && exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid))
+      );
+    }
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Admin Users Collection
+    match /adminUsers/{uid} {
+      allow read: if isVerified() && (request.auth.uid == uid || isAdmin());
+      allow create: if isVerified() && (request.auth.uid == uid || isAdmin());
+      allow update, delete: if isAdmin();
+    }
+
+    // Admin Email Registry (one account per email)
+    match /adminEmailRegistry/{emailHash} {
+      allow read: if isVerified();
+      allow write: if isVerified();
+    }
+
+    // Admin Invitations
+    match /adminInvitations/{invitationId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // Leads: Public can submit inquiries, only verified admins can view/update/delete
+    match /leads/{leadId} {
+      allow create: if request.resource.data.fullName is string &&
+                       request.resource.data.email is string &&
+                       request.resource.data.service is string &&
+                       request.resource.data.status == 'New';
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Clients & Projects
+    match /clients/{clientId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /projects/{projectId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Portfolio: Public read for published items, admin write
+    match /portfolioProjects/{projectId} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Blog Posts: Public read for published items, admin write
+    match /blogPosts/{postId} {
+      allow read: if resource.data.published == true || isAdmin();
+      allow write: if isAdmin();
+    }
+
+    // Site Settings: Public read, admin write
+    match /siteSettings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Audit Logs
+    match /auditLogs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isSignedIn();
+      allow update, delete: if false;
+    }
+  }
+}

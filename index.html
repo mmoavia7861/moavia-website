@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function() {
+        try {
+          var originalFetch = window.fetch ? window.fetch.bind(window) : undefined;
+          var currentFetch = originalFetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() {
+              return currentFetch;
+            },
+            set: function(val) {
+              currentFetch = val;
+            },
+            configurable: true,
+            enumerable: true,
+          });
+        } catch (e) {
+          // ignore
+        }
+      })();
+    </script>
+    <title>Moavia SEO Pro - Digital Agency & Admin Portal</title>
+    <meta name="description" content="Premium digital agency website and secure administrative management platform for SEO, AI website development, WordPress, Meta Ads, and Google Ads by Moavia Hassan." />
+    <meta property="og:title" content="Moavia SEO Pro - Digital Agency & Admin Portal" />
+    <meta property="og:description" content="Premium digital agency website and secure administrative management platform for SEO, AI website development, WordPress, Meta Ads, and Google Ads by Moavia Hassan." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
