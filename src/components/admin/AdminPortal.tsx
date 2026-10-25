@@ -603,7 +603,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
         
         <div className="flex items-center gap-3">
           <img
-            src="/assets/aistudio/moavia_seopro_logo_720x720_10966138.png"
+            src={`${import.meta.env.BASE_URL}assets/aistudio/moavia_seopro_logo_720x720_10966138.png`}
             alt="Logo"
             className="w-9 h-9 rounded-xl object-contain border border-[#E7EAF2]"
           />
@@ -1240,7 +1240,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div className="p-4 rounded-2xl bg-white border border-[#E7EAF2] text-center space-y-2">
                   <img
-                    src="/assets/aistudio/moavia_seopro_logo_720x720_10966138.png"
+                    src={`${import.meta.env.BASE_URL}assets/aistudio/moavia_seopro_logo_720x720_10966138.png`}
                     alt="Logo Asset"
                     className="w-24 h-24 object-contain mx-auto rounded-lg"
                   />
@@ -1250,7 +1250,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
 
                 <div className="p-4 rounded-2xl bg-white border border-[#E7EAF2] text-center space-y-2">
                   <img
-                    src="/assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png"
+                    src={`${import.meta.env.BASE_URL}assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png`}
                     alt="Founder Portrait Asset"
                     className="w-24 h-24 object-cover object-top mx-auto rounded-lg"
                   />
