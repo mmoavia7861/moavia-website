@@ -24,7 +24,7 @@ export const WhatsAppWidget: React.FC = () => {
           </button>
           <div className="flex items-center gap-2.5">
             <img
-              src="/assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png"
+              src={`${import.meta.env.BASE_URL}assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png`}
               alt="Moavia Hassan"
               className="w-9 h-9 rounded-full object-cover object-top border border-[#17A99A]"
             />
