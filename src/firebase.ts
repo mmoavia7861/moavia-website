@@ -12,7 +12,7 @@ import {
   User,
 } from 'firebase/auth';
 import {
-  getFirestore,
+  initializeFirestore,
   doc,
   getDocFromServer,
   collection,
@@ -30,8 +30,15 @@ import firebaseConfig from '../firebase-applet-config.json';
 // Initialize Firebase App
 export const app = initializeApp(firebaseConfig);
 
-// Initialize Firestore with specific Database ID
-export const db = getFirestore(app, (firebaseConfig as any).firestoreDatabaseId);
+// Connect to the AI Studio named Firestore database.
+// Force long-polling because WebChannel streaming can hang on buffered or
+// blocked intermediary networks. This avoids infinite pending writes in some
+// browser/network configurations; it does not bypass security rules.
+export const db = initializeFirestore(
+  app,
+  { experimentalForceLongPolling: true },
+  (firebaseConfig as { firestoreDatabaseId: string }).firestoreDatabaseId,
+);
 
 // Initialize Auth
 export const auth = getAuth(app);
