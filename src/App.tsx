@@ -12,16 +12,10 @@ import { ContactSection } from './components/ContactSection';
 import { Footer } from './components/Footer';
 import { WhatsAppWidget } from './components/WhatsAppWidget';
 import { AdminPortal } from './components/admin/AdminPortal';
-import { testFirestoreConnection } from './firebase';
 
 export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
   const [prefilledService, setPrefilledService] = useState<string>('Search Engine Optimization (SEO)');
-
-  useEffect(() => {
-    // Validate Firestore connection on boot
-    testFirestoreConnection();
-  }, []);
 
   const handleNavigate = (sectionId: string) => {
     const el = document.getElementById(sectionId);
