@@ -27,7 +27,7 @@ export const AiToolsSection: React.FC = () => {
   >('audit');
 
   // --- 1. Deep Thinking Audit State (gemini-2.5-flash) ---
-  const [auditUrl, setAuditUrl] = useState('https://example.com');
+  const [auditUrl, setAuditUrl] = useState('https://moaviaseo.com/');
   const [auditType, setAuditType] = useState('B2B Tech & SaaS');
   const [auditKeywords, setAuditKeywords] = useState('technical SEO, enterprise cloud solutions');
   const [auditIssue, setAuditIssue] = useState('High bounce rate on mobile, organic traffic stagnating');
