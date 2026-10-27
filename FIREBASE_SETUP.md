@@ -66,3 +66,19 @@ After deployment: open the live site, enter an email not previously registered, 
 **Prior signups:** The old form saved emails only to each visitor's browser localStorage. Those records are **not** automatically migrated to Firebase. Previously entered addresses must be resubmitted with the person's permission.
 
 **Production note:** The direct Firestore client-write flow is not a robust anti-spam solution. Use a rate-limited server endpoint, Firebase App Check, permission-controlled reads, and double opt-in before running a public email marketing list at scale. This implementation does not send newsletters or verification emails by itself.
+
+## Admin Portal — Newsletter Subscribers
+
+The protected Admin Portal has a **Newsletter Subscribers** tab (beneath Leads & Inquiries).
+The tab reads the real-time `newsletterSubscribers` collection using the same named Firestore
+database configured in `src/firebase.ts`. It shows total and active counts, subscriber emails,
+subscription dates formatted in Pakistan time, consent and status, plus search.
+
+This section is **read only**, and has loading/empty/error states; it never uses mock subscribers.
+The `firestore.rules` policy already restricts `newsletterSubscribers` reads to the verified,
+password-authenticated owner, `moavia400@gmail.com`, so no public read rule is necessary.
+
+After Cloudflare's GitHub build deploys: log into the Admin Portal as the owner, select
+**Newsletter Subscribers**, check a known subscriber from Firestore and ensure the total
+and date are accurate. If Firestore denies the query, verify the named database's published
+rules and the owner's authenticated provider; never enable public reads to fix the UI.

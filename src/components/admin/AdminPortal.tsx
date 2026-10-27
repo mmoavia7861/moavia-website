@@ -47,6 +47,7 @@ import {
 import {
   collection,
   onSnapshot,
+  Timestamp,
   query,
   orderBy,
   updateDoc,
@@ -86,6 +87,32 @@ interface AdminPortalProps {
   onClose: () => void;
 }
 
+interface NewsletterSubscriberRecord {
+  id: string;
+  email: string;
+  status: string;
+  source: string;
+  consent: boolean;
+  createdAt: Date | null;
+}
+
+function subscriberDate(value: unknown): Date | null {
+  const candidate =
+    value instanceof Timestamp ? value.toDate()
+    : typeof value === 'string' || value instanceof Date ? new Date(value)
+    : null;
+  return candidate && Number.isFinite(candidate.getTime()) ? candidate : null;
+}
+
+function displaySubscriberDate(date: Date | null): string {
+  if (!date) return 'Date unavailable';
+  return new Intl.DateTimeFormat('en-PK', {
+    dateStyle: 'medium',
+    timeStyle: 'short',
+    timeZone: 'Asia/Karachi',
+  }).format(date) + ' PKT';
+}
+
 export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
   // Authentication State
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -104,6 +131,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
   const [activeTab, setActiveTab] = useState<
     | 'overview'
     | 'leads'
+    | 'newsletter'
     | 'clients'
     | 'projects'
     | 'services'
@@ -118,6 +146,9 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
 
   // Live Data Lists (synced from Firestore with fallback to sample data)
   const [leads, setLeads] = useState<Lead[]>([]);
+  const [newsletterSubscribers, setNewsletterSubscribers] = useState<NewsletterSubscriberRecord[]>([]);
+  const [newsletterLoading, setNewsletterLoading] = useState(true);
+  const [newsletterError, setNewsletterError] = useState<string | null>(null);
   const [clients, setClients] = useState<Client[]>(sampleClients);
   const [projects, setProjects] = useState<Project[]>(sampleProjects);
   const [portfolio, setPortfolio] = useState<PortfolioItem[]>(initialPortfolio);
@@ -128,6 +159,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
 
   // Filters & Search
   const [leadSearch, setLeadSearch] = useState('');
+  const [newsletterSearch, setNewsletterSearch] = useState('');
   const [leadStatusFilter, setLeadStatusFilter] = useState<string>('All');
 
   // Modals & Sub-forms
@@ -208,6 +240,55 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
       console.warn('Firestore subscription note:', e);
     }
   }, [currentUser, authorizedRole]);
+
+
+  // The named Firestore database is used via db; its security rules allow
+  // subscriber reads only to the verified, password-authenticated owner.
+  useEffect(() => {
+    if (!currentUser || !currentUser.emailVerified || !authorizedRole) {
+      setNewsletterSubscribers([]);
+      setNewsletterLoading(false);
+      setNewsletterError(null);
+      return;
+    }
+
+    setNewsletterLoading(true);
+    setNewsletterError(null);
+    const unsubscribe = onSnapshot(
+      collection(db, 'newsletterSubscribers'),
+      (snapshot) => {
+        const records: NewsletterSubscriberRecord[] = snapshot.docs.map((entry) => {
+          const data = entry.data();
+          return {
+            id: entry.id,
+            email: typeof data.email === 'string' ? data.email : '',
+            status: typeof data.status === 'string' ? data.status : 'unknown',
+            source: typeof data.source === 'string' ? data.source : 'Unknown',
+            consent: data.consent === true,
+            createdAt: subscriberDate(data.createdAt),
+          };
+        });
+        records.sort((a, b) => (b.createdAt?.getTime() ?? 0) - (a.createdAt?.getTime() ?? 0));
+        setNewsletterSubscribers(records);
+        setNewsletterLoading(false);
+        setNewsletterError(null);
+      },
+      (error) => {
+        console.warn('Unable to read newsletter subscribers:', error.code);
+        setNewsletterSubscribers([]);
+        setNewsletterLoading(false);
+        setNewsletterError('Newsletter data could not be loaded. Check your administrator session and Firestore Security Rules.');
+      },
+    );
+    return () => unsubscribe();
+  }, [currentUser, authorizedRole]);
+
+  const filteredNewsletterSubscribers = newsletterSubscribers.filter(
+    (subscriber) => subscriber.email.toLowerCase().includes(newsletterSearch.trim().toLowerCase()),
+  );
+  const activeNewsletterCount = newsletterSubscribers.filter(
+    (subscriber) => subscriber.status === 'active',
+  ).length;
 
   // Determine Current User Role
   const currentEmail = currentUser?.email ? normalizeEmail(currentUser.email) : '';
@@ -599,6 +680,24 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
               </div>
               <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${activeTab === 'leads' ? 'bg-white/20' : 'bg-[#17A99A]/15 text-[#17A99A]'}`}>
                 {leads.length}
+              </span>
+            </button>
+
+
+            <button
+              onClick={() => setActiveTab('newsletter')}
+              className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-bold transition-all ${
+                activeTab === 'newsletter'
+                  ? 'bg-[#17A99A] text-white shadow-md'
+                  : 'text-[#65738B] hover:text-[#18243A] hover:bg-slate-50'
+              }`}
+            >
+              <div className="flex items-center gap-2.5">
+                <Mail className="w-4 h-4" />
+                <span>Newsletter Subscribers</span>
+              </div>
+              <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${activeTab === 'newsletter' ? 'bg-white/20' : 'bg-[#17A99A]/15 text-[#17A99A]'}`}>
+                {newsletterLoading ? '…' : newsletterError ? '!' : newsletterSubscribers.length}
               </span>
             </button>
 
@@ -1011,6 +1110,98 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
                       ))}
                   </tbody>
                 </table>
+              </div>
+            </div>
+          )}
+
+
+          {/* NEWSLETTER SUBSCRIBERS — LIVE FIRESTORE DATA, ADMIN ONLY */}
+          {activeTab === 'newsletter' && (
+            <div className="space-y-6 max-w-6xl">
+              <div>
+                <h2 className="text-2xl font-extrabold text-[#18243A]">Newsletter Subscribers</h2>
+                <p className="text-xs text-[#65738B]">
+                  Real subscribers from the Firestore newsletterSubscribers collection. This information is visible only in your protected Admin Portal.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="bg-white p-5 rounded-2xl border border-[#E7EAF2] shadow-sm">
+                  <p className="text-xs text-[#65738B] font-semibold">Total subscribers</p>
+                  <p className="text-3xl mt-2 font-extrabold text-[#18243A]">
+                    {newsletterLoading ? '…' : newsletterError ? '—' : newsletterSubscribers.length}
+                  </p>
+                </div>
+                <div className="bg-white p-5 rounded-2xl border border-[#E7EAF2] shadow-sm">
+                  <p className="text-xs text-[#65738B] font-semibold">Active subscriptions</p>
+                  <p className="text-3xl mt-2 font-extrabold text-[#17A99A]">
+                    {newsletterLoading ? '…' : newsletterError ? '—' : activeNewsletterCount}
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-white rounded-3xl border border-[#E7EAF2] shadow-sm p-5 sm:p-6 space-y-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <h3 className="text-sm font-bold text-[#18243A]">Subscriber Directory</h3>
+                  <div className="relative sm:w-80">
+                    <Search className="absolute left-3 top-3 w-4 h-4 text-[#65738B]" />
+                    <input
+                      type="search"
+                      value={newsletterSearch}
+                      onChange={(event) => setNewsletterSearch(event.target.value)}
+                      placeholder="Search subscriber email..."
+                      aria-label="Search newsletter subscribers by email"
+                      className="w-full text-xs pl-9 pr-3 py-2.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
+                    />
+                  </div>
+                </div>
+
+                {newsletterLoading ? (
+                  <p className="text-sm text-[#65738B] py-8 text-center" role="status">Loading newsletter subscribers from Firebase...</p>
+                ) : newsletterError ? (
+                  <div className="flex items-start gap-2 bg-rose-50 border border-rose-200 rounded-xl p-4 text-xs text-rose-700" role="alert">
+                    <AlertCircle className="w-4 h-4 shrink-0" />
+                    <span>{newsletterError}</span>
+                  </div>
+                ) : filteredNewsletterSubscribers.length === 0 ? (
+                  <p className="text-sm text-[#65738B] py-8 text-center">
+                    {newsletterSearch.trim() ? 'No subscribers match your search.' : 'No newsletter subscriptions have been saved yet.'}
+                  </p>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left text-xs">
+                      <thead>
+                        <tr className="border-b border-[#E7EAF2] text-[#65738B]">
+                          <th scope="col" className="pb-3 font-semibold">Subscriber email</th>
+                          <th scope="col" className="pb-3 font-semibold">Subscribed on (PKT)</th>
+                          <th scope="col" className="pb-3 font-semibold">Status</th>
+                          <th scope="col" className="pb-3 font-semibold">Consent</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-[#E7EAF2]">
+                        {filteredNewsletterSubscribers.map((subscriber) => (
+                          <tr key={subscriber.id} className="hover:bg-[#F8F9FD]">
+                            <td className="py-3 pr-4 font-medium text-[#18243A] break-all">{subscriber.email || '—'}</td>
+                            <td className="py-3 pr-4 text-[#65738B] whitespace-nowrap">{displaySubscriberDate(subscriber.createdAt)}</td>
+                            <td className="py-3 pr-4">
+                              <span className={`inline-flex rounded-full px-2.5 py-1 font-semibold ${
+                                subscriber.status === 'active'
+                                  ? 'bg-[#17A99A]/10 text-[#149284]'
+                                  : 'bg-slate-100 text-slate-600'
+                              }`}>
+                                {subscriber.status}
+                              </span>
+                            </td>
+                            <td className="py-3 pr-4 text-[#65738B]">{subscriber.consent ? 'Yes' : 'Not recorded'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    <p className="text-[11px] text-[#65738B] mt-4">
+                      Showing {filteredNewsletterSubscribers.length} of {newsletterSubscribers.length} subscribers. Live updates from Firebase.
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           )}
