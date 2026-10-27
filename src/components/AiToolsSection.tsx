@@ -26,7 +26,7 @@ export const AiToolsSection: React.FC = () => {
     'audit' | 'quick' | 'search' | 'maps' | 'image' | 'video' | 'animate' | 'chat' | 'voice'
   >('audit');
 
-  // --- 1. Deep Thinking Audit State (gemini-4-argon) ---
+  // --- 1. Deep Thinking Audit State (gemini-2.5-flash) ---
   const [auditUrl, setAuditUrl] = useState('https://example.com');
   const [auditType, setAuditType] = useState('B2B Tech & SaaS');
   const [auditKeywords, setAuditKeywords] = useState('technical SEO, enterprise cloud solutions');
@@ -34,27 +34,27 @@ export const AiToolsSection: React.FC = () => {
   const [auditLoading, setAuditLoading] = useState(false);
   const [auditReport, setAuditReport] = useState<string | null>(null);
 
-  // --- 2. Low-Latency Quick Meta State (gemini-3.1-flash-lite) ---
+  // --- 2. Low-Latency Quick Meta State (gemini-2.5-flash-lite) ---
   const [quickTitle, setQuickTitle] = useState('SEO Agency Islamabad | Grow Traffic');
   const [quickDesc, setQuickDesc] = useState('We provide SEO services for businesses to rank on Google.');
   const [quickKw, setQuickKw] = useState('SEO Agency Islamabad');
   const [quickLoading, setQuickLoading] = useState(false);
   const [quickResult, setQuickResult] = useState<any>(null);
 
-  // --- 3. Search Grounding State (gemini-3.8-flash + googleSearch) ---
+  // --- 3. Search Grounding State (gemini-2.5-flash + googleSearch) ---
   const [searchQuery, setSearchQuery] = useState('best SEO agency in Islamabad 2026');
   const [searchRegion, setSearchRegion] = useState('Pakistan');
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchData, setSearchData] = useState<any>(null);
 
-  // --- 4. Maps Grounding State (gemini-3.8-flash + googleMaps) ---
+  // --- 4. Maps Grounding State (gemini-2.5-flash + googleMaps) ---
   const [mapsBusiness, setMapsBusiness] = useState('Moavia SEO Pro');
   const [mapsCategory, setMapsCategory] = useState('Internet Marketing & SEO Agency');
   const [mapsCity, setMapsCity] = useState('Islamabad');
   const [mapsLoading, setMapsLoading] = useState(false);
   const [mapsData, setMapsData] = useState<any>(null);
 
-  // --- 5. Image Studio State (gemini-3-pro-image-preview & gemini-nano-banana-2.1) ---
+  // --- 5. Image Studio State (free SVG poster template & SVG color variation) ---
   const [imagePrompt, setImagePrompt] = useState('Futuristic digital agency dashboard hologram with glowing SEO graph');
   const [imageResolution, setImageResolution] = useState<'1K' | '2K' | '4K'>('2K');
   const [imageMode, setImageMode] = useState<'create' | 'edit'>('create');
@@ -62,13 +62,13 @@ export const AiToolsSection: React.FC = () => {
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [imageEditText, setImageEditText] = useState<string | null>(null);
 
-  // --- 6. Video SEO Analyzer State (gemini-4-argon) ---
+  // --- 6. Video SEO Analyzer State (gemini-2.5-flash) ---
   const [videoTitle, setVideoTitle] = useState('How We Scaled Organic Traffic by 400% in 90 Days');
   const [videoDesc, setVideoDesc] = useState('Complete case study breakdown showing on-page audits, schema markup, and backlink strategies.');
   const [videoLoading, setVideoLoading] = useState(false);
   const [videoAnalysis, setVideoAnalysis] = useState<string | null>(null);
 
-  // --- 7. Animate Image into Video State (gemini-omni-1.1-flash Interactions API) ---
+  // --- 7. Animate Image into Video State (paid AI video model Interactions API) ---
   const [animateAspect, setAnimateAspect] = useState<'16:9' | '9:16'>('16:9');
   const [animatePrompt, setAnimatePrompt] = useState('Smooth cinematic drone reveal with vibrant dynamic lighting');
   const [animateLoading, setAnimateLoading] = useState(false);
@@ -84,10 +84,10 @@ export const AiToolsSection: React.FC = () => {
   ]);
   const [chatInput, setChatInput] = useState('');
   const [chatRole, setChatRole] = useState<'general' | 'seo' | 'webdev' | 'ads'>('general');
-  const [chatModel, setChatModel] = useState<'gemini-3.8-flash' | 'gemini-4-argon' | 'gemini-3.1-flash-lite'>('gemini-3.8-flash');
+  const [chatModel, setChatModel] = useState<'gemini-2.5-flash' | 'gemini-2.5-flash-lite'>('gemini-2.5-flash');
   const [chatLoading, setChatLoading] = useState(false);
 
-  // --- 9. Live Voice Consultation State (gemini-3.8-live) ---
+  // --- 9. Live Voice Consultation State (browser microphone assistant) ---
   const [voiceActive, setVoiceActive] = useState(false);
   const [voiceTranscript, setVoiceTranscript] = useState<string[]>([]);
   const [voiceStatus, setVoiceStatus] = useState<'idle' | 'listening' | 'speaking'>('idle');
@@ -227,30 +227,8 @@ export const AiToolsSection: React.FC = () => {
 
   const handleRunAnimate = async () => {
     setAnimateLoading(true);
-    setAnimatedVideoStatus(null);
-    try {
-      // Use existing logo as default image to animate
-      const sampleBase64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==';
-      const res = await fetch('/api/animate-video', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          imageBase64: sampleBase64,
-          aspectRatio: animateAspect,
-          prompt: animatePrompt,
-        }),
-      });
-      const data = await res.json();
-      if (data.status === 'success') {
-        setAnimatedVideoStatus(`Interactions API job successfully dispatched! Aspect Ratio: ${animateAspect}. Interaction ID: ${data.interactionId}`);
-      } else {
-        setAnimatedVideoStatus(data.error || 'Video animation request submitted.');
-      }
-    } catch {
-      setAnimatedVideoStatus('Video interaction dispatched to background queue.');
-    } finally {
-      setAnimateLoading(false);
-    }
+    setAnimatedVideoStatus('Real AI-generated video requires a paid provider API. Free Gemini text API keys do not support this feature. No video or job was created.');
+    setAnimateLoading(false);
   };
 
   const handleSendChat = async () => {
@@ -294,13 +272,55 @@ export const AiToolsSection: React.FC = () => {
     if (voiceActive) {
       setVoiceActive(false);
       setVoiceStatus('idle');
-    } else {
+      return;
+    }
+    const Recognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+    if (!Recognition) {
+      setVoiceTranscript(['Speech recognition needs Chrome/Edge or a browser supporting the Web Speech API.']);
+      return;
+    }
+    const recognition = new Recognition();
+    recognition.lang = 'en-US';
+    recognition.onresult = async (event: any) => {
+      const utterance = event.results?.[0]?.[0]?.transcript || '';
+      setVoiceTranscript(['You: ' + utterance]);
+      setVoiceStatus('speaking');
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({role:'seo',messages:[{role:'user',content:utterance}]}),
+        });
+        const json = await res.json();
+        const answer = json.reply || json.error || 'No response available.';
+        setVoiceTranscript(['You: ' + utterance, 'Consultant: ' + answer]);
+        if (res.ok && window.speechSynthesis) {
+          const speech = new SpeechSynthesisUtterance(answer.slice(0, 900));
+          speech.onend = () => setVoiceStatus('idle');
+          speech.onerror = () => setVoiceStatus('idle');
+          window.speechSynthesis.speak(speech);
+        } else setVoiceStatus('idle');
+      } catch {
+        setVoiceTranscript(['Unable to reach the AI API.']);
+        setVoiceStatus('idle');
+      }
+      setVoiceActive(false);
+    };
+    recognition.onerror = (e: any) => {
+      setVoiceTranscript(['Microphone error: ' + (e.error || 'unknown')]);
+      setVoiceActive(false);
+      setVoiceStatus('idle');
+    };
+    recognition.onend = () => setVoiceActive(false);
+    try {
+      window.speechSynthesis?.cancel();
+      recognition.start();
       setVoiceActive(true);
       setVoiceStatus('listening');
-      setVoiceTranscript([
-        'Connected to Moavia SEO Pro Voice Consultant via Gemini Live API (gemini-3.8-live).',
-        'Listening for your strategic query: "Ask me about SEO audits or campaign roadmaps..."',
-      ]);
+      setVoiceTranscript(['Browser microphone listening. Requires Gemini API key for AI responses.']);
+    } catch {
+      setVoiceTranscript(['Could not access microphone. Please check browser permissions.']);
+      setVoiceActive(false);
     }
   };
 
@@ -323,6 +343,11 @@ export const AiToolsSection: React.FC = () => {
           </p>
         </div>
 
+        <p className="mt-5 text-xs text-center text-[#65738B]">
+          Free keyless tools: on-page HTML audit, metadata optimization and SVG designs. 
+          Other text AI tools require your own GEMINI_API_KEY configured as a Cloudflare Worker Secret.
+        </p>
+
         {/* Tab Selection Bar */}
         <div className="mt-12 flex flex-wrap items-center justify-center gap-2 p-2 rounded-2xl bg-white border border-[#E7EAF2] shadow-sm max-w-5xl mx-auto">
           <button
@@ -334,7 +359,7 @@ export const AiToolsSection: React.FC = () => {
             }`}
           >
             <Brain className="w-3.5 h-3.5" />
-            Deep Thinking Audit (Argon)
+            On-Page SEO Audit (Free)
           </button>
 
           <button
@@ -346,7 +371,7 @@ export const AiToolsSection: React.FC = () => {
             }`}
           >
             <Zap className="w-3.5 h-3.5" />
-            Quick Meta (Flash-Lite)
+            Quick Meta (Free)
           </button>
 
           <button
@@ -382,7 +407,7 @@ export const AiToolsSection: React.FC = () => {
             }`}
           >
             <ImageIcon className="w-3.5 h-3.5" />
-            Pro Images (1K/2K/4K)
+            Free SVG Graphics (1K–4K)
           </button>
 
           <button
@@ -394,7 +419,7 @@ export const AiToolsSection: React.FC = () => {
             }`}
           >
             <Video className="w-3.5 h-3.5" />
-            Video SEO (Argon)
+            Video SEO (Text Analysis)
           </button>
 
           <button
@@ -406,7 +431,7 @@ export const AiToolsSection: React.FC = () => {
             }`}
           >
             <Film className="w-3.5 h-3.5" />
-            Animate Video (Omni)
+            AI Video (Paid Only)
           </button>
 
           <button
@@ -430,7 +455,7 @@ export const AiToolsSection: React.FC = () => {
             }`}
           >
             <Mic className="w-3.5 h-3.5" />
-            Live Voice (Live API)
+            Browser Voice
           </button>
         </div>
 
@@ -447,11 +472,11 @@ export const AiToolsSection: React.FC = () => {
                     Deep Technical SEO Audit & Algorithm Defense
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by model <span className="font-mono text-[#5265D8] font-bold">gemini-4-argon</span> with <span className="font-semibold text-[#18243A]">ThinkingLevel.HIGH</span>
+                    Live HTML audit (optional Gemini suggestions only if key configured)
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#5265D8]/10 text-[#5265D8] px-3 py-1 rounded-full">
-                  High Reasoning Mode
+                  Live Page HTML
                 </span>
               </div>
 
@@ -502,7 +527,7 @@ export const AiToolsSection: React.FC = () => {
                 {auditLoading ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Engaging Gemini 4 Argon High Thinking Reasoner...</span>
+                    <span>Inspecting public website HTML...</span>
                   </>
                 ) : (
                   <>
@@ -516,7 +541,7 @@ export const AiToolsSection: React.FC = () => {
                 isLoading={auditLoading}
                 steps={[
                   'Analyzing crawl budget & Core Web Vitals...',
-                  'Engaging Gemini 4 Argon High-Thinking reasoner...',
+                  'Inspecting title, canonical, H1 and metadata...',
                   'Auditing semantic entity mapping & Schema JSON-LD...',
                   'Generating 90-day algorithmic recovery blueprint...',
                 ]}
@@ -528,7 +553,7 @@ export const AiToolsSection: React.FC = () => {
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-bold text-[#17A99A] uppercase tracking-wider flex items-center gap-1.5">
                       <CheckCircle2 className="w-4 h-4" />
-                      Auditor Output (Argon High-Thinking)
+                      On-Page HTML Audit
                     </span>
                   </div>
                   <pre className="text-xs text-[#18243A] font-sans whitespace-pre-wrap leading-relaxed">
@@ -549,11 +574,11 @@ export const AiToolsSection: React.FC = () => {
                     Low-Latency Instant Title & Meta Optimizer
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by ultra-fast model <span className="font-mono text-[#17A99A] font-bold">gemini-3.1-flash-lite</span>
+                    Powered by ultra-fast model <span className="font-mono text-[#17A99A] font-bold">gemini-2.5-flash-lite</span>
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#17A99A]/10 text-[#17A99A] px-3 py-1 rounded-full">
-                  Sub-Second Response
+                  No API key required
                 </span>
               </div>
 
@@ -642,6 +667,7 @@ export const AiToolsSection: React.FC = () => {
                       </ul>
                     </div>
                   )}
+                  {quickResult.error && <p className="text-xs text-red-700">{quickResult.error}</p>}
                   {quickResult.rawText && (
                     <p className="text-xs text-[#18243A] whitespace-pre-wrap">{quickResult.rawText}</p>
                   )}
@@ -660,7 +686,7 @@ export const AiToolsSection: React.FC = () => {
                     Live Google Search Grounding & Competitor Scout
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by <span className="font-mono text-[#5265D8] font-bold">gemini-3.8-flash</span> with <span className="font-bold text-[#18243A]">googleSearch</span> tool
+                    Powered by <span className="font-mono text-[#5265D8] font-bold">gemini-2.5-flash</span> with <span className="font-bold text-[#18243A]">googleSearch</span> tool
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#5265D8]/10 text-[#5265D8] px-3 py-1 rounded-full">
@@ -716,7 +742,7 @@ export const AiToolsSection: React.FC = () => {
                     Live Grounded SERP Intelligence
                   </span>
                   <div className="text-xs text-[#18243A] whitespace-pre-wrap leading-relaxed">
-                    {searchData.analysis}
+                    {searchData.analysis || searchData.error}
                   </div>
                 </div>
               )}
@@ -733,7 +759,7 @@ export const AiToolsSection: React.FC = () => {
                     Local SEO & Google Maps Proximity Pack Auditor
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by <span className="font-mono text-[#5265D8] font-bold">gemini-3.8-flash</span> with <span className="font-bold text-[#18243A]">googleMaps</span> tool
+                    Powered by <span className="font-mono text-[#5265D8] font-bold">gemini-2.5-flash</span> with <span className="font-bold text-[#18243A]">googleMaps</span> tool
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#E8B451]/15 text-[#E8B451] px-3 py-1 rounded-full">
@@ -798,7 +824,7 @@ export const AiToolsSection: React.FC = () => {
                     Local Proximity & Map Pack Strategy
                   </span>
                   <div className="text-xs text-[#18243A] whitespace-pre-wrap leading-relaxed">
-                    {mapsData.localAudit}
+                    {mapsData.localAudit || mapsData.error}
                   </div>
                 </div>
               )}
@@ -815,7 +841,7 @@ export const AiToolsSection: React.FC = () => {
                     High-Resolution Visual Asset Studio
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Using <span className="font-mono text-[#8B63D8] font-bold">gemini-3-pro-image-preview</span> with 1K, 2K, 4K resolution affordance, plus <span className="font-mono text-[#5265D8] font-bold">gemini-nano-banana-2.1</span>
+                    Original SVG templates with selectable size and colors, not AI-generated photography.
                   </p>
                 </div>
 
@@ -858,7 +884,7 @@ export const AiToolsSection: React.FC = () => {
                     onChange={() => setImageMode('create')}
                     className="accent-[#8B63D8]"
                   />
-                  <span>Create High-Resolution Visual (gemini-3-pro-image-preview)</span>
+                  <span>Design a downloadable SVG marketing graphic</span>
                 </label>
                 <label className="text-xs font-bold text-[#18243A] flex items-center gap-2 cursor-pointer">
                   <input
@@ -868,7 +894,7 @@ export const AiToolsSection: React.FC = () => {
                     onChange={() => setImageMode('edit')}
                     className="accent-[#8B63D8]"
                   />
-                  <span>Edit Marketing Asset (gemini-nano-banana-2.1)</span>
+                  <span>Alternate SVG color theme</span>
                 </label>
               </div>
 
@@ -889,7 +915,7 @@ export const AiToolsSection: React.FC = () => {
                 isLoading={imageLoading}
                 steps={[
                   `Configuring studio canvas for ${imageResolution} resolution...`,
-                  'Synthesizing photorealistic diffusion weights with Gemini Pro...',
+                  'Creating your SVG poster design...',
                   'Applying studio lighting and sharp brand aesthetics...',
                   'Finalizing graphic render stream...',
                 ]}
@@ -905,11 +931,11 @@ export const AiToolsSection: React.FC = () => {
                   />
                   <div className="flex items-center justify-center gap-3">
                     <span className="text-xs font-bold text-[#17A99A]">
-                      Rendered in {imageResolution} Resolution
+                      Scalable {imageResolution} SVG template
                     </span>
                     <a
                       href={generatedImage}
-                      download={`moavia-seopro-${imageResolution.toLowerCase()}.jpg`}
+                      download={`moavia-seopro-${imageResolution.toLowerCase()}.svg`}
                       className="text-xs font-bold bg-[#18243A] text-white px-3 py-1.5 rounded-lg flex items-center gap-1.5"
                     >
                       <Download className="w-3.5 h-3.5" />
@@ -937,7 +963,7 @@ export const AiToolsSection: React.FC = () => {
                     Video Content Understanding & YouTube/TikTok SEO
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by model <span className="font-mono text-[#F17F72] font-bold">gemini-4-argon</span>
+                    Powered by model <span className="font-mono text-[#F17F72] font-bold">gemini-2.5-flash</span>
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#F17F72]/15 text-[#F17F72] px-3 py-1 rounded-full">
@@ -1012,7 +1038,7 @@ export const AiToolsSection: React.FC = () => {
                     Animate Image into Video (Photo-to-Video Reel)
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Using <span className="font-mono text-[#8B63D8] font-bold">gemini-omni-1.1-flash</span> via the Interactions API
+                    Paid-tier AI video generation is not included in this free setup.
                   </p>
                 </div>
 
@@ -1069,7 +1095,7 @@ export const AiToolsSection: React.FC = () => {
                 className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#8B63D8] to-[#17A99A] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md disabled:opacity-50"
               >
                 {animateLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Film className="w-4 h-4" />}
-                <span>Generate Video Reel with Gemini Omni 1.1 Flash ({animateAspect})</span>
+                <span>Check Paid Video Requirement ({animateAspect})</span>
               </button>
 
               <AiProgressIndicator
@@ -1124,9 +1150,9 @@ export const AiToolsSection: React.FC = () => {
                     onChange={(e) => setChatModel(e.target.value as any)}
                     className="text-xs font-bold p-2 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] text-[#5265D8]"
                   >
-                    <option value="gemini-3.8-flash">gemini-3.8-flash (General)</option>
-                    <option value="gemini-4-argon">gemini-4-argon (Complex)</option>
-                    <option value="gemini-3.1-flash-lite">gemini-3.1-flash-lite (Fast)</option>
+                    <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+                    
+                    <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash-Lite</option>
                   </select>
                 </div>
               </div>
@@ -1199,7 +1225,7 @@ export const AiToolsSection: React.FC = () => {
             <div className="glass-card rounded-3xl p-6 sm:p-8 space-y-6 text-center">
               <div className="max-w-md mx-auto space-y-2">
                 <span className="text-[11px] font-bold text-rose-600 bg-rose-50 px-3 py-1 rounded-full uppercase tracking-wider">
-                  Live API Engine (gemini-3.8-live)
+                  Browser Speech (browser microphone assistant)
                 </span>
                 <h3 className="text-2xl font-extrabold text-[#18243A]">
                   Real-Time Voice Consultation
