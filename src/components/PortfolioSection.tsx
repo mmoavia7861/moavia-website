@@ -114,17 +114,22 @@ export const PortfolioSection: React.FC = () => {
                   Client: <strong className="text-[#18243A]">{item.clientName}</strong>
                 </span>
 
-                {item.liveUrl && (
+                {item.liveUrl && /^https:\/\//.test(item.liveUrl) && !item.liveUrl.includes('example.com') ? (
                   <a
                     href={item.liveUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-xs font-bold text-[#5265D8] hover:text-[#4353bc] transition-colors"
+                    aria-label={`Open live site for ${item.title}`}
                   >
-                    <span>Inspect</span>
+                    <span>View Live Site</span>
                     <ArrowUpRight className="w-4 h-4" />
                   </a>
-                )}
+                ) : item.isDemo ? (
+                  <span className="text-xs font-semibold text-[#65738B]" title="This is a concept demonstration, not an externally hosted project">
+                    Concept demo · No live site
+                  </span>
+                ) : null}
               </div>
             </div>
           ))}
