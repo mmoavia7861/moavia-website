@@ -84,7 +84,7 @@ export const AiToolsSection: React.FC = () => {
   ]);
   const [chatInput, setChatInput] = useState('');
   const [chatRole, setChatRole] = useState<'general' | 'seo' | 'webdev' | 'ads'>('general');
-  const [chatModel, setChatModel] = useState<'gemini-2.5-flash' | 'gemini-2.5-flash-lite'>('gemini-2.5-flash');
+  const [chatModel, setChatModel] = useState<'gemini-3.8-flash' | 'gemini-3.5-flash-lite'>('gemini-3.5-flash-lite');
   const [chatLoading, setChatLoading] = useState(false);
 
   // --- 9. Live Voice Consultation State (browser microphone assistant) ---
@@ -1150,9 +1150,9 @@ export const AiToolsSection: React.FC = () => {
                     onChange={(e) => setChatModel(e.target.value as any)}
                     className="text-xs font-bold p-2 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] text-[#5265D8]"
                   >
-                    <option value="gemini-2.5-flash">Gemini 2.5 Flash</option>
+                    <option value="gemini-3.8-flash">Gemini 3.8 Flash</option>
                     
-                    <option value="gemini-2.5-flash-lite">Gemini 2.5 Flash-Lite</option>
+                    <option value="gemini-3.5-flash-lite">Gemini 3.5 Flash-Lite (Free)</option>
                   </select>
                 </div>
               </div>
@@ -1182,7 +1182,7 @@ export const AiToolsSection: React.FC = () => {
                   <div className="flex justify-start">
                     <div className="bg-white p-3 rounded-2xl border border-[#E7EAF2] text-xs flex items-center gap-2 text-[#65738B]">
                       <Loader2 className="w-3.5 h-3.5 animate-spin text-[#5265D8]" />
-                      <span>Thinking with {chatModel}...</span>
+                      <span>Responding with {chatModel}...</span>
                     </div>
                   </div>
                 )}
