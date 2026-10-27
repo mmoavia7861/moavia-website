@@ -113,7 +113,7 @@ async function inspectPage(rawUrl: string): Promise<string> {
 async function gemini(
   env: WorkerEnv, prompt: string,
   options: { model?: string; tools?: unknown[]; system?: string } = {},
-): Promise<{ text: string; sources: string[] }> {
+): Promise<{ text: string; sources: string[]; modelUsed: string }> {
   if (!env.GEMINI_API_KEY) {
     throw new ApiError(503, 'AI features need a Gemini free-tier API key. Add GEMINI_API_KEY as a Cloudflare Worker secret.');
   }
@@ -127,16 +127,28 @@ async function gemini(
     };
     if (options.tools) body.tools = options.tools;
     if (options.system) body.systemInstruction = { parts: [{ text: options.system }] };
-    const response = await fetch(
-      'https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(model) + ':generateContent',
-      {
-        method: 'POST',
-        signal: controller.signal,
-        headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
-        body: JSON.stringify(body),
-      },
-    );
-    const data = await response.json() as Record<string, any>;
+    // Only retry transient 503/504 for the higher-cost text chatbot model.
+    // 429 is a quota condition: don't amplify it by automatic retries.
+    const requestModel = async (modelName: string) => {
+      const response = await fetch(
+        'https://generativelanguage.googleapis.com/v1beta/models/' + encodeURIComponent(modelName) + ':generateContent',
+        {
+          method: 'POST',
+          signal: controller.signal,
+          headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY! },
+          body: JSON.stringify(body),
+        },
+      );
+      const data = await response.json() as Record<string, any>;
+      return { response, data };
+    };
+    let modelUsed = model;
+    let { response, data } = await requestModel(modelUsed);
+    if (!response.ok && [503, 504].includes(response.status) &&
+        modelUsed === 'gemini-3.8-flash' && !options.tools) {
+      modelUsed = 'gemini-3.5-flash-lite';
+      ({ response, data } = await requestModel(modelUsed));
+    }
     if (!response.ok) {
       const message = response.status === 429
         ? 'Google Gemini free-tier rate limit reached. Please try again later.'
@@ -155,7 +167,7 @@ async function gemini(
     const sources: string[] = (candidate?.groundingMetadata?.groundingChunks || [])
       .map((c: any) => c.web?.uri || c.maps?.uri || '')
       .filter((v: string) => /^https:\/\//.test(v)).slice(0, 8);
-    return { text, sources };
+    return { text, sources, modelUsed };
   } catch (error) {
     if (error instanceof ApiError) throw error;
     throw new ApiError(502, 'Gemini request timed out or could not be reached.');
@@ -246,35 +258,69 @@ async function handleApi(request: Request, env: WorkerEnv, path: string): Promis
       if (!url) throw new ApiError(400, 'Enter a website URL.');
       const findings = await inspectPage(url);
       let report = findings;
-      if (env.GEMINI_API_KEY) {
-        const ai = await gemini(env,
-          'Using ONLY the observed HTML checks below (never invent measured Core Web Vitals, ranks or backlinks), write a prioritized SEO improvement plan. Industry: '
-          + field(data, 'websiteType', 100) + '. Keywords: ' + field(data, 'targetKeywords', 200)
-          + '. Reported issue: ' + field(data, 'mainIssue', 250) + '.\n\n' + findings);
-        report += '\n\nAI RECOMMENDED NEXT STEPS\n' + ai.text;
+      // The on-page audit is a standalone free tool: do not fail a valid audit
+      // just because the connected Gemini project has exhausted its quota.
+      if (data.includeAI === true && env.GEMINI_API_KEY) {
+        try {
+          const ai = await gemini(env,
+            'Using ONLY these observed HTML checks (never invent Core Web Vitals, ranks or backlinks), write a concise prioritized SEO plan. Industry: '
+            + field(data, 'websiteType', 100) + '. Keywords: ' + field(data, 'targetKeywords', 200)
+            + '. Reported issue: ' + field(data, 'mainIssue', 250) + '.\n\n' + findings);
+          report += '\n\nOPTIONAL AI RECOMMENDATIONS (' + ai.modelUsed + ')\n' + ai.text;
+        } catch (error) {
+          const note = error instanceof ApiError ? error.message : 'AI unavailable.';
+          report += '\n\nOPTIONAL AI UNAVAILABLE\n' + note
+            + '\nThe real HTML audit above completed without needing Gemini.';
+        }
       }
       return json({ auditReport: report });
     }
     if (path === '/api/search-grounding') {
-      const question = field(data, 'query', 700);
+      const question = field(data, 'query', 200);
+      const location = field(data, 'location', 100);
       if (!question) throw new ApiError(400, 'Enter a search query.');
-      const ai = await gemini(env,
-        'Search current public sources for: ' + question + '. Region: ' + field(data, 'location', 120)
-        + '. Provide sources, meaningful competitor SEO opportunities, and make no unsupported ranking claims.',
-        { tools: [{ googleSearch: {} }] });
-      return json({ analysis: ai.text, sources: ai.sources });
+      // A standard Gemini free-tier text key is not a licensed SERP data feed.
+      // Offer a genuinely useful planning checklist and a direct real-results link.
+      const googleSearchUrl = 'https://www.google.com/search?q='
+        + encodeURIComponent([question, location].filter(Boolean).join(' '));
+      const analysis = [
+        'FREE SERP RESEARCH PLANNER — no paid grounding and no invented ranking data',
+        'Search query: ' + question,
+        'Region/context: ' + (location || 'Not specified'),
+        '',
+        '1. Open Google Search using the link below to review real current search results.',
+        '2. Note the first relevant organic competitors, their page types and the intent they address.',
+        '3. Compare title tags, headings, FAQs, offers and internal navigation against your page.',
+        '4. Identify gaps where you can add original examples, pricing clarity or useful service details.',
+        '5. Track rankings over time with Google Search Console for websites you own.',
+        '',
+        'Limit: this mode does NOT scrape live SERP results, calculate ranking positions or claim competitor metrics. Search grounding requires a separately eligible model/tier and quota.',
+      ].join('\n');
+      return json({ analysis, googleSearchUrl, mode: 'free-research' });
     }
     if (path === '/api/maps-grounding') {
       const business = field(data, 'businessName', 150);
       const category = field(data, 'category', 150);
       const city = field(data, 'city', 100);
       if (!city || !business) throw new ApiError(400, 'Enter a business name and city.');
-      const ai = await gemini(env,
-        'Using Maps evidence when available, advise local SEO for business ' + business
-        + ', category ' + category + ', city ' + city
-        + '. Include concrete profile, category, citations and review recommendations. Do not invent search ranking or reviews.',
-        { tools: [{ googleMaps: {} }] });
-      return json({ localAudit: ai.text, sources: ai.sources });
+      const googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query='
+        + encodeURIComponent([business, city].filter(Boolean).join(' '));
+      const localAudit = [
+        'FREE LOCAL SEO CHECKLIST — no paid Google Maps grounding and no invented results',
+        'Business: ' + business,
+        'Category: ' + (category || 'Not supplied'),
+        'Location: ' + city,
+        '',
+        '1. Open the Google Maps link below and verify your actual business listing.',
+        '2. Confirm official business name, primary category, service areas, hours and phone.',
+        '3. Add accurate photos, services and your website URL to your Google Business Profile.',
+        '4. Keep the same business details on your website and reputable local directories.',
+        '5. Encourage genuine customer reviews and reply professionally to each review.',
+        '6. Improve location-relevant landing pages and ensure the site works on mobile.',
+        '',
+        'Limit: this checklist does NOT inspect real reviews, calculate map-pack positions, fetch competitors or measure proximity. Real Maps grounding requires an eligible paid/quota-enabled API tier.',
+      ].join('\n');
+      return json({ localAudit, googleMapsUrl, mode: 'free-checklist' });
     }
     if (path === '/api/video-analysis') {
       const title = field(data, 'videoTitle', 250);
@@ -297,7 +343,7 @@ async function handleApi(request: Request, env: WorkerEnv, path: string): Promis
         'You are a Moavia SEO Pro consultant in Islamabad. Specialty: ' + specialization
         + '.\nKeep advice practical. Never guarantee rankings.\n' + conversation,
         {model: chosenModel});
-      return json({ reply: ai.text });
+      return json({ reply: ai.text, modelUsed: ai.modelUsed });
     }
     return json({ error: 'Unknown API endpoint.' }, 404);
   } catch (error) {
