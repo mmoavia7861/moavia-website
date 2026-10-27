@@ -117,7 +117,7 @@ async function gemini(
   if (!env.GEMINI_API_KEY) {
     throw new ApiError(503, 'AI features need a Gemini free-tier API key. Add GEMINI_API_KEY as a Cloudflare Worker secret.');
   }
-  const model = options.model || 'gemini-2.5-flash';
+  const model = options.model || 'gemini-3.5-flash-lite';
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), 25000);
   try {
@@ -141,7 +141,7 @@ async function gemini(
       const message = response.status === 429
         ? 'Google Gemini free-tier rate limit reached. Please try again later.'
         : response.status === 400 || response.status === 404
-          ? 'This model or grounding tool may not be available on your Gemini account/free tier.'
+          ? 'Google rejected this Gemini request. Gemini 2.5 models are restricted for new projects; update your model or verify grounding eligibility. (HTTP ' + response.status + ')'
           : response.status === 403
             ? 'Gemini API key is not authorized. Check AI Studio project and API restrictions.'
             : 'Gemini service could not complete the request (' + response.status + ').';
@@ -292,7 +292,7 @@ async function handleApi(request: Request, env: WorkerEnv, path: string): Promis
         (m?.role === 'user' ? 'Visitor' : 'Assistant') + ': ' + String(m?.content || '').slice(0, 1100)).join('\n');
       if (!conversation) throw new ApiError(400, 'Please enter a message.');
       const specialization = ({seo:'SEO',webdev:'Web development',ads:'Advertising'} as Record<string,string>)[role] || 'Digital services';
-      const chosenModel = field(data,'model',40) === 'gemini-2.5-flash-lite' ? 'gemini-2.5-flash-lite' : 'gemini-2.5-flash';
+      const chosenModel = field(data,'model',40) === 'gemini-3.8-flash' ? 'gemini-3.8-flash' : 'gemini-3.5-flash-lite';
       const ai = await gemini(env,
         'You are a Moavia SEO Pro consultant in Islamabad. Specialty: ' + specialization
         + '.\nKeep advice practical. Never guarantee rankings.\n' + conversation,
