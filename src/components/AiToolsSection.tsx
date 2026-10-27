@@ -574,7 +574,7 @@ export const AiToolsSection: React.FC = () => {
                     Low-Latency Instant Title & Meta Optimizer
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by ultra-fast model <span className="font-mono text-[#17A99A] font-bold">gemini-2.5-flash-lite</span>
+                    Powered by ultra-fast model <span className="font-mono text-[#17A99A] font-bold">gemini-3.5-flash-lite</span>
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#17A99A]/10 text-[#17A99A] px-3 py-1 rounded-full">
@@ -686,7 +686,7 @@ export const AiToolsSection: React.FC = () => {
                     Live Google Search Grounding & Competitor Scout
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by <span className="font-mono text-[#5265D8] font-bold">gemini-2.5-flash</span> with <span className="font-bold text-[#18243A]">googleSearch</span> tool
+                    Powered by <span className="font-mono text-[#5265D8] font-bold">gemini-3.5-flash-lite</span> with <span className="font-bold text-[#18243A]">googleSearch</span> tool
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#5265D8]/10 text-[#5265D8] px-3 py-1 rounded-full">
@@ -759,7 +759,7 @@ export const AiToolsSection: React.FC = () => {
                     Local SEO & Google Maps Proximity Pack Auditor
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by <span className="font-mono text-[#5265D8] font-bold">gemini-2.5-flash</span> with <span className="font-bold text-[#18243A]">googleMaps</span> tool
+                    Powered by <span className="font-mono text-[#5265D8] font-bold">gemini-3.5-flash-lite</span> with <span className="font-bold text-[#18243A]">googleMaps</span> tool
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#E8B451]/15 text-[#E8B451] px-3 py-1 rounded-full">
@@ -963,7 +963,7 @@ export const AiToolsSection: React.FC = () => {
                     Video Content Understanding & YouTube/TikTok SEO
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by model <span className="font-mono text-[#F17F72] font-bold">gemini-2.5-flash</span>
+                    Powered by model <span className="font-mono text-[#F17F72] font-bold">gemini-3.5-flash-lite</span>
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#F17F72]/15 text-[#F17F72] px-3 py-1 rounded-full">
