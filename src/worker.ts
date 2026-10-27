@@ -291,10 +291,12 @@ async function handleApi(request: Request, env: WorkerEnv, path: string): Promis
       const conversation = messages.map((m: any) =>
         (m?.role === 'user' ? 'Visitor' : 'Assistant') + ': ' + String(m?.content || '').slice(0, 1100)).join('\n');
       if (!conversation) throw new ApiError(400, 'Please enter a message.');
+      const specialization = ({seo:'SEO',webdev:'Web development',ads:'Advertising'} as Record<string,string>)[role] || 'Digital services';
+      const chosenModel = field(data,'model',40) === 'gemini-2.5-flash-lite' ? 'gemini-2.5-flash-lite' : 'gemini-2.5-flash';
       const ai = await gemini(env,
-        'You are a helpful Moavia SEO Pro agency consultant in Islamabad. Specialty: ' +
-        ({ seo: 'SEO', webdev: 'Web development', ads: 'Advertising' } as Record<string,string>)[role] || 'Digital services.'
-        + '\nKeep answers accurate and practical. Never promise guaranteed Google rankings.\n' + conversation);
+        'You are a Moavia SEO Pro consultant in Islamabad. Specialty: ' + specialization
+        + '.\nKeep advice practical. Never guarantee rankings.\n' + conversation,
+        {model: chosenModel});
       return json({ reply: ai.text });
     }
     return json({ error: 'Unknown API endpoint.' }, 404);
