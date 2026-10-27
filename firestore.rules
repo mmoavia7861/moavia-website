@@ -5,32 +5,23 @@ service cloud.firestore {
       return request.auth != null && request.auth.token.email_verified == true;
     }
 
-    // Only a verified owner identity can administer the entire database.
+    // The verified password-authenticated owner is the only administrator.
     function owner() {
       return verified() &&
-        request.auth.token.email == 'moaviahassan124@gmail.com';
-    }
-
-    function staff() {
-      return verified() &&
-        exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid)) &&
-        get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.active == true &&
-        get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.email == request.auth.token.email &&
-        get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role in ['Manager', 'Content Editor', 'Viewer'];
+        request.auth.token.email == 'moavia400@gmail.com' &&
+        request.auth.token.firebase.sign_in_provider == 'password';
     }
 
     function admin() {
-      return owner() || staff();
+      return owner();
     }
 
     function leadManager() {
-      return owner() ||
-        (staff() && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'Manager');
+      return owner();
     }
 
     function editor() {
-      return owner() ||
-        (staff() && get(/databases/$(database)/documents/adminUsers/$(request.auth.uid)).data.role == 'Content Editor');
+      return owner();
     }
 
     function validLead() {
@@ -88,11 +79,7 @@ service cloud.firestore {
 
     // Any path not specifically granted below remains denied by default.
     match /adminUsers/{uid} {
-      allow read: if owner() ||
-        (verified() && request.auth.uid == uid &&
-         resource.data.active == true &&
-         resource.data.email == request.auth.token.email);
-      allow create, update, delete: if owner();
+      allow read, write: if false;
     }
 
     match /adminEmailRegistry/{entry} {

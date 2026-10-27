@@ -39,9 +39,7 @@ import {
 import {
   auth,
   db,
-  signInWithGoogle,
   loginWithEmail,
-  registerAdminWithEmail,
   triggerEmailVerification,
   sendResetPassword,
   logOut,
@@ -49,7 +47,6 @@ import {
 import {
   collection,
   onSnapshot,
-  getDoc,
   query,
   orderBy,
   updateDoc,
@@ -79,6 +76,7 @@ import {
 } from '../../data/mockData';
 import {
   normalizeEmail,
+  PRIMARY_ADMIN_EMAIL,
   isPrimaryAdministrator,
   getRolePermissions,
   AdminRole,
@@ -98,12 +96,9 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
   const [authError, setAuthError] = useState<string | null>(null);
   const [authSuccess, setAuthSuccess] = useState<string | null>(null);
 
-  // Login / Register Form State
-  const [authMode, setAuthMode] = useState<'login' | 'register' | 'forgot'>('login');
-  const [emailInput, setEmailInput] = useState('');
+  // Email/password login and recovery state
+  const [authMode, setAuthMode] = useState<'login' | 'forgot'>('login');
   const [passwordInput, setPasswordInput] = useState('');
-  const [nameInput, setNameInput] = useState('');
-  const [invitationTokenInput, setInvitationTokenInput] = useState('');
 
   // Active Navigation Tab
   const [activeTab, setActiveTab] = useState<
@@ -164,30 +159,22 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
     return () => unsubscribe();
   }, []);
 
-  // Verify the role from Firebase before any private data subscription or dashboard render.
-  // Firebase Security Rules MUST independently enforce these same permissions.
+  // Check verified owner and password sign-in before showing private data.
+  // Firestore Security Rules independently enforce these requirements.
   useEffect(() => {
     let cancelled = false;
     const checkAccess = async () => {
       setAdminCheckLoading(true);
-      if (!currentUser || !currentUser.emailVerified) {
-        setAuthorizedRole(null);
+      setAuthorizedRole(null);
+      if (!currentUser || !currentUser.emailVerified || !isPrimaryAdministrator(currentUser.email || '')) {
         setAdminCheckLoading(false);
         return;
       }
       try {
-        if (isPrimaryAdministrator(currentUser.email || '')) {
-          if (!cancelled) setAuthorizedRole('Super Admin');
-        } else {
-          const snapshot = await getDoc(doc(db, 'adminUsers', currentUser.uid));
-          const details = snapshot.data();
-          const claimedRole = details?.role as AdminRole;
-          const validRole = (['Super Admin', 'Manager', 'Content Editor', 'Viewer'] as string[]).includes(claimedRole);
-          const emailMatches = normalizeEmail(details?.email || '') === normalizeEmail(currentUser.email || '');
-          if (!cancelled) setAuthorizedRole(snapshot.exists() && details?.active === true && validRole && emailMatches ? claimedRole : null);
-        }
+        const tokenResult = await currentUser.getIdTokenResult();
+        if (!cancelled) setAuthorizedRole(tokenResult.signInProvider === 'password' ? 'Super Admin' : null);
       } catch (error) {
-        console.warn('Could not confirm administrator authorization:', error);
+        console.warn('Could not confirm administrator sign-in method:', error);
         if (!cancelled) setAuthorizedRole(null);
       } finally {
         if (!cancelled) setAdminCheckLoading(false);
@@ -228,48 +215,15 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
   const permissions = getRolePermissions(userRole);
 
   // Handlers
-  const handleGoogleLogin = async () => {
-    setAuthError(null);
-    try {
-      const user = await signInWithGoogle();
-      if (user) {
-        setAuthSuccess(`Welcome, ${user.displayName || user.email}!`);
-      }
-    } catch (err: any) {
-      setAuthError(err.message || 'Google Sign-In failed.');
-    }
-  };
-
   const handleEmailLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setAuthError(null);
     try {
-      await loginWithEmail(emailInput, passwordInput);
-      setAuthSuccess('Signed in successfully.');
-    } catch (err: any) {
-      setAuthError(err.message || 'Login failed. Please check credentials.');
-    }
-  };
-
-  const handleEmailRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setAuthError(null);
-
-    const norm = normalizeEmail(emailInput);
-    if (!isPrimaryAdministrator(norm)) {
-      setAuthError('Administrator self-registration is limited to the verified owner. Staff must be provisioned through a trusted administrator workflow.');
-      return;
-    }
-
-    try {
-      const user = await registerAdminWithEmail(emailInput, passwordInput);
-      setAuthSuccess('Registration submitted! We have sent a verification link to your email. Please verify your email before accessing the dashboard.');
-    } catch (err: any) {
-      if (err.code === 'auth/email-already-in-use') {
-        setAuthError('This email address is already associated with an administrator account. Please sign in to continue.');
-      } else {
-        setAuthError(err.message || 'Registration failed.');
-      }
+      await loginWithEmail(PRIMARY_ADMIN_EMAIL, passwordInput);
+      setPasswordInput('');
+      setAuthSuccess('Signed in. Verifying administrator access...');
+    } catch {
+      setAuthError('Unable to sign in. Check your password and Firebase Email/Password configuration.');
     }
   };
 
@@ -303,7 +257,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
     e.preventDefault();
     setAuthError(null);
     try {
-      await sendResetPassword(emailInput);
+      await sendResetPassword(PRIMARY_ADMIN_EMAIL);
       setAuthSuccess('Password reset link sent to your email if an account exists.');
       setAuthMode('login');
     } catch (err: any) {
@@ -397,9 +351,9 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
                 <input
                   type="email"
                   required
-                  placeholder="moaviahassan124@gmail.com"
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
+                  value={PRIMARY_ADMIN_EMAIL}
+                  readOnly
+                  autoComplete="username"
                   className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] focus:bg-white focus:outline-[#5265D8]"
                 />
               </div>
@@ -433,97 +387,6 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
                 <span>Sign In</span>
               </button>
 
-              <div className="relative my-4 text-center">
-                <span className="bg-white px-3 text-[11px] text-slate-400 relative z-10 font-medium">OR</span>
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-[#E7EAF2]" />
-                </div>
-              </div>
-
-              {/* Google Sign-In */}
-              <button
-                type="button"
-                onClick={handleGoogleLogin}
-                className="w-full py-3 rounded-xl border border-[#E7EAF2] hover:bg-slate-50 text-xs font-bold text-[#18243A] flex items-center justify-center gap-2 transition-colors"
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.65v3.02h3.88c2.28-2.1 3.66-5.2 3.66-9.11z" />
-                  <path fill="#34A853" d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.02c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.12C3.26 21.36 7.34 24 12 24z" />
-                  <path fill="#FBBC05" d="M5.28 14.29c-.25-.72-.38-1.49-.38-2.29s.13-1.57.38-2.29V6.59H1.24C.45 8.16 0 9.98 0 12s.45 3.84 1.24 5.41l4.04-3.12z" />
-                  <path fill="#EA4335" d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.12c.95-2.84 3.6-4.96 6.72-4.96z" />
-                </svg>
-                <span>Continue with Google</span>
-              </button>
-
-              <div className="pt-4 text-center">
-                <button
-                  type="button"
-                  onClick={() => setAuthMode('register')}
-                  className="text-xs font-semibold text-[#8B63D8] hover:underline"
-                >
-                  Authorized Staff Invitation Registration →
-                </button>
-              </div>
-            </form>
-          )}
-
-          {authMode === 'register' && (
-            <form onSubmit={handleEmailRegister} className="mt-6 space-y-4">
-              <div>
-                <label className="text-xs font-bold text-[#18243A] block mb-1">Staff Administrator Email</label>
-                <input
-                  type="email"
-                  required
-                  placeholder="staff@moaviaseopro.com"
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
-                  className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-[#18243A] block mb-1">Create Password (Min 8 chars)</label>
-                <input
-                  type="password"
-                  required
-                  minLength={8}
-                  placeholder="••••••••••••"
-                  value={passwordInput}
-                  onChange={(e) => setPasswordInput(e.target.value)}
-                  className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
-                />
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-[#18243A] block mb-1">
-                  Invitation Token <span className="text-slate-400 font-normal">(Required for new staff)</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. INV-STAFF-9481 or leave blank if founder"
-                  value={invitationTokenInput}
-                  onChange={(e) => setInvitationTokenInput(e.target.value)}
-                  className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-3.5 rounded-xl bg-[#8B63D8] hover:bg-[#7851c6] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md"
-              >
-                <ShieldCheck className="w-4 h-4" />
-                <span>Register Admin Account</span>
-              </button>
-
-              <div className="pt-2 text-center">
-                <button
-                  type="button"
-                  onClick={() => setAuthMode('login')}
-                  className="text-xs font-semibold text-[#5265D8] hover:underline"
-                >
-                  ← Back to Sign In
-                </button>
-              </div>
             </form>
           )}
 
@@ -537,8 +400,9 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
                 <input
                   type="email"
                   required
-                  value={emailInput}
-                  onChange={(e) => setEmailInput(e.target.value)}
+                  value={PRIMARY_ADMIN_EMAIL}
+                  readOnly
+                  autoComplete="username"
                   className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
                 />
               </div>
@@ -1352,7 +1216,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
                     />
                   </div>
                   <button
-                    onClick={() => alert(`Google Meet room scheduled: https://meet.google.com/new?authuser=moaviahassan124@gmail.com`)}
+                    onClick={() => alert(`Google Meet room scheduled: https://meet.google.com/new?authuser=${PRIMARY_ADMIN_EMAIL}`)}
                     className="w-full py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs"
                   >
                     Create Google Meet Link
@@ -1448,62 +1312,23 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
             </div>
           )}
 
-          {/* TAB 9: ADMIN USERS & ACCESS */}
+          {/* TAB 9: SINGLE ADMINISTRATOR ACCESS */}
           {activeTab === 'admins' && (
             <div className="space-y-6 max-w-6xl">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-2xl font-extrabold text-[#18243A]">Admin Users & Role Control</h2>
-                  <p className="text-xs text-[#65738B]">
-                    Server-enforced role assignments (Super Admin, Manager, Content Editor, Viewer) and email verification statuses.
-                  </p>
-                </div>
+              <div>
+                <h2 className="text-2xl font-extrabold text-[#18243A]">Administrator Access</h2>
+                <p className="text-xs text-[#65738B]">
+                  Only the designated verified email/password account can access this dashboard.
+                  Other emails, Google sessions, and staff registrations are not permitted.
+                </p>
               </div>
-
-              <div className="p-6 rounded-3xl bg-white border border-[#E7EAF2] shadow-sm overflow-x-auto">
-                <table className="w-full text-left text-xs">
-                  <thead>
-                    <tr className="border-b border-[#E7EAF2] text-[#65738B]">
-                      <th className="pb-3 font-semibold">Admin Name</th>
-                      <th className="pb-3 font-semibold">Email</th>
-                      <th className="pb-3 font-semibold">Role</th>
-                      <th className="pb-3 font-semibold">Email Verified</th>
-                      <th className="pb-3 font-semibold">Account Status</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-[#E7EAF2]">
-                    <tr className="hover:bg-slate-50">
-                      <td className="py-3.5 font-bold text-[#18243A]">Moavia Hassan (Owner)</td>
-                      <td className="py-3.5 text-[#5265D8] font-mono">moaviahassan124@gmail.com</td>
-                      <td className="py-3.5">
-                        <span className="px-2.5 py-0.5 rounded-full bg-[#5265D8]/10 text-[#5265D8] font-bold">
-                          Super Admin
-                        </span>
-                      </td>
-                      <td className="py-3.5 text-emerald-600 font-bold">✓ Verified</td>
-                      <td className="py-3.5">
-                        <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-semibold">
-                          Active
-                        </span>
-                      </td>
-                    </tr>
-                    <tr className="hover:bg-slate-50">
-                      <td className="py-3.5 font-bold text-[#18243A]">Moavia Hassan (Secondary)</td>
-                      <td className="py-3.5 text-[#5265D8] font-mono">moavia400@gmail.com</td>
-                      <td className="py-3.5">
-                        <span className="px-2.5 py-0.5 rounded-full bg-[#5265D8]/10 text-[#5265D8] font-bold">
-                          Super Admin
-                        </span>
-                      </td>
-                      <td className="py-3.5 text-emerald-600 font-bold">✓ Verified</td>
-                      <td className="py-3.5">
-                        <span className="px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 font-semibold">
-                          Active
-                        </span>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+              <div className="p-6 rounded-3xl bg-white border border-[#E7EAF2] shadow-sm">
+                <p className="text-xs font-semibold text-[#65738B]">Authorized administrator</p>
+                <p className="mt-1 text-sm font-mono text-[#18243A]">{PRIMARY_ADMIN_EMAIL}</p>
+                <p className="mt-3 text-xs text-[#65738B]">
+                  Current session: {currentUser.emailVerified ? 'Email verified' : 'Verification required'}
+                  {' · '}Password sign-in required
+                </p>
               </div>
             </div>
           )}
@@ -1588,7 +1413,7 @@ export const AdminPortal: React.FC<AdminPortalProps> = ({ onClose }) => {
                 <div className="flex items-center justify-between p-3 bg-[#F8F9FD] rounded-xl text-xs">
                   <div>
                     <strong className="block text-[#18243A]">Super Admin Session Verified</strong>
-                    <span className="text-[#65738B]">moaviahassan124@gmail.com</span>
+                    <span className="text-[#65738B]">{currentUser.email || PRIMARY_ADMIN_EMAIL}</span>
                   </div>
                   <span className="text-[10px] text-slate-400 font-mono">Just now</span>
                 </div>

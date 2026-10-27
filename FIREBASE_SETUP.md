@@ -4,7 +4,7 @@
 - Project ID: `watchful-adapter-wbcxw`
 - Firestore database ID: `ai-studio-moaviaseoprodigi-1ac5ad8a-6ad0-4d35-b8d4-22db21a03fe4`
 - Firebase config: `firebase-applet-config.json`
-- Authentication: `src/firebase.ts`
+- Authentication: `src/firebase.ts` (sole-owner email/password sign-in)
 - Private Admin UI: `src/components/admin/AdminPortal.tsx`
 - Website inquiry form: `src/components/ContactSection.tsx`
 
@@ -12,11 +12,11 @@ This repository is configured to **use** Firebase, but Firestore rules and Auth 
 
 ## Complete Firebase console configuration
 1. Open https://console.firebase.google.com/project/watchful-adapter-wbcxw/overview and verify you are using the correct project.
-2. Go to **Build > Authentication > Sign-in method**. Enable **Google** and, only if needed, **Email/Password**.
-3. Go to **Authentication > Settings > Authorized domains**. Add `mmoavia7861.github.io` (without protocol or path). Keep the project's existing Firebase Auth domain entries.
+2. Go to **Build > Authentication > Sign-in method**. Enable **Email/Password**. Disable **Google** if other apps in this Firebase project do not depend on it.
+3. In **Authentication > Users**, create or find the **email/password** user `moavia400@gmail.com`. Set or reset its password **only in Firebase Authentication**, never in a public GitHub repository. Verify the email and revoke unwanted sessions.
 4. In **Firestore Database**, verify the named database ID above exists. The web app uses this **named** database, not the `(default)` database.
 5. Deploy the **reviewed** `firestore.rules` to the named database using Firebase CLI with a Firebase-authorized administrator account. The repository file is not automatically active in Firebase.
-6. Sign in as verified primary owner `moaviahassan124@gmail.com`; staff access requires a separate owner-provisioned `adminUsers/{uid}` document with a verified matching email, permitted role, and `active: true`.
+6. Sign in as the verified sole administrator `moavia400@gmail.com` using **email/password**. Other users and Google-authenticated sessions are denied by the proposed rules; former `adminUsers/{uid}` documents no longer grant admin access.
 7. Check client inquiries under the named Firestore database's `leads` collection. Run an actual form test and confirm the same document appears in Firestore and in the dashboard.
 8. Configure GitHub Pages **Source: GitHub Actions** and verify compiled deployment to https://mmoavia7861.github.io/moavia-website/.
 
@@ -32,11 +32,11 @@ firebase deploy --only firestore:ai-studio-moaviaseoprodigi-1ac5ad8a-6ad0-4d35-b
 Verify the exact CLI command and target using the installed firebase-tools version before deployment; named databases may require specific configuration.
 
 ## Security cautions
-- `adminUsers` and invitation records require a trusted provisioning procedure. Do **not** make public signup or arbitrary invitation tokens grant access.
+- The admin panel no longer allows Google login, public registration or staff invitations. Only the verified password-authenticated owner can access protected data after the new rules are published.
 - The public lead form currently uses a Firestore client write with validation rules. Add App Check, anti-abuse protections, and preferably a rate-limited backend endpoint for production abuse prevention.
 - Content panels other than leads may contain initial sample/mock data; do not treat that content as verified Firebase records.
 - The AI tools call `/api/*` implemented in `server.ts`. Those endpoints do **not** run on GitHub Pages. Deploy a protected backend separately or disable these tools until configured.
-- No Firebase Auth, Firestore rule, or Cloud Functions production deployment has been performed by generating this file.
+- Committing GitHub files does **not** configure Firebase Authentication, set/reset an account password, revoke Firebase Auth sessions, or deploy Firestore rules. Publish the reviewed rules to the named database separately; until then, older live rules may still apply.
 
 ## Newsletter subscription persistence (new)
 

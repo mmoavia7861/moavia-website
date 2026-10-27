@@ -1,14 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import {
   getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
   sendEmailVerification,
   sendPasswordResetEmail,
   signOut,
-  onAuthStateChanged,
   User,
 } from 'firebase/auth';
 import {
@@ -26,6 +22,7 @@ import {
   onSnapshot,
 } from 'firebase/firestore';
 import firebaseConfig from '../firebase-applet-config.json';
+import { PRIMARY_ADMIN_EMAIL, isPrimaryAdministrator } from './utils/adminSecurity';
 
 // Initialize Firebase App
 export const app = initializeApp(firebaseConfig);
@@ -42,7 +39,6 @@ export const db = initializeFirestore(
 
 // Initialize Auth
 export const auth = getAuth(app);
-export const googleProvider = new GoogleAuthProvider();
 
 // Connection health test as instructed in Firebase guidelines
 export async function testFirestoreConnection(): Promise<boolean> {
@@ -84,26 +80,11 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
 }
 
 // Authentication Wrappers
-export async function signInWithGoogle() {
-  try {
-    const result = await signInWithPopup(auth, googleProvider);
-    return result.user;
-  } catch (error) {
-    console.error('Error signing in with Google:', error);
-    throw error;
-  }
-}
-
 export async function loginWithEmail(email: string, pass: string) {
-  return await signInWithEmailAndPassword(auth, email.trim(), pass);
-}
-
-export async function registerAdminWithEmail(email: string, pass: string) {
-  const userCredential = await createUserWithEmailAndPassword(auth, email.trim(), pass);
-  if (userCredential.user) {
-    await sendEmailVerification(userCredential.user);
+  if (!isPrimaryAdministrator(email)) {
+    throw new Error('Administrator access is limited to the designated account.');
   }
-  return userCredential.user;
+  return await signInWithEmailAndPassword(auth, PRIMARY_ADMIN_EMAIL, pass);
 }
 
 export async function triggerEmailVerification(user: User) {
@@ -111,7 +92,10 @@ export async function triggerEmailVerification(user: User) {
 }
 
 export async function sendResetPassword(email: string) {
-  await sendPasswordResetEmail(auth, email.trim());
+  if (!isPrimaryAdministrator(email)) {
+    throw new Error('Password recovery is limited to the designated administrator.');
+  }
+  await sendPasswordResetEmail(auth, PRIMARY_ADMIN_EMAIL);
 }
 
 export async function logOut() {

@@ -2,6 +2,8 @@
  * Admin Security, RBAC & Email Registry Logic
  */
 
+export const PRIMARY_ADMIN_EMAIL = 'moavia400@gmail.com';
+
 export type AdminRole = 'Super Admin' | 'Manager' | 'Content Editor' | 'Viewer';
 
 export interface AdminPermissions {
@@ -73,5 +75,5 @@ export function getRolePermissions(role: AdminRole): AdminPermissions {
 
 export function isPrimaryAdministrator(email: string): boolean {
   const norm = normalizeEmail(email);
-  return norm === 'moaviahassan124@gmail.com' || norm === 'moavia400@gmail.com';
+  return norm === PRIMARY_ADMIN_EMAIL;
 }
