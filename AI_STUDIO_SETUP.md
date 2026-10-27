@@ -1,31 +1,69 @@
-# Moavia SEO Pro AI Tools — Cloudflare Worker
+# Moavia SEO Pro — AI tools (free-tier safe setup)
 
-## Working without an API key
-- On-page SEO audit: live public HTTPS HTML check (title, meta description, canonical, H1, JSON-LD, alt attributes). This is NOT Google search rankings, Core Web Vitals, backlinks, Lighthouse or speed metrics. The Worker forbids non-public hosts, non-HTTPS URLs and redirects.
-- Quick Meta: rule-based keyword-focused title and description suggestions.
-- Free image designer: generated SVG promotional poster in a scalable 1K/2K/4K size. Not AI photography or photo editing.
+Cloudflare deploys `src/worker.ts` for the same-origin `/api/*` endpoints.
+The Vite static website remains at https://moaviaseo.com and `server.ts` is not
+running in Cloudflare production.
 
-## Gemini free-tier key required
-- SERP Scout: Gemini 2.5 Flash Google Search grounding (account-dependent free quota).
-- Maps: Gemini 2.5 Flash Google Maps grounding (account-dependent availability/quota).
-- Chatbot: Gemini 2.5 Flash / Flash-Lite.
-- Browser Voice: browser speech recognition and synthesis, Gemini text reply (Chrome/Edge support varies).
-- Video SEO: reviews submitted title and script only, not a video file.
-- SEO Audit: optional AI advice grounded in live HTML findings.
+## Keyless free tools
+- **On-Page SEO Audit:** inspect observable HTML metadata from a public HTTPS
+  URL: title, meta description, canonical, H1, JSON-LD markup, image alt
+  attributes. This is **not** Lighthouse, Core Web Vitals, real traffic,
+  Google rankings, or link analysis. A blocked URL may be uninspectable.
+- **Quick Meta:** deterministic SEO tag drafts. Review manually.
+- **SERP Research Planner:** keyword/location research checklist plus
+  clickable *real Google Search* query; does **not** fetch or rank live SERP
+  competitors. Search Console can show rankings for domains you own.
+- **Local SEO Checklist:** business name, category and city guidance plus
+  a link to real Google Maps listings; does **not** compute map-pack position,
+  fake local reviews, or inspect competitor listings.
+- **SVG Poster Maker:** original downloadable marketing vector graphics;
+  not AI-generated photography or editing.
 
-## Not free on Gemini API
-Photorealistic generative AI image and actual generative video. No such key is embedded.
-The AI video button reports the paid-tier requirement rather than a fake job ID.
+## Gemini free-tier tools
+- Chatbot: **Gemini 3.5 Flash-Lite (default)** or **Gemini 3.8 Flash**.
+  When the 3.8 model returns 503 or 504 and the query uses no paid
+  grounding, the server tries 3.5 Flash-Lite and reports the fallback.
+  A 429 quota error is **not** auto-retried.
+- Video SEO: analyzes user-provided title and script text only.
+- Browser voice: uses device/browser recognition & speech synthesis and
+  the Gemini text API, not the Gemini Live streaming API.
+- HTML audit may additionally request **optional** Gemini recommendations;
+  this checkbox is off by default. If quota runs out, the HTML findings
+  still return.
 
-## Set up the free key (manual user action)
-1. Sign in to https://aistudio.google.com/apikey and obtain a Gemini API key using your own Google account. Google controls free access and quotas.
-2. Cloudflare → Workers & Pages → `moaviaseo` → Settings → Variables and Secrets → Add.
-3. Choose **Secret**, name exactly `GEMINI_API_KEY`, paste the key. Never add a real key to GitHub, frontend variables, screenshots, or chat messages.
-4. Save/Deploy the secret (ensure it is set on **Production**). The frontend uses same-origin `/api/*` and never receives the secret.
-5. Check `https://moaviaseo.com/api/health` returns JSON with `ok: true`, `geminiConfigured: true`. Test tools one by one.
+**Google Search / Maps grounding is not bundled into this free setup.**
+Google AI documentation limits grounding by model and account tier. The
+SERP/Maps tools deliberately use honest keyless research guides and
+external Google Search/Maps links. Do not call those real-time API results.
 
-## Production notes
-Cloudflare `wrangler.jsonc` config includes Worker `main: src/worker.ts` and `assets.run_worker_first: ['/api/*']`. Other static assets remain CDN served.
-Worker-side API rate limit binding is approximately 12 requests/minute per IP at each location, not a strict global quota. Add Cloudflare Turnstile / WAF or admin-only permissions before unlimited public use, and set Google AI budget controls to avoid unwanted costs.
-A model/grounding tool may be disabled on a particular free account; its API returns an informative error rather than inventing output.
-Firebase, admin authentication, lead forms and security rules are not changed by the AI backend.
+## Production secret
+1. Get your own key at https://aistudio.google.com/apikey.
+2. Cloudflare Workers & Pages -> moaviaseo -> Settings -> Variables and
+   Secrets -> Add Secret in Production.
+3. Use exact name `GEMINI_API_KEY`. Store the value only inside Cloudflare.
+4. Save/deploy, then view https://moaviaseo.com/api/health. JSON should show
+   `ok:true` and `geminiConfigured:true`.
+5. Test Chat (3.5), free HTML audit (unchecked AI option), SERP checklist
+   and Maps checklist independently. Confirm the latest Cloudflare deployment
+   is successful; a GitHub build alone does not prove production deploy.
+
+## Errors, access, and costs
+- Google API **503/504**: temporary overload or timeout; 3.8 chat tries
+  3.5 after a transient overload. Other tools show a clear error.
+- Google API **429**: rate limit, model quota or spending cap exceeded;
+  check the selected project's AI Studio rate-limit/usage settings and
+  do not repeatedly retry.
+- Google API **400/404**: unsupported model, grounding feature, or invalid
+  request; **403**: project/key not authorized.
+- Cloudflare `AI_LIMITER` uses approximately 12 requests/minute per IP
+  per location. This is not an exact global budget or abuse safeguard;
+  add Turnstile, Cloudflare WAF and Google project limits before promoting
+  unlimited public AI tools. A paid Google tier can incur fees.
+
+No Firebase rules, subscriber data, leads or admin credentials are changed
+by the Worker/API updates.
+
+Google references:
+- https://ai.google.dev/gemini-api/docs/api-errors
+- https://ai.google.dev/gemini-api/docs/pricing
+- https://ai.google.dev/gemini-api/docs/troubleshooting
