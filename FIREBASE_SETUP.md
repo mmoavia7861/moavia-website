@@ -38,6 +38,23 @@ Verify the exact CLI command and target using the installed firebase-tools versi
 - The AI tools call `/api/*` implemented in `server.ts`. Those endpoints do **not** run on GitHub Pages. Deploy a protected backend separately or disable these tools until configured.
 - Committing GitHub files does **not** configure Firebase Authentication, set/reset an account password, revoke Firebase Auth sessions, or deploy Firestore rules. Publish the reviewed rules to the named database separately; until then, older live rules may still apply.
 
+## Duplicate protection — consultation form and newsletter
+
+Both public forms now use the **same approach** for email-based deduplication:
+
+1. Trim and lowercase the submitted email.
+2. Generate a SHA-256 hash of the normalized email, used as the Firestore document ID.
+3. Issue a Firestore REST `:commit` write with `currentDocument: { exists: false }`. If a document with that ID already exists, the write fails atomically, so the existing record cannot be overwritten.
+4. Show an appropriate "already submitted" / "already subscribed" message; do not tell visitors a duplicate record was created.
+
+Consultation requests are saved under `leads/{sha256(lowercase(email))}`. Newsletter subscriptions are saved independently under `newsletterSubscribers/{sha256(lowercase(email))}`. One email can submit **one consultation request and one newsletter subscription**. Different capitalization or surrounding spaces do not create new IDs.
+
+**Important limits:**
+- Existing `leads` documents with old randomly generated IDs are NOT automatically detected by this change. Review and migrate existing leads to the deterministic ID scheme (using trusted admin tooling and backups) if you need to prevent a second submission from those already stored.
+- Email ownership is not checked. Someone can submit another person's email or a different email address. Firestore Security Rules can validate ID format but cannot verify that a supplied SHA-256 ID matches the email field; a determined attacker could bypass this client-side constraint. For strict one-per-real-person controls, deploy a trusted rate-limited backend and verified email identity.
+- Commit the updated `firestore.rules` to GitHub and **publish those rules separately to the named database** `ai-studio-moaviaseoprodigi-1ac5ad8a-6ad0-4d35-b8d4-22db21a03fe4`. Cloudflare's website deployment does not publish Firestore rules.
+- After deployment, test each form twice with the **same test email**, then repeat with a different case. Verify only one document exists in each respective Firestore collection. Keep private client data out of screenshots.
+
 ## Newsletter subscription persistence (new)
 
 The footer newsletter form now writes to the `newsletterSubscribers` collection of the configured named Firestore database (instead of browser localStorage). Subscriptions use a SHA-256 email digest as the document ID to reduce duplicate registrations. The form does not claim success unless the Firestore write resolves.

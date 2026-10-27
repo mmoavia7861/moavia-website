@@ -11,7 +11,14 @@ import {
   ShieldCheck,
   MessageSquare,
 } from 'lucide-react';
-import { postFirestore, firestoreStringFields } from '../services/firestoreRest';
+import {
+  postFirestore,
+  firestoreStringFields,
+  firestoreDocumentPath,
+  firestoreEmailDocumentId,
+  isDuplicateFirestoreDocumentError,
+} from '../services/firestoreRest';
+import { isValidNewsletterEmail } from '../utils/newsletter';
 
 interface ContactSectionProps {
   initialService?: string;
@@ -38,12 +45,18 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
       return;
     }
 
+    const normalizedEmail = email.trim().toLowerCase();
+    if (!isValidNewsletterEmail(normalizedEmail) || normalizedEmail.length > 254) {
+      setErrorMessage('Please enter a valid email address.');
+      return;
+    }
+
     setLoading(true);
     setErrorMessage(null);
 
     const leadPayload = {
       fullName: fullName.trim(),
-      email: email.trim().toLowerCase(),
+      email: normalizedEmail,
       whatsapp: whatsapp.trim() || '',
       businessName: businessName.trim() || '',
       websiteUrl: websiteUrl.trim() || '',
@@ -57,8 +70,17 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
     };
 
     try {
-      await postFirestore('/leads', {
-        fields: firestoreStringFields(leadPayload),
+      // Atomic create-only write: the same email always maps to the same
+      // document, so a later attempt cannot overwrite or duplicate it.
+      const leadId = await firestoreEmailDocumentId(normalizedEmail);
+      await postFirestore(':commit', {
+        writes: [{
+          update: {
+            name: firestoreDocumentPath('leads', leadId),
+            fields: firestoreStringFields(leadPayload),
+          },
+          currentDocument: { exists: false },
+        }],
       });
       setSubmitted(true);
     } catch (err: unknown) {
@@ -66,9 +88,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
         ? String((err as { code?: string }).code)
         : '';
       console.warn('Lead submission could not be confirmed:', code || (err instanceof Error ? err.message : 'unknown'));
-      if (err instanceof Error && err.message === 'FIRESTORE_CONFIRMATION_TIMEOUT') {
-        setErrorMessage('Firebase did not confirm your inquiry within 12 seconds. It may still be pending; please contact us on WhatsApp instead of submitting repeatedly.');
-      } else if (code.includes('permission-denied')) {
+      if (isDuplicateFirestoreDocumentError(err)) {
+        setErrorMessage('This email has already submitted a consultation request. Please contact us on WhatsApp if you need to update your details.');
+      } else if (code === 'TIMEOUT') {
+        setErrorMessage('Firebase did not confirm your inquiry within 12 seconds. It may still be saved; please contact us on WhatsApp instead of submitting repeatedly.');
+      } else if (code === 'PERMISSION_DENIED') {
         setErrorMessage('Firebase permissions rejected the submission. Please contact us on WhatsApp.');
       } else {
         setErrorMessage(err instanceof Error ? err.message : 'Unable to confirm inquiry storage. Please use WhatsApp or email.');
@@ -183,12 +207,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                       <Phone className="w-4 h-4" />
                       <span>Speed Up via WhatsApp</span>
                     </a>
-                    <button
-                      onClick={() => setSubmitted(false)}
-                      className="text-xs font-bold text-[#18243A] px-5 py-3 rounded-xl border border-[#E7EAF2] hover:bg-slate-50"
-                    >
-                      Submit Another Inquiry
-                    </button>
+
                   </div>
                 </div>
               ) : (

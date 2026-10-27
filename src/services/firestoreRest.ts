@@ -94,3 +94,34 @@ export function firestoreStringFields(record: Record<string, string>): Record<st
 export function firestoreDocumentPath(collection: string, id: string): string {
   return `${database}/documents/${collection}/${id}`;
 }
+
+/**
+ * One deterministic Firestore document ID per normalized email address.
+ * Hashing avoids writing a plaintext email address into document paths.
+ * This prevents repeat submissions through our website; it does NOT verify
+ * the visitor owns the email, or replace rate limiting / server-side checks.
+ */
+export async function firestoreEmailDocumentId(address: string): Promise<string> {
+  const normalizedEmail = address.trim().toLowerCase();
+  if (!normalizedEmail) throw new Error('Please enter an email address.');
+  if (!globalThis.crypto?.subtle) throw new Error('Secure browser context required.');
+  const digest = await globalThis.crypto.subtle.digest(
+    'SHA-256',
+    new TextEncoder().encode(normalizedEmail),
+  );
+  return Array.from(new Uint8Array(digest))
+    .map((byte) => byte.toString(16).padStart(2, '0'))
+    .join('');
+}
+
+/**
+ * Firestore reports failed create-only writes as ALREADY_EXISTS (409) or
+ * FAILED_PRECONDITION, depending on the REST operation.
+ */
+export function isDuplicateFirestoreDocumentError(error: unknown): boolean {
+  return error instanceof FirestoreRestError && (
+    error.code === 'ALREADY_EXISTS' ||
+    error.code === 'FAILED_PRECONDITION' ||
+    error.status === 409
+  );
+}

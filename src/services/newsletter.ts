@@ -1,7 +1,7 @@
 import { isValidNewsletterEmail, normalizeSubscriberEmail } from '../utils/newsletter';
-import { postFirestore, firestoreDocumentPath, FirestoreRestError } from './firestoreRest';
+import { postFirestore, firestoreDocumentPath, firestoreEmailDocumentId } from './firestoreRest';
 
-export { FirestoreRestError };
+export { FirestoreRestError, isDuplicateFirestoreDocumentError } from './firestoreRest';
 
 /** Write a subscriber using the Firestore REST commit API.
  *  The serverTimestamp transform satisfies the timestamp security rule.
@@ -12,9 +12,7 @@ export async function subscribeToNewsletter(address: string): Promise<void> {
   if (!isValidNewsletterEmail(email) || email.length > 254) {
     throw new Error('Please enter a valid email address.');
   }
-  if (!globalThis.crypto?.subtle) throw new Error('Secure browser context required.');
-  const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(email));
-  const id = Array.from(new Uint8Array(digest)).map(byte => byte.toString(16).padStart(2,'0')).join('');
+  const id = await firestoreEmailDocumentId(email);
   const name = firestoreDocumentPath('newsletterSubscribers', id);
   await postFirestore(':commit', {
     writes: [{

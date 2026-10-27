@@ -9,7 +9,7 @@ import {
   BellRing,
   ArrowRight
 } from 'lucide-react';
-import { subscribeToNewsletter, FirestoreRestError } from '../services/newsletter';
+import { subscribeToNewsletter, FirestoreRestError, isDuplicateFirestoreDocumentError } from '../services/newsletter';
 
 export const NewsletterSignup: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -32,7 +32,14 @@ export const NewsletterSignup: React.FC = () => {
       setStatus('success');
       setFeedbackMessage('Your email has been saved in our newsletter list.');
     } catch (error: unknown) {
+      if (isDuplicateFirestoreDocumentError(error)) {
+        setAlreadySubscribed(true);
+        setStatus('success');
+        setFeedbackMessage('This email is already subscribed. No duplicate newsletter record was created.');
+        return;
+      }
       console.warn('Newsletter Firestore submission not confirmed:', error instanceof Error ? error.name : 'Unknown error');
+      setAlreadySubscribed(false);
       setStatus('error');
       if (error instanceof FirestoreRestError) {
         setFeedbackMessage(error.message);

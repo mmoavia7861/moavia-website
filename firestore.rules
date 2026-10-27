@@ -99,7 +99,13 @@ service cloud.firestore {
     }
 
     match /leads/{id} {
-      allow create: if validLead();
+      // New inquiries use a 64-character SHA-256 email digest as their ID.
+      // Create-only writes prevent the same normalized email being saved twice
+      // through the public form. Old records remain readable by the owner.
+      // This format check cannot independently prove the hash matches email;
+      // preventing malicious bypasses requires server-side verification.
+      allow create: if validLead() &&
+        id.matches('^[0-9a-f]{64}$');
       allow read: if admin();
       allow update, delete: if leadManager();
     }
