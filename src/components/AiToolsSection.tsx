@@ -253,7 +253,12 @@ export const AiToolsSection: React.FC = () => {
       });
       const data = await res.json();
       if (data.reply) {
-        setChatMessages([...updatedMessages, { role: 'model', content: data.reply }]);
+        setChatMessages([...updatedMessages, {
+          role: 'model',
+          content: data.modelUsed && data.modelUsed !== chatModel
+            ? data.reply + '\n\n(Automatic fallback: ' + data.modelUsed + ', because the selected model was temporarily unavailable.)'
+            : data.reply,
+        }]);
       } else {
         setChatMessages([
           ...updatedMessages,
