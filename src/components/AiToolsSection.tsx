@@ -686,7 +686,7 @@ export const AiToolsSection: React.FC = () => {
                     Live Google Search Grounding & Competitor Scout
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by <span className="font-mono text-[#5265D8] font-bold">gemini-3.5-flash-lite</span> with <span className="font-bold text-[#18243A]">googleSearch</span> tool
+                    Google Search grounding requires a supported paid Gemini API tier (not included in Gemini 3.x free-tier REST requests)
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#5265D8]/10 text-[#5265D8] px-3 py-1 rounded-full">
@@ -759,7 +759,7 @@ export const AiToolsSection: React.FC = () => {
                     Local SEO & Google Maps Proximity Pack Auditor
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by <span className="font-mono text-[#5265D8] font-bold">gemini-3.5-flash-lite</span> with <span className="font-bold text-[#18243A]">googleMaps</span> tool
+                    Google Maps grounding requires a supported paid Gemini API tier (not included in Gemini 3.x free-tier REST requests)
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#E8B451]/15 text-[#E8B451] px-3 py-1 rounded-full">
