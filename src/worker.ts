@@ -43,21 +43,67 @@ function validatePublicUrl(candidate: string): URL {
   }
   return url;
 }
-async function inspectPage(rawUrl: string): Promise<string> {
-  const url = validatePublicUrl(rawUrl);
+async function inspectPage(rawUrl: string, env: WorkerEnv): Promise<string> {
+  let url = validatePublicUrl(rawUrl);
+  const originalHost = url.hostname.toLowerCase().replace(/^www\./, '');
+  const visited = new Set<string>([url.href]);
+  const redirects: string[] = [];
   const abort = new AbortController();
   const timer = setTimeout(() => abort.abort(), 9000);
   try {
-    const response = await fetch(url.href, {
-      redirect: 'manual',
-      signal: abort.signal,
-      headers: { Accept: 'text/html', 'User-Agent': 'MoaviaSEOPro-Audit/1.0' },
-    });
-    if (response.status >= 300 && response.status < 400) {
-      throw new Error('This URL redirects. Please paste the final HTTPS page URL.');
+    let response: Response;
+    const isOwnSite = originalHost === 'moaviaseo.com';
+    if (isOwnSite) {
+      // A Worker cannot reliably HTTP-fetch itself through its public custom
+      // domain. Its static ASSETS binding is the trusted deployed HTML source.
+      const ownSiteUrl = new URL(url.href);
+      ownSiteUrl.hostname = 'moaviaseo.com';
+      response = await env.ASSETS.fetch(new Request(ownSiteUrl.href, {
+        headers: { Accept: 'text/html' },
+      }));
+    } else {
+      // Avoid following redirects to an arbitrary host, private URL, or HTTP.
+      // Support normal HTTPS www <-> apex and canonical-path redirects only.
+      let fetched: Response | undefined;
+      for (let hop = 0; hop <= 3; hop++) {
+        fetched = await fetch(url.href, {
+          redirect: 'manual',
+          signal: abort.signal,
+          headers: { Accept: 'text/html', 'User-Agent': 'MoaviaSEOPro-Audit/1.0' },
+        });
+        if (![301, 302, 303, 307, 308].includes(fetched.status)) break;
+        const location = fetched.headers.get('location');
+        if (!location) throw new Error('Website redirect has no Location header.');
+        let next: URL;
+        try {
+          next = validatePublicUrl(new URL(location, url.href).href);
+        } catch {
+          throw new Error('Website redirects to a blocked destination. Enter its final public HTTPS URL.');
+        }
+        if (next.hostname.toLowerCase().replace(/^www\./, '') !== originalHost) {
+          throw new Error('Website redirects to another domain. Enter the final public HTTPS URL directly.');
+        }
+        if (visited.has(next.href)) throw new Error('Website has a redirect loop. Check its canonical domain configuration.');
+        if (hop === 3) throw new Error('Website redirected more than 3 times. Enter the final HTTPS page URL.');
+        await fetched.body?.cancel().catch(() => {});
+        redirects.push(url.href + ' -> ' + next.href);
+        visited.add(next.href);
+        url = next;
+      }
+      if (!fetched) throw new Error('Website returned no response.');
+      response = fetched;
     }
-    if (!response.ok || !response.headers.get('content-type')?.includes('text/html')) {
-      throw new Error('The target page did not return readable HTML.');
+    const contentType = response.headers.get('content-type') || '(missing)';
+    if (!response.ok) {
+      const hint = response.status === 403 || response.status === 429
+        ? ' The website may be blocking automated access or rate limiting requests.'
+        : response.status >= 500
+          ? ' The website server or a CDN may be unavailable.'
+          : '';
+      throw new Error('Unable to inspect website HTML: HTTP ' + response.status + '.' + hint);
+    }
+    if (!contentType.toLowerCase().includes('text/html')) {
+      throw new Error('Website did not return HTML (Content-Type: ' + contentType.slice(0, 80) + '). Check the final page URL.');
     }
     if (Number(response.headers.get('content-length') || 0) > 500000) {
       throw new Error('The target page is too large for a free lightweight audit.');
@@ -88,7 +134,9 @@ async function inspectPage(rawUrl: string): Promise<string> {
     const missingAlt = imgs.filter(m => !/\balt\s*=\s*["'][^"']+["']/i.test(m)).length;
     const findings = [
       'Page: ' + url.href,
-      'HTTP: ' + response.status + ' OK (HTML was fetched live)',
+      'Source: ' + (isOwnSite ? 'deployed Cloudflare static assets (no self-fetch)' : 'public HTTPS HTML response'),
+      'HTTPS redirects followed: ' + redirects.length,
+      'HTTP: ' + response.status + ' OK',
       'Title (' + title.length + ' characters): ' + (title || 'MISSING'),
       'Meta description (' + description.length + ' characters): ' + (description || 'MISSING'),
       'Canonical: ' + (canonical || 'Not found in fetched HTML'),
@@ -256,7 +304,7 @@ async function handleApi(request: Request, env: WorkerEnv, path: string): Promis
     if (path === '/api/audit') {
       const url = field(data, 'url', 1500);
       if (!url) throw new ApiError(400, 'Enter a website URL.');
-      const findings = await inspectPage(url);
+      const findings = await inspectPage(url, env);
       let report = findings;
       // The on-page audit is a standalone free tool: do not fail a valid audit
       // just because the connected Gemini project has exhausted its quota.
