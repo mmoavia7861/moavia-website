@@ -32,6 +32,7 @@ export const AiToolsSection: React.FC = () => {
   const [auditKeywords, setAuditKeywords] = useState('technical SEO, enterprise cloud solutions');
   const [auditIssue, setAuditIssue] = useState('High bounce rate on mobile, organic traffic stagnating');
   const [auditLoading, setAuditLoading] = useState(false);
+  const [auditIncludeAI, setAuditIncludeAI] = useState(false);
   const [auditReport, setAuditReport] = useState<string | null>(null);
 
   // --- 2. Low-Latency Quick Meta State (gemini-2.5-flash-lite) ---
@@ -105,12 +106,13 @@ export const AiToolsSection: React.FC = () => {
           websiteType: auditType,
           targetKeywords: auditKeywords,
           mainIssue: auditIssue,
+          includeAI: auditIncludeAI,
         }),
       });
       const data = await res.json();
       setAuditReport(data.auditReport || data.error || 'Audit analysis complete.');
     } catch (e: any) {
-      setAuditReport('Failed to connect to audit engine. Please ensure GEMINI_API_KEY is active.');
+      setAuditReport('Could not inspect public HTML. Check the final HTTPS URL and whether the site blocks automated requests. Gemini is not required.');
     } finally {
       setAuditLoading(false);
     }
@@ -383,7 +385,7 @@ export const AiToolsSection: React.FC = () => {
             }`}
           >
             <Globe className="w-3.5 h-3.5" />
-            SERP Scout (Search Tool)
+            SERP Research (Free)
           </button>
 
           <button
@@ -395,7 +397,7 @@ export const AiToolsSection: React.FC = () => {
             }`}
           >
             <MapPin className="w-3.5 h-3.5" />
-            Local Maps (Maps Tool)
+            Local SEO (Free)
           </button>
 
           <button
@@ -469,7 +471,7 @@ export const AiToolsSection: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-bold text-[#18243A] flex items-center gap-2">
                     <Brain className="w-5 h-5 text-[#5265D8]" />
-                    Deep Technical SEO Audit & Algorithm Defense
+                    On-Page SEO Audit — Actual HTML Checks
                   </h3>
                   <p className="text-xs text-[#65738B]">
                     Live HTML audit (optional Gemini suggestions only if key configured)
@@ -519,6 +521,11 @@ export const AiToolsSection: React.FC = () => {
                 </div>
               </div>
 
+              <label className="flex items-center gap-2 text-xs text-[#465571]">
+                <input type="checkbox" checked={auditIncludeAI}
+                  onChange={(event) => setAuditIncludeAI(event.target.checked)} />
+                Optional Gemini advice (uses AI quota). The HTML audit works without it.
+              </label>
               <button
                 onClick={handleRunAudit}
                 disabled={auditLoading}
@@ -532,7 +539,7 @@ export const AiToolsSection: React.FC = () => {
                 ) : (
                   <>
                     <Brain className="w-4 h-4" />
-                    <span>Run Deep Algorithmic Audit Blueprint</span>
+                    <span>Run Free On-Page HTML Audit</span>
                   </>
                 )}
               </button>
@@ -540,10 +547,10 @@ export const AiToolsSection: React.FC = () => {
               <AiProgressIndicator
                 isLoading={auditLoading}
                 steps={[
-                  'Analyzing crawl budget & Core Web Vitals...',
+                  'Fetching public website HTML...',
                   'Inspecting title, canonical, H1 and metadata...',
-                  'Auditing semantic entity mapping & Schema JSON-LD...',
-                  'Generating 90-day algorithmic recovery blueprint...',
+                  'Checking JSON-LD and image markup...',
+                  'Preparing fact-based SEO findings...',
                 ]}
                 accentColor="#5265D8"
               />
@@ -683,14 +690,14 @@ export const AiToolsSection: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-bold text-[#18243A] flex items-center gap-2">
                     <Globe className="w-5 h-5 text-[#5265D8]" />
-                    Live Google Search Grounding & Competitor Scout
+                    Free SERP Research Planner
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Google Search grounding requires a supported paid Gemini API tier (not included in Gemini 3.x free-tier REST requests)
+                    Create a free keyword checklist and open real Google results. No scraped rankings or fabricated metrics.
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#5265D8]/10 text-[#5265D8] px-3 py-1 rounded-full">
-                  Real-Time SERP Data
+                  Free research
                 </span>
               </div>
 
@@ -721,16 +728,16 @@ export const AiToolsSection: React.FC = () => {
                 className="w-full py-3.5 rounded-xl bg-[#5265D8] hover:bg-[#4353bc] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md disabled:opacity-50"
               >
                 {searchLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Globe className="w-4 h-4" />}
-                <span>Fetch Live Google Search Grounded Competitor Analysis</span>
+                <span>Create Free Keyword Research Checklist</span>
               </button>
 
               <AiProgressIndicator
                 isLoading={searchLoading}
                 steps={[
-                  'Connecting to live Google Search index...',
-                  'Analyzing top ranking competitors & search intent...',
-                  'Extracting snippet & content gap opportunities...',
-                  'Synthesizing real-time grounded intelligence...',
+                  'Preparing free keyword research guide...',
+                  'Reviewing keyword and region inputs...',
+                  'Preparing a real Google Search link...',
+                  'Finishing the research checklist...',
                 ]}
                 accentColor="#5265D8"
               />
@@ -739,10 +746,14 @@ export const AiToolsSection: React.FC = () => {
                 <div className="p-5 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] space-y-3">
                   <span className="text-xs font-bold text-[#5265D8] uppercase tracking-wider flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#17A99A]" />
-                    Live Grounded SERP Intelligence
+                    Free Research Checklist (Not Live Rankings)
                   </span>
                   <div className="text-xs text-[#18243A] whitespace-pre-wrap leading-relaxed">
                     {searchData.analysis || searchData.error}
+                    {searchData.googleSearchUrl && (
+                      <a href={searchData.googleSearchUrl} target="_blank" rel="noopener noreferrer"
+                        className="mt-3 block underline font-bold text-[#5265D8]">Open real Google Search results</a>
+                    )}
                   </div>
                 </div>
               )}
@@ -756,14 +767,14 @@ export const AiToolsSection: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-bold text-[#18243A] flex items-center gap-2">
                     <MapPin className="w-5 h-5 text-[#E8B451]" />
-                    Local SEO & Google Maps Proximity Pack Auditor
+                    Free Local SEO Checklist
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Google Maps grounding requires a supported paid Gemini API tier (not included in Gemini 3.x free-tier REST requests)
+                    Create a local SEO checklist and open real Google Maps results. No measured reviews or map-pack rankings.
                   </p>
                 </div>
                 <span className="text-xs font-bold bg-[#E8B451]/15 text-[#E8B451] px-3 py-1 rounded-full">
-                  Geo-Local Grounding
+                  Free checklist
                 </span>
               </div>
 
@@ -803,16 +814,16 @@ export const AiToolsSection: React.FC = () => {
                 className="w-full py-3.5 rounded-xl bg-gradient-to-r from-[#E8B451] to-[#F17F72] text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md disabled:opacity-50"
               >
                 {mapsLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <MapPin className="w-4 h-4" />}
-                <span>Analyze Google Maps Pack Density & Citations</span>
+                <span>Create Local SEO Checklist</span>
               </button>
 
               <AiProgressIndicator
                 isLoading={mapsLoading}
                 steps={[
-                  'Scanning Google Maps geo-grid & proximity clusters...',
-                  'Auditing Google Business Profile citation consistency...',
-                  'Evaluating local competitor review velocity...',
-                  'Formulating local 3-pack rank roadmap...',
+                  'Reading business and city...',
+                  'Preparing a real Google Maps link...',
+                  'Reviewing accurate Business Profile tips...',
+                  'Creating practical local SEO steps...',
                 ]}
                 accentColor="#E8B451"
               />
@@ -821,10 +832,14 @@ export const AiToolsSection: React.FC = () => {
                 <div className="p-5 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] space-y-3">
                   <span className="text-xs font-bold text-[#E8B451] uppercase tracking-wider flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#17A99A]" />
-                    Local Proximity & Map Pack Strategy
+                    Local SEO Checklist (Not Live Map Pack Data)
                   </span>
                   <div className="text-xs text-[#18243A] whitespace-pre-wrap leading-relaxed">
                     {mapsData.localAudit || mapsData.error}
+                    {mapsData.googleMapsUrl && (
+                      <a href={mapsData.googleMapsUrl} target="_blank" rel="noopener noreferrer"
+                        className="mt-3 block underline font-bold text-[#5265D8]">Open real Google Maps listings</a>
+                    )}
                   </div>
                 </div>
               )}
