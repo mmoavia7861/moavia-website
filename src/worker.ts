@@ -141,7 +141,7 @@ async function gemini(
       const message = response.status === 429
         ? 'Google Gemini free-tier rate limit reached. Please try again later.'
         : response.status === 400 || response.status === 404
-          ? 'Google rejected this Gemini request. Gemini 2.5 models are restricted for new projects; update your model or verify grounding eligibility. (HTTP ' + response.status + ')'
+          ? 'Gemini rejected this request (HTTP ' + response.status + ', model: ' + model + '). Check this model and any grounding tools in Google AI Studio.'
           : response.status === 403
             ? 'Gemini API key is not authorized. Check AI Studio project and API restrictions.'
             : 'Gemini service could not complete the request (' + response.status + ').';
