@@ -214,7 +214,7 @@ const menu = [
   ['/services/meta-ads/', 'Meta Ads'],
 ];
 const pagesByUrl = new Map(pages.map((page) => [page.path, page]));
-const style = \`
+const style = `
 :root{color-scheme:light;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#18243a;background:#f7f8fc}
 *{box-sizing:border-box}body{margin:0;line-height:1.65}a{color:#5265d8;text-underline-offset:3px}
 a:hover{text-decoration:underline}a:focus-visible{outline:3px solid #17a99a;outline-offset:4px}
@@ -238,7 +238,7 @@ ul.clean{padding-left:1.25rem}ul.clean li{padding:.23rem 0}
 footer{background:#18243a;color:#d9e0f0;padding:2.5rem 0}footer a{color:#c5ceff}footer .wrap{display:flex;gap:1rem;justify-content:space-between;flex-wrap:wrap}
 .sources li{margin:.5rem 0}.note{font-size:.9rem;color:#65738b}
 @media(max-width:720px){.hero{padding:2.5rem 0}header .wrap{align-items:flex-start}nav{gap:.7rem}nav a{font-size:.78rem}}
-\`;
+`;
 mkdirSync(join(publicDir, 'seo'), { recursive: true });
 writeFileSync(join(publicDir, 'seo', 'pages.css'), style.trim() + '\n', 'utf8');
 
