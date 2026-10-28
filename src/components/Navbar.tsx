@@ -158,12 +158,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
             Founder
           </button>
 
-          <button
-            onClick={() => handleNavClick('blog')}
-            className="px-3 py-2 text-sm font-medium text-[#18243A] hover:text-[#5265D8] rounded-lg hover:bg-slate-50 transition-colors"
-          >
-            Blog
-          </button>
+          <a href="/blog/" className="px-3 py-2 text-sm font-medium text-[#18243A] hover:text-[#5265D8] rounded-lg hover:bg-slate-50 transition-colors">Blog</a>
 
           <button
             onClick={() => handleNavClick('contact')}
@@ -256,12 +251,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
           >
             About Founder (Moavia Hassan)
           </button>
-          <button
-            onClick={() => handleNavClick('blog')}
-            className="w-full text-left px-3 py-2 text-sm font-semibold text-[#18243A] rounded-lg hover:bg-slate-50"
-          >
-            Agency Blog
-          </button>
+          <a href="/blog/" className="block w-full text-left px-3 py-2 text-sm font-semibold text-[#18243A] rounded-lg hover:bg-slate-50">Agency Blog</a>
           <button
             onClick={() => handleNavClick('contact')}
             className="w-full text-left px-3 py-2 text-sm font-semibold text-[#18243A] rounded-lg hover:bg-slate-50"

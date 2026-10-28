@@ -13,6 +13,15 @@ const routes = [
   '/services/meta-ads/',
   '/guides/seo-aeo-geo-explained/',
   '/guides/technical-seo-checklist/',
+  '/about/',
+  '/privacy-policy/',
+  '/terms-and-conditions/',
+  '/blog/',
+  '/blog/technical-seo-playbook-2026/',
+  '/blog/ai-generated-websites-human-engineering/',
+  '/blog/mastering-meta-ads-capi-cro/',
+  '/blog/local-seo-google-maps-3pack/',
+  '/blog/image-video-resolution-cro/',
 ];
 const read = (path) => readFileSync(join(dist, path), 'utf8');
 function check(condition, error) { if (!condition) throw new Error('SEO check failed: ' + error); }
@@ -31,12 +40,18 @@ for (const route of routes) {
   check(html.includes('<h1>') && html.includes('</h1>'), 'visible title missing: ' + route);
   check(html.includes('<meta name="description"'), 'description missing: ' + route);
   check(html.includes('application/ld+json'), 'JSON-LD missing: ' + route);
-  check(html.includes('Frequently asked questions'), 'visible answer section missing: ' + route);
+  if (route.startsWith('/services/') || route.startsWith('/guides/')) {
+    check(html.includes('Frequently asked questions'), 'visible answer section missing: ' + route);
+  }
   check(!html.includes('example.com'), 'placeholder URL detected: ' + route);
   check(sitemap.includes('<loc>' + base + route + '</loc>'), 'route not in sitemap: ' + route);
   const matched = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
   check(Boolean(matched), 'schema script missing: ' + route);
-  JSON.parse(matched[1]);
+  const schema = JSON.parse(matched[1]);
+  if (route.startsWith('/blog/') && route !== '/blog/') {
+    check(html.includes('<time datetime="2026-10-28">'), 'article needs a visible publication date: '+route);
+    check(JSON.stringify(schema).includes('BlogPosting'), 'article schema missing: '+route);
+  }
 }
 check((sitemap.match(/<loc>/g) || []).length === routes.length + 1,
   'sitemap URL count is not homepage + service/guide routes');

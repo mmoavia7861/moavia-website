@@ -48,9 +48,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenAdmin }) => {
             </div>
 
             <p className="text-xs text-slate-400 leading-relaxed max-w-sm">
-              Founded by Moavia Hassan in Islamabad, Pakistan. We deliver senior-engineered Search Engine
-              Optimization, AI-generated website architectures, custom WordPress builds, and high-ROAS Meta and Google
-              advertising campaigns.
+              Founded by Moavia Hassan in Islamabad, Pakistan. We present technical SEO,
+              AI-assisted websites, WordPress development, and Meta and Google Ads services. Project results vary.
             </p>
 
             {/* Social Icons */}
@@ -212,11 +211,12 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenAdmin }) => {
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} Moavia SEO Pro. All rights reserved. Founded by Moavia Hassan.</p>
-          <div className="flex items-center gap-6">
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
-            <span>Security Statement</span>
-          </div>
+          <nav aria-label="Legal and company information" className="flex items-center flex-wrap justify-center gap-4">
+            <a href="/about/" className="hover:text-white hover:underline">About Us</a>
+            <a href="/blog/" className="hover:text-white hover:underline">Blog</a>
+            <a href="/privacy-policy/" className="hover:text-white hover:underline">Privacy Policy</a>
+            <a href="/terms-and-conditions/" className="hover:text-white hover:underline">Terms &amp; Conditions</a>
+          </nav>
         </div>
 
       </div>

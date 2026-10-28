@@ -172,8 +172,8 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
             <div className="p-4 rounded-2xl bg-white border border-[#E7EAF2] flex items-start gap-3">
               <ShieldCheck className="w-5 h-5 text-[#08786F] shrink-0 mt-0.5" />
               <p className="text-xs text-[#65738B] leading-relaxed">
-                Zero spam policy. Your contact information is stored strictly within our secure Firestore
-                database and never shared with third parties.
+                We use the information you submit to respond to your enquiry. Our cloud service providers
+                process submitted information as described in our <a href="/privacy-policy/" className="text-[#5265D8] underline underline-offset-2">Privacy Policy</a>.
               </p>
             </div>
 

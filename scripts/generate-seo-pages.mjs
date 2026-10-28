@@ -310,7 +310,7 @@ function renderPage(page) {
     + '<a class="action" href="/#contact">Contact Moavia SEO Pro</a></section>'
     + '<p class="note">Based in Islamabad, Pakistan. Services are discussed case by case; search rankings, AI citations and advertising returns are not guaranteed.</p>'
     + '</div></main><footer><div class="wrap"><div><strong>Moavia SEO Pro</strong><br>Islamabad, Pakistan</div>'
-    + '<div><a href="/">Homepage</a> · <a href="/services/seo/">SEO Services</a> · <a href="/services/aeo-geo-optimization/">AI Search</a></div>'
+    + '<div><a href="/">Homepage</a> · <a href="/services/seo/">SEO Services</a> · <a href="/blog/">Blog</a> · <a href="/about/">About</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></div>'
     + '<div>© 2026 Moavia SEO Pro</div></div></footer></body></html>\n';
 }
 
