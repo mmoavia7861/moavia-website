@@ -33,6 +33,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenAdmin }) => {
               <img
                 src={`${import.meta.env.BASE_URL}assets/aistudio/moavia_seopro_logo_720x720_10966138.png`}
                 alt="Moavia SEO Pro Logo"
+                loading="lazy"
+                decoding="async"
+                width={48}
+                height={48}
                 className="w-12 h-12 rounded-xl object-contain bg-white/5 p-1 border border-white/10"
               />
               <div>
