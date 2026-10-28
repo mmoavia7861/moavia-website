@@ -66,7 +66,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
                 PRO
               </span>
             </div>
-            <p className="text-[11px] font-semibold text-[#17A99A] tracking-wider uppercase">
+            <p className="text-[11px] font-semibold text-[#08786F] tracking-wider uppercase">
               SEO & Digital Agency
             </p>
           </div>
