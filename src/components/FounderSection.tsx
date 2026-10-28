@@ -56,8 +56,8 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
                 {/* Verified Founder Badge */}
                 <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3 rounded-xl border border-[#E7EAF2] shadow-lg flex items-center justify-between">
                   <div>
-                    <h4 className="text-sm font-extrabold text-[#18243A]">Moavia Hassan</h4>
-                    <p className="text-[11px] font-semibold text-[#17A99A]">Founder & Principal Strategist</p>
+                    <h3 className="text-sm font-extrabold text-[#18243A]">Moavia Hassan</h3>
+                    <p className="text-[11px] font-semibold text-[#08786F]">Founder & Principal Strategist</p>
                   </div>
                   <ShieldCheck className="w-5 h-5 text-[#5265D8]" />
                 </div>
@@ -76,8 +76,8 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
                   </a>
                 </div>
                 <div className="flex items-center gap-2 text-[#65738B]">
-                  <Phone className="w-4 h-4 text-[#17A99A] shrink-0" />
-                  <a href="https://wa.me/923234313869" target="_blank" rel="noopener noreferrer" className="hover:text-[#17A99A] transition-colors">
+                  <Phone className="w-4 h-4 text-[#08786F] shrink-0" />
+                  <a href="https://wa.me/923234313869" target="_blank" rel="noopener noreferrer" className="hover:text-[#08786F] transition-colors">
                     +92 323 4313869 (WhatsApp)
                   </a>
                 </div>
@@ -119,7 +119,7 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
                   href="https://www.upwork.com/freelancers/~01c3735023b2f296fa"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-3 py-2 rounded-xl bg-[#17A99A]/15 text-[#17A99A] text-xs font-bold hover:bg-[#17A99A] hover:text-white transition-all shadow-sm flex items-center gap-1.5"
+                  className="px-3 py-2 rounded-xl bg-[#17A99A]/15 text-[#08786F] text-xs font-bold hover:bg-[#17A99A] hover:text-white transition-all shadow-sm flex items-center gap-1.5"
                 >
                   <span>Upwork Profile</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -140,7 +140,7 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
               Direct Engineering Leadership with <span className="aurora-gradient-text">Moavia Hassan</span>
             </h2>
 
-            <p className="text-sm font-semibold text-[#17A99A]">
+            <p className="text-sm font-semibold text-[#08786F]">
               Digital Marketing Specialist | SEO Specialist | WordPress & AI Website Developer | Meta Ads & Google Ads Specialist
             </p>
 
@@ -163,9 +163,9 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
 
             {/* Core Competencies Matrix */}
             <div className="pt-2">
-              <h4 className="text-xs font-bold text-[#18243A] uppercase tracking-wider mb-3">
+              <h3 className="text-xs font-bold text-[#18243A] uppercase tracking-wider mb-3">
                 Core Specializations & Technical Mastery
-              </h4>
+              </h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {coreCompetencies.map((comp, idx) => (
                   <div key={idx} className="flex items-center gap-2 text-xs font-semibold text-[#18243A]">
