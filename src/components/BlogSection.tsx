@@ -44,6 +44,8 @@ export const BlogSection: React.FC = () => {
                 <div className="relative h-48 overflow-hidden bg-slate-100">
                   <img
                     src={post.featuredImage}
+                    srcSet={`${post.featuredImage.replace('w=800', 'w=360&q=68')} 360w, ${post.featuredImage.replace('w=800', 'w=640')} 640w, ${post.featuredImage} 800w`}
+                    sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1024px) 50vw, 33vw"
                     alt={post.title}
                     loading="lazy"
                     decoding="async"
