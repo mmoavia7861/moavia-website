@@ -60,10 +60,11 @@ export const PortfolioSection: React.FC = () => {
                 <div className="relative h-52 overflow-hidden bg-slate-100">
                   <img
                     src={item.image}
-                    srcSet={`${item.image.replace('w=800', 'w=360&q=68')} 360w, ${item.image.replace('w=800', 'w=640')} 640w, ${item.image} 800w`}
+                    srcSet={`${item.image.replace('w=800', 'w=360').replace('q=80', 'q=68')} 360w, ${item.image.replace('w=800', 'w=640').replace('q=80', 'q=74')} 640w, ${item.image} 800w`}
                     sizes="(max-width: 768px) calc(100vw - 32px), (max-width: 1024px) 50vw, 33vw"
                     alt={item.title}
                     loading="lazy"
+                    fetchPriority="low"
                     decoding="async"
                     width={800}
                     height={460}

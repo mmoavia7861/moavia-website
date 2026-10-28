@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   MapPin,
   Mail,
@@ -19,6 +19,26 @@ interface FounderSectionProps {
 }
 
 export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsultation }) => {
+  // The original founder image is 2.49 MB. Avoid fetching it during the
+  // initial PageSpeed/LCP window, even on browsers that preload distant
+  // loading="lazy" images. Keep the exact visual space reserved to avoid CLS.
+  const portraitHost = useRef<HTMLDivElement>(null);
+  const [showPortrait, setShowPortrait] = useState(false);
+  useEffect(() => {
+    if (showPortrait) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setShowPortrait(true);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setShowPortrait(true);
+        observer.disconnect();
+      }
+    }, { threshold: 0.12, rootMargin: '0px' });
+    if (portraitHost.current) observer.observe(portraitHost.current);
+    return () => observer.disconnect();
+  }, [showPortrait]);
   const coreCompetencies = [
     'Technical SEO & Core Web Vitals measurement',
     'On-Page Semantic Keyword & Entity Mapping',
@@ -41,17 +61,33 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
             <div className="glass-card rounded-3xl p-6 relative border border-[#E7EAF2] shadow-xl w-full max-w-md mx-auto">
               
               {/* Authentic Headshot of Moavia Hassan */}
-              <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-[#5265D8]/20 bg-slate-100 aspect-[3/4]">
-                <img
-                  src={`${import.meta.env.BASE_URL}assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png`}
-                  alt="Founder illustration displayed on Moavia SEO Pro"
-                  loading="lazy"
-                  fetchPriority="low"
-                  decoding="async"
-                  width={480}
-                  height={640}
-                  className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
-                />
+              <div ref={portraitHost} className="relative rounded-2xl overflow-hidden shadow-md border-2 border-[#5265D8]/20 bg-slate-100 aspect-[3/4]">
+                {showPortrait ? (
+                  <img
+                    src={`${import.meta.env.BASE_URL}assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png`}
+                    alt="Illustrated portrait representing the founder of Moavia SEO Pro"
+                    loading="lazy"
+                    fetchPriority="low"
+                    decoding="async"
+                    width={480}
+                    height={640}
+                    className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#EEF2FF] to-[#E9FAF6] text-center px-6" aria-hidden="true">
+                    <img
+                      src={`${import.meta.env.BASE_URL}assets/aistudio/moavia_seopro_logo_720x720_10966138.png`}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      width={96}
+                      height={96}
+                      className="w-24 h-24 rounded-2xl object-contain mb-5"
+                    />
+                    <p className="text-lg font-extrabold text-[#18243A]">Moavia SEO Pro</p>
+                    <p className="text-sm text-[#65738B]">Founder &amp; Digital Strategy</p>
+                  </div>
+                )}
                 
                 {/* Verified Founder Badge */}
                 <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3 rounded-xl border border-[#E7EAF2] shadow-lg flex items-center justify-between">
