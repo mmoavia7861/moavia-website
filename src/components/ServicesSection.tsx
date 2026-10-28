@@ -20,6 +20,14 @@ interface ServicesSectionProps {
   onSelectServiceForConsultation: (serviceTitle: string) => void;
 }
 
+const detailUrls: Record<string, string> = {
+  'seo-complete': '/services/seo/',
+  'ai-websites': '/services/ai-website-development/',
+  'wordpress-dev': '/services/wordpress-development/',
+  'meta-ads': '/services/meta-ads/',
+  'google-ads': '/services/google-ads/',
+};
+
 export const ServicesSection: React.FC<ServicesSectionProps> = ({
   onSelectServiceForConsultation,
 }) => {
@@ -177,6 +185,10 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                   </div>
 
                   <div className="flex items-center gap-2">
+                    <a
+                      href={detailUrls[service.id] || '/#services'}
+                      className="text-xs font-bold text-[#5265D8] underline underline-offset-2 px-2 py-2 rounded-xl hover:bg-slate-50"
+                    >Service Details</a>
                     <button
                       onClick={() => setActiveModalService(service)}
                       className="text-xs font-bold text-[#18243A] hover:text-[#5265D8] px-3 py-2 rounded-xl border border-[#E7EAF2] hover:bg-slate-50 transition-colors"
