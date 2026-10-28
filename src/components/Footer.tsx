@@ -141,8 +141,23 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenAdmin }) => {
             </ul>
           </div>
 
+          {/* Crawlable service and guide links */}
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300">Service Pages</h4>
+            <ul className="space-y-2 text-xs text-slate-400">
+              <li><a href="/services/seo/" className="hover:text-white">SEO Services</a></li>
+              <li><a href="/services/local-seo-islamabad/" className="hover:text-white">Local SEO Islamabad</a></li>
+              <li><a href="/services/aeo-geo-optimization/" className="hover:text-white">AEO &amp; GEO</a></li>
+              <li><a href="/services/ai-website-development/" className="hover:text-white">AI Websites</a></li>
+              <li><a href="/services/wordpress-development/" className="hover:text-white">WordPress Development</a></li>
+              <li><a href="/services/google-ads/" className="hover:text-white">Google Ads</a></li>
+              <li><a href="/services/meta-ads/" className="hover:text-white">Meta Ads</a></li>
+              <li><a href="/guides/technical-seo-checklist/" className="hover:text-white">Technical SEO Guide</a></li>
+            </ul>
+          </div>
+
           {/* Core Services Column */}
-          <div className="lg:col-span-3 space-y-4">
+          <div className="lg:col-span-2 space-y-4">
             <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300">Specializations</h4>
             <ul className="space-y-2 text-xs text-slate-400">
               <li>Technical SEO & Core Web Vitals</li>
