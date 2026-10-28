@@ -36,7 +36,7 @@ export const Hero: React.FC<HeroProps> = ({
   );
 
   return (
-    <section className="relative overflow-hidden pt-12 pb-24 aurora-bg">
+    <section className="relative overflow-hidden pt-8 sm:pt-12 pb-12 sm:pb-24 aurora-bg">
       {/* Decorative Aurora Ambient Orbs */}
       <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#5265D8]/15 via-[#8B63D8]/15 to-[#17A99A]/15 blur-3xl -z-10 rounded-full pointer-events-none" />
 
@@ -47,7 +47,7 @@ export const Hero: React.FC<HeroProps> = ({
           <div className="lg:col-span-7 space-y-8">
             
             {/* Trust Pill / Status Badge */}
-            <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-white/90 border border-[#E7EAF2] shadow-sm">
+            <div className="inline-flex flex-wrap max-w-full items-center gap-x-2.5 gap-y-1 px-4 py-2 rounded-2xl sm:rounded-full bg-white/90 border border-[#E7EAF2] shadow-sm">
               <span className="flex h-2.5 w-2.5 relative">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#17A99A] opacity-75" />
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#17A99A]" />
@@ -177,12 +177,13 @@ export const Hero: React.FC<HeroProps> = ({
               {/* Slider 1: Current Monthly Traffic */}
               <div className="mt-6 space-y-2">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-semibold text-[#18243A]">Current Monthly Visitors:</span>
+                  <label htmlFor="monthlyVisitors" className="font-semibold text-[#18243A]">Current Monthly Visitors:</label>
                   <span className="font-bold text-[#5265D8] bg-[#5265D8]/10 px-2 py-0.5 rounded">
                     {monthlyVisitors.toLocaleString()} / mo
                   </span>
                 </div>
                 <input
+                  id="monthlyVisitors"
                   type="range"
                   min="1000"
                   max="100000"
@@ -196,12 +197,13 @@ export const Hero: React.FC<HeroProps> = ({
               {/* Slider 2: Average Customer Value */}
               <div className="mt-5 space-y-2">
                 <div className="flex justify-between items-center text-xs">
-                  <span className="font-semibold text-[#18243A]">Average Client Deal Value:</span>
+                  <label htmlFor="averageDealSize" className="font-semibold text-[#18243A]">Average Client Deal Value:</label>
                   <span className="font-bold text-[#8B63D8] bg-[#8B63D8]/10 px-2 py-0.5 rounded">
                     ${averageDealSize} USD
                   </span>
                 </div>
                 <input
+                  id="averageDealSize"
                   type="range"
                   min="100"
                   max="5000"
@@ -213,7 +215,7 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
 
               {/* Simulation Result Cards */}
-              <div className="mt-6 grid grid-cols-2 gap-3">
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div className="p-4 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2]">
                   <p className="text-[11px] font-semibold text-[#65738B] uppercase">Projected Inquiries</p>
                   <div className="text-2xl font-extrabold text-[#18243A] mt-1">
@@ -227,7 +229,7 @@ export const Hero: React.FC<HeroProps> = ({
 
                 <div className="p-4 rounded-2xl bg-gradient-to-br from-[#17A99A]/10 to-[#5265D8]/10 border border-[#17A99A]/30">
                   <p className="text-[11px] font-semibold text-[#17A99A] uppercase">Estimated Gain</p>
-                  <div className="text-2xl font-extrabold text-[#17A99A] mt-1">
+                  <div className="text-xl sm:text-2xl font-extrabold text-[#0B756A] mt-1 break-words">
                     ${projectedRevenueGain.toLocaleString()}
                   </div>
                   <p className="text-[10px] text-[#18243A] font-medium mt-1">Illustrative estimate only — not a forecast</p>
