@@ -16,13 +16,13 @@
   body {
     background-color: var(--pearl-white);
     color: var(--deep-ink);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     letter-spacing: -0.02em;
   }
 }
@@ -79,4 +79,23 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #94A3B8;
+}
+
+/* Rendering and interaction improvements for both mobile and desktop. */
+html { scroll-behavior: smooth; }
+[id] { scroll-margin-top: 116px; }
+:focus-visible { outline: 3px solid #5265d8; outline-offset: 3px; }
+
+@media (max-width: 767px) {
+  .aurora-bg { background: #f8f9fd; }
+  .glass-panel { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(255, 255, 255, .98); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
