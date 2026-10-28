@@ -143,80 +143,8 @@ export const agencyServices: ServiceItem[] = [
   },
 ];
 
-export const initialPortfolio: PortfolioItem[] = [
-  {
-    id: 'demo-nexus-tech',
-    title: 'B2B SaaS Platform — Technical SEO Concept',
-    category: 'SEO',
-    clientName: 'B2B SaaS example',
-    isDemo: true,
-    description: 'Hypothetical audit plan illustrating crawl diagnostics, JavaScript rendering checks, canonical URLs and structured data review for a software platform.',
-    technologies: ['Technical SEO', 'Schema JSON-LD', 'Core Web Vitals', 'Crawl Diagnostics'],
-    metrics: '',
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80',
-    published: true,
-  },
-  {
-    id: 'demo-aurora-ai',
-    title: 'Business Portal — AI-Assisted Website Concept',
-    category: 'AI Websites',
-    clientName: 'Business portal example',
-    isDemo: true,
-    description: 'Illustrative interface concept using responsive React components, accessible forms, AI-assisted prototyping and human-reviewed implementation.',
-    technologies: ['AI-Assisted Prototyping', 'React', 'Tailwind CSS', 'Accessibility', 'Vite'],
-    metrics: '',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80',
-    published: true,
-  },
-  {
-    id: 'demo-islamabad-dental',
-    title: 'Dental Practice — Local SEO Planning Concept',
-    category: 'SEO',
-    clientName: 'Local clinic example',
-    isDemo: true,
-    description: 'Hypothetical local search checklist focused on genuine business eligibility, accurate service information, useful location pages and ethical review handling.',
-    technologies: ['Local SEO', 'Business Profile Eligibility', 'Listings', 'Local Content'],
-    metrics: '',
-    image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80',
-    published: true,
-  },
-  {
-    id: 'demo-solis-store',
-    title: 'Online Apparel Store — WordPress Concept',
-    category: 'WordPress',
-    clientName: 'Ecommerce example',
-    isDemo: true,
-    description: 'Conceptual WordPress and WooCommerce site architecture featuring product navigation, accessible checkout patterns and performance-minded imagery.',
-    technologies: ['WordPress', 'WooCommerce', 'Responsive Design', 'Checkout UX', 'Product Pages'],
-    metrics: '',
-    image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=800&q=80',
-    published: true,
-  },
-  {
-    id: 'demo-stride-meta',
-    title: 'Fitness Service — Meta Ads Funnel Concept',
-    category: 'Meta Ads',
-    clientName: 'Fitness service example',
-    isDemo: true,
-    description: 'Illustrative ad-to-landing-page flow covering offer clarity, creative testing, event deduplication and consent-aware measurement.',
-    technologies: ['Meta Ads Planning', 'Conversion Events', 'Creative Testing', 'Lead Quality'],
-    metrics: '',
-    image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80',
-    published: true,
-  },
-  {
-    id: 'demo-beacon-legal',
-    title: 'Legal Services — Google Search Ads Concept',
-    category: 'Google Ads',
-    clientName: 'Professional services example',
-    isDemo: true,
-    description: 'Hypothetical search campaign structure illustrating relevant keywords, clear landing-page messages, negative keyword planning and qualified lead tracking.',
-    technologies: ['Search Campaign Planning', 'Conversion Tracking', 'Negative Keywords', 'Landing Page UX'],
-    metrics: '',
-    image: 'https://images.unsplash.com/photo-1450133064473-71024230f91b?auto=format&fit=crop&w=800&q=80',
-    published: true,
-  },
-];
+// Removed fictional portfolio concepts; real projects are defined in githubProjects.json.
+export const initialPortfolio: PortfolioItem[] = [];
 
 export const initialBlogPosts: BlogPost[] = [
   {

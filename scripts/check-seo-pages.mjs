@@ -22,6 +22,7 @@ const routes = [
   '/blog/mastering-meta-ads-capi-cro/',
   '/blog/local-seo-google-maps-3pack/',
   '/blog/image-video-resolution-cro/',
+  '/projects/',
 ];
 const read = (path) => readFileSync(join(dist, path), 'utf8');
 function check(condition, error) { if (!condition) throw new Error('SEO check failed: ' + error); }

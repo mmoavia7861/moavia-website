@@ -134,7 +134,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
             onClick={() => handleNavClick('portfolio')}
             className="px-3 py-2 text-sm font-medium text-[#18243A] hover:text-[#5265D8] rounded-lg hover:bg-slate-50 transition-colors"
           >
-            Portfolio
+            Projects
           </button>
 
           <button
@@ -231,7 +231,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
             onClick={() => handleNavClick('portfolio')}
             className="w-full text-left px-3 py-2 text-sm font-semibold text-[#18243A] rounded-lg hover:bg-slate-50"
           >
-            Portfolio
+            Projects
           </button>
           <button
             onClick={() => handleNavClick('testimonials')}

@@ -1,0 +1,103 @@
+[
+  {
+    "id": "agency",
+    "title": "Moavia SEO Pro — Agency Website",
+    "repo": "moavia-website",
+    "category": "Websites",
+    "stage": "Live website",
+    "description": "React and TypeScript website with SEO service pages, blog articles, Cloudflare Worker API, contact forms and an admin interface.",
+    "stack": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Cloudflare Workers",
+      "Firebase"
+    ],
+    "highlights": [
+      "Crawlable service and blog pages",
+      "AI tools and Worker API",
+      "Contact and admin interface"
+    ],
+    "liveUrl": "https://moaviaseo.com/",
+    "repoUrl": "https://github.com/mmoavia7861/moavia-website"
+  },
+  {
+    "id": "institute",
+    "title": "Umm-E-Aiman — Institute & Hostel Portal",
+    "repo": "Umm-E-Aiman",
+    "category": "Education",
+    "stage": "Source repository",
+    "description": "React and TypeScript project for a paramedical institute and hostel with course information, enquiry flows and administrative components.",
+    "stack": [
+      "React",
+      "TypeScript",
+      "React Router",
+      "Firebase"
+    ],
+    "highlights": [
+      "Institute courses and hostel sections",
+      "Admission and WhatsApp enquiry UI",
+      "Admin dashboard components"
+    ],
+    "repoUrl": "https://github.com/mmoavia7861/Umm-E-Aiman"
+  },
+  {
+    "id": "static",
+    "title": "Moavia SEO Pro — Multi-Page Static Website",
+    "repo": "moaviaseopro",
+    "category": "Websites",
+    "stage": "Source repository",
+    "description": "Framework-free agency website with dedicated service, about, contact and privacy pages; site generation scripts and SEO metadata.",
+    "stack": [
+      "HTML5",
+      "CSS",
+      "JavaScript",
+      "Python"
+    ],
+    "highlights": [
+      "Multi-page service navigation",
+      "Sitemap and metadata generation",
+      "Responsive user interface"
+    ],
+    "repoUrl": "https://github.com/mmoavia7861/moaviaseopro"
+  },
+  {
+    "id": "landing",
+    "title": "Moavia SEO Pro — Landing Page Prototype",
+    "repo": "Moavia-SEO-Pro",
+    "category": "Websites",
+    "stage": "Prototype",
+    "description": "Single-page website built with HTML, CSS and JavaScript, including theme switching, responsive navigation and interactive service UI.",
+    "stack": [
+      "HTML5",
+      "CSS",
+      "JavaScript"
+    ],
+    "highlights": [
+      "Light and dark themes",
+      "Mobile navigation and service tabs",
+      "Interactive form elements"
+    ],
+    "repoUrl": "https://github.com/mmoavia7861/Moavia-SEO-Pro"
+  },
+  {
+    "id": "android",
+    "title": "Moavia App — Android Compose Starter",
+    "repo": "moavia-app",
+    "category": "Android",
+    "stage": "Starter code",
+    "description": "Early-stage Android Kotlin project with a Jetpack Compose starter screen, Material 3 theme and Gradle setup; not a finished mobile app.",
+    "stack": [
+      "Kotlin",
+      "Jetpack Compose",
+      "Material 3",
+      "Gradle"
+    ],
+    "highlights": [
+      "MainActivity and sample Compose UI",
+      "App theme resources",
+      "Android Gradle project structure"
+    ],
+    "repoUrl": "https://github.com/mmoavia7861/moavia-app"
+  }
+]

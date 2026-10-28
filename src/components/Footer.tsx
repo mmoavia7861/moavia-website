@@ -212,6 +212,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenAdmin }) => {
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
           <p>© {new Date().getFullYear()} Moavia SEO Pro. All rights reserved. Founded by Moavia Hassan.</p>
           <nav aria-label="Legal and company information" className="flex items-center flex-wrap justify-center gap-4">
+            <a href="/projects/" className="hover:text-white hover:underline">GitHub Projects</a>
             <a href="/about/" className="hover:text-white hover:underline">About Us</a>
             <a href="/blog/" className="hover:text-white hover:underline">Blog</a>
             <a href="/privacy-policy/" className="hover:text-white hover:underline">Privacy Policy</a>
