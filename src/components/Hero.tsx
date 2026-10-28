@@ -91,7 +91,7 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
               <div className="flex items-center gap-2 text-xs font-semibold text-[#18243A]">
                 <CheckCircle2 className="w-4 h-4 text-[#F17F72] shrink-0" />
-                <span>High-ROAS Meta Ads</span>
+                <span>Meta Ads Campaign Strategy</span>
               </div>
               <div className="flex items-center gap-2 text-xs font-semibold text-[#18243A]">
                 <CheckCircle2 className="w-4 h-4 text-[#E8B451] shrink-0" />
@@ -99,7 +99,7 @@ export const Hero: React.FC<HeroProps> = ({
               </div>
               <div className="flex items-center gap-2 text-xs font-semibold text-[#18243A]">
                 <CheckCircle2 className="w-4 h-4 text-[#17A99A] shrink-0" />
-                <span>Core Web Vitals &lt; 1.5s</span>
+                <span>Core Web Vitals Diagnostics</span>
               </div>
             </div>
 
@@ -133,8 +133,11 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Founder Headshot & Verification Badge */}
             <div className="flex items-center gap-4 pt-4 border-t border-[#E7EAF2]">
               <img
-                src={`${import.meta.env.BASE_URL}assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png`}
-                alt="Moavia Hassan, Founder of Moavia SEO Pro"
+                src={`${import.meta.env.BASE_URL}assets/aistudio/moavia_seopro_logo_720x720_10966138.png`}
+                alt="Moavia SEO Pro brand logo"
+                width={52}
+                height={52}
+                decoding="async"
                 className="w-13 h-13 rounded-full object-cover object-top border-2 border-[#5265D8] shadow-md"
               />
               <div>
@@ -167,7 +170,7 @@ export const Hero: React.FC<HeroProps> = ({
                   </div>
                 </div>
                 <span className="text-xs font-bold text-[#17A99A] bg-[#17A99A]/10 px-2.5 py-1 rounded-full">
-                  LIVE MODEL
+                  ILLUSTRATIVE MODEL
                 </span>
               </div>
 
@@ -227,7 +230,7 @@ export const Hero: React.FC<HeroProps> = ({
                   <div className="text-2xl font-extrabold text-[#17A99A] mt-1">
                     ${projectedRevenueGain.toLocaleString()}
                   </div>
-                  <p className="text-[10px] text-[#18243A] font-medium mt-1">Monthly recurring upside</p>
+                  <p className="text-[10px] text-[#18243A] font-medium mt-1">Illustrative estimate only — not a forecast</p>
                 </div>
               </div>
 
@@ -235,11 +238,11 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="mt-6 space-y-3 pt-5 border-t border-[#E7EAF2]">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-[#65738B] font-medium">Core Web Vitals Guarantee:</span>
-                  <span className="font-bold text-[#17A99A]">95+ Score Target</span>
+                  <span className="font-bold text-[#17A99A]">Measured on real devices</span>
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-[#65738B] font-medium">Search Intent Accuracy:</span>
-                  <span className="font-bold text-[#5265D8]">100% Commercial</span>
+                  <span className="font-bold text-[#5265D8]">Intent-based planning</span>
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-[#65738B] font-medium">Turnaround Timeline:</span>
