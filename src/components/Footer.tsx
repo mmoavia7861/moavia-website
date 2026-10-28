@@ -120,7 +120,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenAdmin }) => {
               </li>
               <li>
                 <button onClick={() => onNavigate('testimonials')} className="hover:text-white transition-colors">
-                  Success Stories
+                  Our Process
                 </button>
               </li>
               <li>
