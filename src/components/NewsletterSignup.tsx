@@ -128,6 +128,7 @@ export const NewsletterSignup: React.FC = () => {
                 <div className="flex flex-col sm:flex-row gap-2">
                   <div className="relative flex-1">
                     <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+                    <label htmlFor="newsletter-email-input" className="sr-only">Email address for SEO newsletter</label>
                     <input
                       type="email"
                       id="newsletter-email-input"
