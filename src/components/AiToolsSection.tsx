@@ -567,7 +567,7 @@ export const AiToolsSection: React.FC = () => {
               {auditReport && (
                 <div className="mt-4 p-5 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-[#17A99A] uppercase tracking-wider flex items-center gap-1.5">
+                    <span className="text-xs font-bold text-[#08786F] uppercase tracking-wider flex items-center gap-1.5">
                       <CheckCircle2 className="w-4 h-4" />
                       On-Page HTML Audit
                     </span>
@@ -586,14 +586,14 @@ export const AiToolsSection: React.FC = () => {
               <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#E7EAF2]">
                 <div>
                   <h3 className="text-xl font-bold text-[#18243A] flex items-center gap-2">
-                    <Zap className="w-5 h-5 text-[#17A99A]" />
+                    <Zap className="w-5 h-5 text-[#08786F]" />
                     Low-Latency Instant Title & Meta Optimizer
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by ultra-fast model <span className="font-mono text-[#17A99A] font-bold">gemini-3.5-flash-lite</span>
+                    Powered by ultra-fast model <span className="font-mono text-[#08786F] font-bold">gemini-3.5-flash-lite</span>
                   </p>
                 </div>
-                <span className="text-xs font-bold bg-[#17A99A]/10 text-[#17A99A] px-3 py-1 rounded-full">
+                <span className="text-xs font-bold bg-[#17A99A]/10 text-[#08786F] px-3 py-1 rounded-full">
                   No API key required
                 </span>
               </div>
@@ -657,7 +657,7 @@ export const AiToolsSection: React.FC = () => {
 
               {quickResult && (
                 <div className="p-5 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] space-y-4">
-                  <h4 className="text-xs font-bold text-[#17A99A] uppercase tracking-wider">
+                  <h4 className="text-xs font-bold text-[#08786F] uppercase tracking-wider">
                     Optimized Tag Proposals
                   </h4>
                   {quickResult.optimizedTitles && (
@@ -679,7 +679,7 @@ export const AiToolsSection: React.FC = () => {
                       <ul className="space-y-1.5 text-xs text-[#18243A]">
                         {quickResult.optimizedDescriptions.map((d: string, i: number) => (
                           <li key={i} className="flex items-center gap-2 p-2 bg-white rounded-lg border border-[#E7EAF2]">
-                            <span className="font-bold text-[#17A99A]">#{i + 1}</span>
+                            <span className="font-bold text-[#08786F]">#{i + 1}</span>
                             <span>{d}</span>
                           </li>
                         ))}
@@ -759,7 +759,7 @@ export const AiToolsSection: React.FC = () => {
               {searchData && (
                 <div className="p-5 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] space-y-3">
                   <span className="text-xs font-bold text-[#5265D8] uppercase tracking-wider flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#17A99A]" />
+                    <CheckCircle2 className="w-4 h-4 text-[#08786F]" />
                     Free Research Checklist (Not Live Rankings)
                   </span>
                   <div className="text-xs text-[#18243A] whitespace-pre-wrap leading-relaxed">
@@ -780,14 +780,14 @@ export const AiToolsSection: React.FC = () => {
               <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#E7EAF2]">
                 <div>
                   <h3 className="text-xl font-bold text-[#18243A] flex items-center gap-2">
-                    <MapPin className="w-5 h-5 text-[#E8B451]" />
+                    <MapPin className="w-5 h-5 text-[#7F590F]" />
                     Free Local SEO Checklist
                   </h3>
                   <p className="text-xs text-[#65738B]">
                     Create a local SEO checklist and open real Google Maps results. No measured reviews or map-pack rankings.
                   </p>
                 </div>
-                <span className="text-xs font-bold bg-[#E8B451]/15 text-[#E8B451] px-3 py-1 rounded-full">
+                <span className="text-xs font-bold bg-[#E8B451]/15 text-[#7F590F] px-3 py-1 rounded-full">
                   Free checklist
                 </span>
               </div>
@@ -847,8 +847,8 @@ export const AiToolsSection: React.FC = () => {
 
               {mapsData && (
                 <div className="p-5 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] space-y-3">
-                  <span className="text-xs font-bold text-[#E8B451] uppercase tracking-wider flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#17A99A]" />
+                  <span className="text-xs font-bold text-[#7F590F] uppercase tracking-wider flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#08786F]" />
                     Local SEO Checklist (Not Live Map Pack Data)
                   </span>
                   <div className="text-xs text-[#18243A] whitespace-pre-wrap leading-relaxed">
@@ -963,7 +963,7 @@ export const AiToolsSection: React.FC = () => {
                     className="max-h-80 mx-auto rounded-xl shadow-lg border border-[#E7EAF2]"
                   />
                   <div className="flex items-center justify-center gap-3">
-                    <span className="text-xs font-bold text-[#17A99A]">
+                    <span className="text-xs font-bold text-[#08786F]">
                       Scalable {imageResolution} SVG template
                     </span>
                     <a
@@ -992,14 +992,14 @@ export const AiToolsSection: React.FC = () => {
               <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-[#E7EAF2]">
                 <div>
                   <h3 className="text-xl font-bold text-[#18243A] flex items-center gap-2">
-                    <Video className="w-5 h-5 text-[#F17F72]" />
+                    <Video className="w-5 h-5 text-[#A83B31]" />
                     Video Content Understanding & YouTube/TikTok SEO
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Powered by model <span className="font-mono text-[#F17F72] font-bold">gemini-3.5-flash-lite</span>
+                    Powered by model <span className="font-mono text-[#A83B31] font-bold">gemini-3.5-flash-lite</span>
                   </p>
                 </div>
-                <span className="text-xs font-bold bg-[#F17F72]/15 text-[#F17F72] px-3 py-1 rounded-full">
+                <span className="text-xs font-bold bg-[#F17F72]/15 text-[#A83B31] px-3 py-1 rounded-full">
                   Video Intelligence
                 </span>
               </div>
@@ -1051,8 +1051,8 @@ export const AiToolsSection: React.FC = () => {
 
               {videoAnalysis && (
                 <div className="p-5 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] space-y-3">
-                  <span className="text-xs font-bold text-[#F17F72] uppercase tracking-wider flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#17A99A]" />
+                  <span className="text-xs font-bold text-[#A83B31] uppercase tracking-wider flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-[#08786F]" />
                     Video SEO Breakdown
                   </span>
                   <div className="text-xs text-[#18243A] whitespace-pre-wrap leading-relaxed">
@@ -1147,7 +1147,7 @@ export const AiToolsSection: React.FC = () => {
 
               {animatedVideoStatus && (
                 <div className="p-4 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] text-xs font-medium text-[#18243A]">
-                  <p className="font-bold text-[#17A99A] mb-1">Omni Interactions Pipeline Result:</p>
+                  <p className="font-bold text-[#08786F] mb-1">Omni Interactions Pipeline Result:</p>
                   <p>{animatedVideoStatus}</p>
                 </div>
               )}
