@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MessageCircle, X } from 'lucide-react';
 
 export const WhatsAppWidget: React.FC = () => {
-  const [openTooltip, setOpenTooltip] = useState(true);
+  const [openTooltip, setOpenTooltip] = useState(false);
 
   const phone = '923234313869';
   const message = encodeURIComponent(
@@ -11,7 +11,7 @@ export const WhatsAppWidget: React.FC = () => {
   const waUrl = `https://wa.me/${phone}?text=${message}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end">
+    <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end">
       {/* Friendly Tooltip Card */}
       {openTooltip && (
         <div className="mb-3 max-w-xs p-3.5 rounded-2xl bg-white border border-[#E7EAF2] shadow-2xl animate-in slide-in-from-bottom-2 duration-300 relative">
@@ -47,7 +47,7 @@ export const WhatsAppWidget: React.FC = () => {
         href={waUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-xl shadow-[#25D366]/40 flex items-center justify-center transition-all hover:scale-110 active:scale-95 group relative"
+        className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-xl shadow-[#25D366]/40 flex items-center justify-center transition-all hover:scale-110 active:scale-95 group relative"
         aria-label="Chat on WhatsApp with Moavia Hassan"
       >
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-30" />
