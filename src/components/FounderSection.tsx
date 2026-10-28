@@ -20,7 +20,7 @@ interface FounderSectionProps {
 
 export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsultation }) => {
   const coreCompetencies = [
-    'Technical SEO & Core Web Vitals (< 1.5s LCP)',
+    'Technical SEO & Core Web Vitals measurement',
     'On-Page Semantic Keyword & Entity Mapping',
     'Local SEO & Google Business Profile 3-Pack',
     'High-Converting AI Website Architecture',
@@ -44,8 +44,9 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
               <div className="relative rounded-2xl overflow-hidden shadow-md border-2 border-[#5265D8]/20 bg-slate-100 aspect-[3/4]">
                 <img
                   src={`${import.meta.env.BASE_URL}assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png`}
-                  alt="Founder profile image at Moavia SEO Pro"
+                  alt="Founder illustration displayed on Moavia SEO Pro"
                   loading="lazy"
+                  fetchPriority="low"
                   decoding="async"
                   width={480}
                   height={640}
