@@ -45,21 +45,21 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
       case 'teal':
         return {
           bg: 'bg-[#17A99A]/10',
-          text: 'text-[#17A99A]',
+          text: 'text-[#08786F]',
           border: 'border-[#17A99A]/30',
           gradient: 'from-[#17A99A] to-[#5265D8]',
         };
       case 'coral':
         return {
           bg: 'bg-[#F17F72]/10',
-          text: 'text-[#F17F72]',
+          text: 'text-[#A83B31]',
           border: 'border-[#F17F72]/30',
           gradient: 'from-[#F17F72] to-[#8B63D8]',
         };
       case 'gold':
         return {
           bg: 'bg-[#E8B451]/10',
-          text: 'text-[#E8B451]',
+          text: 'text-[#7F590F]',
           border: 'border-[#E8B451]/30',
           gradient: 'from-[#E8B451] to-[#F17F72]',
         };
@@ -231,7 +231,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
                 {getServiceIcon(activeModalService.id)}
               </div>
               <div>
-                <span className="text-xs font-bold text-[#17A99A] uppercase tracking-wider">
+                <span className="text-xs font-bold text-[#08786F] uppercase tracking-wider">
                   {activeModalService.category}
                 </span>
                 <h3 className="text-2xl font-extrabold text-[#18243A]">
@@ -250,7 +250,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
             {/* Deliverables Box */}
             <div className="mt-6 p-5 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2]">
               <h4 className="text-xs font-bold text-[#18243A] uppercase tracking-wider flex items-center gap-2">
-                <Shield className="w-4 h-4 text-[#17A99A]" />
+                <Shield className="w-4 h-4 text-[#08786F]" />
                 Official Project Deliverables
               </h4>
               <ul className="mt-3 space-y-2">
@@ -271,7 +271,7 @@ export const ServicesSection: React.FC<ServicesSectionProps> = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 {activeModalService.features.map((feat, i) => (
                   <div key={i} className="flex items-start gap-2 text-xs text-[#18243A]">
-                    <CheckCircle2 className="w-4 h-4 text-[#17A99A] shrink-0 mt-0.5" />
+                    <CheckCircle2 className="w-4 h-4 text-[#08786F] shrink-0 mt-0.5" />
                     <span>{feat}</span>
                   </div>
                 ))}
