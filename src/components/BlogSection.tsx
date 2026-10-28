@@ -38,3 +38,4 @@ export const BlogSection: React.FC = () => (
       </div>
     </div>
   </section>
+);
