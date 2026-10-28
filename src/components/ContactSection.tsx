@@ -138,7 +138,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                 <div>
                   <h4 className="text-xs font-bold text-[#18243A]">Direct WhatsApp</h4>
                   <p className="text-sm font-extrabold text-[#17A99A]">+92 323 4313869</p>
-                  <span className="text-[10px] text-[#65738B]">Average response: under 1 hour</span>
+                  <span className="text-[10px] text-[#65738B]">Response times vary; messages are reviewed directly</span>
                 </div>
               </a>
 
@@ -225,13 +225,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-bold text-[#18243A] block mb-1">
+                      <label htmlFor="lead-fullName" className="text-xs font-bold text-[#18243A] block mb-1">
                         Full Name <span className="text-rose-500">*</span>
                       </label>
                       <input
                         type="text"
                         required
                         placeholder="e.g. Zainab Ahmed"
+                        id="lead-fullName"
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] focus:bg-white focus:outline-[#5265D8]"
@@ -239,13 +240,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold text-[#18243A] block mb-1">
+                      <label htmlFor="lead-email" className="text-xs font-bold text-[#18243A] block mb-1">
                         Work Email <span className="text-rose-500">*</span>
                       </label>
                       <input
                         type="email"
                         required
                         placeholder="e.g. zainab@company.com"
+                        id="lead-email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] focus:bg-white focus:outline-[#5265D8]"
@@ -255,12 +257,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-bold text-[#18243A] block mb-1">
+                      <label htmlFor="lead-whatsapp" className="text-xs font-bold text-[#18243A] block mb-1">
                         WhatsApp / Phone Number
                       </label>
                       <input
                         type="tel"
                         placeholder="e.g. +92 300 1234567"
+                        id="lead-whatsapp"
                         value={whatsapp}
                         onChange={(e) => setWhatsapp(e.target.value)}
                         className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] focus:bg-white focus:outline-[#5265D8]"
@@ -268,12 +271,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold text-[#18243A] block mb-1">
+                      <label htmlFor="lead-businessName" className="text-xs font-bold text-[#18243A] block mb-1">
                         Business / Company Name
                       </label>
                       <input
                         type="text"
                         placeholder="e.g. Apex Global"
+                        id="lead-businessName"
                         value={businessName}
                         onChange={(e) => setBusinessName(e.target.value)}
                         className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] focus:bg-white focus:outline-[#5265D8]"
@@ -283,12 +287,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="text-xs font-bold text-[#18243A] block mb-1">
+                      <label htmlFor="lead-websiteUrl" className="text-xs font-bold text-[#18243A] block mb-1">
                         Current Website URL
                       </label>
                       <input
                         type="url"
                         placeholder="https://example.com"
+                        id="lead-websiteUrl"
                         value={websiteUrl}
                         onChange={(e) => setWebsiteUrl(e.target.value)}
                         className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] focus:bg-white focus:outline-[#5265D8]"
@@ -296,10 +301,11 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                     </div>
 
                     <div>
-                      <label className="text-xs font-bold text-[#18243A] block mb-1">
+                      <label htmlFor="lead-service" className="text-xs font-bold text-[#18243A] block mb-1">
                         Primary Service Required <span className="text-rose-500">*</span>
                       </label>
                       <select
+                        id="lead-service"
                         value={service}
                         onChange={(e) => setService(e.target.value)}
                         className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] text-[#18243A] focus:bg-white focus:outline-[#5265D8]"
@@ -315,11 +321,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-[#18243A] block mb-1">
+                    <label htmlFor="lead-budget" className="text-xs font-bold text-[#18243A] block mb-1">
                       Estimated Project Budget
                     </label>
                     <select
-                      value={budget}
+                      id="lead-budget"
+                        value={budget}
                       onChange={(e) => setBudget(e.target.value)}
                       className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] text-[#18243A] focus:bg-white focus:outline-[#5265D8]"
                     >
@@ -331,13 +338,14 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold text-[#18243A] block mb-1">
+                    <label htmlFor="lead-description" className="text-xs font-bold text-[#18243A] block mb-1">
                       Project Goals & Challenges
                     </label>
                     <textarea
                       rows={3}
                       placeholder="Share your organic search targets, target audience, or current website bottlenecks..."
-                      value={description}
+                      id="lead-description"
+                        value={description}
                       onChange={(e) => setDescription(e.target.value)}
                       className="w-full text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] focus:bg-white focus:outline-[#5265D8]"
                     />
