@@ -180,7 +180,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
             onClick={() => handleNavClick('testimonials')}
             className="px-3 py-2 text-sm font-medium text-[#18243A] hover:text-[#5265D8] rounded-lg hover:bg-slate-50 transition-colors"
           >
-            Stories
+            Our Process
           </button>
 
           <button
@@ -279,7 +279,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
             onClick={() => handleNavClick('testimonials')}
             className="w-full text-left px-3 py-2 text-sm font-semibold text-[#18243A] rounded-lg hover:bg-slate-50"
           >
-            Client Stories & Reviews
+            Our Approach
           </button>
           <button
             onClick={() => handleNavClick('pricing')}
