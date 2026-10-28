@@ -3,7 +3,7 @@ import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 const ServicesSection = lazy(() => import('./components/ServicesSection').then(m => ({ default: m.ServicesSection })));
 
-// Load only above-the-fold elements on initial visit. AI Studio and the
+// Defer below-the-fold sections until they approach the viewport. AI Studio and the
 // Firebase Admin Portal are especially expensive and must not block LCP.
 const AiToolsSection = lazy(() => import('./components/AiToolsSection').then(m => ({ default: m.AiToolsSection })));
 const PortfolioSection = lazy(() => import('./components/PortfolioSection').then(m => ({ default: m.PortfolioSection })));
@@ -38,7 +38,7 @@ function DeferredSection({ id, label, children, minHeight = 220, eager = false }
         setVisible(true);
         observer.disconnect();
       }
-    }, { rootMargin: '650px 0px' });
+    }, { rootMargin: '160px 0px' });
     if (ref.current) observer.observe(ref.current);
     return () => observer.disconnect();
   }, [visible]);
