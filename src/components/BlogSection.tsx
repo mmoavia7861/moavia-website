@@ -45,6 +45,10 @@ export const BlogSection: React.FC = () => {
                   <img
                     src={post.featuredImage}
                     alt={post.title}
+                    loading="lazy"
+                    decoding="async"
+                    width={800}
+                    height={460}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <span className="absolute top-4 left-4 bg-white/95 backdrop-blur-md text-[#5265D8] text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
@@ -136,6 +140,10 @@ export const BlogSection: React.FC = () => {
             <img
               src={selectedPost.featuredImage}
               alt={selectedPost.title}
+              loading="lazy"
+              decoding="async"
+              width={800}
+              height={450}
               className="w-full h-64 object-cover rounded-2xl my-6 border border-[#E7EAF2]"
             />
 
