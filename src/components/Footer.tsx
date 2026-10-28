@@ -100,7 +100,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenAdmin }) => {
 
           {/* Quick Links Column */}
           <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300">Navigation</h4>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">Navigation</h3>
             <ul className="space-y-2 text-xs text-slate-400">
               <li>
                 <button onClick={() => onNavigate('hero')} className="hover:text-white transition-colors">
@@ -147,7 +147,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenAdmin }) => {
 
           {/* Crawlable service and guide links */}
           <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300">Service Pages</h4>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">Service Pages</h3>
             <ul className="space-y-2 text-xs text-slate-400">
               <li><a href="/services/seo/" className="hover:text-white">SEO Services</a></li>
               <li><a href="/services/local-seo-islamabad/" className="hover:text-white">Local SEO Islamabad</a></li>
@@ -162,7 +162,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenAdmin }) => {
 
           {/* Core Services Column */}
           <div className="lg:col-span-2 space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300">Specializations</h4>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">Specializations</h3>
             <ul className="space-y-2 text-xs text-slate-400">
               <li>Technical SEO & Core Web Vitals</li>
               <li>Local SEO & Google Maps 3-Pack</li>
@@ -176,7 +176,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenAdmin }) => {
 
           {/* Contact & Admin Column */}
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300">Official Contact</h4>
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">Official Contact</h3>
             <div className="space-y-2.5 text-xs text-slate-400">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-[#5265D8] shrink-0 mt-0.5" />
