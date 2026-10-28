@@ -24,6 +24,13 @@ export const BlogSection: React.FC = () => {
           </p>
         </div>
 
+        <div className="mt-7 flex flex-wrap items-center justify-center gap-3 text-sm font-semibold">
+          <a className="px-4 py-2 rounded-xl bg-white border border-[#E7EAF2] text-[#5265D8] hover:underline"
+            href="/guides/seo-aeo-geo-explained/">SEO vs AEO vs GEO: Full Guide</a>
+          <a className="px-4 py-2 rounded-xl bg-white border border-[#E7EAF2] text-[#5265D8] hover:underline"
+            href="/guides/technical-seo-checklist/">Technical SEO Launch Checklist</a>
+        </div>
+
         {/* Blog Post Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
           {initialBlogPosts.map((post) => (
