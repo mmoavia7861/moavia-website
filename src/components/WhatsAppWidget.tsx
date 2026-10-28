@@ -24,13 +24,16 @@ export const WhatsAppWidget: React.FC = () => {
           </button>
           <div className="flex items-center gap-2.5">
             <img
-              src={`${import.meta.env.BASE_URL}assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png`}
-              alt="Moavia Hassan"
+              src={`${import.meta.env.BASE_URL}assets/aistudio/moavia_seopro_logo_720x720_10966138.png`}
+              alt="Moavia SEO Pro"
+              width={36}
+              height={36}
+              decoding="async"
               className="w-9 h-9 rounded-full object-cover object-top border border-[#17A99A]"
             />
             <div>
               <h5 className="text-xs font-bold text-[#18243A]">Moavia Hassan</h5>
-              <p className="text-[10px] text-[#17A99A] font-semibold">Online • Replies immediately</p>
+              <p className="text-[10px] text-[#17A99A] font-semibold">Contact via WhatsApp</p>
             </div>
           </div>
           <p className="text-xs text-[#65738B] mt-2 leading-relaxed">
