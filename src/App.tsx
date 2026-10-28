@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
-import { ServicesSection } from './components/ServicesSection';
+const ServicesSection = lazy(() => import('./components/ServicesSection').then(m => ({ default: m.ServicesSection })));
 
 // Load only above-the-fold elements on initial visit. AI Studio and the
 // Firebase Admin Portal are especially expensive and must not block LCP.
@@ -84,9 +84,9 @@ export default function App() {
             onOpenAiStudio={() => handleNavigate('ai-tools')}
           />
         </div>
-        <div id="services">
+        <DeferredSection id="services" label="services" minHeight={500}>
           <ServicesSection onSelectServiceForConsultation={handleSelectServiceForConsultation} />
-        </div>
+        </DeferredSection>
         <DeferredSection id="ai-tools" label="AI Studio" minHeight={350}>
           <AiToolsSection />
         </DeferredSection>
