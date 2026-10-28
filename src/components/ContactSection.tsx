@@ -110,7 +110,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
           
           {/* Left Column: Contact Value Prop & Official Details */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#17A99A]/10 text-[#17A99A] text-xs font-bold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#17A99A]/10 text-[#08786F] text-xs font-bold uppercase tracking-wider">
               Start Your Growth Engine
             </div>
 
@@ -132,12 +132,12 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                 rel="noopener noreferrer"
                 className="p-4 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] hover:border-[#17A99A] flex items-center gap-4 transition-all group"
               >
-                <div className="p-3 rounded-xl bg-[#17A99A]/10 text-[#17A99A] group-hover:scale-110 transition-transform">
+                <div className="p-3 rounded-xl bg-[#17A99A]/10 text-[#08786F] group-hover:scale-110 transition-transform">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-[#18243A]">Direct WhatsApp</h4>
-                  <p className="text-sm font-extrabold text-[#17A99A]">+92 323 4313869</p>
+                  <h3 className="text-xs font-bold text-[#18243A]">Direct WhatsApp</h3>
+                  <p className="text-sm font-extrabold text-[#08786F]">+92 323 4313869</p>
                   <span className="text-[10px] text-[#65738B]">Response times vary; messages are reviewed directly</span>
                 </div>
               </a>
@@ -150,7 +150,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-[#18243A]">Executive Email</h4>
+                  <h3 className="text-xs font-bold text-[#18243A]">Executive Email</h3>
                   <p className="text-sm font-extrabold text-[#5265D8]">moaviahassan124@gmail.com</p>
                   <span className="text-[10px] text-[#65738B]">Secondary: moavia400@gmail.com</span>
                 </div>
@@ -161,7 +161,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-[#18243A]">Headquarters</h4>
+                  <h3 className="text-xs font-bold text-[#18243A]">Headquarters</h3>
                   <p className="text-xs font-extrabold text-[#18243A]">Islamabad, Federal Capital, Pakistan</p>
                   <span className="text-[10px] text-[#65738B]">Serving global clients across US, UK, UAE, & Pakistan</span>
                 </div>
@@ -170,7 +170,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
 
             {/* Privacy & Guarantee note */}
             <div className="p-4 rounded-2xl bg-white border border-[#E7EAF2] flex items-start gap-3">
-              <ShieldCheck className="w-5 h-5 text-[#17A99A] shrink-0 mt-0.5" />
+              <ShieldCheck className="w-5 h-5 text-[#08786F] shrink-0 mt-0.5" />
               <p className="text-xs text-[#65738B] leading-relaxed">
                 Zero spam policy. Your contact information is stored strictly within our secure Firestore
                 database and never shared with third parties.
@@ -185,7 +185,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
               
               {submitted ? (
                 <div className="py-12 text-center space-y-4 animate-in zoom-in-95 duration-300">
-                  <div className="w-16 h-16 rounded-full bg-[#17A99A]/15 text-[#17A99A] flex items-center justify-center mx-auto">
+                  <div className="w-16 h-16 rounded-full bg-[#17A99A]/15 text-[#08786F] flex items-center justify-center mx-auto">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <h3 className="text-2xl font-extrabold text-[#18243A]">
