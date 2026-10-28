@@ -492,6 +492,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Target Website URL</label>
                   <input
                     type="text"
+                    aria-label="Website URL for SEO audit"
                     value={auditUrl}
                     onChange={(e) => setAuditUrl(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] focus:bg-white focus:outline-[#5265D8]"
@@ -501,6 +502,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Website Category</label>
                   <input
                     type="text"
+                    aria-label="Website category"
                     value={auditType}
                     onChange={(e) => setAuditType(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] focus:bg-white focus:outline-[#5265D8]"
@@ -510,6 +512,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Core Keywords</label>
                   <input
                     type="text"
+                    aria-label="Primary SEO keywords"
                     value={auditKeywords}
                     onChange={(e) => setAuditKeywords(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] focus:bg-white focus:outline-[#5265D8]"
@@ -519,6 +522,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Primary Reported Defect / Drop</label>
                   <input
                     type="text"
+                    aria-label="Reported SEO issue"
                     value={auditIssue}
                     onChange={(e) => setAuditIssue(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] focus:bg-white focus:outline-[#5265D8]"
@@ -599,6 +603,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Target Keyword</label>
                   <input
                     type="text"
+                    aria-label="Target SEO keyword"
                     value={quickKw}
                     onChange={(e) => setQuickKw(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
@@ -608,6 +613,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Current Page Title</label>
                   <input
                     type="text"
+                    aria-label="Current page title"
                     value={quickTitle}
                     onChange={(e) => setQuickTitle(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
@@ -617,6 +623,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Current Meta Description</label>
                   <textarea
                     rows={2}
+                    aria-label="Current meta description"
                     value={quickDesc}
                     onChange={(e) => setQuickDesc(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
@@ -711,6 +718,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Target Commercial Search Query</label>
                   <input
                     type="text"
+                    aria-label="Search research query"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
@@ -720,6 +728,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Search Region</label>
                   <input
                     type="text"
+                    aria-label="Search target region"
                     value={searchRegion}
                     onChange={(e) => setSearchRegion(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
@@ -788,6 +797,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Business Name</label>
                   <input
                     type="text"
+                    aria-label="Business name for local SEO"
                     value={mapsBusiness}
                     onChange={(e) => setMapsBusiness(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
@@ -797,6 +807,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Business Category</label>
                   <input
                     type="text"
+                    aria-label="Business category for local SEO"
                     value={mapsCategory}
                     onChange={(e) => setMapsCategory(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
@@ -806,6 +817,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Target City / Zone</label>
                   <input
                     type="text"
+                    aria-label="Target city for local SEO"
                     value={mapsCity}
                     onChange={(e) => setMapsCity(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
@@ -889,7 +901,8 @@ export const AiToolsSection: React.FC = () => {
                 </label>
                 <textarea
                   rows={2}
-                  value={imagePrompt}
+                  aria-label="Marketing visual design prompt"
+                    value={imagePrompt}
                   onChange={(e) => setImagePrompt(e.target.value)}
                   className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
                 />
@@ -996,6 +1009,7 @@ export const AiToolsSection: React.FC = () => {
                   <label className="text-xs font-bold text-[#18243A] block mb-1">Video Title / Hook</label>
                   <input
                     type="text"
+                    aria-label="Video title"
                     value={videoTitle}
                     onChange={(e) => setVideoTitle(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
@@ -1007,6 +1021,7 @@ export const AiToolsSection: React.FC = () => {
                   </label>
                   <textarea
                     rows={3}
+                    aria-label="Video description or transcript"
                     value={videoDesc}
                     onChange={(e) => setVideoDesc(e.target.value)}
                     className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
@@ -1103,7 +1118,8 @@ export const AiToolsSection: React.FC = () => {
                 </label>
                 <input
                   type="text"
-                  value={animatePrompt}
+                  aria-label="Video animation creative prompt"
+                    value={animatePrompt}
                   onChange={(e) => setAnimatePrompt(e.target.value)}
                   className="w-full text-xs p-3 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD]"
                 />
@@ -1155,6 +1171,7 @@ export const AiToolsSection: React.FC = () => {
                 {/* Role & Model Pickers */}
                 <div className="flex flex-wrap items-center gap-2">
                   <select
+                    aria-label="AI chat role"
                     value={chatRole}
                     onChange={(e) => setChatRole(e.target.value as any)}
                     className="text-xs font-bold p-2 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] text-[#18243A]"
@@ -1166,6 +1183,7 @@ export const AiToolsSection: React.FC = () => {
                   </select>
 
                   <select
+                    aria-label="AI chat model"
                     value={chatModel}
                     onChange={(e) => setChatModel(e.target.value as any)}
                     className="text-xs font-bold p-2 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] text-[#5265D8]"
@@ -1223,7 +1241,8 @@ export const AiToolsSection: React.FC = () => {
                 <input
                   type="text"
                   placeholder="Ask a question about SEO strategy, pricing, or AI web development..."
-                  value={chatInput}
+                  aria-label="AI chat message"
+                    value={chatInput}
                   onChange={(e) => setChatInput(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSendChat()}
                   className="flex-1 text-xs p-3.5 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] focus:bg-white focus:outline-[#5265D8]"
