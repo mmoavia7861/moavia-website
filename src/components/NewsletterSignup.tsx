@@ -72,9 +72,9 @@ export const NewsletterSignup: React.FC = () => {
             <span className="w-1.5 h-1.5 rounded-full bg-[#17A99A] animate-pulse" />
           </div>
 
-          <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
             Stay ahead of Google algorithm updates & AI search shifts
-          </h3>
+          </h2>
 
           <p className="text-sm text-slate-300 leading-relaxed max-w-xl">
             Get our hand-curated weekly digest on Google Core updates, Core Web Vitals optimizations, technical ranking factors, and high-impact SEO case studies.
@@ -102,9 +102,9 @@ export const NewsletterSignup: React.FC = () => {
             <div className="p-6 rounded-2xl bg-white/[0.04] border border-[#17A99A]/40 text-left space-y-3 animate-fade-in">
               <div className="flex items-center gap-2.5 text-[#17A99A]">
                 <CheckCircle2 className="w-6 h-6 text-[#17A99A] shrink-0" />
-                <h4 className="font-bold text-sm text-white">
+                <h3 className="font-bold text-sm text-white">
                   {alreadySubscribed ? 'Already on our VIP list' : 'Welcome to the inner circle!'}
-                </h4>
+                </h3>
               </div>
 
               <p className="text-xs text-slate-300 leading-relaxed">
