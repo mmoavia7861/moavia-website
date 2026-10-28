@@ -1,17 +1,57 @@
-import React, { useState, useEffect } from 'react';
+import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { ServicesSection } from './components/ServicesSection';
-import { AiToolsSection } from './components/AiToolsSection';
-import { PortfolioSection } from './components/PortfolioSection';
-import { TestimonialsSection } from './components/TestimonialsSection';
-import { FounderSection } from './components/FounderSection';
-import { PricingSection } from './components/PricingSection';
-import { BlogSection } from './components/BlogSection';
-import { ContactSection } from './components/ContactSection';
-import { Footer } from './components/Footer';
-import { WhatsAppWidget } from './components/WhatsAppWidget';
-import { AdminPortal } from './components/admin/AdminPortal';
+
+// Load only above-the-fold elements on initial visit. AI Studio and the
+// Firebase Admin Portal are especially expensive and must not block LCP.
+const AiToolsSection = lazy(() => import('./components/AiToolsSection').then(m => ({ default: m.AiToolsSection })));
+const PortfolioSection = lazy(() => import('./components/PortfolioSection').then(m => ({ default: m.PortfolioSection })));
+const TestimonialsSection = lazy(() => import('./components/TestimonialsSection').then(m => ({ default: m.TestimonialsSection })));
+const FounderSection = lazy(() => import('./components/FounderSection').then(m => ({ default: m.FounderSection })));
+const PricingSection = lazy(() => import('./components/PricingSection').then(m => ({ default: m.PricingSection })));
+const BlogSection = lazy(() => import('./components/BlogSection').then(m => ({ default: m.BlogSection })));
+const ContactSection = lazy(() => import('./components/ContactSection').then(m => ({ default: m.ContactSection })));
+const Footer = lazy(() => import('./components/Footer').then(m => ({ default: m.Footer })));
+const WhatsAppWidget = lazy(() => import('./components/WhatsAppWidget').then(m => ({ default: m.WhatsAppWidget })));
+const AdminPortal = lazy(() => import('./components/admin/AdminPortal').then(m => ({ default: m.AdminPortal })));
+
+type DeferredSectionProps = {
+  id: string;
+  label: string;
+  children: React.ReactNode;
+  minHeight?: number;
+  eager?: boolean;
+};
+
+function DeferredSection({ id, label, children, minHeight = 220, eager = false }: DeferredSectionProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(eager);
+  useEffect(() => {
+    if (visible) return;
+    if (typeof IntersectionObserver === 'undefined') {
+      setVisible(true);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setVisible(true);
+        observer.disconnect();
+      }
+    }, { rootMargin: '650px 0px' });
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [visible]);
+  return (
+    <div id={id} ref={ref} style={!visible ? { minHeight } : undefined}>
+      {visible ? (
+        <Suspense fallback={<div className="py-16 text-center text-sm text-[#65738B]" role="status">Loading {label}…</div>}>
+          {children}
+        </Suspense>
+      ) : null}
+    </div>
+  );
+}
 
 export default function App() {
   const [isAdminOpen, setIsAdminOpen] = useState(false);
@@ -19,11 +59,8 @@ export default function App() {
 
   const handleNavigate = (sectionId: string) => {
     const el = document.getElementById(sectionId);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    } else {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    else window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleSelectServiceForConsultation = (serviceTitle: string) => {
@@ -38,16 +75,8 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#F8F9FD] text-[#18243A]">
-      {/* Top Navbar */}
-      <Navbar
-        onNavigate={handleNavigate}
-        onOpenAdmin={() => setIsAdminOpen(true)}
-        isAdminOpen={isAdminOpen}
-      />
-
-      {/* Main Content Sections */}
+      <Navbar onNavigate={handleNavigate} onOpenAdmin={() => setIsAdminOpen(true)} isAdminOpen={isAdminOpen} />
       <main className="flex-1">
-        {/* Section 1: Hero */}
         <div id="hero">
           <Hero
             onConsultationClick={() => handleNavigate('contact')}
@@ -55,65 +84,42 @@ export default function App() {
             onOpenAiStudio={() => handleNavigate('ai-tools')}
           />
         </div>
-
-        {/* Section 2: Core Agency Services Bento Grid */}
         <div id="services">
-          <ServicesSection
-            onSelectServiceForConsultation={handleSelectServiceForConsultation}
-          />
+          <ServicesSection onSelectServiceForConsultation={handleSelectServiceForConsultation} />
         </div>
-
-        {/* Section 3: Interactive Gemini AI Power Suite */}
-        <div id="ai-tools">
+        <DeferredSection id="ai-tools" label="AI Studio" minHeight={350}>
           <AiToolsSection />
-        </div>
-
-        {/* Section 4: Verified Portfolio & Demonstration Projects */}
-        <div id="portfolio">
+        </DeferredSection>
+        <DeferredSection id="portfolio" label="portfolio">
           <PortfolioSection />
-        </div>
-
-        {/* Section 4b: Client Feedback & Success Stories Carousel */}
-        <div id="testimonials">
-          <TestimonialsSection
-            onConsultationClick={() => handleNavigate('contact')}
-          />
-        </div>
-
-        {/* Section 5: Meet The Founder (Moavia Hassan) */}
-        <div id="founder">
-          <FounderSection
-            onDirectConsultation={() => handleNavigate('contact')}
-          />
-        </div>
-
-        {/* Section 6: Transparent Pricing Packages */}
-        <div id="pricing">
+        </DeferredSection>
+        <DeferredSection id="testimonials" label="our process">
+          <TestimonialsSection onConsultationClick={() => handleNavigate('contact')} />
+        </DeferredSection>
+        <DeferredSection id="founder" label="founder information">
+          <FounderSection onDirectConsultation={() => handleNavigate('contact')} />
+        </DeferredSection>
+        <DeferredSection id="pricing" label="pricing">
           <PricingSection onSelectPlan={handleSelectPlan} />
-        </div>
-
-        {/* Section 7: Technical SEO & Web Dev Blog */}
-        <div id="blog">
+        </DeferredSection>
+        <DeferredSection id="blog" label="SEO guides">
           <BlogSection />
-        </div>
-
-        {/* Section 8: Consultation & Lead Generation Form */}
-        <div id="contact">
+        </DeferredSection>
+        <DeferredSection id="contact" label="contact form">
           <ContactSection initialService={prefilledService} />
-        </div>
+        </DeferredSection>
       </main>
-
-      {/* Agency Footer */}
-      <Footer
-        onNavigate={handleNavigate}
-        onOpenAdmin={() => setIsAdminOpen(true)}
-      />
-
-      {/* Floating WhatsApp Quick Action */}
-      <WhatsAppWidget />
-
-      {/* Administrative Management Portal Modal */}
-      {isAdminOpen && <AdminPortal onClose={() => setIsAdminOpen(false)} />}
+      <DeferredSection id="site-footer" label="footer" minHeight={160}>
+        <Footer onNavigate={handleNavigate} onOpenAdmin={() => setIsAdminOpen(true)} />
+      </DeferredSection>
+      <DeferredSection id="whatsapp-support" label="contact widget" minHeight={0} eager>
+        <WhatsAppWidget />
+      </DeferredSection>
+      {isAdminOpen && (
+        <Suspense fallback={<div role="status" className="fixed inset-0 z-50 flex items-center justify-center bg-white/95 text-[#18243A]">Loading secure admin portal…</div>}>
+          <AdminPortal onClose={() => setIsAdminOpen(false)} />
+        </Suspense>
+      )}
     </div>
   );
 }
