@@ -108,7 +108,7 @@ export const PricingSection: React.FC<PricingSectionProps> = ({ onSelectPlan }) 
                   </span>
                   {pkg.features.map((feat, i) => (
                     <div key={i} className="flex items-start gap-2.5 text-xs text-[#18243A]">
-                      <CheckCircle2 className="w-4 h-4 text-[#17A99A] shrink-0 mt-0.5" />
+                      <CheckCircle2 className="w-4 h-4 text-[#08786F] shrink-0 mt-0.5" />
                       <span>{feat}</span>
                     </div>
                   ))}
