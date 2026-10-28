@@ -33,7 +33,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
   return (
     <header className="sticky top-0 z-50 w-full glass-panel border-b border-[#E7EAF2] transition-all">
       {/* Top Announcement Bar */}
-      <div className="bg-gradient-to-r from-[#5265D8] via-[#8B63D8] to-[#17A99A] text-white text-xs font-medium py-1.5 px-4 text-center flex items-center justify-center gap-2">
+      <div className="bg-gradient-to-r from-[#5265D8] via-[#8B63D8] to-[#17A99A] text-white text-xs font-medium py-1.5 px-4 text-center flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
         <span className="inline-block w-2 h-2 rounded-full bg-white animate-pulse" />
         <span>Now booking Q4/Q1 Strategic Technical SEO Audits & AI-Powered Next-Gen Websites</span>
         <button
@@ -44,11 +44,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
         </button>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-16 sm:min-h-20 py-2 flex items-center justify-between gap-2">
         {/* Brand Logo */}
-        <div
+        <button type="button"
           onClick={() => handleNavClick('hero')}
-          className="flex items-center gap-3 cursor-pointer group"
+          className="flex items-center gap-3 cursor-pointer group text-left"
+          aria-label="Moavia SEO Pro — back to homepage"
         >
           <img
             src={`${import.meta.env.BASE_URL}assets/aistudio/moavia_seopro_logo_720x720_10966138.png`}
@@ -69,10 +70,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
               SEO & Digital Agency
             </p>
           </div>
-        </div>
+        </button>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+        <nav className="hidden xl:flex items-center gap-1" aria-label="Primary">
           <button
             onClick={() => handleNavClick('hero')}
             className="px-3 py-2 text-sm font-medium text-[#18243A] hover:text-[#5265D8] rounded-lg hover:bg-slate-50 transition-colors"
@@ -85,6 +86,9 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
             <button
               onClick={() => setServicesDropdownOpen(!servicesDropdownOpen)}
               onMouseEnter={() => setServicesDropdownOpen(true)}
+              aria-expanded={servicesDropdownOpen}
+              aria-controls="service-menu"
+              aria-haspopup="true"
               className="px-3 py-2 text-sm font-medium text-[#18243A] hover:text-[#5265D8] rounded-lg hover:bg-slate-50 transition-colors flex items-center gap-1"
             >
               Services
@@ -93,73 +97,27 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
 
             {servicesDropdownOpen && (
               <div
+                id="service-menu"
                 onMouseLeave={() => setServicesDropdownOpen(false)}
-                className="absolute top-full left-0 w-80 bg-white rounded-2xl shadow-2xl border border-[#E7EAF2] p-3 mt-1 grid gap-2 animate-in fade-in slide-in-from-top-2 duration-200"
+                className="absolute top-full left-0 w-80 max-w-[90vw] bg-white rounded-2xl shadow-2xl border border-[#E7EAF2] p-3 mt-1 grid gap-1"
+                role="group"
+                aria-label="Browse services"
               >
-                <div
-                  onClick={() => handleNavClick('services')}
-                  className="p-2.5 rounded-xl hover:bg-slate-50 cursor-pointer flex items-start gap-3 transition-colors"
-                >
-                  <div className="p-2 rounded-lg bg-[#17A99A]/10 text-[#17A99A] mt-0.5">
-                    <Search className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-[#18243A]">Search Engine Optimization</h4>
-                    <p className="text-xs text-[#65738B]">Technical, on-page, local & link authority</p>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => handleNavClick('services')}
-                  className="p-2.5 rounded-xl hover:bg-slate-50 cursor-pointer flex items-start gap-3 transition-colors"
-                >
-                  <div className="p-2 rounded-lg bg-[#8B63D8]/10 text-[#8B63D8] mt-0.5">
-                    <Sparkles className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-[#18243A]">AI Website Development</h4>
-                    <p className="text-xs text-[#65738B]">Next-gen React & AI-accelerated web systems</p>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => handleNavClick('services')}
-                  className="p-2.5 rounded-xl hover:bg-slate-50 cursor-pointer flex items-start gap-3 transition-colors"
-                >
-                  <div className="p-2 rounded-lg bg-[#5265D8]/10 text-[#5265D8] mt-0.5">
-                    <Code2 className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-[#18243A]">WordPress & Web Dev</h4>
-                    <p className="text-xs text-[#65738B]">Elementor, custom themes & speed optimization</p>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => handleNavClick('services')}
-                  className="p-2.5 rounded-xl hover:bg-slate-50 cursor-pointer flex items-start gap-3 transition-colors"
-                >
-                  <div className="p-2 rounded-lg bg-[#F17F72]/10 text-[#F17F72] mt-0.5">
-                    <Share2 className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-[#18243A]">Meta Ads Management</h4>
-                    <p className="text-xs text-[#65738B]">Facebook & Instagram high-ROAS funnels</p>
-                  </div>
-                </div>
-
-                <div
-                  onClick={() => handleNavClick('services')}
-                  className="p-2.5 rounded-xl hover:bg-slate-50 cursor-pointer flex items-start gap-3 transition-colors"
-                >
-                  <div className="p-2 rounded-lg bg-[#E8B451]/10 text-[#E8B451] mt-0.5">
-                    <Target className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-bold text-[#18243A]">Google Ads Management</h4>
-                    <p className="text-xs text-[#65738B]">Search, display & Performance Max campaigns</p>
-                  </div>
-                </div>
+                {[
+                  ['/services/seo/', 'Search Engine Optimization'],
+                  ['/services/local-seo-islamabad/', 'Local SEO Islamabad'],
+                  ['/services/aeo-geo-optimization/', 'AEO & GEO Optimization'],
+                  ['/services/ai-website-development/', 'AI Website Development'],
+                  ['/services/wordpress-development/', 'WordPress & Web Development'],
+                  ['/services/meta-ads/', 'Meta Ads Management'],
+                  ['/services/google-ads/', 'Google Ads Management'],
+                ].map(([href, title]) => (
+                  <a key={href} href={href}
+                    className="block px-3 py-2.5 rounded-xl text-sm font-semibold text-[#18243A] hover:text-[#5265D8] hover:bg-[#F8F9FD] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]"
+                    onClick={() => setServicesDropdownOpen(false)}>
+                    {title}
+                  </a>
+                ))}
               </div>
             )}
           </div>
@@ -243,8 +201,10 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-[#18243A] hover:bg-slate-100 rounded-lg transition-colors"
+            className="xl:hidden p-2 text-[#18243A] hover:bg-slate-100 rounded-lg transition-colors"
             aria-label="Toggle Navigation Menu"
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -253,7 +213,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="lg:hidden bg-white border-b border-[#E7EAF2] px-4 pt-2 pb-6 space-y-2 animate-in fade-in slide-in-from-top-4 duration-200">
+        <div id="mobile-navigation" className="xl:hidden bg-white border-b border-[#E7EAF2] px-4 pt-2 pb-6 space-y-2 animate-in fade-in slide-in-from-top-4 duration-200">
           <button
             onClick={() => handleNavClick('hero')}
             className="w-full text-left px-3 py-2 text-sm font-semibold text-[#18243A] rounded-lg hover:bg-slate-50"
