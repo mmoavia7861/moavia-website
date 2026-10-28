@@ -38,7 +38,7 @@ export const Hero: React.FC<HeroProps> = ({
   return (
     <section className="relative overflow-hidden pt-8 sm:pt-12 pb-12 sm:pb-24 aurora-bg">
       {/* Decorative Aurora Ambient Orbs */}
-      <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#5265D8]/15 via-[#8B63D8]/15 to-[#17A99A]/15 blur-3xl -z-10 rounded-full pointer-events-none" />
+      <div className="hidden md:block absolute top-10 left-1/2 -translate-x-1/2 w-[700px] h-[350px] bg-gradient-to-r from-[#5265D8]/15 via-[#8B63D8]/15 to-[#17A99A]/15 blur-3xl -z-10 rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -138,6 +138,7 @@ export const Hero: React.FC<HeroProps> = ({
                 width={52}
                 height={52}
                 decoding="async"
+                loading="lazy"
                 className="w-13 h-13 rounded-full object-cover object-top border-2 border-[#5265D8] shadow-md"
               />
               <div>
