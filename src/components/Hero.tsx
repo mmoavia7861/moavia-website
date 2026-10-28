@@ -78,7 +78,7 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Core Capability Checklist */}
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
               <div className="flex items-center gap-2 text-xs font-semibold text-[#18243A]">
-                <CheckCircle2 className="w-4 h-4 text-[#17A99A] shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#08786F] shrink-0" />
                 <span>Technical & Local SEO</span>
               </div>
               <div className="flex items-center gap-2 text-xs font-semibold text-[#18243A]">
@@ -90,15 +90,15 @@ export const Hero: React.FC<HeroProps> = ({
                 <span>Custom WordPress & React</span>
               </div>
               <div className="flex items-center gap-2 text-xs font-semibold text-[#18243A]">
-                <CheckCircle2 className="w-4 h-4 text-[#F17F72] shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#A83B31] shrink-0" />
                 <span>Meta Ads Campaign Strategy</span>
               </div>
               <div className="flex items-center gap-2 text-xs font-semibold text-[#18243A]">
-                <CheckCircle2 className="w-4 h-4 text-[#E8B451] shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#7F590F] shrink-0" />
                 <span>Google Search & PMax</span>
               </div>
               <div className="flex items-center gap-2 text-xs font-semibold text-[#18243A]">
-                <CheckCircle2 className="w-4 h-4 text-[#17A99A] shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-[#08786F] shrink-0" />
                 <span>Core Web Vitals Diagnostics</span>
               </div>
             </div>
@@ -142,12 +142,12 @@ export const Hero: React.FC<HeroProps> = ({
                 className="w-13 h-13 rounded-full object-cover object-top border-2 border-[#5265D8] shadow-md"
               />
               <div>
-                <h4 className="text-sm font-bold text-[#18243A] flex items-center gap-1.5">
+                <h3 className="text-sm font-bold text-[#18243A] flex items-center gap-1.5">
                   Moavia Hassan
-                  <span className="text-[10px] bg-[#17A99A]/15 text-[#17A99A] font-extrabold px-1.5 py-0.5 rounded">
+                  <span className="text-[10px] bg-[#17A99A]/15 text-[#08786F] font-extrabold px-1.5 py-0.5 rounded">
                     FOUNDER & LEAD STRATEGIST
                   </span>
-                </h4>
+                </h3>
                 <p className="text-xs text-[#65738B]">
                   Direct founder involvement on every client campaign, technical audit, and code delivery.
                 </p>
@@ -170,7 +170,7 @@ export const Hero: React.FC<HeroProps> = ({
                     <p className="text-xs text-[#65738B]">Project your organic search ROI</p>
                   </div>
                 </div>
-                <span className="text-xs font-bold text-[#17A99A] bg-[#17A99A]/10 px-2.5 py-1 rounded-full">
+                <span className="text-xs font-bold text-[#08786F] bg-[#17A99A]/10 px-2.5 py-1 rounded-full">
                   ILLUSTRATIVE MODEL
                 </span>
               </div>
@@ -221,7 +221,7 @@ export const Hero: React.FC<HeroProps> = ({
                   <p className="text-[11px] font-semibold text-[#65738B] uppercase">Projected Inquiries</p>
                   <div className="text-2xl font-extrabold text-[#18243A] mt-1">
                     {projectedMonthlyInquiries}
-                    <span className="text-xs text-[#17A99A] font-bold ml-1">
+                    <span className="text-xs text-[#08786F] font-bold ml-1">
                       (+{Math.round((projectedMonthlyInquiries / (currentMonthlyInquiries || 1) - 1) * 100)}%)
                     </span>
                   </div>
@@ -229,7 +229,7 @@ export const Hero: React.FC<HeroProps> = ({
                 </div>
 
                 <div className="p-4 rounded-2xl bg-gradient-to-br from-[#17A99A]/10 to-[#5265D8]/10 border border-[#17A99A]/30">
-                  <p className="text-[11px] font-semibold text-[#17A99A] uppercase">Estimated Gain</p>
+                  <p className="text-[11px] font-semibold text-[#08786F] uppercase">Estimated Gain</p>
                   <div className="text-xl sm:text-2xl font-extrabold text-[#0B756A] mt-1 break-words">
                     ${projectedRevenueGain.toLocaleString()}
                   </div>
@@ -241,7 +241,7 @@ export const Hero: React.FC<HeroProps> = ({
               <div className="mt-6 space-y-3 pt-5 border-t border-[#E7EAF2]">
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-[#65738B] font-medium">Core Web Vitals Guarantee:</span>
-                  <span className="font-bold text-[#17A99A]">Measured on real devices</span>
+                  <span className="font-bold text-[#08786F]">Measured on real devices</span>
                 </div>
                 <div className="flex items-center justify-between text-xs">
                   <span className="text-[#65738B] font-medium">Search Intent Accuracy:</span>
@@ -259,7 +259,7 @@ export const Hero: React.FC<HeroProps> = ({
                 className="w-full mt-6 py-3 rounded-xl bg-[#18243A] hover:bg-[#253655] text-white text-xs font-bold transition-colors flex items-center justify-center gap-2"
               >
                 <span>Request Custom Growth Blueprint</span>
-                <ArrowRight className="w-4 h-4 text-[#17A99A]" />
+                <ArrowRight className="w-4 h-4 text-[#08786F]" />
               </button>
 
             </div>
