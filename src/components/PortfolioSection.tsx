@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { initialPortfolio } from '../data/mockData';
 import { PortfolioItem } from '../types';
-import { ExternalLink, Tag, ShieldCheck, Layers, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export const PortfolioSection: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
@@ -20,14 +20,13 @@ export const PortfolioSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#17A99A]/10 text-[#17A99A] text-xs font-bold uppercase tracking-wider">
-            Verified Architectural Demonstrations
+            Illustrative Project Concepts
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#18243A] tracking-tight">
-            Featured Agency <span className="aurora-gradient-text">Portfolio</span>
+            Explore <span className="aurora-gradient-text">Service Concepts</span>
           </h2>
           <p className="text-base sm:text-lg text-[#65738B]">
-            Explore our real and architectural demonstration case studies showcasing technical SEO execution,
-            high-converting AI websites, custom WordPress builds, and performance advertising funnels.
+            These hypothetical project scenarios explain the kinds of workflows our services cover. They are not real client engagements, verified case studies, or evidence of traffic, sales or ad results.
           </p>
         </div>
 
@@ -85,11 +84,11 @@ export const PortfolioSection: React.FC = () => {
                   )}
 
                   {/* Bottom Image Overlay Metric */}
-                  <div className="absolute bottom-3 left-4 right-4">
-                    <p className="text-xs font-bold text-white tracking-wide truncate">
-                      {item.metrics}
-                    </p>
-                  </div>
+                  {!item.isDemo && item.metrics && (
+                    <div className="absolute bottom-3 left-4 right-4">
+                      <p className="text-xs font-bold text-white tracking-wide truncate">{item.metrics}</p>
+                    </div>
+                  )}
                 </div>
 
                 {/* Content */}
@@ -118,7 +117,7 @@ export const PortfolioSection: React.FC = () => {
               {/* Bottom Actions */}
               <div className="p-6 pt-0 border-t border-[#E7EAF2] mt-4 flex items-center justify-between">
                 <span className="text-[11px] font-medium text-[#65738B]">
-                  Client: <strong className="text-[#18243A]">{item.clientName}</strong>
+                  {item.isDemo ? "Scenario:" : "Client:"} <strong className="text-[#18243A]">{item.clientName}</strong>
                 </span>
 
                 {item.liveUrl && /^https:\/\//.test(item.liveUrl) && !item.liveUrl.includes('example.com') ? (

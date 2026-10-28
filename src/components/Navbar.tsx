@@ -31,7 +31,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full glass-panel border-b border-[#E7EAF2] transition-all">
+    <header className="sticky top-0 z-50 w-full bg-white border-b border-[#E7EAF2] shadow-sm">
       {/* Top Announcement Bar */}
       <div className="bg-gradient-to-r from-[#5265D8] via-[#8B63D8] to-[#17A99A] text-white text-xs font-medium py-1.5 px-4 text-center flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
         <span className="inline-block w-2 h-2 rounded-full bg-white animate-pulse" />
