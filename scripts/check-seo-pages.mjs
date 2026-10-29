@@ -36,7 +36,7 @@ check(existsSync(join(dist, 'favicon.png')), 'favicon missing');
 check(existsSync(join(dist, 'site-logo.png')), 'site logo missing');
 check(existsSync(join(dist, 'apple-touch-icon.png')), 'Apple touch icon missing');
 check(existsSync(join(dist, 'site.webmanifest')), 'site web manifest missing');
-check(root.includes('href="/favicon.png"'), 'homepage favicon link missing');
+check(/href="[^"]*\/favicon\.png"/.test(root), 'homepage favicon link missing');
 check(sitemap.includes('<loc>' + base + '/</loc>'), 'homepage missing from sitemap');
 for (const route of routes) {
   const htmlPath = join(route.replace(/^\/|\/$/g, ''), 'index.html');
