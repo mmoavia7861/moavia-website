@@ -32,6 +32,11 @@ const root = read('index.html');
 check(robots.includes('Sitemap: ' + base + '/sitemap.xml'), 'sitemap missing in robots');
 check(root.includes('<link rel="canonical" href="' + base + '/"'), 'homepage canonical missing');
 check(root.includes('href="/services/seo/"'), 'homepage lacks crawlable service link');
+check(existsSync(join(dist, 'favicon.png')), 'favicon missing');
+check(existsSync(join(dist, 'site-logo.png')), 'site logo missing');
+check(existsSync(join(dist, 'apple-touch-icon.png')), 'Apple touch icon missing');
+check(existsSync(join(dist, 'site.webmanifest')), 'site web manifest missing');
+check(root.includes('href="/favicon.png"'), 'homepage favicon link missing');
 check(sitemap.includes('<loc>' + base + '/</loc>'), 'homepage missing from sitemap');
 for (const route of routes) {
   const htmlPath = join(route.replace(/^\/|\/$/g, ''), 'index.html');
@@ -41,6 +46,7 @@ for (const route of routes) {
   check(html.includes('<h1>') && html.includes('</h1>'), 'visible title missing: ' + route);
   check(html.includes('<meta name="description"'), 'description missing: ' + route);
   check(html.includes('application/ld+json'), 'JSON-LD missing: ' + route);
+  check(html.includes('href="/favicon.png"'), 'static page favicon link missing: ' + route);
   if (route.startsWith('/services/') || route.startsWith('/guides/')) {
     check(html.includes('Frequently asked questions'), 'visible answer section missing: ' + route);
   }

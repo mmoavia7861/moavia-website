@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 const publicDir = join(process.cwd(), 'public');
 const site = 'https://moaviaseo.com';
-const logo = site + '/assets/aistudio/moavia_seopro_logo_720x720_10966138.png';
+const logo = site + '/site-logo.png';
 const company = { '@type': 'Organization', '@id': site + '/#organization', name: 'Moavia SEO Pro',
   url: site + '/', logo, areaServed: [{ '@type': 'City', name: 'Islamabad' }, { '@type': 'Country', name: 'Pakistan' }] };
 const clean = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -287,7 +287,9 @@ function renderPage(page) {
     + '<meta property="og:url" content="' + clean(url) + '">\n'
     + '<meta property="og:image" content="' + clean(logo) + '">\n'
     + '<meta name="twitter:card" content="summary">\n'
-    + '<link rel="icon" type="image/png" href="/assets/aistudio/moavia_seopro_logo_720x720_10966138.png">\n'
+    + '<link rel="icon" type="image/png" href="/favicon.png">\n'
+    + '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n'
+    + '<link rel="manifest" href="/site.webmanifest">\n'
     + '<link rel="stylesheet" href="/seo/pages.css">\n'
     + '<script type="application/ld+json">' + jsonLd(schema) + '</script>\n'
     + '</head><body>\n'

@@ -32,7 +32,7 @@ const html = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta n
   + '<title>' + escape(title) + '</title><meta name="description" content="' + escape(description) + '">'
   + '<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="' + url + '">'
   + '<meta property="og:title" content="' + escape(title) + '"><meta property="og:description" content="' + escape(description) + '">'
-  + '<meta property="og:url" content="' + url + '"><link rel="stylesheet" href="/seo/pages.css">'
+  + '<meta property="og:url" content="' + url + '"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="stylesheet" href="/seo/pages.css">'
   + '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, '\\u003c') + '</script>'
   + '</head><body><header><div class="wrap"><a class="brand" href="/">Moavia SEO Pro</a>'
   + '<nav aria-label="Main navigation"><a href="/">Home</a><a href="/#portfolio">Websites</a><a href="/blog/">Blog</a><a href="/about/">About</a><a href="/#contact">Contact</a></nav></div></header>'

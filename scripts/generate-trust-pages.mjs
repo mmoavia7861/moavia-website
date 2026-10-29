@@ -110,7 +110,7 @@ function layout(info,inner){
   +'<meta property="og:site_name" content="Moavia SEO Pro"><meta property="og:type" content="'+(article?'article':'website')+'">'
   +'<meta property="og:title" content="'+esc(info.name)+'"><meta property="og:description" content="'+esc(info.desc)+'">'
   +'<meta property="og:url" content="'+esc(url)+'"><link rel="stylesheet" href="/seo/pages.css">'
-  +'<link rel="stylesheet" href="/blog/editorial.css"><script type="application/ld+json">'+json+'</script></head><body>'
+  +'<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="stylesheet" href="/blog/editorial.css"><script type="application/ld+json">'+json+'</script></head><body>'
   +'<header><div class="wrap"><a class="brand" href="/"><img src="/assets/aistudio/moavia_seopro_logo_720x720_10966138.png" alt="" width="42" height="42">Moavia SEO Pro</a>'+commonLinks+'</div></header>'
   +'<main><div class="wrap subnav">'+a('/','Home')+' / '+(article?a('/blog/','Blog')+' / ':'')+esc(info.name)+'</div>'
   +'<div class="hero"><div class="wrap"><span class="pill">'+esc(info.topic||'Moavia SEO Pro')+'</span><h1>'+esc(info.name)+'</h1>'
