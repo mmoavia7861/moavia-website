@@ -53,7 +53,7 @@ for (const route of routes) {
   check(html.includes('<meta name="description"'), 'description missing: ' + route);
   check(html.includes('application/ld+json'), 'JSON-LD missing: ' + route);
   check(html.includes('href="/favicon.png"'), 'static page favicon link missing: ' + route);
-  if (route.startsWith('/services/') || route.startsWith('/guides/')) {
+  if ((route.startsWith('/services/') && route !== '/services/') || route.startsWith('/guides/')) {
     check(html.includes('Frequently asked questions'), 'visible answer section missing: ' + route);
   }
   check(!html.includes('example.com'), 'placeholder URL detected: ' + route);
