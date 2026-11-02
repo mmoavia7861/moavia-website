@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { SeoAuthoritySection } from './components/SeoAuthoritySection';
 const ServicesSection = lazy(() => import('./components/ServicesSection').then(m => ({ default: m.ServicesSection })));
 
 // Defer below-the-fold sections until they approach the viewport. AI Studio and the
@@ -87,6 +88,7 @@ export default function App() {
         <DeferredSection id="services" label="services" minHeight={500}>
           <ServicesSection onSelectServiceForConsultation={handleSelectServiceForConsultation} />
         </DeferredSection>
+        <SeoAuthoritySection />
         <DeferredSection id="ai-tools" label="AI Studio" minHeight={350}>
           <AiToolsSection />
         </DeferredSection>

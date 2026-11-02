@@ -148,6 +148,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenAdmin }) => {
           <div className="lg:col-span-2 space-y-4">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-300">Service Pages</h3>
             <ul className="space-y-2 text-xs text-slate-400">
+              <li><a href="/services/" className="hover:text-white">All SEO & Marketing Services</a></li>
               <li><a href="/services/seo/" className="hover:text-white">SEO Services</a></li>
               <li><a href="/services/local-seo-islamabad/" className="hover:text-white">Local SEO Islamabad</a></li>
               <li><a href="/services/aeo-geo-optimization/" className="hover:text-white">AEO &amp; GEO</a></li>
@@ -213,6 +214,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenAdmin }) => {
           <p>© {new Date().getFullYear()} Moavia SEO Pro. All rights reserved. Founded by Moavia Hassan.</p>
           <nav aria-label="Legal and company information" className="flex items-center flex-wrap justify-center gap-4">
             <a href="/projects/" className="hover:text-white hover:underline">Website Projects</a>
+            <a href="/contact/" className="hover:text-white hover:underline">Contact</a>
             <a href="/about/" className="hover:text-white hover:underline">About Us</a>
             <a href="/blog/" className="hover:text-white hover:underline">Blog</a>
             <a href="/privacy-policy/" className="hover:text-white hover:underline">Privacy Policy</a>

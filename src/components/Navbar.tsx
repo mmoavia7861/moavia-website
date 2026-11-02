@@ -104,6 +104,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onNavigate, onOpenAdmin, isAdmin
                 aria-label="Browse services"
               >
                 {[
+                  ['/services/', 'All Services Overview'],
                   ['/services/seo/', 'Search Engine Optimization'],
                   ['/services/local-seo-islamabad/', 'Local SEO Islamabad'],
                   ['/services/aeo-geo-optimization/', 'AEO & GEO Optimization'],

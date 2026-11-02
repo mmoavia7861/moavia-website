@@ -294,12 +294,12 @@ function renderPage(page) {
     + '<script type="application/ld+json">' + jsonLd(schema) + '</script>\n'
     + '</head><body>\n'
     + '<header><div class="wrap"><a class="brand" href="/"><img src="/assets/aistudio/moavia_seopro_logo_720x720_10966138.png" alt="" width="42" height="42">Moavia SEO Pro</a>'
-    + '<nav aria-label="Main navigation"><a href="/">Home</a><a href="/#services">Services</a><a href="/guides/seo-aeo-geo-explained/">SEO Guides</a><a href="/#contact">Contact</a></nav></div></header>'
-    + '<main><div class="wrap subnav"><a href="/">Home</a> / <a href="' + (isGuide ? '/#blog' : '/#services') + '">'
+    + '<nav aria-label="Main navigation"><a href="/">Home</a><a href="/services/">Services</a><a href="/guides/seo-aeo-geo-explained/">SEO Guides</a><a href="/contact/">Contact</a></nav></div></header>'
+    + '<main><div class="wrap subnav"><a href="/">Home</a> / <a href="' + (isGuide ? '/blog/' : '/services/') + '">'
     + (isGuide ? 'Guides' : 'Services') + '</a> / ' + clean(page.name) + '</div>'
     + '<div class="hero"><div class="wrap"><span class="pill">' + (isGuide ? 'Practical SEO Guide' : 'Moavia SEO Pro Service')
     + '</span><h1>' + clean(page.name) + '</h1><p>' + clean(page.lead) + '</p>'
-    + '<a class="action" href="/#contact">' + (isGuide ? 'Ask about your website' : 'Discuss your project') + '</a></div></div>'
+    + '<a class="action" href="/contact/">' + (isGuide ? 'Ask about your website' : 'Discuss your project') + '</a></div></div>'
     + '<div class="wrap"><section aria-labelledby="audience"><h2 id="audience">Who this is for</h2><p>' + clean(page.audience) + '</p></section>'
     + '<section aria-labelledby="approach"><h2 id="approach">' + (isGuide ? 'What you need to know' : 'How we approach the work')
     + '</h2><div class="cards">' + steps + '</div></section>'
@@ -309,10 +309,10 @@ function renderPage(page) {
     + (sources ? '<section aria-labelledby="sources"><h2 id="sources">Further reading</h2><ul class="sources">' + sources + '</ul></section>' : '')
     + '<section aria-labelledby="more"><h2 id="more">Explore related topics</h2><ul class="clean">' + related + '</ul></section>'
     + '<section class="card"><h2>Need a plan for your actual website?</h2><p>Share the URL, target audience and your main business goal. We can discuss the scope before making any promises about outcomes.</p>'
-    + '<a class="action" href="/#contact">Contact Moavia SEO Pro</a></section>'
+    + '<a class="action" href="/contact/">Contact Moavia SEO Pro</a></section>'
     + '<p class="note">Based in Islamabad, Pakistan. Services are discussed case by case; search rankings, AI citations and advertising returns are not guaranteed.</p>'
     + '</div></main><footer><div class="wrap"><div><strong>Moavia SEO Pro</strong><br>Islamabad, Pakistan</div>'
-    + '<div><a href="/">Homepage</a> · <a href="/services/seo/">SEO Services</a> · <a href="/blog/">Blog</a> · <a href="/about/">About</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></div>'
+    + '<div><a href="/">Homepage</a> · <a href="/services/">All Services</a> · <a href="/services/seo/">SEO Services</a> · <a href="/blog/">Blog</a> · <a href="/about/">About</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></div>'
     + '<div>© 2026 Moavia SEO Pro</div></div></footer></body></html>\n';
 }
 

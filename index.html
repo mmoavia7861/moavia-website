@@ -19,25 +19,105 @@
     <meta property="og:image:height" content="720" />
     <meta property="og:image:alt" content="Moavia SEO Pro logo" />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Moavia SEO Pro" />
     <meta name="twitter:card" content="summary_large_image" />
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "@id": "https://moaviaseo.com/#organization",
-        "name": "Moavia SEO Pro",
-        "url": "https://moaviaseo.com/",
-        "logo": "https://moaviaseo.com/site-logo.png",
-        "founder": { "@type": "Person", "name": "Moavia Hassan" },
-        "areaServed": [{ "@type": "City", "name": "Islamabad" }, { "@type": "Country", "name": "Pakistan" }],
-        "contactPoint": {
-          "@type": "ContactPoint",
-          "contactType": "sales",
-          "email": "moaviahassan124@gmail.com",
-          "telephone": "+92-323-4313869",
-          "availableLanguage": ["English", "Urdu"]
+    {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://moaviaseo.com/#organization",
+      "name": "Moavia SEO Pro",
+      "url": "https://moaviaseo.com/",
+      "logo": "https://moaviaseo.com/site-logo.png",
+      "founder": {
+        "@type": "Person",
+        "name": "Moavia Hassan"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Islamabad"
+        },
+        {
+          "@type": "Country",
+          "name": "Pakistan"
         }
+      ],
+      "sameAs": [
+        "https://github.com/mmoavia7861",
+        "https://www.linkedin.com/company/moaviaseo/",
+        "https://www.facebook.com/profile.php?id=61594226902693"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "email": "moaviahassan124@gmail.com",
+        "telephone": "+92-323-4313869",
+        "availableLanguage": [
+          "English",
+          "Urdu"
+        ]
       }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://moaviaseo.com/#website",
+      "url": "https://moaviaseo.com/",
+      "name": "Moavia SEO Pro",
+      "publisher": {
+        "@id": "https://moaviaseo.com/#organization"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://moaviaseo.com/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is SEO and why does a business need it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Search engine optimization helps search engines discover and understand helpful pages so potential customers can find a business through relevant searches. Work may include indexing fixes, technical performance, useful service descriptions, internal links, and measurement in Google Search Console. Rankings and enquiries depend on competition, content quality, search intent and time."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is AEO and how is it different from SEO?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Answer Engine Optimization focuses on making clear answers to real customer questions easy to find and understand. It builds on SEO rather than replacing it. Concise definitions, direct answers, supporting details, trustworthy sources, accessible HTML and descriptive headings can help users and search systems interpret the information. No answer-engine inclusion is guaranteed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is GEO for AI-powered search?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Generative Engine Optimization means making reliable information easier for AI-supported discovery systems to find, evaluate and reference. Useful work includes crawlable content, clear company identity, original evidence, updated pages and links from genuine third-party sources. AI citations are selected by independent systems and cannot be bought or promised through a markup file."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can an Islamabad-based agency help clients outside Pakistan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "An Islamabad-based digital agency can discuss remote website, search and advertising projects with businesses in other cities or countries. Project scope, time zones, platform access, fees and communication methods should be agreed in advance. Being based in Islamabad does not automatically mean the agency operates a publicly staffed storefront or qualifies for a Google Business Profile."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I evaluate an SEO agency without ranking guarantees?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ask for a clear website audit, specific deliverables, realistic priorities, examples of real work and a plan for measuring progress. Track search impressions and clicks together with qualified enquiries, rather than relying on a single keyword ranking. Genuine case-study metrics need a documented baseline and permission; illustrative calculators are not proof of results."
+          }
+        }
+      ]
+    }
+  ]
+}
     </script>
 
     <style>
@@ -52,22 +132,25 @@
   </head>
   <body>
     <div id="root">
-      <main style="max-width:1100px;margin:40px auto;padding:0 20px;font:16px/1.6 Arial,sans-serif;color:#18243A">
-        <h1>Moavia SEO Pro — SEO and Digital Marketing Agency in Islamabad</h1>
-        <p>SEO audits, local SEO, AI-assisted websites, WordPress, Google Ads and Meta Ads services for businesses in Pakistan and beyond.</p>
-        <nav aria-label="Explore our services">
-          <a href="/services/seo/">SEO Services</a> ·
-          <a href="/services/local-seo-islamabad/">Local SEO Islamabad</a> ·
-          <a href="/services/aeo-geo-optimization/">AEO &amp; GEO</a> ·
-          <a href="/services/ai-website-development/">AI Website Development</a> ·
-          <a href="/services/wordpress-development/">WordPress Websites</a> ·
-          <a href="/services/google-ads/">Google Ads</a> ·
-          <a href="/services/meta-ads/">Meta Ads</a> ·
-          <a href="/guides/seo-aeo-geo-explained/">SEO vs AEO vs GEO Guide</a> ·
-          <a href="/guides/technical-seo-checklist/">Technical SEO Checklist</a>
+      <main id="homepage-readable-content" style="max-width:1100px;margin:40px auto;padding:0 20px;font:16px/1.65 system-ui,sans-serif;color:#18243A">
+        <h1>SEO, AEO and Website Development in Islamabad | Moavia SEO Pro</h1>
+        <p>Independent digital marketing and website development services. Learn what we offer, explore real publicly accessible websites and contact us about your own business goals.</p>
+        <section><h2>SEO, website development and performance marketing in Islamabad</h2><p>Moavia SEO Pro is a digital services website founded by Moavia Hassan in Islamabad, Pakistan. We discuss search engine optimization, local visibility, answer-focused content, websites and paid advertising with businesses that want clearer online information and measurable customer enquiries. Our work starts with the audience, existing website and specific business goal rather than an unrealistic promise of first-page rankings.</p></section>
+        <section><h2>Choose the right service for your website</h2><p>Technical SEO covers crawling, canonical URLs, internal links, mobile usability and Search Console reporting. Local SEO focuses on accurate business information and genuinely relevant geographic content. AEO and GEO focus on clear, useful answers for search and AI-assisted discovery without promising citations. WordPress and React website work covers accessible, responsive user experiences. Google Ads and Meta Ads services focus on campaign structure, landing-page relevance and responsible conversion measurement.</p></section>
+        <section><h2>How an initial project discussion works</h2><p>First, describe your website, customers, location and the problem you want to solve. Next, we review the public pages, likely technical barriers, content gaps and any performance data you choose to share. We then discuss a proposed scope, priorities and measurement approach. Paid work, deadlines and deliverables are agreed separately in writing. We do not present demo calculators as actual client revenue.</p></section>
+        <section><h2>Projects you can inspect</h2><p>Our website portfolio links directly to public GitHub Pages websites so visitors can explore work rather than trust invented client testimonials. Projects at prototype or demonstration stage are labelled appropriately. Code examples or website previews do not establish that a commercial engagement occurred or that particular sales or advertising outcomes were achieved.</p></section>
+        <section><h2>How to contact Moavia SEO Pro</h2><p>You can contact the agency using the consultation form, a WhatsApp message or the published email address. We are based in Islamabad, Pakistan, but an online enquiry does not mean the website represents a walk-in office. For privacy, avoid submitting account passwords or unnecessary sensitive information in forms or AI prompts.</p></section>
+        <nav aria-label="Website sections and service pages"><h2>Explore our services and resources</h2>
+          <ul><li><a href="/services/">All services</a></li><li><a href="/services/seo/">Technical SEO</a></li><li><a href="/services/local-seo-islamabad/">Local SEO Islamabad</a></li><li><a href="/services/aeo-geo-optimization/">AEO and GEO</a></li><li><a href="/services/wordpress-development/">WordPress development</a></li><li><a href="/services/google-ads/">Google Ads</a></li><li><a href="/services/meta-ads/">Meta Ads</a></li><li><a href="/blog/">Educational blog</a></li><li><a href="/projects/">Public website portfolio</a></li><li><a href="/contact/">Contact information</a></li><li><a href="/about/">About Moavia SEO Pro</a></li></ul>
         </nav>
-        <p><a href="/projects/">Explore our websites</a> · <a href="/#contact">Contact Moavia SEO Pro</a> to discuss your website goals.</p>
-        <p><a href="/about/">About Us</a> · <a href="/blog/">Blog</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms &amp; Conditions</a></p>
+        <section><h2>Common questions about search visibility</h2>
+          <h3>What is SEO and why does a business need it?</h3><p>Search engine optimization helps search engines discover and understand helpful pages so potential customers can find a business through relevant searches. Work may include indexing fixes, technical performance, useful service descriptions, internal links, and measurement in Google Search Console. Rankings and enquiries depend on competition, content quality, search intent and time.</p>
+          <h3>What is AEO and how is it different from SEO?</h3><p>Answer Engine Optimization focuses on making clear answers to real customer questions easy to find and understand. It builds on SEO rather than replacing it. Concise definitions, direct answers, supporting details, trustworthy sources, accessible HTML and descriptive headings can help users and search systems interpret the information. No answer-engine inclusion is guaranteed.</p>
+          <h3>What is GEO for AI-powered search?</h3><p>Generative Engine Optimization means making reliable information easier for AI-supported discovery systems to find, evaluate and reference. Useful work includes crawlable content, clear company identity, original evidence, updated pages and links from genuine third-party sources. AI citations are selected by independent systems and cannot be bought or promised through a markup file.</p>
+          <h3>Can an Islamabad-based agency help clients outside Pakistan?</h3><p>An Islamabad-based digital agency can discuss remote website, search and advertising projects with businesses in other cities or countries. Project scope, time zones, platform access, fees and communication methods should be agreed in advance. Being based in Islamabad does not automatically mean the agency operates a publicly staffed storefront or qualifies for a Google Business Profile.</p>
+          <h3>How do I evaluate an SEO agency without ranking guarantees?</h3><p>Ask for a clear website audit, specific deliverables, realistic priorities, examples of real work and a plan for measuring progress. Track search impressions and clicks together with qualified enquiries, rather than relying on a single keyword ranking. Genuine case-study metrics need a documented baseline and permission; illustrative calculators are not proof of results.</p>
+        </section>
+        <p><a href="mailto:moaviahassan124@gmail.com">Email Moavia SEO Pro</a> · <a href="https://wa.me/923234313869">WhatsApp</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></p>
       </main>
     </div>
     <script type="module" src="/src/main.tsx"></script>

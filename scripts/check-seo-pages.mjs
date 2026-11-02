@@ -23,6 +23,8 @@ const routes = [
   '/blog/local-seo-google-maps-3pack/',
   '/blog/image-video-resolution-cro/',
   '/projects/',
+  '/services/',
+  '/contact/',
 ];
 const read = (path) => readFileSync(join(dist, path), 'utf8');
 function check(condition, error) { if (!condition) throw new Error('SEO check failed: ' + error); }
@@ -32,6 +34,10 @@ const root = read('index.html');
 check(robots.includes('Sitemap: ' + base + '/sitemap.xml'), 'sitemap missing in robots');
 check(root.includes('<link rel="canonical" href="' + base + '/"'), 'homepage canonical missing');
 check(root.includes('href="/services/seo/"'), 'homepage lacks crawlable service link');
+check(root.includes('href="/services/"'), 'homepage lacks services hub link');
+check(root.includes('href="/contact/"'), 'homepage lacks contact hub link');
+check(root.includes('FAQPage'), 'homepage lacks FAQ schema');
+check(root.includes('og:site_name'), 'homepage site name missing');
 check(existsSync(join(dist, 'favicon.png')), 'favicon missing');
 check(existsSync(join(dist, 'site-logo.png')), 'site logo missing');
 check(existsSync(join(dist, 'apple-touch-icon.png')), 'Apple touch icon missing');
