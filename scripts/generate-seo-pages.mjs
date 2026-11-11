@@ -73,7 +73,7 @@ const pages = [
   {
     path: '/services/ai-website-development/', kind: 'service',
     name: 'AI-Assisted Website Development',
-    title: 'AI-Assisted Website Development | Accessible, Fast Web Experiences',
+    title: 'AI-Assisted Website Development | Moavia SEO Pro',
     description: 'Modern business website development with AI-assisted workflows, human review, mobile-first design, accessibility and search-friendly semantic HTML.',
     lead: 'AI-assisted development can speed up prototypes, but a business website still needs human review of content, security, usability and performance. We help turn early concepts into maintainable public-facing experiences.',
     audience: 'Founders and businesses looking for a responsive marketing website or custom interactive web experience.',
@@ -92,8 +92,8 @@ const pages = [
   },
   {
     path: '/services/wordpress-development/', kind: 'service',
-    name: 'WordPress & Custom Web Development',
-    title: 'WordPress Website Development | Business Websites & SEO Foundations',
+    name: 'Custom WordPress Website Development',
+    title: 'Custom WordPress Website Development | Moavia SEO Pro',
     description: 'WordPress website planning and implementation with responsive design, content management, technical SEO, accessibility and practical maintenance guidance.',
     lead: 'A well-built WordPress website should be easy for your team to edit and easy for customers to navigate. The right structure depends on your pages, content workflows, integrations and maintenance needs.',
     audience: 'Service businesses that want control over website content, landing pages or an expandable blog.',
@@ -113,7 +113,7 @@ const pages = [
   {
     path: '/services/google-ads/', kind: 'service',
     name: 'Google Ads & PPC Management',
-    title: 'Google Ads Management | Search Campaigns and Conversion Tracking',
+    title: 'Google Ads & PPC Management | Moavia SEO Pro',
     description: 'Google Ads campaign planning for qualified leads: keyword intent, landing pages, conversion tracking, ad relevance and accountable reporting.',
     lead: 'Paid search is useful when your offer matches a clear customer need. Good Google Ads management starts with measurement, relevant landing pages and a budget that supports testing.',
     audience: 'Businesses ready to test or improve search advertising with a defined product, service and lead objective.',
@@ -178,7 +178,7 @@ const pages = [
   {
     path: '/guides/technical-seo-checklist/', kind: 'guide',
     name: 'Technical SEO Checklist for a New Website',
-    title: 'Technical SEO Checklist: Indexing, Canonicals & Performance',
+    title: 'Technical SEO Checklist for a New Website | Moavia SEO Pro',
     description: 'A practical technical SEO checklist: Search Console, crawl status, XML sitemap, canonical URLs, internal links, mobile performance and structured data.',
     lead: 'A technical SEO audit is most useful when it separates observable facts from assumptions. This checklist helps website owners find common discoverability problems before requesting an expensive overhaul.',
     audience: 'Owners launching a new website or moving an existing domain to a new host.',
@@ -233,7 +233,7 @@ main{padding-bottom:4rem}section{margin-top:3rem}h2{font-size:clamp(1.4rem,3vw,1
 .action:hover{background:#4052c8;text-decoration:none}
 .subnav{font-size:.82rem;color:#52607a;padding:1rem 0}.subnav a{color:#52607a}
 .faq details{border:1px solid #e7eaf2;background:white;border-radius:12px;padding:1rem 1.2rem;margin:.7rem 0}
-.faq summary{font-weight:700;cursor:pointer}.faq p{color:#52607a;margin:.7rem 0 0}
+.faq summary{font-weight:700;cursor:pointer}.faq summary h3{display:inline;font-size:1rem;line-height:1.5;margin:0}.faq p{color:#52607a;margin:.7rem 0 0}
 ul.clean{padding-left:1.25rem}ul.clean li{padding:.23rem 0}
 footer{background:#18243a;color:#d9e0f0;padding:2.5rem 0}footer a{color:#c5ceff}footer .wrap{display:flex;gap:1rem;justify-content:space-between;flex-wrap:wrap}
 .sources li{margin:.5rem 0}.note{font-size:.9rem;color:#65738b}
@@ -251,13 +251,13 @@ function renderPage(page) {
       { '@type': 'BreadcrumbList', '@id': url + '#breadcrumbs',
         itemListElement: [
           { '@type': 'ListItem', position: 1, name: 'Home', item: site + '/' },
-          { '@type': 'ListItem', position: 2, name: isGuide ? 'Guides' : 'Services', item: isGuide ? site + '/#blog' : site + '/#services' },
+          { '@type': 'ListItem', position: 2, name: isGuide ? 'Blog and Guides' : 'Services', item: isGuide ? site + '/blog/' : site + '/services/' },
           { '@type': 'ListItem', position: 3, name: page.name, item: url }
         ]
       },
       isGuide
         ? { '@type': 'Article', '@id': url + '#article', mainEntityOfPage: url, headline: page.name,
-            description: page.description, author: { '@id': company['@id'] }, publisher: { '@id': company['@id'] } }
+            description: page.description, dateModified: '2026-11-11', author: { '@id': company['@id'] }, publisher: { '@id': company['@id'] } }
         : { '@type': 'Service', '@id': url + '#service', name: page.name, url, description: page.description,
             provider: { '@id': company['@id'] }, areaServed: [{ '@type': 'City', name: 'Islamabad' }, { '@type': 'Country', name: 'Pakistan' }] },
       { '@type': 'FAQPage', '@id': url + '#faq', mainEntity: page.faqs.map(([q,a]) =>
@@ -271,7 +271,7 @@ function renderPage(page) {
     return '<li><a href="' + clean(path) + '">' + clean(p?.name || path) + '</a></li>';
   }).join('');
   const faqs = page.faqs.map(([q,a]) =>
-    '<details><summary>' + clean(q) + '</summary><p>' + clean(a) + '</p></details>').join('');
+    '<details><summary><h3>' + clean(q) + '</h3></summary><p>' + clean(a) + '</p></details>').join('');
   const sources = (page.sources || []).map(([label,link]) =>
     '<li><a href="' + clean(link) + '" rel="noopener noreferrer" target="_blank">' + clean(label) + '</a></li>').join('');
   return '<!doctype html>\n<html lang="en"><head>\n'
@@ -287,14 +287,17 @@ function renderPage(page) {
     + '<meta property="og:url" content="' + clean(url) + '">\n'
     + '<meta property="og:image" content="' + clean(logo) + '">\n'
     + '<meta name="twitter:card" content="summary">\n'
+    + '<meta name="twitter:title" content="' + clean(page.title) + '">\n'
+    + '<meta name="twitter:description" content="' + clean(page.description) + '">\n'
+    + '<meta name="twitter:image" content="' + clean(logo) + '">\n'
     + '<link rel="icon" type="image/png" href="/favicon.png">\n'
     + '<link rel="apple-touch-icon" href="/apple-touch-icon.png">\n'
     + '<link rel="manifest" href="/site.webmanifest">\n'
     + '<link rel="stylesheet" href="/seo/pages.css">\n'
     + '<script type="application/ld+json">' + jsonLd(schema) + '</script>\n'
     + '</head><body>\n'
-    + '<header><div class="wrap"><a class="brand" href="/"><img src="/assets/aistudio/moavia_seopro_logo_720x720_10966138.png" alt="" width="42" height="42">Moavia SEO Pro</a>'
-    + '<nav aria-label="Main navigation"><a href="/">Home</a><a href="/services/">Services</a><a href="/guides/seo-aeo-geo-explained/">SEO Guides</a><a href="/contact/">Contact</a></nav></div></header>'
+    + '<header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" alt="Moavia SEO Pro logo" width="42" height="42">Moavia SEO Pro</a>'
+    + '<nav aria-label="Main navigation"><a href="/">Home</a><a href="/services/">Services</a><a href="/about/">About</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></nav></div></header>'
     + '<main><div class="wrap subnav"><a href="/">Home</a> / <a href="' + (isGuide ? '/blog/' : '/services/') + '">'
     + (isGuide ? 'Guides' : 'Services') + '</a> / ' + clean(page.name) + '</div>'
     + '<div class="hero"><div class="wrap"><span class="pill">' + (isGuide ? 'Practical SEO Guide' : 'Moavia SEO Pro Service')
@@ -305,10 +308,11 @@ function renderPage(page) {
     + '</h2><div class="cards">' + steps + '</div></section>'
     + '<section aria-labelledby="checklist"><h2 id="checklist">' + (isGuide ? 'Action checklist' : 'What to expect')
     + '</h2><ul class="clean">' + page.deliverables.map(d => '<li>' + clean(d) + '</li>').join('') + '</ul></section>'
+    + (isGuide ? '<p class="note">Reviewed by Moavia SEO Pro Editorial Team · Updated 11 November 2026 · <a href="/about/">About the team</a></p>' : '')
     + '<section class="faq" aria-labelledby="faq-title"><h2 id="faq-title">Frequently asked questions</h2>' + faqs + '</section>'
     + (sources ? '<section aria-labelledby="sources"><h2 id="sources">Further reading</h2><ul class="sources">' + sources + '</ul></section>' : '')
     + '<section aria-labelledby="more"><h2 id="more">Explore related topics</h2><ul class="clean">' + related + '</ul></section>'
-    + '<section class="card"><h2>Need a plan for your actual website?</h2><p>Share the URL, target audience and your main business goal. We can discuss the scope before making any promises about outcomes.</p>'
+    + '<section class="card"><h2>' + (page.path === '/services/google-ads/' ? 'Need help with a Google Ads campaign?' : page.path === '/services/meta-ads/' ? 'Planning a Meta Ads campaign?' : 'Discuss your business project') + '</h2><p>Share your service, target audience, goals and the landing page if relevant. We can discuss scope and measurement.</p>'
     + '<a class="action" href="/contact/">Contact Moavia SEO Pro</a></section>'
     + '<p class="note">Based in Islamabad, Pakistan. Services are discussed case by case; search rankings, AI citations and advertising returns are not guaranteed.</p>'
     + '</div></main><footer><div class="wrap"><div><strong>Moavia SEO Pro</strong><br>Islamabad, Pakistan</div>'
