@@ -1,0 +1,62 @@
+name: Deploy moaviaseo.com to Cloudflare
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: moaviaseo-cloudflare-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Build and deploy existing moaviaseo Worker
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install locked dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Build production assets for Cloudflare root path
+        run: bun run build
+
+      - name: Verify standalone tool pages are in production output
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s dist/index.html
+          test -s dist/tools/index.html
+          test -s dist/tools/meta-title-description-checker/index.html
+          test -s dist/tools/json-ld-schema-generator/index.html
+          test -s dist/tools/robots-txt-sitemap-generator/index.html
+          test -s dist/tools/toolkit.css
+          test -s dist/tools/toolkit.js
+          test -s dist/sitemap.xml
+          test -s dist/moavia-hassan-portrait.webp
+
+      - name: Check deployment credentials in GitHub Secrets
+        shell: bash
+        env:
+          CF_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CF_ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CF_TOKEN" ] || [ -z "$CF_ACCOUNT" ]; then
+            echo "::error::Missing CLOUDFLARE_API_TOKEN or CLOUDFLARE_ACCOUNT_ID repository secret."
+            echo "Set these in repository Settings > Secrets and variables > Actions before running this workflow."
+            exit 1
+          fi
+
+      - name: Deploy Worker and static assets (preserve dashboard vars)
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: deploy --keep-vars
