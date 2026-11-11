@@ -20,10 +20,10 @@ const content = [
  ['Working approach','For new projects, I first review the website or idea, the requested features, constraints and goals. We can discuss availability, scope and deliverables before agreeing paid work.'],
  ['Honest claims','I do not guarantee search rankings, advertising revenue or AI-search citations. I avoid displaying fabricated results, reviews, client testimonials or certifications.']
  ],extra:[['LinkedIn profile','https://www.linkedin.com/in/moavia-hassan-seo/'],['GitHub profile','https://github.com/mmoavia7861'],['Website projects','/projects/'],['SEO and web tools','/#tools'],['Hire Me','/hire-me/'],['Contact','/contact/']]},
- {path:'/privacy-policy/',title:'Privacy Policy | Moavia SEO Pro',name:'Privacy Policy',
+ {path:'/privacy-policy/',title:'Privacy Policy | Moavia Hassan',name:'Privacy Policy',
  intro:'This policy describes the information that may be processed when visiting moaviaseo.com, sending an enquiry, subscribing to updates, signing in to administrative features, or choosing to use interactive AI tools. Last updated: 28 October 2026.',
  sections:[
- ['Who manages this website','Moavia SEO Pro is based in Islamabad, Pakistan. Questions about privacy, information you submitted, correction or deletion requests can be sent to hello@moaviaseo.com. We may verify requests before acting on records.'],
+ ['Who manages this website','Moavia Hassan is based in Islamabad, Pakistan. Questions about privacy, information you submitted, correction or deletion requests can be sent to hello@moaviaseo.com. We may verify requests before acting on records.'],
  ['Information you provide','The consultation form may collect your full name, work email, phone or WhatsApp number, business name, website address, chosen service, budget and project description. We use this information to respond and manage enquiries. The optional newsletter subscription collects an email address to maintain an updates list. Please do not submit passwords, payment card details or unnecessary sensitive information.'],
  ['AI and SEO tools','If you deliberately use the AI Studio tools, your prompt, URLs or submitted text may be processed by our Cloudflare Worker backend and, for AI-powered responses, by Google Gemini services. A URL audit may retrieve publicly accessible website HTML. Avoid sending confidential data or credentials. AI outputs can be inaccurate and should be independently reviewed.'],
  ['Hosting, Firebase and technical information','We use Cloudflare to host and serve the website and API requests. Firebase and other Google services support some contact, newsletter and administrative functions. These providers may process information necessary for their operations, such as network addresses, browser and request details, sign-in information or submitted records. Providers may process data outside your country.'],
@@ -33,7 +33,7 @@ const content = [
  ['Your choices and requests','You can choose not to fill optional fields, ask about personal information associated with your submission, request correction or deletion when applicable, or ask to stop newsletter messages through the contact email above. Your legal rights may depend on your location.'],
  ['External sites and policy updates','Links to other websites, including WhatsApp, LinkedIn and platform documentation, have their own policies. We may revise this policy when technologies or business practices change and will update the date shown above.']
  ],extra:[['About','/about/'],['Contact','/#contact'],['Google Privacy Policy','https://policies.google.com/privacy'],['Google advertising policies','https://policies.google.com/technologies/ads']]},
- {path:'/terms-and-conditions/',title:'Terms & Conditions | Moavia SEO Pro',name:'Terms & Conditions',
+ {path:'/terms-and-conditions/',title:'Terms & Conditions | Moavia Hassan',name:'Terms & Conditions',
  intro:'These terms apply to your use of the public pages and optional interactive tools on moaviaseo.com. Last updated: 28 October 2026.',
  sections:[
  ['Use of the website','You may read public content, share links and use tools for lawful activities. Do not attempt unauthorized access, interfere with security or hosting, overload the service, submit malicious content or misuse other people’s information.'],
@@ -118,16 +118,16 @@ const articles = [
 
 const allPaths=[...content.map(p=>p.path),'/blog/',...articles.map(p=>'/blog/'+p.slug+'/')];
 const commonLinks='<nav aria-label="Main navigation"><a href="/#tools">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
-const footer='<footer><div class="wrap"><div><strong>Moavia SEO Pro</strong><p>Islamabad, Pakistan</p></div><div>'+[['About Us','/about/'],['Blog','/blog/'],['Privacy Policy','/privacy-policy/'],['Terms & Conditions','/terms-and-conditions/']].map(([name,href])=>a(href,name)).join(' · ')+'</div><div><a href="mailto:hello@moaviaseo.com">Contact by email</a></div></div></footer>';
+const footer='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>Islamabad, Pakistan</p></div><div>'+[['About Us','/about/'],['Blog','/blog/'],['Privacy Policy','/privacy-policy/'],['Terms & Conditions','/terms-and-conditions/']].map(([name,href])=>a(href,name)).join(' · ')+'</div><div><a href="mailto:hello@moaviaseo.com">Contact by email</a></div></div></footer>';
 const schemaText = x => JSON.stringify(x).replace(/</g,'\\u003c');
 function layout(info,inner){
  const url=host+info.path;const article=info.type==='article';
  const published=article?(info.published||date):date;
  const displayedDate=article?new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(published+'T12:00:00Z')):dateText;
- const pageTitle=info.seoTitle || (info.name.includes('Moavia SEO Pro') ? info.name : info.name+' | Moavia SEO Pro');
+ const pageTitle=info.seoTitle || (info.name.includes('Moavia Hassan') ? info.name : info.name+' | Moavia Hassan');
  const entity=article?{'@type':'BlogPosting',headline:info.name,description:info.desc,datePublished:published,dateModified:published,
-   mainEntityOfPage:url,author:{'@type':'Organization',name:'Moavia SEO Pro Editorial Team',url:host+'/about/'},
-   publisher:{'@type':'Organization',name:'Moavia SEO Pro',url:host+'/'}}
+   mainEntityOfPage:url,author:{'@type':'Person',name:'Moavia Hassan',url:host+'/about/'},
+   publisher:{'@type':'Person',name:'Moavia Hassan',url:host+'/'}}
    :{'@type':info.path==='/about/'?'AboutPage':info.path==='/blog/'?'CollectionPage':'WebPage',name:info.name,url,description:info.desc};
  const crumbs=[{'@type':'ListItem',position:1,name:'Home',item:host+'/'}];
  if(article)crumbs.push({'@type':'ListItem',position:2,name:'Blog',item:host+'/blog/'});
@@ -136,16 +136,16 @@ function layout(info,inner){
  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
   +'<title>'+esc(pageTitle)+'</title><meta name="description" content="'+esc(info.desc)+'">'
   +'<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="'+esc(url)+'">'
-  +'<meta property="og:site_name" content="Moavia SEO Pro"><meta property="og:type" content="'+(article?'article':'website')+'">'
+  +'<meta property="og:site_name" content="Moavia Hassan"><meta property="og:type" content="'+(article?'article':'website')+'">'
   +'<meta property="og:title" content="'+esc(info.name)+'"><meta property="og:description" content="'+esc(info.desc)+'">'
   +'<meta property="og:url" content="'+esc(url)+'"><meta property="og:image" content="'+host+'/site-logo.png">'
   +'<meta name="twitter:card" content="summary"><meta name="twitter:title" content="'+esc(info.name)+'"><meta name="twitter:description" content="'+esc(info.desc)+'"><meta name="twitter:image" content="'+host+'/site-logo.png">'
   +'<link rel="stylesheet" href="/seo/pages.css">'
   +'<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="stylesheet" href="/blog/editorial.css"><script type="application/ld+json">'+json+'</script></head><body>'
-  +'<header><div class="wrap"><a class="brand" href="/"><img src="/assets/aistudio/moavia_seopro_logo_720x720_10966138.png" alt="" width="42" height="42">Moavia SEO Pro</a>'+commonLinks+'</div></header>'
+  +'<header><div class="wrap"><a class="brand" href="/"><img src="/assets/aistudio/moavia_seopro_logo_720x720_10966138.png" alt="" width="42" height="42">Moavia Hassan</a>'+commonLinks+'</div></header>'
   +'<main><div class="wrap subnav">'+a('/','Home')+' / '+(article?a('/blog/','Blog')+' / ':'')+esc(info.name)+'</div>'
-  +'<div class="hero"><div class="wrap"><span class="pill">'+esc(info.topic||'Moavia SEO Pro')+'</span><h1>'+esc(info.name)+'</h1>'
-  +(info.intro?par(info.intro):'')+(article?'<p class="note">Published <time datetime="'+published+'">'+displayedDate+'</time> · By <a href="/about/">Moavia SEO Pro Editorial Team</a></p>':'')
+  +'<div class="hero"><div class="wrap"><span class="pill">'+esc(info.topic||'Moavia Hassan')+'</span><h1>'+esc(info.name)+'</h1>'
+  +(info.intro?par(info.intro):'')+(article?'<p class="note">Published <time datetime="'+published+'">'+displayedDate+'</time> · By <a href="/about/">Moavia Hassan</a></p>':'')
   +'</div></div><div class="wrap editorial-content">'+inner+'</div></main>'+footer+'</body></html>\n';
 }
 function save(path,html) {
@@ -155,7 +155,7 @@ mkdirSync(join(root,'blog'),{recursive:true});
 writeFileSync(join(root,'blog/editorial.css'),'.editorial-content{max-width:900px;margin:2.5rem auto 5rem}.editorial-content section{margin-top:2.5rem}.editorial-content p{font-size:1.04rem;color:#485872;line-height:1.85}.editorial-content h2{font-size:clamp(1.3rem,3vw,1.85rem);margin-bottom:.7rem}.editorial-content .cards{margin-top:1.3rem}.editorial-content .card{margin:0}.editorial-content .card h2{font-size:1.2rem}.editorial-content a{overflow-wrap:anywhere}footer a{margin-right:.7rem}footer p{font-size:.9rem;margin:0}.hero .note{font-size:.9rem}.hero .note a{font-size:inherit}\n','utf8');
 for(const p of content){
  const inner=p.sections.map(([heading,...paragraphs])=>'<section><h2>'+esc(heading)+'</h2>'+paragraphs.map(par).join('')+'</section>').join('')
- +(p.path==='/about/'?'<section class="card"><h2>Founder profile</h2><p><strong>Moavia Hassan</strong> founded Moavia SEO Pro in Islamabad. Explore his <a href="https://www.linkedin.com/in/moavia-hassan-seo/" target="_blank" rel="noopener noreferrer">LinkedIn profile</a>, <a href="https://github.com/mmoavia7861" target="_blank" rel="noopener noreferrer">GitHub profile</a>, and <a href="/projects/">public website portfolio</a>. These links are evidence of published pages, not independently validated qualifications.</p><figure><img src="/assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png" width="170" height="227" loading="lazy" decoding="async" alt="Illustrative founder portrait" style="border-radius:14px;max-width:100%;height:auto"><figcaption>Illustrative portrait, not a verified photograph.</figcaption></figure></section>':'')
+ +(p.path==='/about/'?'<section class="card"><h2>Profile and work</h2><p><strong>Moavia Hassan</strong> maintains this personal SEO tools and website portfolio. See the <a href="https://www.linkedin.com/in/moavia-hassan-seo/" target="_blank" rel="noopener noreferrer">LinkedIn profile</a>, <a href="https://github.com/mmoavia7861" target="_blank" rel="noopener noreferrer">GitHub projects</a>, and <a href="/projects/">public website portfolio</a>.</p><figure><img src="/site-logo.png" width="140" height="140" loading="lazy" decoding="async" alt="Moavia Hassan logo placeholder, not a personal photo" style="border-radius:14px;max-width:100%;height:auto"><figcaption>A real personal photograph can be added after it is supplied.</figcaption></figure></section>':'')
  +'<section class="card"><h2>Related pages</h2><ul class="clean">'+p.extra.map(([title,url])=>'<li>'+a(url,title)+'</li>').join('')+'</ul></section>';
  save(p.path,layout({path:p.path,name:p.name,seoTitle:p.title,desc:p.intro,intro:p.intro,topic:'About and policies'},inner));
 }
@@ -164,13 +164,13 @@ for(const p of articles){
  const sections=p.sections.map(([heading,...paragraphs])=>'<section><h2>'+esc(heading)+'</h2>'+paragraphs.map(par).join('')+'</section>').join('');
  const sources='<section class="card"><h2>Source documentation</h2><p>Check the original platform documentation for updates and detail.</p><ul class="clean">'
   +p.sources.map(([name,url])=>'<li><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(name)+'</a></li>').join('')+'</ul></section>';
- const related='<section><h2>Explore related services</h2><p>'+a('/services/seo/','SEO services')+' · '+a('/services/aeo-geo-optimization/','AI search and AEO')+' · '+a('/contact/','Contact our agency')+'</p></section>';
+ const related='<section><h2>Related pages</h2><p>'+a('/#tools','SEO tools')+' · '+a('/hire-me/','Hire Me')+' · '+a('/contact/','Contact me')+'</p></section>';
  save(path,layout({path,name:p.name,desc:p.desc,intro:p.desc,topic:p.topic,type:'article',published:p.published},'<article>'+sections+sources+related+'</article>'));
 }
 const indexBody='<section><h2>Explore our practical articles</h2><div class="cards">'+articles.map(p=>
  '<article class="card"><span class="pill">'+esc(p.topic)+'</span><h2><a href="/blog/'+esc(p.slug)+'/">'+esc(p.name)+'</a></h2><p>'+esc(p.desc)+'</p><p class="note">Published '+(p.published?new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(p.published+'T12:00:00Z')):dateText)+'</p><a href="/blog/'+esc(p.slug)+'/">Read full article</a></article>').join('')+'</div></section>'
  +'<section><h2>More detailed guides</h2><p>'+a('/guides/technical-seo-checklist/','Technical SEO checklist')+' · '+a('/guides/seo-aeo-geo-explained/','SEO vs AEO vs GEO')+'</p></section>';
-save('/blog/',layout({path:'/blog/',name:'SEO and Digital Marketing Blog',desc:'Practical articles about technical SEO, AI-assisted websites, local search, Meta Ads and faster marketing media.',intro:'Learn how to make a website discoverable, usable and measurable with practical explanations grounded in original platform documentation.',topic:'Agency learning hub'},indexBody));
+save('/blog/',layout({path:'/blog/',name:'SEO & Web Projects Blog',desc:'Practical articles about technical SEO, online tools, websites and local search.',intro:'Learn how to make a website discoverable, usable and measurable with practical explanations grounded in original platform documentation.',topic:'SEO learning hub'},indexBody));
 let sitemap=readFileSync(join(root,'sitemap.xml'),'utf8');
 if(!sitemap.includes('</urlset>'))throw new Error('Core XML sitemap must run first');
 for(const path of allPaths)if(sitemap.includes('<loc>'+host+path+'</loc>'))throw new Error('Duplicate sitemap URL: '+path);

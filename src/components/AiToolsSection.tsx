@@ -36,27 +36,27 @@ export const AiToolsSection: React.FC = () => {
   const [auditReport, setAuditReport] = useState<string | null>(null);
 
   // --- 2. Low-Latency Quick Meta State (gemini-2.5-flash-lite) ---
-  const [quickTitle, setQuickTitle] = useState('SEO Agency Islamabad | Grow Traffic');
-  const [quickDesc, setQuickDesc] = useState('We provide SEO services for businesses to rank on Google.');
-  const [quickKw, setQuickKw] = useState('SEO Agency Islamabad');
+  const [quickTitle, setQuickTitle] = useState('Moavia Hassan | SEO Tools and Web Projects');
+  const [quickDesc, setQuickDesc] = useState('Explore helpful SEO tools and published web projects.');
+  const [quickKw, setQuickKw] = useState('SEO tools portfolio');
   const [quickLoading, setQuickLoading] = useState(false);
   const [quickResult, setQuickResult] = useState<any>(null);
 
   // --- 3. Search Grounding State (gemini-2.5-flash + googleSearch) ---
-  const [searchQuery, setSearchQuery] = useState('best SEO agency in Islamabad 2026');
+  const [searchQuery, setSearchQuery] = useState('how to improve website SEO');
   const [searchRegion, setSearchRegion] = useState('Pakistan');
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchData, setSearchData] = useState<any>(null);
 
   // --- 4. Maps Grounding State (gemini-2.5-flash + googleMaps) ---
-  const [mapsBusiness, setMapsBusiness] = useState('Moavia SEO Pro');
-  const [mapsCategory, setMapsCategory] = useState('Internet Marketing & SEO Agency');
+  const [mapsBusiness, setMapsBusiness] = useState('Moavia Hassan');
+  const [mapsCategory, setMapsCategory] = useState('SEO & Web Projects');
   const [mapsCity, setMapsCity] = useState('Islamabad');
   const [mapsLoading, setMapsLoading] = useState(false);
   const [mapsData, setMapsData] = useState<any>(null);
 
   // --- 5. Image Studio State (free SVG poster template & SVG color variation) ---
-  const [imagePrompt, setImagePrompt] = useState('Futuristic digital agency dashboard hologram with glowing SEO graph');
+  const [imagePrompt, setImagePrompt] = useState('Minimal SEO dashboard checklist illustration');
   const [imageResolution, setImageResolution] = useState<'1K' | '2K' | '4K'>('2K');
   const [imageMode, setImageMode] = useState<'create' | 'edit'>('create');
   const [imageLoading, setImageLoading] = useState(false);
@@ -64,8 +64,8 @@ export const AiToolsSection: React.FC = () => {
   const [imageEditText, setImageEditText] = useState<string | null>(null);
 
   // --- 6. Video SEO Analyzer State (gemini-2.5-flash) ---
-  const [videoTitle, setVideoTitle] = useState('How We Scaled Organic Traffic by 400% in 90 Days');
-  const [videoDesc, setVideoDesc] = useState('Complete case study breakdown showing on-page audits, schema markup, and backlink strategies.');
+  const [videoTitle, setVideoTitle] = useState('How to Review a Technical SEO Checklist');
+  const [videoDesc, setVideoDesc] = useState('Educational SEO checklist covering metadata, schema and links.');
   const [videoLoading, setVideoLoading] = useState(false);
   const [videoAnalysis, setVideoAnalysis] = useState<string | null>(null);
 
@@ -80,7 +80,7 @@ export const AiToolsSection: React.FC = () => {
     {
       role: 'model',
       content:
-        'Greetings! I am the Moavia SEO Pro Strategic Consultant. Ask me about technical audits, Core Web Vitals, Google Ads campaigns, or AI website architecture.',
+        'Greetings! I am the Moavia Hassan Strategic Consultant. Ask me about technical audits, Core Web Vitals, Google Ads campaigns, or AI website architecture.',
     },
   ]);
   const [chatInput, setChatInput] = useState('');
@@ -345,8 +345,7 @@ export const AiToolsSection: React.FC = () => {
             Practical SEO & Web <span className="aurora-gradient-text">Tools</span>
           </h2>
           <p className="text-base sm:text-lg text-[#65738B]">
-            Experience the real-time AI capabilities powering Moavia SEO Pro — from high-thinking algorithmic
-            diagnostics to low-latency optimizations and live search grounding.
+            Explore SEO helpers and educational AI experiments. Some tools require a configured backend and may be temporarily unavailable.
           </p>
         </div>
 
@@ -1105,7 +1104,7 @@ export const AiToolsSection: React.FC = () => {
                   className="w-20 h-20 rounded-xl object-contain border border-[#E7EAF2] bg-white p-1"
                 />
                 <div className="space-y-1">
-                  <h4 className="text-xs font-bold text-[#18243A]">Source Asset: Moavia SEO Pro Official Logo / Graphic</h4>
+                  <h4 className="text-xs font-bold text-[#18243A]">Source Asset: Moavia Hassan Official Logo / Graphic</h4>
                   <p className="text-xs text-[#65738B]">
                     Aspect Ratio: <span className="font-bold text-[#8B63D8]">{animateAspect}</span>. Ready for dynamic reel animation.
                   </p>
@@ -1161,10 +1160,10 @@ export const AiToolsSection: React.FC = () => {
                 <div>
                   <h3 className="text-xl font-bold text-[#18243A] flex items-center gap-2">
                     <MessageSquare className="w-5 h-5 text-[#5265D8]" />
-                    Multi-Turn AI Agency Consultant
+                    Multi-Turn SEO Assistant
                   </h3>
                   <p className="text-xs text-[#65738B]">
-                    Maintains full conversational thread with specialized agency persona roles.
+                    Maintains full conversational thread with specialized SEO and web development roles.
                   </p>
                 </div>
 
@@ -1176,7 +1175,7 @@ export const AiToolsSection: React.FC = () => {
                     onChange={(e) => setChatRole(e.target.value as any)}
                     className="text-xs font-bold p-2 rounded-xl border border-[#E7EAF2] bg-[#F8F9FD] text-[#18243A]"
                   >
-                    <option value="general">Role: General Agency Consultant</option>
+                    <option value="general">Role: General SEO Assistant</option>
                     <option value="seo">Role: Chief SEO Strategist</option>
                     <option value="webdev">Role: AI & WordPress Web Architect</option>
                     <option value="ads">Role: Media Buyer (Meta & Google Ads)</option>
@@ -1210,7 +1209,7 @@ export const AiToolsSection: React.FC = () => {
                       }`}
                     >
                       <span className="block text-[10px] font-bold opacity-75 mb-1">
-                        {msg.role === 'user' ? 'You' : `Moavia SEO Pro (${chatRole.toUpperCase()})`}
+                        {msg.role === 'user' ? 'You' : `Moavia Hassan (${chatRole.toUpperCase()})`}
                       </span>
                       <p className="whitespace-pre-wrap">{msg.content}</p>
                     </div>
@@ -1230,7 +1229,7 @@ export const AiToolsSection: React.FC = () => {
                 isLoading={chatLoading}
                 steps={[
                   `Connecting to ${chatModel}...`,
-                  `Analyzing question with ${chatRole.toUpperCase()} agency role...`,
+                  `Analyzing question with ${chatRole.toUpperCase()} topic role...`,
                   'Formulating actionable response...',
                 ]}
                 accentColor="#5265D8"
@@ -1270,7 +1269,7 @@ export const AiToolsSection: React.FC = () => {
                   Real-Time Voice Consultation
                 </h3>
                 <p className="text-xs text-[#65738B]">
-                  Experience low-latency real-time voice interaction with Moavia SEO Pro's AI consultant.
+                  Experience low-latency real-time voice interaction with Moavia Hassan's AI consultant.
                 </p>
               </div>
 

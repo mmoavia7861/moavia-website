@@ -4,7 +4,7 @@ import { join } from 'node:path';
 const publicDir = join(process.cwd(), 'public');
 const site = 'https://moaviaseo.com';
 const logo = site + '/site-logo.png';
-const company = { '@type': 'Organization', '@id': site + '/#organization', name: 'Moavia Hassan',
+const company = { '@type': 'Person', '@id': site + '/#person', name: 'Moavia Hassan',
   url: site + '/', logo, areaServed: [{ '@type': 'City', name: 'Islamabad' }, { '@type': 'Country', name: 'Pakistan' }] };
 const clean = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
@@ -173,7 +173,7 @@ const pages = [
       ['Google: Generative AI search optimization', 'https://developers.google.com/search/docs/fundamentals/ai-optimization-guide'],
       ['Google: AI features and your website', 'https://developers.google.com/search/docs/appearance/ai-features']
     ],
-    related: ['/services/aeo-geo-optimization/', '/services/seo/', '/guides/technical-seo-checklist/']
+    related: ['/hire-me/', '/projects/', '/guides/technical-seo-checklist/']
   },
   {
     path: '/guides/technical-seo-checklist/', kind: 'guide',
@@ -200,7 +200,7 @@ const pages = [
       ['Google: SEO Starter Guide', 'https://developers.google.com/search/docs/fundamentals/seo-starter-guide'],
       ['PageSpeed Insights', 'https://pagespeed.web.dev/']
     ],
-    related: ['/services/seo/', '/guides/seo-aeo-geo-explained/', '/services/ai-website-development/']
+    related: ['/hire-me/', '/guides/seo-aeo-geo-explained/', '/projects/']
   }
 ].filter(page => page.kind === 'guide');
 
@@ -308,7 +308,7 @@ function renderPage(page) {
     + '<a class="action" href="/contact/">Contact Moavia Hassan</a></section>'
     + '<p class="note">Based in Islamabad, Pakistan. Services are discussed case by case; search rankings, AI citations and advertising returns are not guaranteed.</p>'
     + '</div></main><footer><div class="wrap"><div><strong>Moavia Hassan</strong><br>Islamabad, Pakistan</div>'
-    + '<div><a href="/">Homepage</a> · <a href="/services/">All Services</a> · <a href="/services/seo/">SEO Services</a> · <a href="/blog/">Blog</a> · <a href="/about/">About</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></div>'
+    + '<div><a href="/">Homepage</a> · <a href="/hire-me/">Hire Me</a> · <a href="/projects/">Projects</a> · <a href="/blog/">Blog</a> · <a href="/about/">About</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></div>'
     + '<div>© 2026 Moavia Hassan</div></div></footer></body></html>\n';
 }
 

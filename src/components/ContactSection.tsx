@@ -111,7 +111,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
           {/* Left Column: Contact Value Prop & Official Details */}
           <div className="lg:col-span-5 space-y-6">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#17A99A]/10 text-[#08786F] text-xs font-bold uppercase tracking-wider">
-              Start Your Growth Engine
+              Discuss a Web Project
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#18243A] tracking-tight leading-tight">
@@ -119,9 +119,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
             </h2>
 
             <p className="text-sm text-[#65738B] leading-relaxed">
-              Every client engagement begins with an objective technical review and algorithmic roadmap.
-              Tell us about your business goals, target keywords, or project timeline, and founder Moavia Hassan
-              will respond within 24 hours.
+              Tell me about your website, SEO question or web project. Enquiries are reviewed personally; response times depend on availability.
             </p>
 
             {/* Direct Channel Cards */}
@@ -192,7 +190,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                   </h3>
                   <p className="text-sm text-[#65738B] max-w-md mx-auto leading-relaxed">
                     Thank you, <strong>{fullName}</strong>. Your consultation request has been stored in our
-                    project enquiry system. Founder Moavia Hassan will review your website metrics and reach out shortly.
+                    project enquiry system. Founder Moavia Hassan will review your project details and reach out shortly.
                   </p>
                   <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
                     <a
@@ -301,7 +299,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
 
                     <div>
                       <label htmlFor="lead-service" className="text-xs font-bold text-[#18243A] block mb-1">
-                        Primary Service Required <span className="text-rose-500">*</span>
+                        Project Type <span className="text-rose-500">*</span>
                       </label>
                       <select
                         id="lead-service"
@@ -312,9 +310,10 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                         <option value="Search Engine Optimization (SEO)">Search Engine Optimization (SEO)</option>
                         <option value="AI-Generated Website Development">AI-Generated Website Development</option>
                         <option value="WordPress & Custom Web Development">WordPress & Custom Web Development</option>
-                        <option value="Meta Ads Management (Facebook & Instagram)">Meta Ads Management</option>
-                        <option value="Google Ads & PPC Management">Google Ads & PPC Management</option>
-                        <option value="Comprehensive Digital Growth Consultation">Comprehensive Digital Growth Consultation</option>
+                        
+                        
+                        <option value="Website Development / SEO Project">Website Development / SEO Project</option>
+                        <option value="Web Tool / Technical Project">Web Tool / Technical Project</option>
                       </select>
                     </div>
                   </div>
@@ -363,7 +362,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        <span>Submit Free Consultation Request</span>
+                        <span>Submit Project Enquiry</span>
                       </>
                     )}
                   </button>
