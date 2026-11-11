@@ -42,10 +42,10 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
   const coreCompetencies = [
     'Technical SEO & Core Web Vitals measurement',
     'On-Page Semantic Keyword & Entity Mapping',
-    'Local SEO & Google Business Profile 3-Pack',
-    'High-Converting AI Website Architecture',
+    'Local SEO and Google Business Profile Eligibility',
+    'AI-Assisted Website Prototyping and Testing',
     'WordPress Custom Development & Elementor Pro',
-    'High-ROAS Meta Ads (Facebook & Instagram)',
+    'Meta Ads Planning and Conversion Measurement',
     'Precision Google Search & Performance Max Ads',
     'Full-Stack React, TypeScript & Tailwind CSS',
   ];
@@ -60,7 +60,7 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
           <div className="lg:col-span-5 flex flex-col items-center sm:items-start">
             <div className="glass-card rounded-3xl p-6 relative border border-[#E7EAF2] shadow-xl w-full max-w-md mx-auto">
               
-              {/* Authentic Headshot of Moavia Hassan */}
+              {/* Illustrative portrait, not a verified personal photograph */}
               <div ref={portraitHost} className="relative rounded-2xl overflow-hidden shadow-md border-2 border-[#5265D8]/20 bg-slate-100 aspect-[3/4]">
                 {showPortrait ? (
                   <img
@@ -89,7 +89,7 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
                   </div>
                 )}
                 
-                {/* Verified Founder Badge */}
+                {/* Founder label */}
                 <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-md p-3 rounded-xl border border-[#E7EAF2] shadow-lg flex items-center justify-between">
                   <div>
                     <h3 className="text-sm font-extrabold text-[#18243A]">Moavia Hassan</h3>
@@ -99,7 +99,7 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
                 </div>
               </div>
 
-              {/* Verified Location & Contact Details */}
+              {/* Published location and contact details */}
               <div className="mt-5 space-y-2 text-xs">
                 <div className="flex items-center gap-2 text-[#65738B]">
                   <MapPin className="w-4 h-4 text-[#5265D8] shrink-0" />
@@ -119,7 +119,7 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
                 </div>
               </div>
 
-              {/* Social and Verified Profile Links */}
+              {/* Social profile links */}
               <div className="mt-6 pt-4 border-t border-[#E7EAF2] flex flex-wrap items-center gap-2">
                 <a
                   href="https://www.linkedin.com/in/moavia-hassan-seo/"
@@ -173,7 +173,7 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#18243A] tracking-tight leading-tight">
-              Direct Engineering Leadership with <span className="aurora-gradient-text">Moavia Hassan</span>
+              Meet <span className="aurora-gradient-text">Moavia Hassan</span>, Our Founder
             </h2>
 
             <p className="text-sm font-semibold text-[#08786F]">
@@ -181,20 +181,10 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
             </p>
 
             <div className="space-y-4 text-sm text-[#65738B] leading-relaxed">
-              <p>
-                Based in Islamabad, Pakistan, I founded Moavia SEO Pro with a single commitment: eliminating the
-                divide between high-velocity web development and aggressive organic search dominance.
-              </p>
-              <p>
-                Unlike generic agencies where accounts are passed off to junior trainees, every single technical audit,
-                keyword clustering blueprint, and ad campaign architecture at Moavia SEO Pro is directly engineered and
-                supervised by me.
-              </p>
-              <p>
-                Whether you need a high-speed AI-assisted website deployed in React, a custom WordPress architecture,
-                or a scalable multi-channel customer acquisition funnel across Google and Meta, I guarantee transparent
-                communication and measurable revenue growth.
-              </p>
+              <p>Moavia Hassan founded Moavia SEO Pro in Islamabad, Pakistan. The public portfolio includes agency website projects that visitors can inspect directly.</p>
+              <p>His published work and interests cover technical SEO, WordPress and React websites, AI-assisted prototyping, and digital advertising planning. Project scopes and deliverables are discussed according to individual requirements.</p>
+              <p>Explore the <a href="/projects/" className="text-[#4353BC] underline">website portfolio</a>, <a href="https://github.com/mmoavia7861" target="_blank" rel="noopener noreferrer" className="text-[#4353BC] underline">GitHub profile</a> and <a href="https://www.linkedin.com/in/moavia-hassan-seo/" target="_blank" rel="noopener noreferrer" className="text-[#4353BC] underline">LinkedIn profile</a>. Qualifications and client results will only be published with supporting evidence.</p>
+              <p className="text-xs">Portrait shown is an illustration, not a verified personal photograph.</p>
             </div>
 
             {/* Core Competencies Matrix */}

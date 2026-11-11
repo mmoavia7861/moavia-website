@@ -3,18 +3,21 @@
     "id": "dark-agency",
     "title": "Moavia SEO Pro — Dark Theme Website",
     "url": "https://mmoavia7861.github.io/Moavia-SEO-Pro/",
-    "category": "Agency Website"
+    "category": "Agency Website",
+    "description": "A dark-theme agency website preview with a simple design and navigation."
   },
   {
     "id": "agency-multipage",
     "title": "Moavia SEO Pro — Multi-Page Website",
     "url": "https://mmoavia7861.github.io/moaviaseopro/",
-    "category": "Business Website"
+    "category": "Business Website",
+    "description": "An alternate multi-page agency website preview."
   },
   {
     "id": "umm-e-aiman",
     "title": "Umm-E-Aiman — Institute & Hostel Website",
     "url": "https://mmoavia7861.github.io/Umm-E-Aiman/",
-    "category": "Institute Website"
+    "category": "Institute Website",
+    "description": "An institute and hostel website preview."
   }
 ]

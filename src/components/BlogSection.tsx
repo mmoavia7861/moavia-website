@@ -2,11 +2,13 @@ import React from 'react';
 import { BookOpen, ArrowRight, CalendarDays } from 'lucide-react';
 
 const posts = [
-  {slug: 'technical-seo-playbook-2026', topic: 'Technical SEO', title: 'Technical SEO in 2026: A Practical Audit Checklist', excerpt: 'Check indexing, canonical URLs, page speed and schema with a realistic, repeatable audit.'},
-  {slug: 'ai-generated-websites-human-engineering', topic: 'Web Development', title: 'AI-Assisted Websites: Why Human Review Still Matters', excerpt: 'Review AI-generated websites for speed, privacy, security and accessibility before launch.'},
-  {slug: 'mastering-meta-ads-capi-cro', topic: 'Paid Social', title: 'Meta Ads and Conversions API: What to Measure First', excerpt: 'Understand event deduplication, consent, lead quality and landing-page improvements.'},
-  {slug: 'local-seo-google-maps-3pack', topic: 'Local SEO', title: 'Local SEO in Islamabad: Google Maps and Business Eligibility', excerpt: 'Practical guidance for eligible businesses without guaranteed Maps ranking promises.'},
-  {slug: 'image-video-resolution-cro', topic: 'Creative Strategy', title: 'Marketing Images and Videos: Quality Without Slow Pages', excerpt: 'Use efficient visuals, accessible captions and realistic testing for better user experience.'}
+  {slug: 'google-search-console-discovered-vs-indexed', topic: 'Technical SEO', title: 'Search Console: Discovered URLs vs Indexed Pages', excerpt: 'What sitemap success, URL Inspection and indexing reports actually tell you.', published: '11 November 2026'},
+  {slug: 'seo-aeo-geo-small-business-guide', topic: 'SEO, AEO and GEO', title: 'SEO, AEO and GEO: What Small Businesses Should Prioritize', excerpt: 'Practical next steps for search visibility and helpful AI-search content.', published: '11 November 2026'},
+  {slug: 'technical-seo-playbook-2026', topic: 'Technical SEO', title: 'Technical SEO in 2026: A Practical Audit Checklist', excerpt: 'Check indexing, canonical URLs, page speed and schema with a realistic, repeatable audit.', published: '28 October 2026'},
+  {slug: 'ai-generated-websites-human-engineering', topic: 'Web Development', title: 'AI-Assisted Websites: Why Human Review Still Matters', excerpt: 'Review AI-generated websites for speed, privacy, security and accessibility before launch.', published: '28 October 2026'},
+  {slug: 'mastering-meta-ads-capi-cro', topic: 'Paid Social', title: 'Meta Ads and Conversions API: What to Measure First', excerpt: 'Understand event deduplication, consent, lead quality and landing-page improvements.', published: '28 October 2026'},
+  {slug: 'local-seo-google-maps-3pack', topic: 'Local SEO', title: 'Local SEO in Islamabad: Google Maps and Business Eligibility', excerpt: 'Practical guidance for eligible businesses without guaranteed Maps ranking promises.', published: '28 October 2026'},
+  {slug: 'image-video-resolution-cro', topic: 'Creative Strategy', title: 'Marketing Images and Videos: Quality Without Slow Pages', excerpt: 'Use efficient visuals, accessible captions and realistic testing for better user experience.', published: '28 October 2026'}
 ];
 export const BlogSection: React.FC = () => (
   <section id="blog" className="py-24 bg-[#F8F9FD] border-t border-[#E7EAF2]">
@@ -26,7 +28,7 @@ export const BlogSection: React.FC = () => (
               <p className="text-sm text-[#65738B] leading-relaxed mt-3">{post.excerpt}</p>
             </div>
             <div className="mt-6 pt-4 border-t border-[#E7EAF2]">
-              <p className="text-xs text-[#65738B] flex items-center gap-2 mb-3"><CalendarDays className="w-4 h-4" aria-hidden="true"/> Published 28 October 2026</p>
+              <p className="text-xs text-[#65738B] flex items-center gap-2 mb-3"><CalendarDays className="w-4 h-4" aria-hidden="true"/> Published {post.published}</p>
               <a href={`/blog/${post.slug}/`} className="inline-flex items-center gap-2 text-sm font-bold text-[#5265D8] hover:underline">Read full article <ArrowRight className="w-4 h-4" aria-hidden="true" /></a>
             </div>
           </article>

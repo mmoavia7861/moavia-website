@@ -35,7 +35,8 @@ export const PortfolioSection: React.FC = () => (
             </div>
             <p className="mt-6 text-xs font-bold uppercase tracking-wider text-[#4353BC]">{site.category}</p>
             <h3 className="mt-2 text-lg font-extrabold text-[#18243A] leading-snug group-hover:text-[#4353BC]">{site.title}</h3>
-            <p className="mt-4 text-xs text-[#52607A] break-all">{site.url.replace('https://', '')}</p>
+            <p className="mt-3 text-sm leading-relaxed text-[#52607A]">{site.description}</p>
+            <p className="mt-4 text-xs text-[#52607A] break-all>{site.url.replace('https://', '')}</p>
             <span className="inline-flex mt-5 items-center gap-2 font-bold text-[#4353BC] text-sm">Visit Website <ArrowUpRight className="w-4 h-4" aria-hidden="true"/></span>
           </a>
         ))}

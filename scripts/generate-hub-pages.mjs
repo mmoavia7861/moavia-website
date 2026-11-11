@@ -25,7 +25,7 @@ function page(path,title,description,body,kind){
   ]}
  ]};
  const html='<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
- +'<title>'+clean(title)+' | Moavia SEO Pro</title><meta name="description" content="'+clean(description)+'">'
+ +'<title>'+clean(title.includes('Moavia SEO Pro')?title:title+' | Moavia SEO Pro')+'</title><meta name="description" content="'+clean(description)+'">'
  +'<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="'+url+'">'
  +'<meta property="og:site_name" content="Moavia SEO Pro"><meta property="og:title" content="'+clean(title)+'">'
  +'<meta property="og:description" content="'+clean(description)+'"><meta property="og:url" content="'+url+'">'

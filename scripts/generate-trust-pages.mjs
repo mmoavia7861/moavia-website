@@ -14,12 +14,13 @@ const content = [
  intro:'Moavia SEO Pro is an Islamabad-based digital services website founded by Moavia Hassan. We present technical SEO, content and local search guidance, web development and paid marketing services to businesses looking for a clear plan.',
  sections:[
  ['Who we are','Moavia SEO Pro is based in Islamabad, Pakistan. Our website provides service information and educational material about search optimization, responsive websites and measurable advertising. We can discuss projects with clients in Pakistan and other locations. We do not claim a publicly staffed storefront.'],
+ ['Meet the founder','Moavia Hassan founded Moavia SEO Pro in Islamabad, Pakistan. Public portfolio projects include real website previews that visitors can inspect. Learn more through his LinkedIn profile and public GitHub projects; professional certifications should only be shown when verified.'],
  ['Our services','Our listed services include technical and on-page SEO, local SEO guidance, AEO and AI-search content, AI-assisted websites, custom WordPress websites, Meta Ads and Google Ads strategy. Project details, timelines, budgets and deliverables are agreed separately for each enquiry.'],
  ['How we approach projects','A useful starting point is the existing website, audience and business objective. We review discoverability, actual site experience, page content, contact pathways and available measurement. We explain what is known, what needs testing, and which work has the highest practical priority.'],
  ['Transparency and results','No agency can guarantee Google search positions, inclusion in AI-generated search answers or advertising revenue. Illustrative calculators are not client results. Our portfolio links to public websites rather than invented case studies. Verified reviews and case studies should only be published with evidence and permission.'],
  ['Editorial information','Our guides aim to explain technical concepts with practical checklists and links to source documentation. Product rules change over time; readers should confirm relevant details with the platform responsible. Our articles are educational and not individual legal, financial or security advice.'],
- ['Contact the agency','For services, corrections, questions or privacy enquiries, email moaviahassan124@gmail.com or use the contact section at https://moaviaseo.com/#contact. The site also provides a WhatsApp contact route.']
- ],extra:[['Services','/services/seo/'],['Read articles','/blog/'],['Contact','/#contact']]},
+ ['Contact the agency','For services, corrections, questions or privacy enquiries, email moaviahassan124@gmail.com, call or WhatsApp +92 323 4313869, or use the contact page at https://moaviaseo.com/contact/.']
+ ],extra:[['Founder LinkedIn','https://www.linkedin.com/in/moavia-hassan-seo/'],['GitHub profile','https://github.com/mmoavia7861'],['Website portfolio','/projects/'],['Services','/services/'],['Read articles','/blog/'],['Contact','/contact/']]},
  {path:'/privacy-policy/',title:'Privacy Policy | Moavia SEO Pro',name:'Privacy Policy',
  intro:'This policy describes the information that may be processed when visiting moaviaseo.com, sending an enquiry, subscribing to updates, signing in to administrative features, or choosing to use interactive AI tools. Last updated: 28 October 2026.',
  sections:[
@@ -48,6 +49,31 @@ const content = [
 ];
 
 const articles = [
+ {slug:'google-search-console-discovered-vs-indexed',published:'2026-11-11',name:'Search Console: Discovered URLs vs Indexed Pages',desc:'Understand what a successful sitemap means, why discovery is not indexing, and how to use URL Inspection responsibly.',topic:'Technical SEO',
+ sections:[
+ ['What does a successful sitemap mean?','A successful sitemap status means Search Console was able to read and process the submitted sitemap. The discovered URL count shows URLs identified from that file, not how many pages Google has indexed or will rank. A sitemap helps discovery, but indexing is a separate decision.','Use canonical HTTPS URLs in your sitemap. Include pages that offer distinct value, such as service descriptions, authentic company information, useful articles and contact details. Exclude admin routes, API endpoints and duplicate URLs.'],
+ ['Understanding the Page Indexing report','A new Search Console property can show a processing message while Google collects and aggregates information. The message alone does not prove an SEO error. Page indexing reports can also lag behind changes on your live website.','For an important URL, run URL Inspection and distinguish the Google Index report from the live test. The live test checks whether Google can access the page now, but passing it is not a promise of indexing.'],
+ ['What to check if a page is not indexed','Open the URL directly and confirm a useful response. Check robots.txt, noindex directives, redirects and canonical tags. Make sure the page contains original information and can be reached through internal links rather than only through a sitemap.','A new page may simply not have been crawled yet. Where appropriate, request indexing once after checking the page. Repeated requests cannot force Google to put the page in results.'],
+ ['Use the right success measures','For an Islamabad-based service business, useful Search Console information includes impressions, clicks, queries, relevant landing pages and whether real enquiries arrive. These are different measurements and should not be combined into an imaginary ranking score.','Track changes over time and annotate important publications or deployments. One screenshot of a search position or a PageSpeed score cannot establish long-term business growth.'],
+ ['A practical weekly checklist','Review sitemap access and the high-priority URL Inspection reports. Check for new indexing issues, look for broken links or unintended canonical changes and compare search traffic over consistent periods.','Publish a helpful answer when the website lacks information customers actually need. Avoid duplicating city pages or mass-generating similar posts just to increase the number of indexed URLs.']
+ ],sources:[
+ ['Google: Build and submit a sitemap','https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap'],
+ ['Google: Ask Google to recrawl URLs','https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl'],
+ ['Google URL Inspection tool','https://support.google.com/webmasters/answer/9012289']
+ ]},
+ {slug:'seo-aeo-geo-small-business-guide',published:'2026-11-11',name:'SEO, AEO and GEO: What Small Businesses Should Prioritize',desc:'A practical comparison of search engine optimization, answer-focused content and AI-assisted discovery for small businesses.',topic:'SEO, AEO and GEO',
+ sections:[
+ ['Start with useful SEO fundamentals','SEO helps people and search engines find, access and understand useful information about a business. For a service business, the essentials include specific service pages, truthful contact information, descriptive headings, links that work, responsive layouts and reliable website performance.','Technical tasks such as sitemaps, canonical tags and crawlable HTML matter, but these alone do not make a company the most relevant result for every query. Useful original information and real business credibility matter too.'],
+ ['What does AEO add?','Answer Engine Optimization is a common term for making clear responses to real user questions. Start with a direct answer, then explain situations where the answer changes, the practical next steps and a link to relevant detail.','For example, an Islamabad clinic deciding whether to create a local SEO page needs eligibility, service area and customer information—not a repetitive paragraph containing the city name. FAQ structured data must match what is visibly written on the page.'],
+ ['What is GEO?','Generative Engine Optimization refers to practices intended to help AI-assisted search systems recognize credible information. It overlaps heavily with SEO: understandable content, clear brand identity, firsthand examples, useful links and independent mentions when they are earned.','AI tools may cite different sources or omit a company depending on the prompt, available search results and other factors. There is no reliable code snippet or payment that guarantees an appearance in a best-agency list.'],
+ ['A realistic Islamabad example','An Islamabad-based digital agency can first explain the services it actually offers and provide a direct contact method. Next, it can link to public website examples and write helpful articles answering genuine technical questions. If it operates exclusively online, it should not invent a storefront to gain a Google Maps listing.','A small business should choose content topics from actual customer questions instead of creating dozens of duplicate neighbourhood pages. The goal is to help someone choose a suitable service and understand the process.'],
+ ['How to monitor progress','Use Search Console to track discoverability, indexing and relevant query trends over time. For AI-assisted search, keep a list of test prompts and record date, product, region and whether a real URL was cited. Treat AI outputs as variable observations, not guaranteed placements.','Revise articles when platform rules change. Real experience, documented methods and accurate updates build a more useful resource than bulk publishing content with no independent review.']
+ ],sources:[
+ ['Google SEO Starter Guide','https://developers.google.com/search/docs/fundamentals/seo-starter-guide'],
+ ['Google AI features and websites','https://developers.google.com/search/docs/appearance/ai-features'],
+ ['Google Business Profile eligibility','https://support.google.com/business/answer/13763036']
+ ]},
+
  {slug:'technical-seo-playbook-2026',name:'Technical SEO in 2026: A Practical Audit Checklist',desc:'A practical guide to indexing, canonical URLs, sitemap checks, internal linking, mobile performance and structured data.',topic:'Technical SEO',
  sections:[
  ['Check indexing before making assumptions','Search Console URL Inspection tells you whether a URL can be accessed and whether Google has indexed it. A successful live test is not the same as an indexed page. Monitor the actual Google Index status, HTTP responses and server redirects.','Check for accidental noindex directives, blocked paths and canonical links that point to another URL. A sitemap assists discovery but does not force indexing.'],
@@ -97,7 +123,10 @@ const footer='<footer><div class="wrap"><div><strong>Moavia SEO Pro</strong><p>I
 const schemaText = x => JSON.stringify(x).replace(/</g,'\\u003c');
 function layout(info,inner){
  const url=host+info.path;const article=info.type==='article';
- const entity=article?{'@type':'BlogPosting',headline:info.name,description:info.desc,datePublished:date,dateModified:date,
+ const published=article?(info.published||date):date;
+ const displayedDate=article?new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(published+'T12:00:00Z')):dateText;
+ const pageTitle=info.seoTitle || (info.name.includes('Moavia SEO Pro') ? info.name : info.name+' | Moavia SEO Pro');
+ const entity=article?{'@type':'BlogPosting',headline:info.name,description:info.desc,datePublished:published,dateModified:published,
    mainEntityOfPage:url,author:{'@type':'Organization',name:'Moavia SEO Pro Editorial Team',url:host+'/about/'},
    publisher:{'@type':'Organization',name:'Moavia SEO Pro',url:host+'/'}}
    :{'@type':info.path==='/about/'?'AboutPage':info.path==='/blog/'?'CollectionPage':'WebPage',name:info.name,url,description:info.desc};
@@ -106,7 +135,7 @@ function layout(info,inner){
  crumbs.push({'@type':'ListItem',position:article?3:2,name:info.name,item:url});
  const json=schemaText({'@context':'https://schema.org','@graph':[entity,{'@type':'BreadcrumbList',itemListElement:crumbs}]});
  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-  +'<title>'+esc(info.name)+' | Moavia SEO Pro</title><meta name="description" content="'+esc(info.desc)+'">'
+  +'<title>'+esc(pageTitle)+'</title><meta name="description" content="'+esc(info.desc)+'">'
   +'<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="'+esc(url)+'">'
   +'<meta property="og:site_name" content="Moavia SEO Pro"><meta property="og:type" content="'+(article?'article':'website')+'">'
   +'<meta property="og:title" content="'+esc(info.name)+'"><meta property="og:description" content="'+esc(info.desc)+'">'
@@ -117,7 +146,7 @@ function layout(info,inner){
   +'<header><div class="wrap"><a class="brand" href="/"><img src="/assets/aistudio/moavia_seopro_logo_720x720_10966138.png" alt="" width="42" height="42">Moavia SEO Pro</a>'+commonLinks+'</div></header>'
   +'<main><div class="wrap subnav">'+a('/','Home')+' / '+(article?a('/blog/','Blog')+' / ':'')+esc(info.name)+'</div>'
   +'<div class="hero"><div class="wrap"><span class="pill">'+esc(info.topic||'Moavia SEO Pro')+'</span><h1>'+esc(info.name)+'</h1>'
-  +(info.intro?par(info.intro):'')+(article?'<p class="note">Published <time datetime="'+date+'">'+dateText+'</time> · By <a href="/about/">Moavia SEO Pro Editorial Team</a></p>':'')
+  +(info.intro?par(info.intro):'')+(article?'<p class="note">Published <time datetime="'+published+'">'+displayedDate+'</time> · By <a href="/about/">Moavia SEO Pro Editorial Team</a></p>':'')
   +'</div></div><div class="wrap editorial-content">'+inner+'</div></main>'+footer+'</body></html>\n';
 }
 function save(path,html) {
@@ -127,19 +156,20 @@ mkdirSync(join(root,'blog'),{recursive:true});
 writeFileSync(join(root,'blog/editorial.css'),'.editorial-content{max-width:900px;margin:2.5rem auto 5rem}.editorial-content section{margin-top:2.5rem}.editorial-content p{font-size:1.04rem;color:#485872;line-height:1.85}.editorial-content h2{font-size:clamp(1.3rem,3vw,1.85rem);margin-bottom:.7rem}.editorial-content .cards{margin-top:1.3rem}.editorial-content .card{margin:0}.editorial-content .card h2{font-size:1.2rem}.editorial-content a{overflow-wrap:anywhere}footer a{margin-right:.7rem}footer p{font-size:.9rem;margin:0}.hero .note{font-size:.9rem}.hero .note a{font-size:inherit}\n','utf8');
 for(const p of content){
  const inner=p.sections.map(([heading,...paragraphs])=>'<section><h2>'+esc(heading)+'</h2>'+paragraphs.map(par).join('')+'</section>').join('')
+ +(p.path==='/about/'?'<section class="card"><h2>Founder profile</h2><p><strong>Moavia Hassan</strong> founded Moavia SEO Pro in Islamabad. Explore his <a href="https://www.linkedin.com/in/moavia-hassan-seo/" target="_blank" rel="noopener noreferrer">LinkedIn profile</a>, <a href="https://github.com/mmoavia7861" target="_blank" rel="noopener noreferrer">GitHub profile</a>, and <a href="/projects/">public website portfolio</a>. These links are evidence of published pages, not independently validated qualifications.</p><figure><img src="/assets/aistudio/ChatGPT_Image_Apr_12__2026__04_13_21_PM_7c49c572.png" width="170" height="227" loading="lazy" decoding="async" alt="Illustrative founder portrait" style="border-radius:14px;max-width:100%;height:auto"><figcaption>Illustrative portrait, not a verified photograph.</figcaption></figure></section>':'')
  +'<section class="card"><h2>Related pages</h2><ul class="clean">'+p.extra.map(([title,url])=>'<li>'+a(url,title)+'</li>').join('')+'</ul></section>';
- save(p.path,layout({path:p.path,name:p.name,desc:p.intro,intro:p.intro,topic:'About and policies'},inner));
+ save(p.path,layout({path:p.path,name:p.name,seoTitle:p.title,desc:p.intro,intro:p.intro,topic:'About and policies'},inner));
 }
 for(const p of articles){
  const path='/blog/'+p.slug+'/';
  const sections=p.sections.map(([heading,...paragraphs])=>'<section><h2>'+esc(heading)+'</h2>'+paragraphs.map(par).join('')+'</section>').join('');
  const sources='<section class="card"><h2>Source documentation</h2><p>Check the original platform documentation for updates and detail.</p><ul class="clean">'
   +p.sources.map(([name,url])=>'<li><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(name)+'</a></li>').join('')+'</ul></section>';
- const related='<section><h2>Explore related services</h2><p>'+a('/services/seo/','SEO services')+' · '+a('/services/aeo-geo-optimization/','AI search and AEO')+' · '+a('/#contact','Contact our agency')+'</p></section>';
- save(path,layout({path,name:p.name,desc:p.desc,intro:p.desc,topic:p.topic,type:'article'},'<article>'+sections+sources+related+'</article>'));
+ const related='<section><h2>Explore related services</h2><p>'+a('/services/seo/','SEO services')+' · '+a('/services/aeo-geo-optimization/','AI search and AEO')+' · '+a('/contact/','Contact our agency')+'</p></section>';
+ save(path,layout({path,name:p.name,desc:p.desc,intro:p.desc,topic:p.topic,type:'article',published:p.published},'<article>'+sections+sources+related+'</article>'));
 }
 const indexBody='<section><h2>Explore our practical articles</h2><div class="cards">'+articles.map(p=>
- '<article class="card"><span class="pill">'+esc(p.topic)+'</span><h2><a href="/blog/'+esc(p.slug)+'/">'+esc(p.name)+'</a></h2><p>'+esc(p.desc)+'</p><p class="note">Published '+dateText+'</p><a href="/blog/'+esc(p.slug)+'/">Read full article</a></article>').join('')+'</div></section>'
+ '<article class="card"><span class="pill">'+esc(p.topic)+'</span><h2><a href="/blog/'+esc(p.slug)+'/">'+esc(p.name)+'</a></h2><p>'+esc(p.desc)+'</p><p class="note">Published '+(p.published?new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(p.published+'T12:00:00Z')):dateText)+'</p><a href="/blog/'+esc(p.slug)+'/">Read full article</a></article>').join('')+'</div></section>'
  +'<section><h2>More detailed guides</h2><p>'+a('/guides/technical-seo-checklist/','Technical SEO checklist')+' · '+a('/guides/seo-aeo-geo-explained/','SEO vs AEO vs GEO')+'</p></section>';
 save('/blog/',layout({path:'/blog/',name:'SEO and Digital Marketing Blog',desc:'Practical articles about technical SEO, AI-assisted websites, local search, Meta Ads and faster marketing media.',intro:'Learn how to make a website discoverable, usable and measurable with practical explanations grounded in original platform documentation.',topic:'Agency learning hub'},indexBody));
 let sitemap=readFileSync(join(root,'sitemap.xml'),'utf8');

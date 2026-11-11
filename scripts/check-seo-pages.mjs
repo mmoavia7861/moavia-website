@@ -22,6 +22,8 @@ const routes = [
   '/blog/mastering-meta-ads-capi-cro/',
   '/blog/local-seo-google-maps-3pack/',
   '/blog/image-video-resolution-cro/',
+  '/blog/google-search-console-discovered-vs-indexed/',
+  '/blog/seo-aeo-geo-small-business-guide/',
   '/projects/',
   '/services/',
   '/contact/',
@@ -38,6 +40,8 @@ check(root.includes('href="/services/"'), 'homepage lacks services hub link');
 check(root.includes('href="/contact/"'), 'homepage lacks contact hub link');
 check(root.includes('FAQPage'), 'homepage lacks FAQ schema');
 check(root.includes('og:site_name'), 'homepage site name missing');
+check(root.includes('<h1>SEO, AEO and Website Development in Islamabad</h1>'), 'homepage H1 not updated');
+check(root.includes('tel:+923234313869'), 'homepage visible phone number missing');
 check(existsSync(join(dist, 'favicon.png')), 'favicon missing');
 check(existsSync(join(dist, 'site-logo.png')), 'site logo missing');
 check(existsSync(join(dist, 'apple-touch-icon.png')), 'Apple touch icon missing');
@@ -52,6 +56,7 @@ for (const route of routes) {
   check(html.includes('<h1>') && html.includes('</h1>'), 'visible title missing: ' + route);
   check(html.includes('<meta name="description"'), 'description missing: ' + route);
   check(html.includes('application/ld+json'), 'JSON-LD missing: ' + route);
+  check(!/<title>[^<]*Moavia SEO Pro[^<]*Moavia SEO Pro<\/title>/.test(html), 'duplicate brand in title: '+route);
   check(html.includes('href="/favicon.png"'), 'static page favicon link missing: ' + route);
   if ((route.startsWith('/services/') && route !== '/services/') || route.startsWith('/guides/')) {
     check(html.includes('Frequently asked questions'), 'visible answer section missing: ' + route);
@@ -62,8 +67,9 @@ for (const route of routes) {
   check(Boolean(matched), 'schema script missing: ' + route);
   const schema = JSON.parse(matched[1]);
   if (route.startsWith('/blog/') && route !== '/blog/') {
-    check(html.includes('<time datetime="2026-10-28">'), 'article needs a visible publication date: '+route);
+    check(/<time datetime="\d{4}-\d{2}-\d{2}">/.test(html), 'article needs a visible publication date: '+route);
     check(JSON.stringify(schema).includes('BlogPosting'), 'article schema missing: '+route);
+    check(html.includes('href="/services/"') && html.includes('href="/contact/"'), 'inconsistent blog navigation: '+route);
   }
 }
 check((sitemap.match(/<loc>/g) || []).length === routes.length + 1,

@@ -62,11 +62,11 @@ export const Hero: React.FC<HeroProps> = ({
             {/* Official Headlines */}
             <div className="space-y-4">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-[#18243A] leading-[1.1] tracking-tight">
-                Your Digital Growth Starts With{' '}
-                <span className="aurora-gradient-text">Smarter Solutions.</span>
+                SEO, AEO &amp; Website Development in{' '}
+                <span className="aurora-gradient-text">Islamabad.</span>
               </h1>
               <h2 className="text-xl sm:text-2xl font-bold text-[#5265D8]">
-                SEO, AI-Powered Websites & Performance Marketing.
+                Your Digital Growth Starts With Smarter Solutions.
               </h2>
               <p className="text-base sm:text-lg text-[#65738B] max-w-2xl leading-relaxed">
                 Moavia SEO Pro combines search engine optimization, professional website development,
@@ -130,7 +130,10 @@ export const Hero: React.FC<HeroProps> = ({
               </button>
             </div>
 
-            {/* Founder Headshot & Verification Badge */}
+            <p className="text-sm text-[#18243A]"><span className="font-bold">Phone / WhatsApp:</span>{' '}
+              <a href="tel:+923234313869" className="text-[#4053C6] underline underline-offset-4">+92 323 4313869</a>
+              {' · '}<a href="mailto:moaviahassan124@gmail.com" className="text-[#4053C6] underline underline-offset-4">Email</a></p>
+            {/* Founder profile */}
             <div className="flex items-center gap-4 pt-4 border-t border-[#E7EAF2]">
               <img
                 src={`${import.meta.env.BASE_URL}assets/aistudio/moavia_seopro_logo_720x720_10966138.png`}
@@ -149,7 +152,7 @@ export const Hero: React.FC<HeroProps> = ({
                   </span>
                 </h3>
                 <p className="text-xs text-[#65738B]">
-                  Direct founder involvement on every client campaign, technical audit, and code delivery.
+                  Founder of Moavia SEO Pro. Explore our public website portfolio and discuss your own project scope.
                 </p>
               </div>
             </div>
