@@ -107,8 +107,8 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ onDirectConsulta
                 </div>
                 <div className="flex items-center gap-2 text-[#65738B]">
                   <Mail className="w-4 h-4 text-[#8B63D8] shrink-0" />
-                  <a href="mailto:moaviahassan124@gmail.com" className="hover:text-[#5265D8] transition-colors">
-                    moaviahassan124@gmail.com
+                  <a href="mailto:hello@moaviaseo.com" className="hover:text-[#5265D8] transition-colors">
+                    hello@moaviaseo.com
                   </a>
                 </div>
                 <div className="flex items-center gap-2 text-[#65738B]">

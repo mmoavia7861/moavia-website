@@ -143,7 +143,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
               </a>
 
               <a
-                href="mailto:moaviahassan124@gmail.com"
+                href="mailto:hello@moaviaseo.com"
                 className="p-4 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] hover:border-[#5265D8] flex items-center gap-4 transition-all group"
               >
                 <div className="p-3 rounded-xl bg-[#5265D8]/10 text-[#5265D8] group-hover:scale-110 transition-transform">
@@ -151,8 +151,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                 </div>
                 <div>
                   <h3 className="text-xs font-bold text-[#18243A]">Email</h3>
-                  <p className="text-sm font-extrabold text-[#5265D8]">moaviahassan124@gmail.com</p>
-                  <span className="text-[10px] text-[#65738B]">Secondary: moavia400@gmail.com</span>
+                  <p className="text-sm font-extrabold text-[#5265D8]">hello@moaviaseo.com</p>
                 </div>
               </a>
 

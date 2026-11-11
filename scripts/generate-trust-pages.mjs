@@ -16,14 +16,14 @@ const content = [
  ['Who I am','I work on SEO, website projects and useful online tools. My interests include technical SEO, on-page improvements, React, WordPress and user-friendly website design.'],
  ['Public projects','You can visit the published website projects directly, including RankNova and other public web previews. A publicly linked demo is not presented as proof of a paid client engagement or guaranteed outcome.'],
  ['Profile image','A real personal photograph has not yet been provided for this website. The logo on the homepage is a branding image, not a photograph or verified portrait.'],
- ['Profiles and contact','Find my work on GitHub at https://github.com/mmoavia7861 and my LinkedIn profile at https://www.linkedin.com/in/moavia-hassan-seo/. For enquiries use moaviahassan124@gmail.com.'],
+ ['Profiles and contact','Find my work on GitHub at https://github.com/mmoavia7861 and my LinkedIn profile at https://www.linkedin.com/in/moavia-hassan-seo/. For enquiries use hello@moaviaseo.com.'],
  ['Working approach','For new projects, I first review the website or idea, the requested features, constraints and goals. We can discuss availability, scope and deliverables before agreeing paid work.'],
  ['Honest claims','I do not guarantee search rankings, advertising revenue or AI-search citations. I avoid displaying fabricated results, reviews, client testimonials or certifications.']
  ],extra:[['LinkedIn profile','https://www.linkedin.com/in/moavia-hassan-seo/'],['GitHub profile','https://github.com/mmoavia7861'],['Website projects','/projects/'],['SEO and web tools','/#tools'],['Hire Me','/hire-me/'],['Contact','/contact/']]},
  {path:'/privacy-policy/',title:'Privacy Policy | Moavia SEO Pro',name:'Privacy Policy',
  intro:'This policy describes the information that may be processed when visiting moaviaseo.com, sending an enquiry, subscribing to updates, signing in to administrative features, or choosing to use interactive AI tools. Last updated: 28 October 2026.',
  sections:[
- ['Who manages this website','Moavia SEO Pro is based in Islamabad, Pakistan. Questions about privacy, information you submitted, correction or deletion requests can be sent to moaviahassan124@gmail.com. We may verify requests before acting on records.'],
+ ['Who manages this website','Moavia SEO Pro is based in Islamabad, Pakistan. Questions about privacy, information you submitted, correction or deletion requests can be sent to hello@moaviaseo.com. We may verify requests before acting on records.'],
  ['Information you provide','The consultation form may collect your full name, work email, phone or WhatsApp number, business name, website address, chosen service, budget and project description. We use this information to respond and manage enquiries. The optional newsletter subscription collects an email address to maintain an updates list. Please do not submit passwords, payment card details or unnecessary sensitive information.'],
  ['AI and SEO tools','If you deliberately use the AI Studio tools, your prompt, URLs or submitted text may be processed by our Cloudflare Worker backend and, for AI-powered responses, by Google Gemini services. A URL audit may retrieve publicly accessible website HTML. Avoid sending confidential data or credentials. AI outputs can be inaccurate and should be independently reviewed.'],
  ['Hosting, Firebase and technical information','We use Cloudflare to host and serve the website and API requests. Firebase and other Google services support some contact, newsletter and administrative functions. These providers may process information necessary for their operations, such as network addresses, browser and request details, sign-in information or submitted records. Providers may process data outside your country.'],
@@ -43,7 +43,7 @@ const content = [
  ['Consultations and project contracts','Sending a consultation form does not create a paid project contract. The scope, delivery plan, pricing, deadlines, payment schedule and any warranties must be separately agreed in writing before work begins.'],
  ['Content ownership and third-party links','Original site materials and branding may not be copied and presented as your own without permission. Other brands, platforms and trademarks belong to their respective owners. External links are provided for context, not as a guarantee or endorsement of everything on those sites.'],
  ['Availability and limitations','We may update the website, change features or apply usage limits. We aim for reliable content but do not promise continuous availability or error-free tools. Any liability limitations apply only to the extent permitted by applicable law.'],
- ['Questions and revisions','Contact moaviahassan124@gmail.com for questions about using the website or a proposed paid service. We may update these general website terms and will show a revised date. They should be reviewed for the business’s actual contracting and legal needs.']
+ ['Questions and revisions','Contact hello@moaviaseo.com for questions about using the website or a proposed paid service. We may update these general website terms and will show a revised date. They should be reviewed for the business’s actual contracting and legal needs.']
  ],extra:[['Privacy Policy','/privacy-policy/'],['About us','/about/'],['Contact','/#contact']]}
 ];
 
@@ -118,7 +118,7 @@ const articles = [
 
 const allPaths=[...content.map(p=>p.path),'/blog/',...articles.map(p=>'/blog/'+p.slug+'/')];
 const commonLinks='<nav aria-label="Main navigation"><a href="/#tools">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
-const footer='<footer><div class="wrap"><div><strong>Moavia SEO Pro</strong><p>Islamabad, Pakistan</p></div><div>'+[['About Us','/about/'],['Blog','/blog/'],['Privacy Policy','/privacy-policy/'],['Terms & Conditions','/terms-and-conditions/']].map(([name,href])=>a(href,name)).join(' · ')+'</div><div><a href="mailto:moaviahassan124@gmail.com">Contact by email</a></div></div></footer>';
+const footer='<footer><div class="wrap"><div><strong>Moavia SEO Pro</strong><p>Islamabad, Pakistan</p></div><div>'+[['About Us','/about/'],['Blog','/blog/'],['Privacy Policy','/privacy-policy/'],['Terms & Conditions','/terms-and-conditions/']].map(([name,href])=>a(href,name)).join(' · ')+'</div><div><a href="mailto:hello@moaviaseo.com">Contact by email</a></div></div></footer>';
 const schemaText = x => JSON.stringify(x).replace(/</g,'\\u003c');
 function layout(info,inner){
  const url=host+info.path;const article=info.type==='article';

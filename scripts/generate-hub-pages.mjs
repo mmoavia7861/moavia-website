@@ -28,7 +28,7 @@ function page(path,title,description,body,kind){
  +'<div class="wrap">'+body+'</div></main>'
  +'<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>Islamabad, Pakistan</p></div>'
  +'<div><a href="/#tools">Tools</a> · <a href="/projects/">Projects</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></div>'
- +'<div><a href="mailto:moaviahassan124@gmail.com">Email</a></div></div></footer></body></html>\n';
+ +'<div><a href="mailto:hello@moaviaseo.com">Email</a></div></div></footer></body></html>\n';
  const dir=join(root,path.replace(/^\/|\/$/g,''));mkdirSync(dir,{recursive:true});
  writeFileSync(join(dir,'index.html'),html,'utf8');
 }
@@ -37,12 +37,12 @@ page('/hire-me/','Hire Me | Moavia Hassan',
 '<section><h2>What I can discuss</h2><p>Technical and on-page SEO reviews, WordPress or React website work, usability improvements, and useful web tools. I only take on projects after confirming the scope, requirements and my availability.</p>'
 +'<p>There are no promised Google rankings, fixed results, or unverified client success claims.</p></section>'
 +'<section><h2>How to get started</h2><ol class="clean"><li>Send your website URL or project idea.</li><li>Describe the goal, audience and required features.</li><li>We can agree scope, timeline and pricing in writing before any paid work.</li></ol></section>'
-+'<section class="card"><h2>Contact me</h2><p>Email <a href="mailto:moaviahassan124@gmail.com">moaviahassan124@gmail.com</a> or <a href="/contact/">use the contact page</a>.</p><a class="action" href="mailto:moaviahassan124@gmail.com?subject=Website%20or%20SEO%20project%20enquiry">Send an enquiry</a></section>',
++'<section class="card"><h2>Contact me</h2><p>Email <a href="mailto:hello@moaviaseo.com">hello@moaviaseo.com</a> or <a href="/contact/">use the contact page</a>.</p><a class="action" href="mailto:hello@moaviaseo.com?subject=Website%20or%20SEO%20project%20enquiry">Send an enquiry</a></section>',
 'hire');
 page('/contact/','Contact Moavia Hassan',
 'Contact Moavia Hassan about an SEO tool, web project or possible collaboration. Email and WhatsApp available.',
 '<section><h2>Contact details</h2><p>Based in Islamabad, Pakistan, working online. No walk-in office is advertised.</p>'
-+'<div class="cards"><article class="card"><h3>Email</h3><p><a href="mailto:moaviahassan124@gmail.com">moaviahassan124@gmail.com</a></p><p>Include your website and the purpose of your message.</p></article>'
++'<div class="cards"><article class="card"><h3>Email</h3><p><a href="mailto:hello@moaviaseo.com">hello@moaviaseo.com</a></p><p>Include your website and the purpose of your message.</p></article>'
 +'<article class="card"><h3>WhatsApp</h3><p><a href="https://wa.me/923234313869" target="_blank" rel="noopener noreferrer">+92 323 4313869</a></p><p>Use for project enquiries.</p></article></div></section>'
 +'<section><h2>Project enquiries</h2><p>Share the website address, problem, goal and preferred reply channel. Do not send passwords or sensitive customer data.</p><p><a href="/#contact">Open the website contact form</a> · <a href="/hire-me/">Hire Me</a> · <a href="/privacy-policy/">Privacy Policy</a></p></section>',
 'contact');

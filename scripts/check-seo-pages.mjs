@@ -17,6 +17,8 @@ check(root.includes('<link rel="canonical" href="'+base+'/"'),'missing homepage 
 check(root.includes('<h1>Moavia Hassan: SEO Tools &amp; Web Projects</h1>'),'wrong homepage fallback H1');
 check(root.includes('Moavia Hassan: SEO Tools & Web Projects'),'wrong site title');
 check(root.includes('https://moaviaseo.com/#person'),'person schema missing');
+check(root.includes('mailto:hello@moaviaseo.com'),'public homepage must use verified domain email');
+check(!root.includes('moaviahassan124@gmail.com'),'legacy personal email should not appear on public homepage');
 for(const href of ['/#tools','/projects/','/about/','/contact/','/hire-me/']){
  check(root.includes('href="'+href+'"'),'homepage link missing: '+href);
 }
@@ -33,6 +35,10 @@ for(const route of routes){
  check(html.includes('application/ld+json'),'schema missing: '+route);
  check(sitemap.includes('<loc>'+base+route+'</loc>'),'sitemap missing: '+route);
  check(html.includes('href="/favicon.png"'),'favicon missing: '+route);
+  if(['/about/','/privacy-policy/','/terms-and-conditions/','/contact/','/hire-me/'].includes(route)) {
+    check(html.includes('hello@moaviaseo.com'),'domain email missing: '+route);
+    check(!html.includes('moaviahassan124@gmail.com'),'old personal email remains: '+route);
+  }
  const matched=html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
  check(Boolean(matched),'schema script missing: '+route);JSON.parse(matched[1]);
  if(route.startsWith('/blog/')&&route!=='/blog/')check(/<time datetime="\d{4}-\d{2}-\d{2}">/.test(html),'blog date missing: '+route);
