@@ -27,7 +27,7 @@ export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const sections = [
-    { label: 'Tools', href: '/#tools' },
+    { label: 'Tools', href: '/tools/' },
     { label: 'Projects', href: '/#projects' },
     { label: 'About', href: '/#about' },
     { label: 'Contact', href: '/#contact' },
@@ -60,7 +60,7 @@ export default function App() {
               <h1 id="homepage-title" className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">Moavia Hassan: <span className="text-[#5265D8]">SEO Tools & Web Projects</span></h1>
               <p className="mt-6 max-w-2xl text-base sm:text-xl leading-relaxed text-[#52607A]">Explore practical SEO and web tools, browse public website projects, and see how I approach creating useful, accessible web experiences. The portfolio links to real project websites, not invented case studies.</p>
               <div className="mt-9 flex flex-wrap gap-3">
-                <a href="/#tools" className="inline-flex items-center gap-2 rounded-xl bg-[#5265D8] px-5 py-3 font-bold text-white hover:bg-[#4353BC]">Explore Tools <ArrowRight className="w-4 h-4" /></a>
+                <a href="/tools/" className="inline-flex items-center gap-2 rounded-xl bg-[#5265D8] px-5 py-3 font-bold text-white hover:bg-[#4353BC]">Explore Tools <ArrowRight className="w-4 h-4" /></a>
                 <a href="/#projects" className="inline-flex items-center gap-2 rounded-xl border border-[#C9D1E7] bg-white px-5 py-3 font-bold text-[#18243A] hover:bg-[#F4F6FF]">View Projects <Code2 className="w-4 h-4" /></a>
                 <a href="/hire-me/" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 font-bold text-[#4353BC] hover:underline">Hire Me <ArrowUpRight className="w-4 h-4" /></a>
               </div>
@@ -68,7 +68,28 @@ export default function App() {
           </div>
         </section>
 
-        <OnView id="tools" minHeight={540}><AiToolsSection /></OnView>
+        <section id="tools" className="scroll-mt-20 bg-white border-y border-[#E7EAF2] py-16 sm:py-20" aria-labelledby="featured-tools-heading">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p className="text-xs font-extrabold uppercase tracking-widest text-[#5265D8]">Free browser-based utilities</p>
+            <h2 id="featured-tools-heading" className="mt-3 text-3xl sm:text-4xl font-extrabold">Explore 3 practical SEO tools</h2>
+            <p className="mt-3 max-w-3xl text-[#52607A]">Each tool has its own page and works with information you enter. No invented SEO audit scores.</p>
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
+              {[
+                { title: 'Meta Title & Description Checker', href: '/tools/meta-title-description-checker/', description: 'Check metadata and preview an illustrative search snippet.' },
+                { title: 'JSON-LD Schema Generator', href: '/tools/json-ld-schema-generator/', description: 'Create FAQPage, Organization and Article structured data.' },
+                { title: 'Robots.txt & XML Sitemap Generator', href: '/tools/robots-txt-sitemap-generator/', description: 'Create robots.txt and sitemap.xml from real URLs.' },
+              ].map(tool => (
+                <article key={tool.href} className="flex flex-col rounded-2xl border border-[#DCE3F2] bg-[#F8F9FD] p-6">
+                  <h3 className="text-lg font-extrabold">{tool.title}</h3>
+                  <p className="mt-3 mb-6 flex-1 text-sm leading-7 text-[#52607A]">{tool.description}</p>
+                  <a href={tool.href} className="inline-flex items-center gap-2 font-bold text-[#4353BC] hover:underline">Open tool <ArrowRight className="w-4 h-4" /></a>
+                </article>
+              ))}
+            </div>
+            <a href="/tools/" className="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#5265D8] px-5 py-3 font-bold text-white hover:bg-[#4353BC]">View All Tools <ArrowRight className="w-4 h-4" /></a>
+          </div>
+        </section>
+        <OnView id="experiments" minHeight={540}><AiToolsSection /></OnView>
 
         <section id="projects" className="scroll-mt-20" aria-label="Website projects">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 text-center">
@@ -128,7 +149,7 @@ export default function App() {
           <div className="flex flex-wrap justify-between gap-7">
             <div><p className="font-extrabold text-white">Moavia Hassan</p><p className="mt-2 text-sm text-slate-400">SEO Tools · Web Projects · Islamabad, Pakistan</p><a href="mailto:hello@moaviaseo.com" className="mt-3 inline-flex items-center gap-2 text-sm text-slate-200 hover:text-white"><Mail className="h-4 w-4" /> hello@moaviaseo.com</a></div>
             <nav aria-label="Footer" className="flex flex-wrap items-start gap-x-5 gap-y-3 text-sm">
-              <a href="/#tools" className="hover:text-white">Tools</a><a href="/projects/" className="hover:text-white">Projects</a><a href="/about/" className="hover:text-white">About</a><a href="/contact/" className="hover:text-white">Contact</a><a href="/hire-me/" className="hover:text-white">Hire Me</a><a href="/blog/" className="hover:text-white">Blog</a>
+              <a href="/tools/" className="hover:text-white">Tools</a><a href="/projects/" className="hover:text-white">Projects</a><a href="/about/" className="hover:text-white">About</a><a href="/contact/" className="hover:text-white">Contact</a><a href="/hire-me/" className="hover:text-white">Hire Me</a><a href="/blog/" className="hover:text-white">Blog</a>
             </nav>
           </div>
           <div className="mt-9 border-t border-slate-700 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">

@@ -35,7 +35,7 @@ const html = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta n
   + '<meta property="og:url" content="' + url + '"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="stylesheet" href="/seo/pages.css">'
   + '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, '\\u003c') + '</script>'
   + '</head><body><header><div class="wrap"><a class="brand" href="/">Moavia Hassan</a>'
-  + '<nav aria-label="Main navigation"><a href="/#tools">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header>'
+  + '<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header>'
   + '<main><div class="wrap subnav"><a href="/">Home</a> / Websites</div>'
   + '<div class="hero"><div class="wrap"><span class="pill">Website Portfolio</span><h1>Explore Our Websites</h1>'
   + '<p>Choose a website below. Each link opens the GitHub Pages website in a new tab.</p></div></div>'

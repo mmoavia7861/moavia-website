@@ -19,7 +19,7 @@ const content = [
  ['Profiles and contact','Find my work on GitHub at https://github.com/mmoavia7861 and my LinkedIn profile at https://www.linkedin.com/in/moavia-hassan-seo/. For enquiries use hello@moaviaseo.com.'],
  ['Working approach','For new projects, I first review the website or idea, the requested features, constraints and goals. We can discuss availability, scope and deliverables before agreeing paid work.'],
  ['Honest claims','I do not guarantee search rankings, advertising revenue or AI-search citations. I avoid displaying fabricated results, reviews, client testimonials or certifications.']
- ],extra:[['LinkedIn profile','https://www.linkedin.com/in/moavia-hassan-seo/'],['GitHub profile','https://github.com/mmoavia7861'],['Website projects','/projects/'],['SEO and web tools','/#tools'],['Hire Me','/hire-me/'],['Contact','/contact/']]},
+ ],extra:[['LinkedIn profile','https://www.linkedin.com/in/moavia-hassan-seo/'],['GitHub profile','https://github.com/mmoavia7861'],['Website projects','/projects/'],['SEO and web tools','/tools/'],['Hire Me','/hire-me/'],['Contact','/contact/']]},
  {path:'/privacy-policy/',title:'Privacy Policy | Moavia Hassan',name:'Privacy Policy',
  intro:'This policy describes the information that may be processed when visiting moaviaseo.com, sending an enquiry, subscribing to updates, signing in to administrative features, or choosing to use interactive AI tools. Last updated: 28 October 2026.',
  sections:[
@@ -117,7 +117,7 @@ const articles = [
 ];
 
 const allPaths=[...content.map(p=>p.path),'/blog/',...articles.map(p=>'/blog/'+p.slug+'/')];
-const commonLinks='<nav aria-label="Main navigation"><a href="/#tools">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
+const commonLinks='<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
 const footer='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>Islamabad, Pakistan</p></div><div>'+[['About Us','/about/'],['Blog','/blog/'],['Privacy Policy','/privacy-policy/'],['Terms & Conditions','/terms-and-conditions/']].map(([name,href])=>a(href,name)).join(' · ')+'</div><div><a href="mailto:hello@moaviaseo.com">Contact by email</a></div></div></footer>';
 const schemaText = x => JSON.stringify(x).replace(/</g,'\\u003c');
 function layout(info,inner){

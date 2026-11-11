@@ -7,7 +7,8 @@ const routes=[
  '/blog/technical-seo-playbook-2026/','/blog/ai-generated-websites-human-engineering/',
  '/blog/mastering-meta-ads-capi-cro/','/blog/local-seo-google-maps-3pack/',
  '/blog/image-video-resolution-cro/','/blog/google-search-console-discovered-vs-indexed/',
- '/blog/seo-aeo-geo-small-business-guide/','/projects/','/hire-me/','/contact/'
+ '/blog/seo-aeo-geo-small-business-guide/','/projects/','/hire-me/','/contact/',
+ '/tools/','/tools/meta-title-description-checker/','/tools/json-ld-schema-generator/','/tools/robots-txt-sitemap-generator/'
 ];
 const read=path=>readFileSync(join(dist,path),'utf8');
 const check=(ok,err)=>{if(!ok)throw Error('Site build check failed: '+err)};
@@ -21,7 +22,7 @@ check(root.includes('mailto:hello@moaviaseo.com'),'public homepage must use veri
 check(existsSync(join(dist,'moavia-hassan-portrait.webp')),'Professional photo asset missing');
 check(!root.includes('Moavia SEO Pro'),'old agency branding still in homepage');
 check(!root.includes('moaviahassan124@gmail.com'),'legacy personal email should not appear on public homepage');
-for(const href of ['/#tools','/projects/','/about/','/contact/','/hire-me/']){
+for(const href of ['/tools/','/projects/','/about/','/contact/','/hire-me/','/tools/meta-title-description-checker/','/tools/json-ld-schema-generator/','/tools/robots-txt-sitemap-generator/']){
  check(root.includes('href="'+href+'"'),'homepage link missing: '+href);
 }
 for(const asset of ['favicon.png','site-logo.png','apple-touch-icon.png','site.webmanifest'])check(existsSync(join(dist,asset)),'asset missing: '+asset);
@@ -32,6 +33,11 @@ for(const route of routes){
  check(existsSync(f),'page missing: '+route);
  const html=readFileSync(f,'utf8');
  check(html.includes('href="'+base+route+'"'),'canonical missing: '+route);
+ if(route.startsWith('/tools/')){
+  check(html.includes('href="/tools/toolkit.css"'),'tool CSS missing: '+route);
+  check(html.includes('href="/tools/"'),'tools navigation missing: '+route);
+  if(route!=='/tools/')check(html.includes('src="/tools/toolkit.js"'),'tool JavaScript missing: '+route);
+ }
  check(html.includes('<h1>')&&html.includes('</h1>'),'page H1 missing: '+route);
  check(html.includes('<meta name="description"'),'description missing: '+route);
  check(html.includes('application/ld+json'),'schema missing: '+route);
@@ -58,4 +64,7 @@ for(const route of ['/services/','/services/seo/','/services/google-ads/','/serv
 }
 check(read('_redirects').includes('/services/meta-ads/ /hire-me/ 301'),'Cloudflare redirect missing');
 check(existsSync(join(dist,'404.html')),'404 missing');
+for(const asset of ['tools/toolkit.js','tools/toolkit.css'])check(existsSync(join(dist,asset)),'tool asset missing: '+asset);
+const clientJs=read('tools/toolkit.js');
+for(const marker of ['initMeta','initSchema','initCrawler','downloadRobots','downloadSitemap','downloadSchema','snippetTitle'])check(clientJs.includes(marker),'tool functionality marker missing: '+marker);
 console.log('Validated '+routes.length+' canonical pages, personal homepage, retired service redirects, and sitemap.');
