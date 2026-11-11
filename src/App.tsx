@@ -95,9 +95,9 @@ export default function App() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-[minmax(0,290px)_1fr] items-center gap-10 lg:gap-16">
             <figure className="rounded-3xl border border-[#E7EAF2] bg-white p-5 shadow-sm">
               <div className="aspect-square overflow-hidden rounded-2xl bg-[#EEF2FF] flex items-center justify-center">
-                <img src="/site-logo.png" alt="Moavia Hassan portfolio logo, displayed until a verified personal photo is provided" width="210" height="210" loading="lazy" className="h-40 w-40 object-contain" />
+                <img src="/moavia-hassan-portrait.webp" alt="Moavia Hassan professional headshot in a charcoal suit and white shirt" width="400" height="500" loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
               </div>
-              <figcaption className="mt-3 text-xs leading-relaxed text-[#65738B]">Personal portrait pending. This is a site logo, not a photograph of Moavia Hassan.</figcaption>
+              <figcaption className="mt-3 text-xs leading-relaxed text-[#65738B]">Moavia Hassan · SEO tools and web projects</figcaption>
             </figure>
             <div>
               <p className="text-xs font-extrabold uppercase tracking-widest text-[#5265D8]">About me</p>

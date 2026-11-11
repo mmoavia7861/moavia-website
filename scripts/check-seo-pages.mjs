@@ -18,6 +18,7 @@ check(root.includes('<h1>Moavia Hassan: SEO Tools &amp; Web Projects</h1>'),'wro
 check(root.includes('Moavia Hassan: SEO Tools & Web Projects'),'wrong site title');
 check(root.includes('https://moaviaseo.com/#person'),'person schema missing');
 check(root.includes('mailto:hello@moaviaseo.com'),'public homepage must use verified domain email');
+check(existsSync(join(dist,'moavia-hassan-portrait.webp')),'Professional photo asset missing');
 check(!root.includes('Moavia SEO Pro'),'old agency branding still in homepage');
 check(!root.includes('moaviahassan124@gmail.com'),'legacy personal email should not appear on public homepage');
 for(const href of ['/#tools','/projects/','/about/','/contact/','/hire-me/']){
@@ -38,6 +39,7 @@ for(const route of routes){
  check(html.includes('href="/favicon.png"'),'favicon missing: '+route);
  if(route==='/about/') {
   check(html.includes('https://github.com/mmoavia7861'),'About missing GitHub');
+  check(html.includes('/moavia-hassan-portrait.webp'),'About portrait missing');
   check(html.includes('https://www.linkedin.com/in/moavia-hassan-seo/'),'About missing LinkedIn');
   check(!html.includes('Illustrative founder portrait'),'Unverified portrait still shown');
  }
