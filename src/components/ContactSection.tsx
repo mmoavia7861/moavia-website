@@ -103,7 +103,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
   };
 
   return (
-    <section id="contact" className="py-24 bg-white relative">
+    <section id="contact-form" className="py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
@@ -115,7 +115,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
             </div>
 
             <h2 className="text-3xl sm:text-4xl font-extrabold text-[#18243A] tracking-tight leading-tight">
-              Request Your Free Strategic <span className="aurora-gradient-text">Consultation</span>
+              Discuss an SEO or Web <span className="aurora-gradient-text">Project</span>
             </h2>
 
             <p className="text-sm text-[#65738B] leading-relaxed">
@@ -150,7 +150,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-xs font-bold text-[#18243A]">Executive Email</h3>
+                  <h3 className="text-xs font-bold text-[#18243A]">Email</h3>
                   <p className="text-sm font-extrabold text-[#5265D8]">moaviahassan124@gmail.com</p>
                   <span className="text-[10px] text-[#65738B]">Secondary: moavia400@gmail.com</span>
                 </div>
@@ -193,7 +193,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                   </h3>
                   <p className="text-sm text-[#65738B] max-w-md mx-auto leading-relaxed">
                     Thank you, <strong>{fullName}</strong>. Your consultation request has been stored in our
-                    agency CRM. Founder Moavia Hassan will review your website metrics and reach out shortly.
+                    project enquiry system. Founder Moavia Hassan will review your website metrics and reach out shortly.
                   </p>
                   <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
                     <a
@@ -370,7 +370,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                   </button>
 
                   <p className="text-[11px] text-center text-[#65738B] pt-2">
-                    Direct founder review by Moavia Hassan • No automated spam • Verified agency response
+                    Direct founder review by Moavia Hassan • No automated spam • Direct project enquiry
                   </p>
                 </form>
               )}

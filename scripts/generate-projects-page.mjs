@@ -7,12 +7,12 @@ const root = join(process.cwd(), 'public');
 const websites = JSON.parse(readFileSync(join(process.cwd(), 'src/data/githubProjects.json'), 'utf8'));
 const escape = value => String(value).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-if (websites.length !== 3 || websites.some(w => !/^https:\/\/mmoavia7861\.github\.io\/[A-Za-z0-9_.-]+\/$/.test(w.url))) {
+if (websites.length !== 4 || websites.some(w => !/^https:\/\/mmoavia7861\.github\.io\/[A-Za-z0-9_.-]+\/$/.test(w.url))) {
   throw new Error('Expected 3 published GitHub Pages website URLs');
 }
 
-const title = 'Website Portfolio | Moavia SEO Pro';
-const description = 'Open three GitHub Pages websites from the Moavia SEO Pro website portfolio.';
+const title = 'Website Portfolio | Moavia Hassan';
+const description = 'Open four public GitHub Pages websites from the Moavia Hassan website portfolio.';
 const schema = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -34,13 +34,13 @@ const html = '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta n
   + '<meta property="og:title" content="' + escape(title) + '"><meta property="og:description" content="' + escape(description) + '">'
   + '<meta property="og:url" content="' + url + '"><link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="stylesheet" href="/seo/pages.css">'
   + '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, '\\u003c') + '</script>'
-  + '</head><body><header><div class="wrap"><a class="brand" href="/">Moavia SEO Pro</a>'
-  + '<nav aria-label="Main navigation"><a href="/">Home</a><a href="/services/">Services</a><a href="/about/">About</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></nav></div></header>'
+  + '</head><body><header><div class="wrap"><a class="brand" href="/">Moavia Hassan</a>'
+  + '<nav aria-label="Main navigation"><a href="/#tools">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header>'
   + '<main><div class="wrap subnav"><a href="/">Home</a> / Websites</div>'
   + '<div class="hero"><div class="wrap"><span class="pill">Website Portfolio</span><h1>Explore Our Websites</h1>'
   + '<p>Choose a website below. Each link opens the GitHub Pages website in a new tab.</p></div></div>'
   + '<div class="wrap"><section><h2>Visit a website</h2><div class="cards">' + cards + '</div></section></div></main>'
-  + '<footer><div class="wrap"><div><strong>Moavia SEO Pro</strong><p>Islamabad, Pakistan</p></div>'
+  + '<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>Islamabad, Pakistan</p></div>'
   + '<div><a href="/about/">About</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></div></div></footer>'
   + '</body></html>\n';
 

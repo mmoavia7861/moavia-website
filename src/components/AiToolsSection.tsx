@@ -342,7 +342,7 @@ export const AiToolsSection: React.FC = () => {
             Gemini Intelligence Suite
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#18243A] tracking-tight">
-            Interactive AI Agency <span className="aurora-gradient-text">Power Tools</span>
+            Practical SEO & Web <span className="aurora-gradient-text">Tools</span>
           </h2>
           <p className="text-base sm:text-lg text-[#65738B]">
             Experience the real-time AI capabilities powering Moavia SEO Pro — from high-thinking algorithmic
@@ -351,7 +351,7 @@ export const AiToolsSection: React.FC = () => {
         </div>
 
         <p className="mt-5 text-xs text-center text-[#65738B]">
-          Free keyless tools: on-page HTML audit, metadata optimization and SVG designs. 
+          Try the available on-page HTML audit and SEO helpers. Results depend on the website response and backend availability. 
           Other text AI tools require your own GEMINI_API_KEY configured as a Cloudflare Worker Secret.
         </p>
 

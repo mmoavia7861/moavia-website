@@ -10,7 +10,7 @@ export const PortfolioSection: React.FC = () => (
           <Globe2 className="w-4 h-4" aria-hidden="true" /> Website Portfolio
         </span>
         <h2 id="website-portfolio-title" className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#18243A]">
-          Explore Our <span className="aurora-gradient-text">Websites</span>
+          Explore My <span className="aurora-gradient-text">Web Projects</span>
         </h2>
         <p className="text-[#52607A] text-sm sm:text-base leading-relaxed">
           Click a website below to open its GitHub Pages website in a new tab.

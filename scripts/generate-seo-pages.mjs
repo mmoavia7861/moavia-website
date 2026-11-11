@@ -4,7 +4,7 @@ import { join } from 'node:path';
 const publicDir = join(process.cwd(), 'public');
 const site = 'https://moaviaseo.com';
 const logo = site + '/site-logo.png';
-const company = { '@type': 'Organization', '@id': site + '/#organization', name: 'Moavia SEO Pro',
+const company = { '@type': 'Organization', '@id': site + '/#organization', name: 'Moavia Hassan',
   url: site + '/', logo, areaServed: [{ '@type': 'City', name: 'Islamabad' }, { '@type': 'Country', name: 'Pakistan' }] };
 const clean = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
@@ -13,7 +13,7 @@ const pages = [
   {
     path: '/services/seo/', kind: 'service',
     name: 'Search Engine Optimization',
-    title: 'SEO Services in Islamabad | Technical & On-Page SEO | Moavia SEO Pro',
+    title: 'SEO Services in Islamabad | Technical & On-Page SEO | Moavia Hassan',
     description: 'SEO services for businesses in Islamabad and across Pakistan: technical audits, search intent research, on-page content and transparent Search Console reporting.',
     lead: 'Search engine optimization helps the right customers find a useful answer on your website. We start with the pages, technical barriers and search queries that matter to your business, rather than promising a guaranteed position.',
     audience: 'Businesses that need qualified organic enquiries, clearer service pages and measurable website visibility.',
@@ -73,7 +73,7 @@ const pages = [
   {
     path: '/services/ai-website-development/', kind: 'service',
     name: 'AI-Assisted Website Development',
-    title: 'AI-Assisted Website Development | Moavia SEO Pro',
+    title: 'AI-Assisted Website Development | Moavia Hassan',
     description: 'Modern business website development with AI-assisted workflows, human review, mobile-first design, accessibility and search-friendly semantic HTML.',
     lead: 'AI-assisted development can speed up prototypes, but a business website still needs human review of content, security, usability and performance. We help turn early concepts into maintainable public-facing experiences.',
     audience: 'Founders and businesses looking for a responsive marketing website or custom interactive web experience.',
@@ -93,7 +93,7 @@ const pages = [
   {
     path: '/services/wordpress-development/', kind: 'service',
     name: 'Custom WordPress Website Development',
-    title: 'Custom WordPress Website Development | Moavia SEO Pro',
+    title: 'Custom WordPress Website Development | Moavia Hassan',
     description: 'WordPress website planning and implementation with responsive design, content management, technical SEO, accessibility and practical maintenance guidance.',
     lead: 'A well-built WordPress website should be easy for your team to edit and easy for customers to navigate. The right structure depends on your pages, content workflows, integrations and maintenance needs.',
     audience: 'Service businesses that want control over website content, landing pages or an expandable blog.',
@@ -113,7 +113,7 @@ const pages = [
   {
     path: '/services/google-ads/', kind: 'service',
     name: 'Google Ads & PPC Management',
-    title: 'Google Ads & PPC Management | Moavia SEO Pro',
+    title: 'Google Ads & PPC Management | Moavia Hassan',
     description: 'Google Ads campaign planning for qualified leads: keyword intent, landing pages, conversion tracking, ad relevance and accountable reporting.',
     lead: 'Paid search is useful when your offer matches a clear customer need. Good Google Ads management starts with measurement, relevant landing pages and a budget that supports testing.',
     audience: 'Businesses ready to test or improve search advertising with a defined product, service and lead objective.',
@@ -178,7 +178,7 @@ const pages = [
   {
     path: '/guides/technical-seo-checklist/', kind: 'guide',
     name: 'Technical SEO Checklist for a New Website',
-    title: 'Technical SEO Checklist for a New Website | Moavia SEO Pro',
+    title: 'Technical SEO Checklist for a New Website | Moavia Hassan',
     description: 'A practical technical SEO checklist: Search Console, crawl status, XML sitemap, canonical URLs, internal links, mobile performance and structured data.',
     lead: 'A technical SEO audit is most useful when it separates observable facts from assumptions. This checklist helps website owners find common discoverability problems before requesting an expensive overhaul.',
     audience: 'Owners launching a new website or moving an existing domain to a new host.',
@@ -202,17 +202,9 @@ const pages = [
     ],
     related: ['/services/seo/', '/guides/seo-aeo-geo-explained/', '/services/ai-website-development/']
   }
-];
+].filter(page => page.kind === 'guide');
 
-const menu = [
-  ['/services/seo/', 'SEO Services'],
-  ['/services/local-seo-islamabad/', 'Local SEO'],
-  ['/services/aeo-geo-optimization/', 'AEO & GEO'],
-  ['/services/ai-website-development/', 'AI Websites'],
-  ['/services/wordpress-development/', 'WordPress'],
-  ['/services/google-ads/', 'Google Ads'],
-  ['/services/meta-ads/', 'Meta Ads'],
-];
+const menu = [['/hire-me/', 'Hire Me'], ['/projects/', 'Projects']];
 const pagesByUrl = new Map(pages.map((page) => [page.path, page]));
 const style = `
 :root{color-scheme:light;font-family:Inter,"Segoe UI",Arial,sans-serif;color:#18243a;background:#f7f8fc}
@@ -281,7 +273,7 @@ function renderPage(page) {
     + '<meta name="robots" content="index,follow,max-image-preview:large">\n'
     + '<link rel="canonical" href="' + clean(url) + '">\n'
     + '<meta property="og:type" content="' + (isGuide ? 'article' : 'website') + '">\n'
-    + '<meta property="og:site_name" content="Moavia SEO Pro">\n'
+    + '<meta property="og:site_name" content="Moavia Hassan">\n'
     + '<meta property="og:title" content="' + clean(page.title) + '">\n'
     + '<meta property="og:description" content="' + clean(page.description) + '">\n'
     + '<meta property="og:url" content="' + clean(url) + '">\n'
@@ -296,11 +288,11 @@ function renderPage(page) {
     + '<link rel="stylesheet" href="/seo/pages.css">\n'
     + '<script type="application/ld+json">' + jsonLd(schema) + '</script>\n'
     + '</head><body>\n'
-    + '<header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" alt="Moavia SEO Pro logo" width="42" height="42">Moavia SEO Pro</a>'
-    + '<nav aria-label="Main navigation"><a href="/">Home</a><a href="/services/">Services</a><a href="/about/">About</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></nav></div></header>'
+    + '<header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" alt="Moavia Hassan logo" width="42" height="42">Moavia Hassan</a>'
+    + '<nav aria-label="Main navigation"><a href="/#tools">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header>'
     + '<main><div class="wrap subnav"><a href="/">Home</a> / <a href="' + (isGuide ? '/blog/' : '/services/') + '">'
     + (isGuide ? 'Guides' : 'Services') + '</a> / ' + clean(page.name) + '</div>'
-    + '<div class="hero"><div class="wrap"><span class="pill">' + (isGuide ? 'Practical SEO Guide' : 'Moavia SEO Pro Service')
+    + '<div class="hero"><div class="wrap"><span class="pill">' + (isGuide ? 'Practical SEO Guide' : 'Website Project')
     + '</span><h1>' + clean(page.name) + '</h1><p>' + clean(page.lead) + '</p>'
     + '<a class="action" href="/contact/">' + (isGuide ? 'Ask about your website' : 'Discuss your project') + '</a></div></div>'
     + '<div class="wrap"><section aria-labelledby="audience"><h2 id="audience">Who this is for</h2><p>' + clean(page.audience) + '</p></section>'
@@ -308,16 +300,16 @@ function renderPage(page) {
     + '</h2><div class="cards">' + steps + '</div></section>'
     + '<section aria-labelledby="checklist"><h2 id="checklist">' + (isGuide ? 'Action checklist' : 'What to expect')
     + '</h2><ul class="clean">' + page.deliverables.map(d => '<li>' + clean(d) + '</li>').join('') + '</ul></section>'
-    + (isGuide ? '<p class="note">Reviewed by Moavia SEO Pro Editorial Team · Updated 11 November 2026 · <a href="/about/">About the team</a></p>' : '')
+    + (isGuide ? '<p class="note">Reviewed by Moavia Hassan · Updated 11 November 2026 · <a href="/about/">About the team</a></p>' : '')
     + '<section class="faq" aria-labelledby="faq-title"><h2 id="faq-title">Frequently asked questions</h2>' + faqs + '</section>'
     + (sources ? '<section aria-labelledby="sources"><h2 id="sources">Further reading</h2><ul class="sources">' + sources + '</ul></section>' : '')
     + '<section aria-labelledby="more"><h2 id="more">Explore related topics</h2><ul class="clean">' + related + '</ul></section>'
     + '<section class="card"><h2>' + (page.path === '/services/google-ads/' ? 'Need help with a Google Ads campaign?' : page.path === '/services/meta-ads/' ? 'Planning a Meta Ads campaign?' : 'Discuss your business project') + '</h2><p>Share your service, target audience, goals and the landing page if relevant. We can discuss scope and measurement.</p>'
-    + '<a class="action" href="/contact/">Contact Moavia SEO Pro</a></section>'
+    + '<a class="action" href="/contact/">Contact Moavia Hassan</a></section>'
     + '<p class="note">Based in Islamabad, Pakistan. Services are discussed case by case; search rankings, AI citations and advertising returns are not guaranteed.</p>'
-    + '</div></main><footer><div class="wrap"><div><strong>Moavia SEO Pro</strong><br>Islamabad, Pakistan</div>'
+    + '</div></main><footer><div class="wrap"><div><strong>Moavia Hassan</strong><br>Islamabad, Pakistan</div>'
     + '<div><a href="/">Homepage</a> · <a href="/services/">All Services</a> · <a href="/services/seo/">SEO Services</a> · <a href="/blog/">Blog</a> · <a href="/about/">About</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></div>'
-    + '<div>© 2026 Moavia SEO Pro</div></div></footer></body></html>\n';
+    + '<div>© 2026 Moavia Hassan</div></div></footer></body></html>\n';
 }
 
 for (const page of pages) {
@@ -325,6 +317,23 @@ for (const page of pages) {
   mkdirSync(dir, { recursive: true });
   writeFileSync(join(dir, 'index.html'), renderPage(page), 'utf8');
 }
+
+const retiredServicePaths = [
+ '/services/seo/', '/services/local-seo-islamabad/', '/services/aeo-geo-optimization/',
+ '/services/ai-website-development/', '/services/wordpress-development/',
+ '/services/google-ads/', '/services/meta-ads/'
+];
+// Keep old incoming links navigable without advertising retired service pages.
+for (const route of retiredServicePaths) {
+  const dir = join(publicDir, route.replace(/^\/|\/$/g, ''));
+  mkdirSync(dir, { recursive: true });
+  writeFileSync(join(dir, 'index.html'),
+    '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+    + '<meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0;url=/hire-me/">'
+    + '<title>Page moved | Moavia Hassan</title><link rel="canonical" href="https://moaviaseo.com/hire-me/"></head>'
+    + '<body><main><h1>Page moved</h1><p>This section is now on the <a href="/hire-me/">Hire Me page</a>.</p></main></body></html>\n','utf8');
+}
+
 const sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n'
   + '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
   + ['/', ...pages.map(p => p.path)].map(path => '  <url><loc>' + site + path + '</loc></url>').join('\n')
@@ -333,8 +342,8 @@ writeFileSync(join(publicDir, 'sitemap.xml'), sitemap, 'utf8');
 writeFileSync(join(publicDir, 'robots.txt'), 'User-agent: *\nAllow: /\nDisallow: /api/\n\nSitemap: https://moaviaseo.com/sitemap.xml\n', 'utf8');
 writeFileSync(join(publicDir, '404.html'),
   '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-  + '<meta name="robots" content="noindex"><title>Page not found | Moavia SEO Pro</title>'
+  + '<meta name="robots" content="noindex"><title>Page not found | Moavia Hassan</title>'
   + '<link rel="stylesheet" href="/seo/pages.css"></head><body><main class="wrap"><h1>Page not found</h1>'
-  + '<p>This URL does not exist. Browse our <a href="/">homepage</a> or <a href="/services/seo/">SEO services</a>.</p></main></body></html>\n',
+  + '<p>This URL does not exist. Browse our <a href="/">homepage</a> or <a href="/hire-me/">Hire Me</a>.</p></main></body></html>\n',
   'utf8');
 console.log('Generated ' + pages.length + ' static SEO pages and sitemap with ' + (pages.length + 1) + ' URLs.');

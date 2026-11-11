@@ -10,17 +10,16 @@ const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>
 const par = s => '<p>'+esc(s)+'</p>';
 const a = (href,name) => '<a href="'+esc(href)+'">'+esc(name)+'</a>';
 const content = [
- {path:'/about/',title:'About Moavia SEO Pro | SEO Agency Islamabad',name:'About Moavia SEO Pro',
- intro:'Moavia SEO Pro is an Islamabad-based digital services website founded by Moavia Hassan. We present technical SEO, content and local search guidance, web development and paid marketing services to businesses looking for a clear plan.',
+ {path:'/about/',title:'About Moavia Hassan | SEO Tools & Web Projects',name:'About Moavia Hassan',
+ intro:'Moavia Hassan is based in Islamabad, Pakistan. This personal website shares public web projects, practical SEO tools, technical interests and ways to make contact.',
  sections:[
- ['Who we are','Moavia SEO Pro is based in Islamabad, Pakistan. Our website provides service information and educational material about search optimization, responsive websites and measurable advertising. We can discuss projects with clients in Pakistan and other locations. We do not claim a publicly staffed storefront.'],
- ['Meet the founder','Moavia Hassan founded Moavia SEO Pro in Islamabad, Pakistan. Public portfolio projects include real website previews that visitors can inspect. Learn more through his LinkedIn profile and public GitHub projects; professional certifications should only be shown when verified.'],
- ['Our services','Our listed services include technical and on-page SEO, local SEO guidance, AEO and AI-search content, AI-assisted websites, custom WordPress websites, Meta Ads and Google Ads strategy. Project details, timelines, budgets and deliverables are agreed separately for each enquiry.'],
- ['How we approach projects','A useful starting point is the existing website, audience and business objective. We review discoverability, actual site experience, page content, contact pathways and available measurement. We explain what is known, what needs testing, and which work has the highest practical priority.'],
- ['Transparency and results','No agency can guarantee Google search positions, inclusion in AI-generated search answers or advertising revenue. Illustrative calculators are not client results. Our portfolio links to public websites rather than invented case studies. Verified reviews and case studies should only be published with evidence and permission.'],
- ['Editorial information','Our guides aim to explain technical concepts with practical checklists and links to source documentation. Product rules change over time; readers should confirm relevant details with the platform responsible. Our articles are educational and not individual legal, financial or security advice.'],
- ['Contact the agency','For services, corrections, questions or privacy enquiries, email moaviahassan124@gmail.com, call or WhatsApp +92 323 4313869, or use the contact page at https://moaviaseo.com/contact/.']
- ],extra:[['Founder LinkedIn','https://www.linkedin.com/in/moavia-hassan-seo/'],['GitHub profile','https://github.com/mmoavia7861'],['Website portfolio','/projects/'],['Services','/services/'],['Read articles','/blog/'],['Contact','/contact/']]},
+ ['Who I am','I work on SEO, website projects and useful online tools. My interests include technical SEO, on-page improvements, React, WordPress and user-friendly website design.'],
+ ['Public projects','You can visit the published website projects directly, including RankNova and other public web previews. A publicly linked demo is not presented as proof of a paid client engagement or guaranteed outcome.'],
+ ['Profile image','A real personal photograph has not yet been provided for this website. The logo on the homepage is a branding image, not a photograph or verified portrait.'],
+ ['Profiles and contact','Find my work on GitHub at https://github.com/mmoavia7861 and my LinkedIn profile at https://www.linkedin.com/in/moavia-hassan-seo/. For enquiries use moaviahassan124@gmail.com.'],
+ ['Working approach','For new projects, I first review the website or idea, the requested features, constraints and goals. We can discuss availability, scope and deliverables before agreeing paid work.'],
+ ['Honest claims','I do not guarantee search rankings, advertising revenue or AI-search citations. I avoid displaying fabricated results, reviews, client testimonials or certifications.']
+ ],extra:[['LinkedIn profile','https://www.linkedin.com/in/moavia-hassan-seo/'],['GitHub profile','https://github.com/mmoavia7861'],['Website projects','/projects/'],['SEO and web tools','/#tools'],['Hire Me','/hire-me/'],['Contact','/contact/']]},
  {path:'/privacy-policy/',title:'Privacy Policy | Moavia SEO Pro',name:'Privacy Policy',
  intro:'This policy describes the information that may be processed when visiting moaviaseo.com, sending an enquiry, subscribing to updates, signing in to administrative features, or choosing to use interactive AI tools. Last updated: 28 October 2026.',
  sections:[
@@ -118,7 +117,7 @@ const articles = [
 ];
 
 const allPaths=[...content.map(p=>p.path),'/blog/',...articles.map(p=>'/blog/'+p.slug+'/')];
-const commonLinks='<nav aria-label="Main navigation"><a href="/">Home</a><a href="/services/">Services</a><a href="/about/">About</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></nav>';
+const commonLinks='<nav aria-label="Main navigation"><a href="/#tools">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
 const footer='<footer><div class="wrap"><div><strong>Moavia SEO Pro</strong><p>Islamabad, Pakistan</p></div><div>'+[['About Us','/about/'],['Blog','/blog/'],['Privacy Policy','/privacy-policy/'],['Terms & Conditions','/terms-and-conditions/']].map(([name,href])=>a(href,name)).join(' · ')+'</div><div><a href="mailto:moaviahassan124@gmail.com">Contact by email</a></div></div></footer>';
 const schemaText = x => JSON.stringify(x).replace(/</g,'\\u003c');
 function layout(info,inner){

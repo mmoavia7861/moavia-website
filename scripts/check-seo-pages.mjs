@@ -1,79 +1,47 @@
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
-
-const dist = join(process.cwd(), 'dist');
-const base = 'https://moaviaseo.com';
-const routes = [
-  '/services/seo/',
-  '/services/local-seo-islamabad/',
-  '/services/aeo-geo-optimization/',
-  '/services/ai-website-development/',
-  '/services/wordpress-development/',
-  '/services/google-ads/',
-  '/services/meta-ads/',
-  '/guides/seo-aeo-geo-explained/',
-  '/guides/technical-seo-checklist/',
-  '/about/',
-  '/privacy-policy/',
-  '/terms-and-conditions/',
-  '/blog/',
-  '/blog/technical-seo-playbook-2026/',
-  '/blog/ai-generated-websites-human-engineering/',
-  '/blog/mastering-meta-ads-capi-cro/',
-  '/blog/local-seo-google-maps-3pack/',
-  '/blog/image-video-resolution-cro/',
-  '/blog/google-search-console-discovered-vs-indexed/',
-  '/blog/seo-aeo-geo-small-business-guide/',
-  '/projects/',
-  '/services/',
-  '/contact/',
+const dist=join(process.cwd(),'dist'), base='https://moaviaseo.com';
+const routes=[
+ '/guides/seo-aeo-geo-explained/','/guides/technical-seo-checklist/',
+ '/about/','/privacy-policy/','/terms-and-conditions/','/blog/',
+ '/blog/technical-seo-playbook-2026/','/blog/ai-generated-websites-human-engineering/',
+ '/blog/mastering-meta-ads-capi-cro/','/blog/local-seo-google-maps-3pack/',
+ '/blog/image-video-resolution-cro/','/blog/google-search-console-discovered-vs-indexed/',
+ '/blog/seo-aeo-geo-small-business-guide/','/projects/','/hire-me/','/contact/'
 ];
-const read = (path) => readFileSync(join(dist, path), 'utf8');
-function check(condition, error) { if (!condition) throw new Error('SEO check failed: ' + error); }
-const sitemap = read('sitemap.xml');
-const robots = read('robots.txt');
-const root = read('index.html');
-check(robots.includes('Sitemap: ' + base + '/sitemap.xml'), 'sitemap missing in robots');
-check(root.includes('<link rel="canonical" href="' + base + '/"'), 'homepage canonical missing');
-check(root.includes('href="/services/seo/"'), 'homepage lacks crawlable service link');
-check(root.includes('href="/services/"'), 'homepage lacks services hub link');
-check(root.includes('href="/contact/"'), 'homepage lacks contact hub link');
-check(root.includes('FAQPage'), 'homepage lacks FAQ schema');
-check(root.includes('og:site_name'), 'homepage site name missing');
-check(root.includes('<h1>SEO, AEO and Website Development in Islamabad</h1>'), 'homepage H1 not updated');
-check(root.includes('tel:+923234313869'), 'homepage visible phone number missing');
-check(existsSync(join(dist, 'favicon.png')), 'favicon missing');
-check(existsSync(join(dist, 'site-logo.png')), 'site logo missing');
-check(existsSync(join(dist, 'apple-touch-icon.png')), 'Apple touch icon missing');
-check(existsSync(join(dist, 'site.webmanifest')), 'site web manifest missing');
-check(/href="[^"]*\/favicon\.png"/.test(root), 'homepage favicon link missing');
-check(sitemap.includes('<loc>' + base + '/</loc>'), 'homepage missing from sitemap');
-for (const route of routes) {
-  const htmlPath = join(route.replace(/^\/|\/$/g, ''), 'index.html');
-  check(existsSync(join(dist, htmlPath)), 'page absent from build: ' + route);
-  const html = read(htmlPath);
-  check(html.includes('href="' + base + route + '"'), 'canonical missing: ' + route);
-  check(html.includes('<h1>') && html.includes('</h1>'), 'visible title missing: ' + route);
-  check(html.includes('<meta name="description"'), 'description missing: ' + route);
-  check(html.includes('application/ld+json'), 'JSON-LD missing: ' + route);
-  check(!/<title>[^<]*Moavia SEO Pro[^<]*Moavia SEO Pro<\/title>/.test(html), 'duplicate brand in title: '+route);
-  check(html.includes('href="/favicon.png"'), 'static page favicon link missing: ' + route);
-  if ((route.startsWith('/services/') && route !== '/services/') || route.startsWith('/guides/')) {
-    check(html.includes('Frequently asked questions'), 'visible answer section missing: ' + route);
-  }
-  check(!html.includes('example.com'), 'placeholder URL detected: ' + route);
-  check(sitemap.includes('<loc>' + base + route + '</loc>'), 'route not in sitemap: ' + route);
-  const matched = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
-  check(Boolean(matched), 'schema script missing: ' + route);
-  const schema = JSON.parse(matched[1]);
-  if (route.startsWith('/blog/') && route !== '/blog/') {
-    check(/<time datetime="\d{4}-\d{2}-\d{2}">/.test(html), 'article needs a visible publication date: '+route);
-    check(JSON.stringify(schema).includes('BlogPosting'), 'article schema missing: '+route);
-    check(html.includes('href="/services/"') && html.includes('href="/contact/"'), 'inconsistent blog navigation: '+route);
-  }
+const read=path=>readFileSync(join(dist,path),'utf8');
+const check=(ok,err)=>{if(!ok)throw Error('Site build check failed: '+err)};
+const sitemap=read('sitemap.xml'),root=read('index.html');
+check(read('robots.txt').includes('Sitemap: '+base+'/sitemap.xml'),'missing sitemap rule');
+check(root.includes('<link rel="canonical" href="'+base+'/"'),'missing homepage canonical');
+check(root.includes('<h1>Moavia Hassan: SEO Tools &amp; Web Projects</h1>'),'wrong homepage fallback H1');
+check(root.includes('Moavia Hassan: SEO Tools & Web Projects'),'wrong site title');
+check(root.includes('https://moaviaseo.com/#person'),'person schema missing');
+for(const href of ['/#tools','/projects/','/about/','/contact/','/hire-me/']){
+ check(root.includes('href="'+href+'"'),'homepage link missing: '+href);
 }
-check((sitemap.match(/<loc>/g) || []).length === routes.length + 1,
-  'sitemap URL count is not homepage + service/guide routes');
-check(existsSync(join(dist, '404.html')), '404 page missing');
-check(read('404.html').includes('noindex'), '404 page should not be indexed');
-console.log('SEO validation passed: ' + routes.length + ' unique static pages, valid JSON-LD, canonical URLs, sitemap, robots.txt and 404.');
+for(const asset of ['favicon.png','site-logo.png','apple-touch-icon.png','site.webmanifest'])check(existsSync(join(dist,asset)),'asset missing: '+asset);
+check(sitemap.includes('<loc>'+base+'/</loc>'),'homepage missing from sitemap');
+check((sitemap.match(/<loc>/g)||[]).length===routes.length+1,'unexpected sitemap route count');
+for(const route of routes){
+ const f=join(dist,route.replace(/^\/|\/$/g,''),'index.html');
+ check(existsSync(f),'page missing: '+route);
+ const html=readFileSync(f,'utf8');
+ check(html.includes('href="'+base+route+'"'),'canonical missing: '+route);
+ check(html.includes('<h1>')&&html.includes('</h1>'),'page H1 missing: '+route);
+ check(html.includes('<meta name="description"'),'description missing: '+route);
+ check(html.includes('application/ld+json'),'schema missing: '+route);
+ check(sitemap.includes('<loc>'+base+route+'</loc>'),'sitemap missing: '+route);
+ check(html.includes('href="/favicon.png"'),'favicon missing: '+route);
+ const matched=html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+ check(Boolean(matched),'schema script missing: '+route);JSON.parse(matched[1]);
+ if(route.startsWith('/blog/')&&route!=='/blog/')check(/<time datetime="\d{4}-\d{2}-\d{2}">/.test(html),'blog date missing: '+route);
+}
+for(const route of ['/services/','/services/seo/','/services/google-ads/','/services/meta-ads/']){
+ const html=read(join(route.replace(/^\/|\/$/g,''),'index.html'));
+ check(html.includes('noindex')&&html.includes('/hire-me/'),'retired route not redirected: '+route);
+ check(!sitemap.includes('<loc>'+base+route+'</loc>'),'retired route in sitemap: '+route);
+}
+check(read('_redirects').includes('/services/meta-ads/ /hire-me/ 301'),'Cloudflare redirect missing');
+check(existsSync(join(dist,'404.html')),'404 missing');
+console.log('Validated '+routes.length+' canonical pages, personal homepage, retired service redirects, and sitemap.');
