@@ -53,6 +53,16 @@ jobs:
             echo "Set these in repository Settings > Secrets and variables > Actions before running this workflow."
             exit 1
           fi
+          # Never print secret values or request headers. Tokens must be a single value,
+          # not a copied curl command, quoted text, or multi-line input.
+          if [[ "$CF_TOKEN" =~ [[:space:]] ]]; then
+            echo "::error::CLOUDFLARE_API_TOKEN has whitespace or a line break. Replace it with only the raw single-line token, without quotes or curl commands."
+            exit 1
+          fi
+          if [[ ! "$CF_ACCOUNT" =~ ^[[:xdigit:]]{32}$ ]]; then
+            echo "::error::CLOUDFLARE_ACCOUNT_ID must be the 32-character hexadecimal Account ID (no quotes or whitespace)."
+            exit 1
+          fi
 
       - name: Deploy Worker and static assets (preserve dashboard vars)
         uses: cloudflare/wrangler-action@v4
