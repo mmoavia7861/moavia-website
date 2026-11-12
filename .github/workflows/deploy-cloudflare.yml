@@ -40,6 +40,12 @@ jobs:
           test -s dist/tools/toolkit.css
           test -s dist/tools/toolkit.js
           test -s dist/sitemap.xml
+          test -s sitemap.xml
+          test -s robots.txt
+          test -s dist/projects/ranknova/index.html
+          test -s dist/projects/dark-agency/index.html
+          test -s dist/projects/agency-multipage/index.html
+          test -s dist/projects/umm-e-aiman/index.html
           test -s dist/moavia-hassan-portrait.webp
 
       - name: Check deployment credentials in GitHub Secrets

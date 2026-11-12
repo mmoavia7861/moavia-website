@@ -28,7 +28,7 @@ export default function App() {
   const [adminOpen, setAdminOpen] = useState(false);
   const sections = [
     { label: 'Tools', href: '/tools/' },
-    { label: 'Projects', href: '/#projects' },
+    { label: 'Projects', href: '/projects/' },
     { label: 'About', href: '/#about' },
     { label: 'Contact', href: '/#contact' },
   ];
@@ -61,7 +61,7 @@ export default function App() {
               <p className="mt-6 max-w-2xl text-base sm:text-xl leading-relaxed text-[#52607A]">Explore practical SEO and web tools, browse public website projects, and see how I approach creating useful, accessible web experiences. The portfolio links to real project websites, not invented case studies.</p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <a href="/tools/" className="inline-flex items-center gap-2 rounded-xl bg-[#5265D8] px-5 py-3 font-bold text-white hover:bg-[#4353BC]">Explore Tools <ArrowRight className="w-4 h-4" /></a>
-                <a href="/#projects" className="inline-flex items-center gap-2 rounded-xl border border-[#C9D1E7] bg-white px-5 py-3 font-bold text-[#18243A] hover:bg-[#F4F6FF]">View Projects <Code2 className="w-4 h-4" /></a>
+                <a href="/projects/" className="inline-flex items-center gap-2 rounded-xl border border-[#C9D1E7] bg-white px-5 py-3 font-bold text-[#18243A] hover:bg-[#F4F6FF]">View Projects <Code2 className="w-4 h-4" /></a>
                 <a href="/hire-me/" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 font-bold text-[#4353BC] hover:underline">Hire Me <ArrowUpRight className="w-4 h-4" /></a>
               </div>
             </div>
@@ -101,11 +101,11 @@ export default function App() {
               <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">Web projects</h2>
               <p className="mt-3 max-w-2xl text-[#52607A]">Browse website examples and tool projects. A public demo is not a claim that the project was a paid client engagement.</p>
               <div className="mt-9 grid grid-cols-1 md:grid-cols-2 gap-5">
-                {websiteLinks.map(site => <a key={site.id} href={site.url} rel="noopener noreferrer" target="_blank" className="group block rounded-2xl border border-[#E7EAF2] bg-[#F8F9FD] p-6 hover:border-[#5265D8] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]">
+                {websiteLinks.map(site => <a key={site.id} href={`/projects/${site.id}/`} className="group block rounded-2xl border border-[#E7EAF2] bg-[#F8F9FD] p-6 hover:border-[#5265D8] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]">
                   <span className="text-xs font-bold uppercase tracking-wide text-[#5265D8]">{site.category}</span>
                   <span className="mt-2 flex items-start justify-between gap-4 text-lg font-extrabold">{site.title}<ArrowUpRight className="h-5 w-5 shrink-0 text-[#5265D8]" /></span>
                   <span className="mt-2 block text-sm leading-relaxed text-[#52607A]">{site.description}</span>
-                  <span className="mt-3 block text-xs text-[#4353BC] break-all">{site.url}</span>
+                  <span className="mt-3 block text-sm font-bold text-[#4353BC]">Read project brief, stack and results →</span>
                 </a>)}
               </div>
             </div>

@@ -4,27 +4,83 @@
     "title": "RankNova — SEO Tools Website",
     "url": "https://mmoavia7861.github.io/RankNova/",
     "category": "SEO Tools Project",
-    "description": "An SEO utilities website project. Features and availability may change as development continues."
+    "description": "A public SEO utilities demo with a page audit interface, meta tag generator and structured-data generator.",
+    "problem": "How can several common SEO tasks be presented in one practical interface while avoiding fabricated audit results?",
+    "role": "Portfolio tooling project: tool interfaces, iterative implementation and publication in the linked public repository.",
+    "stack": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "Express",
+      "Firebase"
+    ],
+    "work": [
+      "Separate interfaces for SEO audit, metadata generation and JSON-LD markup.",
+      "Public tool and informational pages with documented security considerations."
+    ],
+    "result": "Source code includes three SEO tool interfaces and public project pages. Actual remote-audit availability depends on backend deployment; no traffic, rankings or customer results are claimed.",
+    "repo": "https://github.com/mmoavia7861/RankNova"
   },
   {
     "id": "dark-agency",
     "title": "Moavia SEO Pro — Dark Theme Website",
     "url": "https://mmoavia7861.github.io/Moavia-SEO-Pro/",
-    "category": "Agency Website",
-    "description": "A dark-theme agency website preview with a simple design and navigation."
+    "category": "Design Prototype",
+    "description": "A separate dark-theme one-page website concept for a digital marketing brand; it is not a client case study.",
+    "problem": "How might a dark-themed landing page organize service information, navigation and project enquiries?",
+    "role": "Personal front-end website concept maintained as a GitHub Pages prototype.",
+    "stack": [
+      "HTML5",
+      "CSS",
+      "JavaScript"
+    ],
+    "work": [
+      "Single-page marketing layout and responsive section navigation.",
+      "Interactive interface elements and contact-form presentation."
+    ],
+    "result": "An HTML/CSS/JavaScript prototype exists in the public repository. Promotional metrics shown by the old concept are illustrative, not verified client outcomes.",
+    "repo": "https://github.com/mmoavia7861/Moavia-SEO-Pro"
   },
   {
     "id": "agency-multipage",
     "title": "Moavia SEO Pro — Multi-Page Website",
     "url": "https://mmoavia7861.github.io/moaviaseopro/",
-    "category": "Business Website",
-    "description": "An alternate multi-page agency website preview."
+    "category": "Design Prototype",
+    "description": "A distinct multi-page static website concept built to explore service-page information architecture.",
+    "problem": "How can visitors browse several services, information pages and enquiries without a complex runtime?",
+    "role": "Personal static-site prototype and content/navigation implementation in a public repository.",
+    "stack": [
+      "HTML5",
+      "CSS",
+      "Vanilla JavaScript"
+    ],
+    "work": [
+      "Standalone service, About, Contact and Privacy pages.",
+      "Responsive layouts, illustrative planning calculator and basic front-end interactions."
+    ],
+    "result": "A multi-page static website and supporting source files are published in the repository. Pricing examples are not confirmed offers; no paid-client or conversion results are asserted.",
+    "repo": "https://github.com/mmoavia7861/moaviaseopro"
   },
   {
     "id": "umm-e-aiman",
     "title": "Umm-E-Aiman — Institute & Hostel Website",
     "url": "https://mmoavia7861.github.io/Umm-E-Aiman/",
-    "category": "Institute Website",
-    "description": "An institute and hostel website preview."
+    "category": "Portal Demo",
+    "description": "A publicly linked portal prototype with separate institute and girls-hostel information flows.",
+    "problem": "How can hostel facilities, institute courses, enquiries and other information be organized in one navigable experience?",
+    "role": "Portfolio portal interface and navigation implementation in a public repository; no paid-client relationship is claimed.",
+    "stack": [
+      "React",
+      "TypeScript",
+      "Vite",
+      "React Router",
+      "Firebase"
+    ],
+    "work": [
+      "Separate page routes for hostel and institute content.",
+      "Enquiry and booking interface components, galleries and administrative UI."
+    ],
+    "result": "Source code includes the portal routes and interface components. Availability, admissions and actual institutional use require independent confirmation; no measured outcomes are claimed.",
+    "repo": "https://github.com/mmoavia7861/Umm-E-Aiman"
   }
 ]

@@ -1,0 +1,18 @@
+.project-note{margin:1.2rem auto;padding:13px 17px;border-left:3px solid #6475d9;background:#edf1fc;color:#33445b;border-radius:8px;line-height:1.65}
+.project-layout{display:grid;grid-template-columns:minmax(0,1.8fr) minmax(240px,.8fr);gap:28px;padding:28px 0 70px}
+.project-main{min-width:0}
+.project-main section{margin:24px 0}
+.project-main section h2{margin-bottom:10px}
+.project-main li,.project-side li{margin:8px 0}
+.project-side{align-self:start}
+.project-side h2:not(:first-child){margin-top:26px}
+.project-side p,.project-side li,.project-main p{overflow-wrap:anywhere}
+.project-screenshot{margin:0;border:1px solid #dce3ef;border-radius:16px;background:#e9edf8;overflow:hidden;box-shadow:0 12px 30px rgba(30,45,80,.08)}
+.project-screenshot img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:top center}
+.project-screenshot figcaption{padding:11px 15px;background:white;color:#526079;font-size:.8rem;line-height:1.5}
+.project-screenshot-unavailable{padding:48px 18px;text-align:center;color:#526079}
+.project-card{min-height:230px;display:flex;flex-direction:column}
+.project-card .project-card-actions{margin-top:auto;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.project-card .action{display:inline-block;padding:9px 14px;background:#455bc7;color:white;border-radius:9px;text-decoration:none;font-weight:700}
+.project-card .action:hover{background:#3448aa}
+@media(max-width:760px){.project-layout{grid-template-columns:1fr;padding-top:18px}.project-side{order:-1}}

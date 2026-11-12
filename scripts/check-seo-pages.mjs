@@ -7,7 +7,7 @@ const routes=[
  '/blog/technical-seo-playbook-2026/','/blog/ai-generated-websites-human-engineering/',
  '/blog/mastering-meta-ads-capi-cro/','/blog/local-seo-google-maps-3pack/',
  '/blog/image-video-resolution-cro/','/blog/google-search-console-discovered-vs-indexed/',
- '/blog/seo-aeo-geo-small-business-guide/','/projects/','/hire-me/','/contact/',
+ '/blog/seo-aeo-geo-small-business-guide/','/projects/','/projects/ranknova/','/projects/dark-agency/','/projects/agency-multipage/','/projects/umm-e-aiman/','/hire-me/','/contact/',
  '/tools/','/tools/meta-title-description-checker/','/tools/json-ld-schema-generator/','/tools/robots-txt-sitemap-generator/'
 ];
 const read=path=>readFileSync(join(dist,path),'utf8');
@@ -28,6 +28,10 @@ for(const href of ['/tools/','/projects/','/about/','/contact/','/hire-me/','/to
 for(const asset of ['favicon.png','site-logo.png','apple-touch-icon.png','site.webmanifest'])check(existsSync(join(dist,asset)),'asset missing: '+asset);
 check(sitemap.includes('<loc>'+base+'/</loc>'),'homepage missing from sitemap');
 check((sitemap.match(/<loc>/g)||[]).length===routes.length+1,'unexpected sitemap route count');
+const rootMap=readFileSync(join(process.cwd(),'sitemap.xml'),'utf8'),rootRobots=readFileSync(join(process.cwd(),'robots.txt'),'utf8');
+const urls=x=>[...x.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]).sort().join('\n');
+check(urls(rootMap)===urls(sitemap),'repository root sitemap out of sync with generated sitemap');
+check(rootRobots.trim()===read('robots.txt').trim(),'repository root robots.txt differs from deployed robots.txt');
 for(const route of routes){
  const f=join(dist,route.replace(/^\/|\/$/g,''),'index.html');
  check(existsSync(f),'page missing: '+route);
@@ -38,6 +42,7 @@ for(const route of routes){
   check(html.includes('href="/tools/"'),'tools navigation missing: '+route);
   if(route!=='/tools/')check(html.includes('src="/tools/toolkit.js"'),'tool JavaScript missing: '+route);
  }
+ if(route.startsWith('/projects/')){check(html.includes('property="og:image"'),'project social image missing: '+route);check(html.includes('name="twitter:card"'),'project Twitter card missing: '+route);if(route!=='/projects/'){for(const label of ['Project screenshot','My portfolio role','Technology stack','Results and verification','View live project'])check(html.includes(label),'project section missing '+label+': '+route);check(html.includes('image.thum.io/get/'),'project screenshot source missing: '+route);}} 
  check(html.includes('<h1>')&&html.includes('</h1>'),'page H1 missing: '+route);
  check(html.includes('<meta name="description"'),'description missing: '+route);
  check(html.includes('application/ld+json'),'schema missing: '+route);

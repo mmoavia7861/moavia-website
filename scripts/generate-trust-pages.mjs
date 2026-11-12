@@ -5,7 +5,7 @@ import { join } from 'node:path';
 const root = join(process.cwd(), 'public');
 const host = 'https://moaviaseo.com';
 const date = '2026-10-28';
-const dateText = '28 October 2026';
+const dateText = '12 November 2026';
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const par = s => '<p>'+esc(s)+'</p>';
 const a = (href,name) => '<a href="'+esc(href)+'">'+esc(name)+'</a>';
@@ -21,7 +21,7 @@ const content = [
  ['Honest claims','I do not guarantee search rankings, advertising revenue or AI-search citations. I avoid displaying fabricated results, reviews, client testimonials or certifications.']
  ],extra:[['LinkedIn profile','https://www.linkedin.com/in/moavia-hassan-seo/'],['GitHub profile','https://github.com/mmoavia7861'],['Website projects','/projects/'],['SEO and web tools','/tools/'],['Hire Me','/hire-me/'],['Contact','/contact/']]},
  {path:'/privacy-policy/',title:'Privacy Policy | Moavia Hassan',name:'Privacy Policy',
- intro:'This policy describes the information that may be processed when visiting moaviaseo.com, sending an enquiry, subscribing to updates, signing in to administrative features, or choosing to use interactive AI tools. Last updated: 28 October 2026.',
+ intro:'This policy describes the information that may be processed when visiting moaviaseo.com, sending an enquiry, subscribing to updates, signing in to administrative features, or choosing to use interactive AI tools. Last updated: 12 November 2026.',
  sections:[
  ['Who manages this website','Moavia Hassan is based in Islamabad, Pakistan. Questions about privacy, information you submitted, correction or deletion requests can be sent to hello@moaviaseo.com. We may verify requests before acting on records.'],
  ['Information you provide','The consultation form may collect your full name, work email, phone or WhatsApp number, business name, website address, chosen service, budget and project description. We use this information to respond and manage enquiries. The optional newsletter subscription collects an email address to maintain an updates list. Please do not submit passwords, payment card details or unnecessary sensitive information.'],
@@ -31,6 +31,8 @@ const content = [
  ['Google advertising disclosures','Google AdSense advertising is not represented as active on this website at the date of this policy. If advertising is added, third-party vendors, including Google, may place or read cookies, use web beacons, IP addresses or other identifiers and serve ads based on visits to this or other websites. Google and its partners may use advertising cookies for personalized advertising. Visitors can manage personalized ads via Google Ad Settings or My Ad Center. If advertising or additional analytics are introduced, we will update this notice and assess applicable consent requirements before activation.'],
  ['Retention and security','Enquiries and newsletter subscriptions may be retained while needed to respond, operate the relevant service, address recordkeeping needs or comply with applicable requirements. We do not promise a fixed deletion schedule. Please request a review or deletion by email. We apply reasonable access safeguards but cannot promise absolute security for internet systems.'],
  ['Your choices and requests','You can choose not to fill optional fields, ask about personal information associated with your submission, request correction or deletion when applicable, or ask to stop newsletter messages through the contact email above. Your legal rights may depend on your location.'],
+ ['Portfolio thumbnail previews','Project pages can request screenshots of public demo websites from Thum.io (image.thum.io). When a preview loads, the visitor’s browser may connect to that provider, which can receive network request data such as IP address and user agent. Thumbnails are only visual previews and can become outdated or unavailable.'],
+ ['Analytics and measurement','Cloudflare provides edge-level traffic and security metrics for this website. Cloudflare Web Analytics may also be enabled in the Cloudflare dashboard to collect page-view and performance metrics through a beacon; if activated, the service is operated by Cloudflare. We do not claim an optional analytics beacon is installed unless it has actually been enabled. The public SEO tools in this portfolio process entered inputs within the browser unless a separately labeled backend feature is used.'],
  ['External sites and policy updates','Links to other websites, including WhatsApp, LinkedIn and platform documentation, have their own policies. We may revise this policy when technologies or business practices change and will update the date shown above.']
  ],extra:[['About','/about/'],['Contact','/#contact'],['Google Privacy Policy','https://policies.google.com/privacy'],['Google advertising policies','https://policies.google.com/technologies/ads']]},
  {path:'/terms-and-conditions/',title:'Terms & Conditions | Moavia Hassan',name:'Terms & Conditions',
