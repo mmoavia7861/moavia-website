@@ -78,3 +78,26 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy --keep-vars
+
+      - name: Verify live social image and metadata (diagnostic)
+        shell: bash
+        run: |
+          set +e
+          img="https://moaviaseo.com/social-preview.png"
+          code=$(curl --max-time 20 --retry 2 -LsS -o /tmp/social-preview.png -w '%{http_code}' "$img")
+          mime=$(file -b --mime-type /tmp/social-preview.png 2>/dev/null)
+          echo "Preview image: status=$code MIME=$mime"
+          if [[ "$code" == "200" && "$mime" == "image/png" ]]; then
+            python3 -c "import struct; b=open('/tmp/social-preview.png','rb').read(24); print('Size:',struct.unpack('>II',b[16:24]))"
+          else
+            echo "::warning::Social preview image could not be fetched publicly"
+          fi
+          curl --max-time 20 --retry 2 -LsS -o /tmp/home.html -w 'Homepage: HTTP %{http_code}, MIME %{content_type}\n' https://moaviaseo.com/
+          if grep -q 'https://moaviaseo.com/social-preview.png' /tmp/home.html; then
+            echo "Homepage exposes the expected social image URL"
+          else
+            echo "::warning::Homepage social image metadata not confirmed"
+          fi
+          curl --max-time 20 -LsS -A 'facebookexternalhit/1.1' -o /dev/null -w 'Facebook crawler: HTTP %{http_code}, MIME %{content_type}\n' "$img"
+          exit 0
+
