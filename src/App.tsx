@@ -29,8 +29,8 @@ export default function App() {
   const sections = [
     { label: 'Tools', href: '/tools/' },
     { label: 'Projects', href: '/projects/' },
-    { label: 'About', href: '/#about' },
-    { label: 'Contact', href: '/#contact' },
+    { label: 'About', href: '/about/' },
+    { label: 'Contact', href: '/contact/' },
   ];
   return (
     <div className="min-h-screen bg-[#F8F9FD] text-[#18243A]">

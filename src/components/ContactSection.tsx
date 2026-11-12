@@ -89,7 +89,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
         : '';
       console.warn('Lead submission could not be confirmed:', code || (err instanceof Error ? err.message : 'unknown'));
       if (isDuplicateFirestoreDocumentError(err)) {
-        setErrorMessage('This email has already submitted a consultation request. Please contact us on WhatsApp if you need to update your details.');
+        setErrorMessage('This email has already submitted a project enquiry. Please contact us on WhatsApp if you need to update your details.');
       } else if (code === 'TIMEOUT') {
         setErrorMessage('Firebase did not confirm your inquiry within 12 seconds. It may still be saved; please contact us on WhatsApp instead of submitting repeatedly.');
       } else if (code === 'PERMISSION_DENIED') {
@@ -125,7 +125,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
             {/* Direct Channel Cards */}
             <div className="space-y-3 pt-2">
               <a
-                href="https://wa.me/923234313869?text=Hello%20Moavia,%20I%20visited%20Moavia%20SEO%20Pro%20and%20would%20like%20to%20discuss%20your%20professional%20digital%20services."
+                href="https://wa.me/923234313869?text=Hello%20Moavia,%20I%20visited%20Moavia%20Hassan%20Portfolio%20and%20would%20like%20to%20discuss%20a%20website%20project."
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-4 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] hover:border-[#17A99A] flex items-center gap-4 transition-all group"

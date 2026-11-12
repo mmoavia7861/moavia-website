@@ -6,7 +6,7 @@ const posts = [
   {slug: 'seo-aeo-geo-small-business-guide', topic: 'SEO, AEO and GEO', title: 'SEO, AEO and GEO: What Small Businesses Should Prioritize', excerpt: 'Practical next steps for search visibility and helpful AI-search content.', published: '11 November 2026'},
   {slug: 'technical-seo-playbook-2026', topic: 'Technical SEO', title: 'Technical SEO in 2026: A Practical Audit Checklist', excerpt: 'Check indexing, canonical URLs, page speed and schema with a realistic, repeatable audit.', published: '28 October 2026'},
   {slug: 'ai-generated-websites-human-engineering', topic: 'Web Development', title: 'AI-Assisted Websites: Why Human Review Still Matters', excerpt: 'Review AI-generated websites for speed, privacy, security and accessibility before launch.', published: '28 October 2026'},
-  {slug: 'mastering-meta-ads-capi-cro', topic: 'Paid Social', title: 'Meta Ads and Conversions API: What to Measure First', excerpt: 'Understand event deduplication, consent, lead quality and landing-page improvements.', published: '28 October 2026'},
+  {slug: 'mastering-meta-ads-capi-cro', topic: 'Advertising Education', title: 'Meta Conversions API: A Practical Measurement Guide', excerpt: 'Independent educational notes on event deduplication, consent and measurement, not an ad-management offer.', published: '28 October 2026'},
   {slug: 'local-seo-google-maps-3pack', topic: 'Local SEO', title: 'Local SEO in Islamabad: Google Maps and Business Eligibility', excerpt: 'Practical guidance for eligible businesses without guaranteed Maps ranking promises.', published: '28 October 2026'},
   {slug: 'image-video-resolution-cro', topic: 'Creative Strategy', title: 'Marketing Images and Videos: Quality Without Slow Pages', excerpt: 'Use efficient visuals, accessible captions and realistic testing for better user experience.', published: '28 October 2026'}
 ];
@@ -15,7 +15,7 @@ export const BlogSection: React.FC = () => (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center max-w-3xl mx-auto space-y-4">
         <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#8B63D8]/10 text-[#8B63D8] text-xs font-bold uppercase"><BookOpen className="w-4 h-4" /> SEO & Marketing Learning</span>
-        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#18243A]">Latest From Our <span className="aurora-gradient-text">Agency Blog</span></h2>
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-[#18243A]">Latest From My <span className="aurora-gradient-text">SEO & Web Blog</span></h2>
         <p className="text-[#65738B]">Useful technical SEO, AI-assisted development, local search and advertising guides with original page URLs and primary-source reading.</p>
         <p><a href="/blog/" className="text-[#5265D8] font-bold underline underline-offset-4">View all blog articles</a></p>
       </div>

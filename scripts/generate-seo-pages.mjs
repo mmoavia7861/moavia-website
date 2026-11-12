@@ -289,18 +289,18 @@ function renderPage(page) {
     + '<script type="application/ld+json">' + jsonLd(schema) + '</script>\n'
     + '</head><body>\n'
     + '<header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" alt="Moavia Hassan logo" width="42" height="42">Moavia Hassan</a>'
-    + '<nav aria-label="Main navigation"><a href="/#tools">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header>'
+    + '<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header>'
     + '<main><div class="wrap subnav"><a href="/">Home</a> / <a href="' + (isGuide ? '/blog/' : '/services/') + '">'
     + (isGuide ? 'Guides' : 'Services') + '</a> / ' + clean(page.name) + '</div>'
     + '<div class="hero"><div class="wrap"><span class="pill">' + (isGuide ? 'Practical SEO Guide' : 'Website Project')
     + '</span><h1>' + clean(page.name) + '</h1><p>' + clean(page.lead) + '</p>'
     + '<a class="action" href="/contact/">' + (isGuide ? 'Ask about your website' : 'Discuss your project') + '</a></div></div>'
     + '<div class="wrap"><section aria-labelledby="audience"><h2 id="audience">Who this is for</h2><p>' + clean(page.audience) + '</p></section>'
-    + '<section aria-labelledby="approach"><h2 id="approach">' + (isGuide ? 'What you need to know' : 'How we approach the work')
+    + '<section aria-labelledby="approach"><h2 id="approach">' + (isGuide ? 'What you need to know' : 'Working approach')
     + '</h2><div class="cards">' + steps + '</div></section>'
     + '<section aria-labelledby="checklist"><h2 id="checklist">' + (isGuide ? 'Action checklist' : 'What to expect')
     + '</h2><ul class="clean">' + page.deliverables.map(d => '<li>' + clean(d) + '</li>').join('') + '</ul></section>'
-    + (isGuide ? '<p class="note">Reviewed by Moavia Hassan · Updated 11 November 2026 · <a href="/about/">About the team</a></p>' : '')
+    + (isGuide ? '<p class="note">Reviewed by Moavia Hassan · Updated 11 November 2026 · <a href="/about/">About the author</a></p>' : '')
     + '<section class="faq" aria-labelledby="faq-title"><h2 id="faq-title">Frequently asked questions</h2>' + faqs + '</section>'
     + (sources ? '<section aria-labelledby="sources"><h2 id="sources">Further reading</h2><ul class="sources">' + sources + '</ul></section>' : '')
     + '<section aria-labelledby="more"><h2 id="more">Explore related topics</h2><ul class="clean">' + related + '</ul></section>'

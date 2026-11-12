@@ -21,6 +21,9 @@ check(root.includes('https://moaviaseo.com/#person'),'person schema missing');
 check(root.includes('mailto:hello@moaviaseo.com'),'public homepage must use verified domain email');
 check(existsSync(join(dist,'moavia-hassan-portrait.webp')),'Professional photo asset missing');
 check(!root.includes('Moavia SEO Pro'),'old agency branding still in homepage');
+check(root.includes('name="twitter:card"'),'homepage twitter card missing');
+check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes("{ label: 'About', href: '/about/' }"),'homepage About link must open About page');
+check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes("{ label: 'Contact', href: '/contact/' }"),'homepage Contact link must open Contact page');
 check(!root.includes('moaviahassan124@gmail.com'),'legacy personal email should not appear on public homepage');
 for(const href of ['/tools/','/projects/','/about/','/contact/','/hire-me/','/tools/meta-title-description-checker/','/tools/json-ld-schema-generator/','/tools/robots-txt-sitemap-generator/']){
  check(root.includes('href="'+href+'"'),'homepage link missing: '+href);
@@ -42,6 +45,13 @@ for(const route of routes){
   check(html.includes('href="/tools/"'),'tools navigation missing: '+route);
   if(route!=='/tools/')check(html.includes('src="/tools/toolkit.js"'),'tool JavaScript missing: '+route);
  }
+ if(route==='/projects/')check(html.includes('href="/projects/ranknova/"'),'RankNova missing from project directory');
+ if(route.startsWith('/blog/')||route.startsWith('/guides/')){
+  check(html.includes('href="/tools/"'),'old tools navigation found: '+route);
+  check(!html.includes('href="/services/seo/"'),'old SEO agency page linked: '+route);
+  check(!html.includes('href="/#contact"'),'old contact anchor found: '+route);
+  check(!html.includes('About the team'),'old agency byline found: '+route);
+ }
  if(route.startsWith('/projects/')){check(html.includes('property="og:image"'),'project social image missing: '+route);check(html.includes('name="twitter:card"'),'project Twitter card missing: '+route);if(route!=='/projects/'){for(const label of ['Project screenshot','My portfolio role','Technology stack','Results and verification','View live project'])check(html.includes(label),'project section missing '+label+': '+route);check(html.includes('image.thum.io/get/'),'project screenshot source missing: '+route);}} 
  check(html.includes('<h1>')&&html.includes('</h1>'),'page H1 missing: '+route);
  check(html.includes('<meta name="description"'),'description missing: '+route);
@@ -55,6 +65,9 @@ for(const route of routes){
   check(html.includes('/moavia-hassan-portrait.webp'),'About portrait missing');
   check(html.includes('https://www.linkedin.com/in/moavia-hassan-seo/'),'About missing LinkedIn');
   check(!html.includes('Illustrative founder portrait'),'Unverified portrait still shown');
+  check(html.includes('src="/moavia-hassan-portrait.webp"'),'About portrait not rendered');
+  check(html.includes('href="https://github.com/mmoavia7861"'),'GitHub profile not linked');
+  check(html.includes('href="https://www.linkedin.com/in/moavia-hassan-seo/"'),'LinkedIn profile not linked');
  }
   if(['/about/','/privacy-policy/','/terms-and-conditions/','/contact/','/hire-me/'].includes(route)) {
     check(html.includes('hello@moaviaseo.com'),'domain email missing: '+route);
