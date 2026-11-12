@@ -99,5 +99,11 @@ jobs:
             echo "::warning::Homepage social image metadata not confirmed"
           fi
           curl --max-time 20 -LsS -A 'facebookexternalhit/1.1' -o /dev/null -w 'Facebook crawler: HTTP %{http_code}, MIME %{content_type}\n' "$img"
+          echo "Checking homepage access for social crawlers and normal browsers"
+          for agent in 'facebookexternalhit/1.1' 'Twitterbot/1.0' 'LinkedInBot/1.0' 'Mozilla/5.0'; do
+            echo "User-Agent: $agent"
+            curl --max-time 20 -LsS -A "$agent" -o /tmp/home-crawler.html -w 'Home HTTP: %{http_code}; Content-type: %{content_type}; Effective URL: %{url_effective}\\n' 'https://moaviaseo.com/'
+            if grep -q '<meta property="og:image" content="https://moaviaseo.com/social-preview.png"' /tmp/home-crawler.html; then echo "Open Graph tag detected"; else echo "Open Graph tag NOT detected"; fi
+          done
           exit 0
 
