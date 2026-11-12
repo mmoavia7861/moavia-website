@@ -4,7 +4,7 @@ import { join } from 'node:path';
 // Run after scripts/generate-seo-pages.mjs and before Vite.
 const root = join(process.cwd(), 'public');
 const host = 'https://moaviaseo.com';
-const date = '2026-10-28';
+const date = '2026-11-12';
 const dateText = '12 November 2026';
 const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const par = s => '<p>'+esc(s)+'</p>';
@@ -32,7 +32,7 @@ const content = [
  ['Retention and security','Enquiries and newsletter subscriptions may be retained while needed to respond, operate the relevant service, address recordkeeping needs or comply with applicable requirements. We do not promise a fixed deletion schedule. Please request a review or deletion by email. We apply reasonable access safeguards but cannot promise absolute security for internet systems.'],
  ['Your choices and requests','You can choose not to fill optional fields, ask about personal information associated with your submission, request correction or deletion when applicable, or ask to stop newsletter messages through the contact email above. Your legal rights may depend on your location.'],
  ['Portfolio thumbnail previews','Project pages can request screenshots of public demo websites from Thum.io (image.thum.io). When a preview loads, the visitor’s browser may connect to that provider, which can receive network request data such as IP address and user agent. Thumbnails are only visual previews and can become outdated or unavailable.'],
- ['Analytics and measurement','Cloudflare provides edge-level traffic and security metrics for this website. Cloudflare Web Analytics may also be enabled in the Cloudflare dashboard to collect page-view and performance metrics through a beacon; if activated, the service is operated by Cloudflare. We do not claim an optional analytics beacon is installed unless it has actually been enabled. The public SEO tools in this portfolio process entered inputs within the browser unless a separately labeled backend feature is used.'],
+ ['Analytics and measurement','Cloudflare Web Analytics is enabled for moaviaseo.com with automatic setup. It measures site visits, page views and website performance to help us understand how the website is used. Cloudflare processes technical request information needed to provide these metrics. The analytics service is operated by Cloudflare; review Cloudflare\'s privacy information for details. We do not use these counts as evidence of purchases, clients, SEO rankings or business outcomes. The three standalone public SEO tools process text you enter within the browser, except for any separately labeled feature that explicitly connects to a server.'],
  ['External sites and policy updates','Links to other websites, including WhatsApp, LinkedIn and platform documentation, have their own policies. We may revise this policy when technologies or business practices change and will update the date shown above.']
  ],extra:[['About','/about/'],['Contact','/#contact'],['Google Privacy Policy','https://policies.google.com/privacy'],['Google advertising policies','https://policies.google.com/technologies/ads']]},
  {path:'/terms-and-conditions/',title:'Terms & Conditions | Moavia Hassan',name:'Terms & Conditions',
