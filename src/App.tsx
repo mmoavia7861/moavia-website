@@ -128,6 +128,7 @@ export default function App() {
               <div className="mt-7 flex flex-wrap gap-3">
                 <a href="https://www.linkedin.com/in/moavia-hassan-seo/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]"><Linkedin className="h-4 w-4" /> LinkedIn</a>
                 <a href="https://github.com/mmoavia7861" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]"><Github className="h-4 w-4" /> GitHub</a>
+                <a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer" aria-label="View Moavia Hassan's Fiverr freelancer profile (opens in new tab)" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]">Fiverr <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
                 <a href="/about/" className="inline-flex items-center gap-2 px-3 py-3 font-bold text-sm text-[#4353BC] hover:underline">Read more <ArrowRight className="h-4 w-4" /></a>
               </div>
             </div>
@@ -149,7 +150,7 @@ export default function App() {
           <div className="flex flex-wrap justify-between gap-7">
             <div><p className="font-extrabold text-white">Moavia Hassan</p><p className="mt-2 text-sm text-slate-400">SEO Tools · Web Projects · Islamabad, Pakistan</p><a href="mailto:hello@moaviaseo.com" className="mt-3 inline-flex items-center gap-2 text-sm text-slate-200 hover:text-white"><Mail className="h-4 w-4" /> hello@moaviaseo.com</a></div>
             <nav aria-label="Footer" className="flex flex-wrap items-start gap-x-5 gap-y-3 text-sm">
-              <a href="/tools/" className="hover:text-white">Tools</a><a href="/projects/" className="hover:text-white">Projects</a><a href="/about/" className="hover:text-white">About</a><a href="/contact/" className="hover:text-white">Contact</a><a href="/hire-me/" className="hover:text-white">Hire Me</a><a href="/blog/" className="hover:text-white">Blog</a>
+              <a href="/tools/" className="hover:text-white">Tools</a><a href="/projects/" className="hover:text-white">Projects</a><a href="/about/" className="hover:text-white">About</a><a href="/contact/" className="hover:text-white">Contact</a><a href="/hire-me/" className="hover:text-white">Hire Me</a><a href="/blog/" className="hover:text-white">Blog</a><a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Fiverr freelancer profile (opens in new tab)">Fiverr</a>
             </nav>
           </div>
           <div className="mt-9 border-t border-slate-700 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">
