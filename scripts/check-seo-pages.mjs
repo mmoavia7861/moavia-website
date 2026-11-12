@@ -38,6 +38,7 @@ check(root.includes('<h1>Moavia Hassan: SEO Tools &amp; Web Projects</h1>'),'wro
 check(root.includes('Moavia Hassan: SEO Tools & Web Projects'),'wrong site title');
 check(root.includes('https://moaviaseo.com/#person'),'person schema missing');
 check(root.includes('https://www.fiverr.com/moavia_seopro'),'Fiverr missing from homepage person schema');
+check(root.includes('https://www.upwork.com/freelancers/~01c3735023b2f296fa'),'Upwork missing from homepage person schema');
 check(root.includes('mailto:hello@moaviaseo.com'),'public homepage must use verified domain email');
 check(existsSync(join(dist,'moavia-hassan-portrait.webp')),'Professional photo asset missing');
 check(!root.includes('Moavia SEO Pro'),'old agency branding still in homepage');
@@ -108,11 +109,13 @@ for(const route of routes){
  }
  if(route==='/hire-me/')check(html.includes('alt="Moavia Hassan logo"'),'Hire Me logo alt missing');
  if(route==='/hire-me/')check(html.includes('href="https://www.fiverr.com/moavia_seopro"'),'Hire Me Fiverr contact option missing');
+ if(route==='/hire-me/')check(html.includes('href="https://www.upwork.com/freelancers/~01c3735023b2f296fa"'),'Hire Me Upwork contact option missing');
  if(route==='/about/') {
   check(html.includes('https://github.com/mmoavia7861'),'About missing GitHub');
   check(html.includes('/moavia-hassan-portrait.webp'),'About portrait missing');
   check(html.includes('https://www.linkedin.com/in/moavia-hassan-seo/'),'About missing LinkedIn');
   check(html.includes('href="https://www.fiverr.com/moavia_seopro"'),'About missing Fiverr freelancer profile');
+  check(html.includes('href="https://www.upwork.com/freelancers/~01c3735023b2f296fa"'),'About missing Upwork freelancer profile');
   check(!html.includes('Illustrative founder portrait'),'Unverified portrait still shown');
   check(html.includes('src="/moavia-hassan-portrait.webp"'),'About portrait not rendered');
   check(html.includes('href="https://github.com/mmoavia7861"'),'GitHub profile not linked');
