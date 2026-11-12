@@ -25,6 +25,7 @@ check(root.includes('mailto:hello@moaviaseo.com'),'public homepage must use veri
 check(existsSync(join(dist,'moavia-hassan-portrait.webp')),'Professional photo asset missing');
 check(!root.includes('Moavia SEO Pro'),'old agency branding still in homepage');
 check(root.includes('name="twitter:card"'),'homepage twitter card missing');
+check(root.includes('https://moaviaseo.com/social-preview.png'),'homepage social image missing');
 check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes("{ label: 'About', href: '/about/' }"),'homepage About link must open About page');
 check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes("{ label: 'Contact', href: '/contact/' }"),'homepage Contact link must open Contact page');
 check(!root.includes('moaviahassan124@gmail.com'),'legacy personal email should not appear on public homepage');
@@ -60,6 +61,8 @@ for(const route of routes){
  check(html.includes('<meta name="description"'),'description missing: '+route);
  check(html.includes('application/ld+json'),'schema missing: '+route);
  check(html.includes('property="og:image"'),'social preview image missing: '+route);
+ check(html.includes('https://moaviaseo.com/social-preview.png'),'social preview URL missing: '+route);
+ check(html.includes('content="1200"')&&html.includes('content="630"'),'social preview dimensions missing: '+route);
  check(html.includes('name="twitter:card"'),'Twitter card missing: '+route);
  check(sitemap.includes('<loc>'+base+route+'</loc>'),'sitemap missing: '+route);
  check(html.includes('href="/favicon.png"'),'favicon missing: '+route);

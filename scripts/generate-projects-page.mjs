@@ -7,7 +7,7 @@ const websites=JSON.parse(readFileSync(join(process.cwd(),'src/data/githubProjec
 const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 const json=s=>JSON.stringify(s).replace(/</g,'\\u003c');
 const canonical=path=>origin+path;
-const image=origin+'/site-logo.png';
+const image=origin+'/social-preview.png';
 const thumb=url=>'https://image.thum.io/get/width/960/crop/680/maxAge/72/'+url;
 const nav='<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/projects/" aria-current="page">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
 const foot='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>SEO Tools &amp; Web Projects</p></div><div><a href="/tools/">Tools</a> · <a href="/projects/">Projects</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/contact/">Contact</a></div></div></footer>';
@@ -19,7 +19,7 @@ function head(path,title,description,entity,crumbs) {
  +'<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="'+esc(url)+'">'
  +'<meta property="og:type" content="website"><meta property="og:site_name" content="Moavia Hassan">'
  +'<meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(description)+'">'
- +'<meta property="og:url" content="'+esc(url)+'"><meta property="og:image" content="'+image+'"><meta property="og:image:alt" content="Moavia Hassan web project portfolio">'
+ +'<meta property="og:url" content="'+esc(url)+'"><meta property="og:image" content="'+image+'"><meta property="og:image:alt" content="Moavia Hassan SEO tools and web projects banner"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
  +'<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="'+esc(title)+'"><meta name="twitter:description" content="'+esc(description)+'"><meta name="twitter:image" content="'+image+'">'
  +'<link rel="icon" href="/favicon.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">'
  +'<link rel="stylesheet" href="/seo/pages.css"><link rel="stylesheet" href="/projects/projects.css">'

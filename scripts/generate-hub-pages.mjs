@@ -18,7 +18,7 @@ function page(path,title,description,body,kind){
  +'<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="'+url+'">'
  +'<meta property="og:site_name" content="Moavia Hassan"><meta property="og:title" content="'+clean(title)+'">'
  +'<meta property="og:description" content="'+clean(description)+'"><meta property="og:url" content="'+url+'">'
- +'<meta property="og:image" content="'+origin+'/site-logo.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="'+origin+'/site-logo.png"><link rel="icon" type="image/png" href="/favicon.png">'
+ +'<meta property="og:image" content="'+origin+'/social-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="'+origin+'/social-preview.png"><link rel="icon" type="image/png" href="/favicon.png">'
  +'<link rel="stylesheet" href="/seo/pages.css">'
  +'<script type="application/ld+json">'+JSON.stringify(schema).replace(/</g,'\u003c')+'</script>'
  +'</head><body><header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" width="42" height="42" alt="">Moavia Hassan</a>'

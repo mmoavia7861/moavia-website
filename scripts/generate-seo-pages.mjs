@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 const publicDir = join(process.cwd(), 'public');
 const site = 'https://moaviaseo.com';
-const logo = site + '/site-logo.png';
+const logo = site + '/social-preview.png';
 const company = { '@type': 'Person', '@id': site + '/#person', name: 'Moavia Hassan',
   url: site + '/', logo, areaServed: [{ '@type': 'City', name: 'Islamabad' }, { '@type': 'Country', name: 'Pakistan' }] };
 const clean = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -278,7 +278,8 @@ function renderPage(page) {
     + '<meta property="og:description" content="' + clean(page.description) + '">\n'
     + '<meta property="og:url" content="' + clean(url) + '">\n'
     + '<meta property="og:image" content="' + clean(logo) + '">\n'
-    + '<meta name="twitter:card" content="summary">\n'
+    + '<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">\n'
+     + '<meta name="twitter:card" content="summary_large_image">\n'
     + '<meta name="twitter:title" content="' + clean(page.title) + '">\n'
     + '<meta name="twitter:description" content="' + clean(page.description) + '">\n'
     + '<meta name="twitter:image" content="' + clean(logo) + '">\n'
