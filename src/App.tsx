@@ -37,7 +37,7 @@ export default function App() {
       <header className="sticky top-0 z-40 border-b border-[#E7EAF2] bg-white/95 backdrop-blur-lg">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 min-h-20 flex items-center justify-between gap-4">
           <a href="/" aria-label="Moavia Hassan - homepage" className="flex items-center gap-3 font-extrabold min-w-0">
-            <img src="/site-logo.png" width="44" height="44" alt="" className="w-11 h-11 rounded-xl object-contain border border-[#E7EAF2]" />
+            <img src="/site-logo.png" width="44" height="44" alt="Moavia Hassan logo" className="w-11 h-11 rounded-xl object-contain border border-[#E7EAF2]" />
             <span className="min-w-0 leading-tight"><span className="block text-base sm:text-lg">Moavia Hassan</span><span className="block text-[11px] font-semibold text-[#5265D8]">SEO Tools & Web Projects</span></span>
           </a>
           <nav aria-label="Primary" className="hidden sm:flex items-center gap-1 md:gap-4">

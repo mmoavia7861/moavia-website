@@ -21,7 +21,7 @@ function page(path,title,description,body,kind){
  +'<meta property="og:image" content="'+origin+'/social-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="'+origin+'/social-preview.png"><link rel="icon" type="image/png" href="/favicon.png">'
  +'<link rel="stylesheet" href="/seo/pages.css">'
  +'<script type="application/ld+json">'+JSON.stringify(schema).replace(/</g,'\u003c')+'</script>'
- +'</head><body><header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" width="42" height="42" alt="">Moavia Hassan</a>'
+ +'</head><body><header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" width="42" height="42" alt="Moavia Hassan logo">Moavia Hassan</a>'
  +nav+'</div></header>'
  +'<main><div class="wrap subnav"><a href="/">Home</a> / '+(kind==='hire'?'Hire Me':'Contact')+'</div>'
  +'<div class="hero"><div class="wrap"><span class="pill">Independent SEO &amp; Web Projects</span><h1>'+clean(title.replace(' | Moavia Hassan',''))+'</h1><p>'+clean(description)+'</p></div></div>'

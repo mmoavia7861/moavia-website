@@ -46,6 +46,22 @@ for(const route of routes){
  check(html.includes('href="'+base+route+'"'),'canonical missing: '+route);
  if(route.startsWith('/tools/')){
   check(html.includes('href="/tools/toolkit.css"'),'tool CSS missing: '+route);
+  check(html.includes('alt="Moavia Hassan logo"'),'logo alt text missing: '+route);
+  if(route!=='/tools/'){
+   check((html.match(/<details class="faq-entry">/g)||[]).length===4,'4 FAQs missing: '+route);
+   check(html.includes('Your entered text stays in the browser'),'privacy note missing: '+route);
+   check(html.includes('Worked example'),'worked example missing: '+route);
+  }
+  if(route==='/tools/meta-title-description-checker/')check(html.includes('Meta Title & Description Checker | Moavia Hassan'),'short title missing');
+  if(route==='/tools/json-ld-schema-generator/'){
+   check(html.includes('developers.google.com/search/updates'),'FAQ Google source missing');
+   check(html.includes('Schema Markup Validator'),'validator instructions missing');
+   check(!html.includes('Download valid JSON-LD'),'unverified validity claim remains');
+  }
+  if(route==='/tools/robots-txt-sitemap-generator/'){
+   check(html.includes('noindex'),'robots noindex help missing');
+   check(html.includes('Disallow'),'robots disallow help missing');
+  }
   check(html.includes('href="/tools/"'),'tools navigation missing: '+route);
   if(route!=='/tools/')check(html.includes('src="/tools/toolkit.js"'),'tool JavaScript missing: '+route);
  }
@@ -66,6 +82,12 @@ for(const route of routes){
  check(html.includes('name="twitter:card"'),'Twitter card missing: '+route);
  check(sitemap.includes('<loc>'+base+route+'</loc>'),'sitemap missing: '+route);
  check(html.includes('href="/favicon.png"'),'favicon missing: '+route);
+ if(route==='/privacy-policy/'){
+   check(html.includes('Standalone SEO tools and optional AI services'),'tool privacy policy missing');
+   check(html.includes('Cloudflare Web Analytics'),'analytics privacy policy missing');
+   check(!html.includes('Google advertising disclosures'),'old ad boilerplate remains');
+ }
+ if(route==='/hire-me/')check(html.includes('alt="Moavia Hassan logo"'),'Hire Me logo alt missing');
  if(route==='/about/') {
   check(html.includes('https://github.com/mmoavia7861'),'About missing GitHub');
   check(html.includes('/moavia-hassan-portrait.webp'),'About portrait missing');

@@ -73,7 +73,7 @@ function initSchema(){
   return JSON.stringify(data,null,2);
  };
  $("generateSchema").addEventListener("click",()=>{
-  try{last=build();$("schemaOutput").value=last;show("Valid JSON-LD generated locally. Confirm every fact appears on the actual page before publishing.");}catch(e){last="";$("schemaOutput").value="";show(e.message||"Invalid information.",true);}
+  try{last=build();$("schemaOutput").value=last;show("JSON-LD generated locally. Form fields and URLs were checked; independently validate the schema before publishing.");}catch(e){last="";$("schemaOutput").value="";show(e.message||"Invalid information.",true);}
  });
  bindCopy("copySchema",()=>last);
  bindCopy("copySchemaHTML",()=>last?'<script type="application/ld+json">\n'+last.replace(/</g,"\\u003c")+'\n</script>':"");
