@@ -119,8 +119,8 @@ const articles = [
 ];
 
 const allPaths=[...content.map(p=>p.path),'/blog/',...articles.map(p=>'/blog/'+p.slug+'/')];
-const commonLinks='<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
-const footer='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>Islamabad, Pakistan</p></div><div>'+[['About Us','/about/'],['Blog','/blog/'],['Privacy Policy','/privacy-policy/'],['Terms & Conditions','/terms-and-conditions/']].map(([name,href])=>a(href,name)).join(' · ')+'</div><div><a href="mailto:hello@moaviaseo.com">Contact by email</a></div></div></footer>';
+const commonLinks='<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/hire-me/">Services</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
+const footer='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>Islamabad, Pakistan</p></div><div>'+[['About Us','/about/'],['Services','/hire-me/'],['Blog','/blog/'],['Privacy Policy','/privacy-policy/'],['Terms & Conditions','/terms-and-conditions/']].map(([name,href])=>a(href,name)).join(' · ')+'</div><div><a href="mailto:hello@moaviaseo.com">Contact by email</a></div></div></footer>';
 const schemaText = x => JSON.stringify(x).replace(/</g,'\\u003c');
 function layout(info,inner){
  const url=host+info.path;const article=info.type==='article';

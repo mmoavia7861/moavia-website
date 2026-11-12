@@ -9,8 +9,8 @@ const json=s=>JSON.stringify(s).replace(/</g,'\\u003c');
 const canonical=path=>origin+path;
 const image=origin+'/social-preview.png';
 const thumb=url=>'https://image.thum.io/get/width/960/crop/680/maxAge/72/'+url;
-const nav='<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/projects/" aria-current="page">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
-const foot='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>SEO Tools &amp; Web Projects</p></div><div><a href="/tools/">Tools</a> · <a href="/projects/">Projects</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/contact/">Contact</a></div></div></footer>';
+const nav='<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/hire-me/">Services</a><a href="/projects/" aria-current="page">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
+const foot='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>SEO Tools · Services · Web/App Projects</p></div><div><a href="/tools/">Tools</a> · <a href="/hire-me/">Services</a> · <a href="/projects/">Projects</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/contact/">Contact</a></div></div></footer>';
 const sep='<div class="wrap"><p class="project-note">These are public website demos, not verified paid-client case studies. Descriptions cover source-visible work, not traffic, leads, rankings or revenue.</p></div>';
 function head(path,title,description,entity,crumbs) {
  const url=canonical(path);

@@ -34,12 +34,15 @@ const social=readFileSync(join(dist,'social-preview.png'));
 check(social.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')),'social image not PNG');
 check(social.readUInt32BE(16)===1200&&social.readUInt32BE(20)===630,'social image not 1200x630');
 check(root.includes('<link rel="canonical" href="'+base+'/"'),'missing homepage canonical');
-check(root.includes('<h1>Moavia Hassan: SEO Tools &amp; Web Projects</h1>'),'wrong homepage fallback H1');
-check(root.includes('Moavia Hassan: SEO Tools & Web Projects'),'wrong site title');
+check(root.includes('<h1>Moavia Hassan: SEO Tools, Services &amp; Web/App Projects</h1>'),'wrong homepage fallback H1');
+check(root.includes('Moavia Hassan: SEO Tools, Services & Web/App Projects'),'wrong site title');
 check(root.includes('https://moaviaseo.com/#person'),'person schema missing');
 check(root.includes('https://www.fiverr.com/moavia_seopro'),'Fiverr missing from homepage person schema');
 check(root.includes('https://www.upwork.com/freelancers/~01c3735023b2f296fa'),'Upwork missing from homepage person schema');
 check(root.includes('mailto:hello@moaviaseo.com'),'public homepage must use verified domain email');
+check(root.includes('href="/hire-me/">Services</a>'),'homepage Services navigation missing');
+check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes("{ label: 'Services', href: '/hire-me/' }"),'React Services navigation missing');
+check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes('Web/App Projects'),'React projects branding missing');
 check(existsSync(join(dist,'moavia-hassan-portrait.webp')),'Professional photo asset missing');
 check(!root.includes('Moavia SEO Pro'),'old agency branding still in homepage');
 check(root.includes('name="twitter:card"'),'homepage twitter card missing');
@@ -62,6 +65,7 @@ for(const route of routes){
  check(existsSync(f),'page missing: '+route);
  const html=readFileSync(f,'utf8');
  check(html.includes('href="'+base+route+'"'),'canonical missing: '+route);
+ check(html.includes('href="/hire-me/">Services</a>'),'Services link missing: '+route);
  check(html.includes('src="/cursor-effect.js"') && html.includes('href="/cursor-effect.css"'),'cursor missing on page: '+route);
  check(html.includes('src="/theme-init.js"') && html.includes('href="/theme.css"') && html.includes('src="/theme-switcher.js"'),'theme support missing on page: '+route);
  if(route.startsWith('/tools/')){
@@ -108,6 +112,7 @@ for(const route of routes){
    check(!html.includes('Google advertising disclosures'),'old ad boilerplate remains');
  }
  if(route==='/hire-me/')check(html.includes('alt="Moavia Hassan logo"'),'Hire Me logo alt missing');
+ if(route==='/hire-me/')check(html.includes('SEO, Website &amp; Project Services'),'Hire Me Services copy missing');
  if(route==='/hire-me/')check(html.includes('href="https://www.fiverr.com/moavia_seopro"'),'Hire Me Fiverr contact option missing');
  if(route==='/hire-me/')check(html.includes('href="https://www.upwork.com/freelancers/~01c3735023b2f296fa"'),'Hire Me Upwork contact option missing');
  if(route==='/about/') {

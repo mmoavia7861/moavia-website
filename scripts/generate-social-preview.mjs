@@ -24,8 +24,9 @@ W:'10001/10001/10001/10101/10101/10101/01010',
 ' ':'00000/00000/00000/00000/00000/00000/00000'};
 function txt(t,x,y,k,c){for(const a of t.toUpperCase()){const g=(glyphs[a]||glyphs[' ']).split('/');for(let j=0;j<7;j++)for(let i=0;i<5;i++)if(g[j][i]==='1')box(x+i*k,y+j*k,x+(i+1)*k,y+(j+1)*k,c);x+=6*k;}}
 box(0,0,W,H,C.bg);rr(63,100,315,141,18,C.light);txt('PERSONAL PORTFOLIO',82,111,3,C.blue);
-txt('MOAVIA HASSAN',61,210,8,C.navy);rr(61,332,709,414,22,C.blue);
-txt('SEO TOOLS & WEB PROJECTS',87,355,4,C.white);box(65,450,194,461,C.green);box(194,450,255,461,C.blue);
+txt('MOAVIA HASSAN',61,210,8,C.navy);rr(61,324,709,423,22,C.blue);
+txt('SEO TOOLS & SERVICES',87,337,4,C.white);
+txt('WEB / APP PROJECTS',87,378,4,C.white);box(65,450,194,461,C.green);box(194,450,255,461,C.blue);
 txt('MOAVIASEO.COM',69,499,5,C.navy);txt('FREE TOOLS / REAL PROJECTS',69,569,3,C.blue);
 rr(769,121,1151,515,36,C.navy);rr(782,181,1138,501,25,C.white);rr(782,181,1138,224,14,C.navy);
 for(let x=806;x<874;x+=26)rr(x,193,x+13,206,6,C.green);rr(810,259,1099,335,13,C.light);txt('</>',855,274,7,C.blue);

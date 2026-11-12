@@ -28,6 +28,7 @@ export default function App() {
   const [adminOpen, setAdminOpen] = useState(false);
   const sections = [
     { label: 'Tools', href: '/tools/' },
+    { label: 'Services', href: '/hire-me/' },
     { label: 'Projects', href: '/projects/' },
     { label: 'About', href: '/about/' },
     { label: 'Contact', href: '/contact/' },
@@ -38,7 +39,7 @@ export default function App() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 min-h-20 flex items-center justify-between gap-4">
           <a href="/" aria-label="Moavia Hassan - homepage" className="flex items-center gap-3 font-extrabold min-w-0">
             <img src="/site-logo.png" width="44" height="44" alt="Moavia Hassan logo" className="w-11 h-11 rounded-xl object-contain border border-[#E7EAF2]" />
-            <span className="min-w-0 leading-tight"><span className="block text-base sm:text-lg">Moavia Hassan</span><span className="block text-[11px] font-semibold text-[#5265D8]">SEO Tools & Web Projects</span></span>
+            <span className="min-w-0 leading-tight"><span className="block text-base sm:text-lg">Moavia Hassan</span><span className="block text-[11px] font-semibold text-[#5265D8]">SEO Tools · Services · Web/App Projects</span></span>
           </a>
           <nav aria-label="Primary" className="hidden sm:flex items-center gap-1 md:gap-4">
             {sections.map(link => <a key={link.label} href={link.href} className="rounded-lg px-2.5 py-2 text-sm font-semibold text-[#263854] hover:bg-[#EEF2FF] hover:text-[#4353BC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]">{link.label}</a>)}
@@ -57,12 +58,12 @@ export default function App() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl">
               <p className="inline-block rounded-full bg-white border border-[#DDE3F4] px-4 py-2 text-xs font-extrabold tracking-wide text-[#4353BC]">PERSONAL PORTFOLIO · ISLAMABAD, PAKISTAN</p>
-              <h1 id="homepage-title" className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">Moavia Hassan: <span className="text-[#5265D8]">SEO Tools & Web Projects</span></h1>
-              <p className="mt-6 max-w-2xl text-base sm:text-xl leading-relaxed text-[#52607A]">Explore practical SEO and web tools, browse public website projects, and see how I approach creating useful, accessible web experiences. The portfolio links to real project websites, not invented case studies.</p>
+              <h1 id="homepage-title" className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">Moavia Hassan: <span className="text-[#5265D8]">SEO Tools, Services &amp; Web/App Projects</span></h1>
+              <p className="mt-6 max-w-2xl text-base sm:text-xl leading-relaxed text-[#52607A]">Explore free SEO tools, discuss technical SEO and website services, and browse real web project demos. App ideas can be discussed individually; no unpublished app is presented as a completed project.</p>
               <div className="mt-9 flex flex-wrap gap-3">
                 <a href="/tools/" className="inline-flex items-center gap-2 rounded-xl bg-[#5265D8] px-5 py-3 font-bold text-white hover:bg-[#4353BC]">Explore Tools <ArrowRight className="w-4 h-4" /></a>
                 <a href="/projects/" className="inline-flex items-center gap-2 rounded-xl border border-[#C9D1E7] bg-white px-5 py-3 font-bold text-[#18243A] hover:bg-[#F4F6FF]">View Projects <Code2 className="w-4 h-4" /></a>
-                <a href="/hire-me/" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 font-bold text-[#4353BC] hover:underline">Hire Me <ArrowUpRight className="w-4 h-4" /></a>
+                <a href="/hire-me/" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 font-bold text-[#4353BC] hover:underline">Explore Services <ArrowUpRight className="w-4 h-4" /></a>
               </div>
             </div>
           </div>
@@ -91,15 +92,37 @@ export default function App() {
         </section>
         <OnView id="experiments" minHeight={540}><AiToolsSection /></OnView>
 
-        <section id="projects" className="scroll-mt-20" aria-label="Website projects">
+        <section id="services" className="scroll-mt-20 border-y border-[#E7EAF2] bg-[#F8F9FD] py-16 sm:py-20" aria-labelledby="services-title">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p className="text-xs font-extrabold uppercase tracking-widest text-[#5265D8]">Freelance services · Scope agreed individually</p>
+            <h2 id="services-title" className="mt-3 text-3xl sm:text-4xl font-extrabold">SEO &amp; Web Development Services</h2>
+            <p className="mt-3 max-w-3xl text-[#52607A]">Discuss a practical project before hiring. These are areas I can review or scope, not promises of specific rankings, app launches or client outcomes.</p>
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
+              {[
+                { title: 'Technical & On-Page SEO', description: 'Discuss crawlability, site structure, metadata, content improvements and Search Console issues.' },
+                { title: 'Website Development', description: 'Plan responsive WordPress or React websites with useful pages, clear navigation and maintainable content.' },
+                { title: 'Web Tools & App Project Planning', description: 'Explore a web utility or application idea and agree feasibility, scope and deliverables before any work begins.' },
+              ].map(service => (
+                <article key={service.title} className="rounded-2xl border border-[#DCE3F2] bg-white p-6">
+                  <h3 className="text-lg font-extrabold">{service.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-[#52607A]">{service.description}</p>
+                </article>
+              ))}
+            </div>
+            <a href="/hire-me/" className="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#5265D8] px-5 py-3 text-white font-bold hover:bg-[#4353BC]">Explore Services &amp; Discuss a Project <ArrowRight className="w-4 h-4" /></a>
+          </div>
+        </section>
+
+
+        <section id="projects" className="scroll-mt-20" aria-label="Web and app projects">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 text-center">
             <a href="/projects/" className="text-sm font-bold text-[#4353BC] underline underline-offset-4">Open the full projects directory</a>
           </div>
           <div className="bg-white py-16 sm:py-20">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <p className="text-xs font-extrabold uppercase tracking-widest text-[#4353BC]">Real public links</p>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">Web projects</h2>
-              <p className="mt-3 max-w-2xl text-[#52607A]">Browse website examples and tool projects. A public demo is not a claim that the project was a paid client engagement.</p>
+              <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">Web/App Projects</h2>
+              <p className="mt-3 max-w-2xl text-[#52607A]">Browse published website and tool projects. App projects will be listed only when real, verifiable examples are available; demos do not imply paid-client work.</p>
               <div className="mt-9 grid grid-cols-1 md:grid-cols-2 gap-5">
                 {websiteLinks.map(site => <a key={site.id} href={`/projects/${site.id}/`} className="group block rounded-2xl border border-[#E7EAF2] bg-[#F8F9FD] p-6 hover:border-[#5265D8] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]">
                   <span className="text-xs font-bold uppercase tracking-wide text-[#5265D8]">{site.category}</span>
@@ -149,9 +172,9 @@ export default function App() {
       <footer className="bg-[#18243A] text-slate-200 py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-between gap-7">
-            <div><p className="font-extrabold text-white">Moavia Hassan</p><p className="mt-2 text-sm text-slate-400">SEO Tools · Web Projects · Islamabad, Pakistan</p><a href="mailto:hello@moaviaseo.com" className="mt-3 inline-flex items-center gap-2 text-sm text-slate-200 hover:text-white"><Mail className="h-4 w-4" /> hello@moaviaseo.com</a></div>
+            <div><p className="font-extrabold text-white">Moavia Hassan</p><p className="mt-2 text-sm text-slate-400">SEO Tools · Services · Web/App Projects · Islamabad, Pakistan</p><a href="mailto:hello@moaviaseo.com" className="mt-3 inline-flex items-center gap-2 text-sm text-slate-200 hover:text-white"><Mail className="h-4 w-4" /> hello@moaviaseo.com</a></div>
             <nav aria-label="Footer" className="flex flex-wrap items-start gap-x-5 gap-y-3 text-sm">
-              <a href="/tools/" className="hover:text-white">Tools</a><a href="/projects/" className="hover:text-white">Projects</a><a href="/about/" className="hover:text-white">About</a><a href="/contact/" className="hover:text-white">Contact</a><a href="/hire-me/" className="hover:text-white">Hire Me</a><a href="/blog/" className="hover:text-white">Blog</a><a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Fiverr freelancer profile (opens in new tab)">Fiverr</a><a href="https://www.upwork.com/freelancers/~01c3735023b2f296fa" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Upwork freelancer profile (opens in new tab)">Upwork</a>
+              <a href="/tools/" className="hover:text-white">Tools</a><a href="/hire-me/" className="hover:text-white">Services</a><a href="/projects/" className="hover:text-white">Projects</a><a href="/about/" className="hover:text-white">About</a><a href="/contact/" className="hover:text-white">Contact</a><a href="/hire-me/" className="hover:text-white">Hire Me</a><a href="/blog/" className="hover:text-white">Blog</a><a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Fiverr freelancer profile (opens in new tab)">Fiverr</a><a href="https://www.upwork.com/freelancers/~01c3735023b2f296fa" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Upwork freelancer profile (opens in new tab)">Upwork</a>
             </nav>
           </div>
           <div className="mt-9 border-t border-slate-700 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">

@@ -290,7 +290,7 @@ function renderPage(page) {
     + '<script type="application/ld+json">' + jsonLd(schema) + '</script>\n'
     + '</head><body>\n'
     + '<header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" alt="Moavia Hassan logo" width="42" height="42">Moavia Hassan</a>'
-    + '<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header>'
+    + '<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/hire-me/">Services</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav></div></header>'
     + '<main><div class="wrap subnav"><a href="/">Home</a> / <a href="' + (isGuide ? '/blog/' : '/services/') + '">'
     + (isGuide ? 'Guides' : 'Services') + '</a> / ' + clean(page.name) + '</div>'
     + '<div class="hero"><div class="wrap"><span class="pill">' + (isGuide ? 'Practical SEO Guide' : 'Website Project')
