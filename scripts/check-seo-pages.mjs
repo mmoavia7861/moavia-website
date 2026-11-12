@@ -7,7 +7,7 @@ const routes=[
  '/blog/technical-seo-playbook-2026/','/blog/ai-generated-websites-human-engineering/',
  '/blog/mastering-meta-ads-capi-cro/','/blog/local-seo-google-maps-3pack/',
  '/blog/image-video-resolution-cro/','/blog/google-search-console-discovered-vs-indexed/',
- '/blog/seo-aeo-geo-small-business-guide/','/projects/','/projects/ranknova/','/projects/dark-agency/','/projects/agency-multipage/','/projects/umm-e-aiman/','/hire-me/','/contact/',
+ '/blog/seo-aeo-geo-small-business-guide/','/projects/','/projects/ranknova/','/projects/dark-agency/','/projects/agency-multipage/','/projects/umm-e-aiman/','/projects/moavia-app/','/hire-me/','/contact/',
  '/tools/','/tools/meta-title-description-checker/','/tools/json-ld-schema-generator/','/tools/robots-txt-sitemap-generator/'
 ];
 const read=path=>readFileSync(join(dist,path),'utf8');
@@ -43,6 +43,7 @@ check(root.includes('mailto:hello@moaviaseo.com'),'public homepage must use veri
 check(root.includes('href="/hire-me/">Services</a>'),'homepage Services navigation missing');
 check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes("{ label: 'Services', href: '/hire-me/' }"),'React Services navigation missing');
 check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes('Web/App Projects'),'React projects branding missing');
+check(readFileSync(join(process.cwd(),'src/data/githubProjects.json'),'utf8').includes('"id": "moavia-app"'),'Android app project missing from React data');
 check(existsSync(join(dist,'moavia-hassan-portrait.webp')),'Professional photo asset missing');
 check(!root.includes('Moavia SEO Pro'),'old agency branding still in homepage');
 check(root.includes('name="twitter:card"'),'homepage twitter card missing');
@@ -89,14 +90,36 @@ for(const route of routes){
   check(html.includes('href="/tools/"'),'tools navigation missing: '+route);
   if(route!=='/tools/')check(html.includes('src="/tools/toolkit.js"'),'tool JavaScript missing: '+route);
  }
- if(route==='/projects/')check(html.includes('href="/projects/ranknova/"'),'RankNova missing from project directory');
+ if(route==='/projects/') {
+  check(html.includes('href="/projects/ranknova/"'),'RankNova missing from project directory');
+  check(html.includes('href="/projects/moavia-app/"'),'Android app missing from projects directory');
+  check(html.includes('View GitHub source'),'Android source link missing from projects directory');
+  check(html.includes('Web &amp; App Projects'),'Web/App project directory heading missing');
+ }
  if(route.startsWith('/blog/')||route.startsWith('/guides/')){
   check(html.includes('href="/tools/"'),'old tools navigation found: '+route);
   check(!html.includes('href="/services/seo/"'),'old SEO agency page linked: '+route);
   check(!html.includes('href="/#contact"'),'old contact anchor found: '+route);
   check(!html.includes('About the team'),'old agency byline found: '+route);
  }
- if(route.startsWith('/projects/')){check(html.includes('property="og:image"'),'project social image missing: '+route);check(html.includes('name="twitter:card"'),'project Twitter card missing: '+route);if(route!=='/projects/'){for(const label of ['Project screenshot','My portfolio role','Technology stack','Results and verification','View live project'])check(html.includes(label),'project section missing '+label+': '+route);check(html.includes('image.thum.io/get/'),'project screenshot source missing: '+route);}} 
+ if(route.startsWith('/projects/')){
+  check(html.includes('property="og:image"'),'project social image missing: '+route);
+  check(html.includes('name="twitter:card"'),'project Twitter card missing: '+route);
+  if(route==='/projects/moavia-app/'){
+   for(const label of ['Source-based app illustration','My portfolio role','Technology stack','Results and verification','View Android source repository','No live app or store download']){
+    check(html.includes(label),'Android prototype disclosure missing '+label+': '+route);
+   }
+   check(html.includes('Hello Android!'),'actual current Android starter screen not described');
+   check(html.includes('app/src/main/java/com/example/MainActivity.kt'),'Android code reference missing');
+   check(html.includes('SoftwareSourceCode'),'Android software source JSON-LD missing');
+   check(!html.includes('image.thum.io/get/'),'Android prototype should not use a fabricated live screenshot');
+  } else if(route!=='/projects/'){
+   for(const label of ['Project screenshot','My portfolio role','Technology stack','Results and verification','View live project']){
+    check(html.includes(label),'project section missing '+label+': '+route);
+   }
+   check(html.includes('image.thum.io/get/'),'project screenshot source missing: '+route);
+  }
+ } 
  check(html.includes('<h1>')&&html.includes('</h1>'),'page H1 missing: '+route);
  check(html.includes('<meta name="description"'),'description missing: '+route);
  check(html.includes('application/ld+json'),'schema missing: '+route);

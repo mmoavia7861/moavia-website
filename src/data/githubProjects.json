@@ -82,5 +82,29 @@
     ],
     "result": "Source code includes the portal routes and interface components. Availability, admissions and actual institutional use require independent confirmation; no measured outcomes are claimed.",
     "repo": "https://github.com/mmoavia7861/Umm-E-Aiman"
+  },
+  {
+    "id": "moavia-app",
+    "title": "Moavia SEO Pro — Android App Starter",
+    "url": "https://github.com/mmoavia7861/moavia-app",
+    "repo": "https://github.com/mmoavia7861/moavia-app",
+    "kind": "android",
+    "category": "Android App Prototype",
+    "description": "Public Kotlin/Jetpack Compose Android starter repository. The current app displays a basic “Hello Android!” greeting; SEO features are not implemented or released.",
+    "problem": "How can an Android project be initialized as a foundation for a possible future Moavia SEO Pro mobile experience without implying an app has already launched?",
+    "role": "Personal Android starter code repository using a Compose activity, theme files and Android project configuration.",
+    "stack": [
+      "Kotlin",
+      "Android",
+      "Jetpack Compose",
+      "Material 3",
+      "Gradle"
+    ],
+    "work": [
+      "AndroidManifest.xml with a launcher activity and application label.",
+      "MainActivity.kt with a Jetpack Compose scaffold and basic Hello Android greeting.",
+      "Gradle build configuration, launcher icons, theme resources and placeholder tests."
+    ],
+    "result": "The public GitHub code shows a basic starter screen, not a finished mobile SEO application. No Play Store listing, published APK, working Gemini assistant, production integration or user results are claimed."
   }
 ]

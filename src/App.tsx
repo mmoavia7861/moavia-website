@@ -122,7 +122,7 @@ export default function App() {
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <p className="text-xs font-extrabold uppercase tracking-widest text-[#4353BC]">Real public links</p>
               <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">Web/App Projects</h2>
-              <p className="mt-3 max-w-2xl text-[#52607A]">Browse published website and tool projects. App projects will be listed only when real, verifiable examples are available; demos do not imply paid-client work.</p>
+              <p className="mt-3 max-w-2xl text-[#52607A]">Browse published web projects and a source-verified Android starter. The mobile entry is a prototype, not a completed or released app; demos do not imply paid-client work.</p>
               <div className="mt-9 grid grid-cols-1 md:grid-cols-2 gap-5">
                 {websiteLinks.map(site => <a key={site.id} href={`/projects/${site.id}/`} className="group block rounded-2xl border border-[#E7EAF2] bg-[#F8F9FD] p-6 hover:border-[#5265D8] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]">
                   <span className="text-xs font-bold uppercase tracking-wide text-[#5265D8]">{site.category}</span>
