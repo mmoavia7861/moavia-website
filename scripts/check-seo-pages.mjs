@@ -13,6 +13,16 @@ const routes=[
 const read=path=>readFileSync(join(dist,path),'utf8');
 const check=(ok,err)=>{if(!ok)throw Error('Site build check failed: '+err)};
 const sitemap=read('sitemap.xml'),root=read('index.html');
+for (const asset of ['cursor-effect.js', 'cursor-effect.css']) {
+ check(existsSync(join(dist, asset)), 'cursor asset missing: ' + asset);
+}
+const effectJs = read('cursor-effect.js');
+const effectCss = read('cursor-effect.css');
+check(effectJs.includes("prefers-reduced-motion: reduce"), 'cursor must respect reduced-motion preference');
+check(effectJs.includes("pointerType !== 'mouse'"), 'cursor must ignore touch input');
+check(effectJs.includes("pointer-events: none") || effectCss.includes('pointer-events: none'), 'cursor must not intercept clicks');
+check(!effectCss.includes('cursor: none'), 'native cursor must remain accessible');
+check(root.includes('src="/cursor-effect.js"') && root.includes('href="/cursor-effect.css"'), 'cursor missing on homepage');
 check(read('robots.txt').includes('Sitemap: '+base+'/sitemap.xml'),'missing sitemap rule');
 const social=readFileSync(join(dist,'social-preview.png'));
 check(social.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')),'social image not PNG');
@@ -44,6 +54,7 @@ for(const route of routes){
  check(existsSync(f),'page missing: '+route);
  const html=readFileSync(f,'utf8');
  check(html.includes('href="'+base+route+'"'),'canonical missing: '+route);
+ check(html.includes('src="/cursor-effect.js"') && html.includes('href="/cursor-effect.css"'),'cursor missing on page: '+route);
  if(route.startsWith('/tools/')){
   check(html.includes('href="/tools/toolkit.css"'),'tool CSS missing: '+route);
   check(html.includes('alt="Moavia Hassan logo"'),'logo alt text missing: '+route);

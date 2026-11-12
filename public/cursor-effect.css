@@ -1,0 +1,37 @@
+/* Small, premium cursor-follow effect, without replacing the native pointer. */
+.moavia-cursor-halo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483645;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(82, 101, 216, .68);
+  background: rgba(82, 101, 216, .035);
+  box-shadow: 0 0 0 7px rgba(82, 101, 216, .065), 0 5px 20px rgba(82, 101, 216, .12);
+  pointer-events: none;
+  user-select: none;
+  opacity: 0;
+  transform: translate3d(-100px, -100px, 0);
+  transition: width .2s ease, height .2s ease, border-color .2s ease,
+    background .2s ease, box-shadow .2s ease, opacity .16s ease;
+  will-change: transform;
+  contain: layout paint style;
+}
+.moavia-cursor-halo.is-visible { opacity: 1; }
+.moavia-cursor-halo.is-hover {
+  width: 54px;
+  height: 54px;
+  border-color: rgba(23, 169, 154, .9);
+  background: rgba(23, 169, 154, .055);
+  box-shadow: 0 0 0 8px rgba(23, 169, 154, .08), 0 6px 24px rgba(23, 169, 154, .14);
+}
+.moavia-cursor-halo.is-pressed {
+  width: 29px;
+  height: 29px;
+  border-color: rgba(82, 101, 216, .9);
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .moavia-cursor-halo { display: none !important; }
+}
