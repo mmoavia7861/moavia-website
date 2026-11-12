@@ -46,6 +46,8 @@ for(const route of routes){
  check(html.includes('<h1>')&&html.includes('</h1>'),'page H1 missing: '+route);
  check(html.includes('<meta name="description"'),'description missing: '+route);
  check(html.includes('application/ld+json'),'schema missing: '+route);
+ check(html.includes('property="og:image"'),'social preview image missing: '+route);
+ check(html.includes('name="twitter:card"'),'Twitter card missing: '+route);
  check(sitemap.includes('<loc>'+base+route+'</loc>'),'sitemap missing: '+route);
  check(html.includes('href="/favicon.png"'),'favicon missing: '+route);
  if(route==='/about/') {
