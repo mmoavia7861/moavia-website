@@ -13,7 +13,10 @@
       "/projects/*",
       "/offerings/*",
       "/pages/*",
-      "/sitemap.xml"
+      "/sitemap.xml",
+      "/about/*",
+      "/contact/*",
+      "/hire-me/*"
     ],
     "not_found_handling": "404-page"
   },
