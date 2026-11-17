@@ -30,28 +30,30 @@ export default function App() {
   const [managedServices, setManagedServices] = useState<Array<{slug:string;title:string;excerpt:string}>>([]);
   const [managedProjects, setManagedProjects] = useState<Array<{id:string;title:string;description:string;category:string}>>([]);
   useEffect(() => {
-    let disposed = false;
-    const offs: Array<()=>void> = [];
-    void (async () => {
-      const [{db},{onSnapshot,doc,collection,where,query}] = await Promise.all([
-        import('./firebase'),import('firebase/firestore')
-      ]);
-      if(disposed)return;
-      offs.push(onSnapshot(doc(db,'siteSettings','public'),snap=>
-        setSiteSettings(mergeSiteSettings(snap.exists()?snap.data() as Partial<PublicSiteSettings>:null)),
-        ()=>setSiteSettings(SITE_DEFAULTS)));
-      offs.push(onSnapshot(query(collection(db,'cmsServices'),where('published','==',true)),snap=>{
-        setManagedServices(snap.docs.filter(d=>/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(d.id))
-          .map(d=>({slug:d.id,title:String(d.data().title||''),excerpt:String(d.data().excerpt||'')}))
-          .filter(d=>d.title&&d.excerpt));
-      },()=>setManagedServices([])));
-      offs.push(onSnapshot(query(collection(db,'portfolioProjects'),where('published','==',true)),snap=>{
-        setManagedProjects(snap.docs.filter(d=>/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(d.id))
-          .map(d=>({id:d.id,title:String(d.data().title||''),description:String(d.data().excerpt||''),category:String(d.data().category||'Website project')}))
-          .filter(d=>d.title&&d.description));
-      },()=>setManagedProjects([])));
-    })().catch(()=>{});
-    return ()=>{disposed=true;offs.forEach(off=>off());};
+    // Public site uses a lightweight read-only endpoint, not Firebase Auth or
+    // the Firestore browser SDK. Admin access is separate.
+    const controller = new AbortController();
+    void fetch('/api/public-site',{signal:controller.signal})
+      .then(response=>{if(!response.ok)throw Error('Public content unavailable');return response.json();})
+      .then((payload: {
+        settings?:Partial<PublicSiteSettings>;
+        services?:Array<{slug:string;title:string;excerpt:string}>;
+        projects?:Array<{id:string;title:string;description:string;category:string}>;
+      })=>{
+        if(controller.signal.aborted)return;
+        setSiteSettings(mergeSiteSettings(payload.settings));
+        if(Array.isArray(payload.services)){
+          setManagedServices(payload.services.filter(item=>
+            /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.slug) &&
+            typeof item.title==='string' && typeof item.excerpt==='string'));
+        }
+        if(Array.isArray(payload.projects)){
+          setManagedProjects(payload.projects.filter(item=>
+            /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(item.id) &&
+            typeof item.title==='string' && typeof item.description==='string'));
+        }
+      }).catch(()=>{/* Keep verified static fallback copy when the CMS is offline. */});
+    return ()=>controller.abort();
   },[]);
   useEffect(()=>{
     if(siteSettings.seoTitle)document.title=siteSettings.seoTitle;
