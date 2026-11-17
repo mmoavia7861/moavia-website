@@ -15,11 +15,11 @@ function visit(folder) {
     if (entry.isDirectory()) { visit(path); continue; }
     if (!entry.isFile() || !entry.name.endsWith('.html')) continue;
     let html = readFileSync(path, 'utf8');
-    if (!/<head(?:\\s[^>]*)?>/i.test(html) || !/<\\/head>/i.test(html)) throw new Error('Missing head element in ' + path);
+    if (!/<head(?:\s[^>]*)?>/i.test(html) || !/<\/head>/i.test(html)) throw new Error('Missing head element in ' + path);
     // Add on every HTML page, including blog, tools, contact and privacy pages.
     // The external Google tag loads only after a visitor explicitly opts in.
     if (!html.includes('analytics-consent.js')) {
-      html = html.replace(/<head(?:\\s[^>]*)?>/i, head => head + analyticsSnippet);
+      html = html.replace(/<head(?:\s[^>]*)?>/i, head => head + analyticsSnippet);
     }
     if (!(html.includes('theme-init.js') && html.includes('theme-switcher.js'))) {
       html = html.replace('</head>', snippet + '</head>');
