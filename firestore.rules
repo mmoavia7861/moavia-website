@@ -128,8 +128,18 @@ service cloud.firestore {
       allow create, update, delete: if editor();
     }
 
+    match /cmsServices/{id} {
+      allow read: if owner() || resource.data.published == true;
+      allow create, update, delete: if owner();
+    }
+
+    match /cmsPages/{id} {
+      allow read: if owner() || resource.data.published == true;
+      allow create, update, delete: if owner();
+    }
+
     match /siteSettings/{id} {
-      allow read: if true;
+      allow read: if id == 'public' || owner();
       allow write: if owner();
     }
 
