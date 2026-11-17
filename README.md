@@ -49,6 +49,16 @@ bun run build
 
 **Do not commit API tokens, account IDs, credentials or secrets.** Live deployment uses GitHub Actions encrypted secrets. Publishing the Cloudflare Worker requires authorized account credentials; cloning the repository alone will not give you that access.
 
+## Secure administrator dashboard
+
+The private admin interface is available at **https://moaviaseo.com/admin/** after a successful Cloudflare deployment. The public homepage footer also links there.
+
+- Firebase Email/Password sign-in is required for the existing designated administrator account. Email verification and password-provider checks are enforced by the dashboard and must also be enforced in the deployed Firebase Firestore rules.
+- The dashboard shows **real Firestore enquiries and newsletter subscribers**. It allows the owner to update lead statuses and export filtered leads to CSV; it does not display sample CRM entries.
+- Blog and project pages are generated from GitHub code and cannot be directly edited in the dashboard. Links to their actual source files are provided instead; Google Analytics and Search Console open their own official dashboards.
+- No admin data is included in the published HTML. The route is `noindex`, omitted from the sitemap and excluded from optional visitor analytics.
+- Firebase user provisioning, enabling Email/Password and deploying `firestore.rules` are separate authorized setup steps. Never paste the administrator password or Firebase service credentials into GitHub or into public code.
+
 ## SEO and privacy
 
 - [Production sitemap](https://moaviaseo.com/sitemap.xml) and [robots.txt](https://moaviaseo.com/robots.txt)
