@@ -9,6 +9,12 @@ export default defineConfig(() => {
     build: {
       sourcemap: true, // let Lighthouse identify actual JavaScript errors; not fetched by ordinary visitors
       cssCodeSplit: true,
+      rollupOptions: {
+        input: {
+          homepage: path.resolve(__dirname, 'index.html'),
+          admin: path.resolve(__dirname, 'admin/index.html'),
+        },
+      },
     },
     // GitHub Pages serves this project from /moavia-website/, not the domain root.
     base: process.env.GITHUB_PAGES === 'true' ? '/moavia-website/' : '/',
