@@ -70,7 +70,18 @@ export function CmsManager({kind}:{kind:CmsKind}) {
     const unsubscribe=onSnapshot(collection(db,collections[kind]),snapshot=>{
       const next = snapshot.docs.map(snap=>{
         const d=snap.data();
-        return {...blank(),...d,slug:snap.id} as CmsItem;
+        const base=blank();
+        const keys: Array<keyof CmsItem> = [
+          'title','excerpt','body','category','imageUrl','linkUrl','repoUrl',
+          'metaTitle','metaDescription','createdAt','updatedAt'
+        ];
+        for(const key of keys){
+          const value=d[key];
+          if(typeof value==='string') (base as unknown as Record<string,unknown>)[key]=value;
+        }
+        base.slug=snap.id;
+        base.published=d.published===true;
+        return base;
       });
       next.sort((a,b)=>b.updatedAt.localeCompare(a.updatedAt));
       setItems(next);setLoading(false);
