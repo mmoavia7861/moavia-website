@@ -22,9 +22,12 @@ import { isValidNewsletterEmail } from '../utils/newsletter';
 
 interface ContactSectionProps {
   initialService?: string;
+  contactEmail?: string;
+  whatsappNumber?: string;
 }
 
-export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }) => {
+export const ContactSection: React.FC<ContactSectionProps> = ({ initialService, contactEmail = 'hello@moaviaseo.com', whatsappNumber = '+92 323 4313869' }) => {
+  const whatsappDigits = whatsappNumber.replace(/\D/g, '');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [whatsapp, setWhatsapp] = useState('');
@@ -125,7 +128,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
             {/* Direct Channel Cards */}
             <div className="space-y-3 pt-2">
               <a
-                href="https://wa.me/923234313869?text=Hello%20Moavia,%20I%20visited%20Moavia%20Hassan%20Portfolio%20and%20would%20like%20to%20discuss%20a%20website%20project."
+                href={`https://wa.me/${whatsappDigits}?text=Hello%20Moavia,%20I%20visited%20Moavia%20Hassan%20Portfolio%20and%20would%20like%20to%20discuss%20a%20website%20project.`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-4 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] hover:border-[#17A99A] flex items-center gap-4 transition-all group"
@@ -135,13 +138,13 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                 </div>
                 <div>
                   <h3 className="text-xs font-bold text-[#18243A]">Direct WhatsApp</h3>
-                  <p className="text-sm font-extrabold text-[#08786F]">+92 323 4313869</p>
+                  <p className="text-sm font-extrabold text-[#08786F]">{whatsappNumber}</p>
                   <span className="text-[10px] text-[#65738B]">Response times vary; messages are reviewed directly</span>
                 </div>
               </a>
 
               <a
-                href="mailto:hello@moaviaseo.com"
+                href={'mailto:'+contactEmail}
                 className="p-4 rounded-2xl bg-[#F8F9FD] border border-[#E7EAF2] hover:border-[#5265D8] flex items-center gap-4 transition-all group"
               >
                 <div className="p-3 rounded-xl bg-[#5265D8]/10 text-[#5265D8] group-hover:scale-110 transition-transform">
@@ -149,7 +152,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                 </div>
                 <div>
                   <h3 className="text-xs font-bold text-[#18243A]">Email</h3>
-                  <p className="text-sm font-extrabold text-[#5265D8]">hello@moaviaseo.com</p>
+                  <p className="text-sm font-extrabold text-[#5265D8]">{contactEmail}</p>
                 </div>
               </a>
 
@@ -194,7 +197,7 @@ export const ContactSection: React.FC<ContactSectionProps> = ({ initialService }
                   </p>
                   <div className="pt-4 flex flex-wrap items-center justify-center gap-3">
                     <a
-                      href={`https://wa.me/923234313869?text=Hello%20Moavia,%20I%20just%20submitted%20a%20consultation%20inquiry%20for%20${encodeURIComponent(
+                      href={`https://wa.me/${whatsappDigits}?text=Hello%20Moavia,%20I%20just%20submitted%20a%20consultation%20inquiry%20for%20${encodeURIComponent(
                         service
                       )}.`}
                       target="_blank"
