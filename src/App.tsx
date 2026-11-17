@@ -4,7 +4,7 @@ import { ArrowRight, ArrowUpRight, Code2, Github, Linkedin, Mail, Menu, ShieldCh
 
 const AiToolsSection = lazy(() => import('./components/AiToolsSection').then(m => ({ default: m.AiToolsSection })));
 const ContactSection = lazy(() => import('./components/ContactSection').then(m => ({ default: m.ContactSection })));
-const AdminPortal = lazy(() => import('./components/admin/AdminPortal').then(m => ({ default: m.AdminPortal })));
+
 
 function OnView({ id, children, minHeight = 240 }: { id: string; children: React.ReactNode; minHeight?: number }) {
   const host = useRef<HTMLDivElement>(null);
@@ -25,7 +25,6 @@ function OnView({ id, children, minHeight = 240 }: { id: string; children: React
 
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [adminOpen, setAdminOpen] = useState(false);
   const sections = [
     { label: 'Tools', href: '/tools/' },
     { label: 'Services', href: '/hire-me/' },
@@ -180,12 +179,11 @@ export default function App() {
           <div className="mt-9 border-t border-slate-700 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">
             <span>© {new Date().getFullYear()} Moavia Hassan</span>
             <div className="flex flex-wrap gap-4"><a href="/privacy-policy/" className="hover:text-white">Privacy Policy</a><a href="/terms-and-conditions/" className="hover:text-white">Terms & Conditions</a>
-              <button type="button" onClick={() => setAdminOpen(true)} className="inline-flex items-center gap-1 hover:text-white" aria-label="Open secure admin portal"><ShieldCheck className="h-3 w-3" /> Admin</button>
+              <a href="/admin/" className="inline-flex items-center gap-1 hover:text-white" aria-label="Open secure administrator dashboard"><ShieldCheck className="h-3 w-3" /> Admin</a>
             </div>
           </div>
         </div>
       </footer>
-      {adminOpen && <Suspense fallback={<p role="status" className="fixed inset-0 z-50 flex items-center justify-center bg-white">Loading admin portal…</p>}><AdminPortal onClose={() => setAdminOpen(false)} /></Suspense>}
     </div>
   );
 }
