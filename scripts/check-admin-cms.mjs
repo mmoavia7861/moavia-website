@@ -26,6 +26,26 @@ for (const name of ['blogPosts','portfolioProjects','cmsServices','cmsPages']) {
   check(rules.includes('match /'+name+'/{id}'), 'security rules missing '+name);
   check(cms.includes("'"+name+"'"), 'editor collection missing '+name);
 }
+// Reject the regression where JS text replacement interpolated "$'" inside
+// a Firestore regex and duplicated the rest of the rules source.
+for (const name of [
+  'adminUsers','adminEmailRegistry','adminInvitations','newsletterSubscribers',
+  'leads','clients','projects','portfolioProjects','blogPosts',
+  'cmsServices','cmsPages','siteSettings','auditLogs'
+]) {
+  check(rules.split('match /'+name+'/{').length === 2, 'missing/duplicated Firestore rules for '+name);
+}
+check(rules.split('function validCms(').length === 2, 'CMS validation function duplicated');
+check(rules.split('function validPublicSiteSettings(').length === 2, 'settings validation function duplicated');
+check(rules.includes("id.matches('^[a-z0-9]+(-[a-z0-9]+)*$')"), 'CMS slug regex was truncated');
+check(rules.includes('d.updatedAt.size() <= 40;'), 'CMS/settings validator was truncated');
+let braces = 0;
+for (const char of rules) {
+  if (char === '{') braces++;
+  else if (char === '}') braces--;
+}
+check(braces === 0, 'Firestore rules braces unbalanced');
+
 check(rules.includes('request.auth.token.email_verified == true') &&
   rules.includes('request.auth.token.firebase.sign_in_provider') &&
   rules.includes('validCms(id)') && rules.includes('validPublicSiteSettings()'),
