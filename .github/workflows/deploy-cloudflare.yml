@@ -35,6 +35,9 @@ jobs:
         run: |
           set -euo pipefail
           test -s dist/index.html
+          test -s dist/admin/index.html
+          test -s dist/assets
+          grep -q 'noindex,nofollow,noarchive' dist/admin/index.html
           test -s dist/tools/index.html
           test -s dist/tools/meta-title-description-checker/index.html
           test -s dist/tools/json-ld-schema-generator/index.html
