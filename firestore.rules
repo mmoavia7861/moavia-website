@@ -77,6 +77,107 @@ service cloud.firestore {
       request.resource.data.createdAt == request.time;
     }
 
+    // CMS documents can only be changed by the verified owner.
+    function validCms(id) {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['slug','title','excerpt','body','category',
+        'imageUrl','linkUrl','repoUrl','metaTitle','metaDescription',
+        'published','createdAt','updatedAt']) &&
+        d.keys().hasAll(['slug','title','excerpt','body','category',
+        'imageUrl','linkUrl','repoUrl','metaTitle','metaDescription',
+        'published','createdAt','updatedAt']) &&
+        id.matches('^[a-z0-9]+(-[a-z0-9]+)*
+    match /adminUsers/{uid} {
+      allow read, write: if false;
+    }
+
+    match /adminEmailRegistry/{entry} {
+      allow read, write: if false;
+    }
+
+    match /adminInvitations/{entry} {
+      allow read, write: if false;
+    }
+
+    match /newsletterSubscribers/{subscriberId} {
+      // Anonymous visitors can subscribe, but cannot read the list or overwrite.
+      // Document IDs are SHA-256 digests of normalized email in the frontend.
+      allow create: if validNewsletterSignup() &&
+        subscriberId.matches('^[0-9a-f]{64}$');
+      allow read, update, delete: if owner();
+    }
+
+    match /leads/{id} {
+      // New inquiries use a 64-character SHA-256 email digest as their ID.
+      // Create-only writes prevent the same normalized email being saved twice
+      // through the public form. Old records remain readable by the owner.
+      // This format check cannot independently prove the hash matches email;
+      // preventing malicious bypasses requires server-side verification.
+      allow create: if validLead() &&
+        id.matches('^[0-9a-f]{64}$');
+      allow read: if admin();
+      allow update, delete: if leadManager();
+    }
+
+    match /clients/{id} {
+      allow read, write: if leadManager();
+    }
+
+    match /projects/{id} {
+      allow read, write: if leadManager();
+    }
+
+    match /portfolioProjects/{id} {
+      allow read: if owner() || resource.data.published == true;
+      allow create, update: if owner() && validCms(id);
+      allow delete: if owner();
+    }
+
+    match /blogPosts/{id} {
+      allow read: if owner() || resource.data.published == true;
+      allow create, update: if owner() && validCms(id);
+      allow delete: if owner();
+    }
+
+    match /cmsServices/{id} {
+      allow read: if owner() || resource.data.published == true;
+      allow create, update: if owner() && validCms(id);
+      allow delete: if owner();
+    }
+
+    match /cmsPages/{id} {
+      allow read: if owner() || resource.data.published == true;
+      allow create, update: if owner() && validCms(id);
+      allow delete: if owner();
+    }
+
+    match /siteSettings/{id} {
+      allow read: if id == 'public' || owner();
+      allow write: if owner();
+    }
+
+    match /auditLogs/{id} {
+      allow read: if owner();
+      allow write: if false;
+    }
+  }
+}
+) &&
+        d.slug == id &&
+        d.title is string && d.title.size() > 0 && d.title.size() <= 140 &&
+        d.excerpt is string && d.excerpt.size() > 0 && d.excerpt.size() <= 320 &&
+        d.body is string && d.body.size() > 0 && d.body.size() <= 16000 &&
+        d.category is string && d.category.size() <= 80 &&
+        d.imageUrl is string && d.imageUrl.size() <= 500 &&
+        d.linkUrl is string && d.linkUrl.size() <= 500 &&
+        d.repoUrl is string && d.repoUrl.size() <= 500 &&
+        d.metaTitle is string && d.metaTitle.size() <= 160 &&
+        d.metaDescription is string && d.metaDescription.size() <= 320 &&
+        d.published is bool &&
+        d.createdAt is string && d.createdAt.size() <= 40 &&
+        d.updatedAt is string && d.updatedAt.size() <= 40;
+    }
+
     // Any path not specifically granted below remains denied by default.
     match /adminUsers/{uid} {
       allow read, write: if false;
