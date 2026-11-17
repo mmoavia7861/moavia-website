@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import {
-  Activity, AlertCircle, ArrowLeft, ArrowUpRight, CheckCircle2, Download,
+  Activity, AlertCircle, ArrowLeft, ArrowUpRight, Download,
   FileText, FolderKanban, LayoutDashboard, Loader2, LockKeyhole, LogOut,
-  Mail, RefreshCw, Search, ShieldCheck, Users, XCircle,
+  Mail, RefreshCw, Search, ShieldCheck, Users,
 } from 'lucide-react';
 import { onAuthStateChanged, type User } from 'firebase/auth';
 import { collection, doc, onSnapshot, updateDoc, type DocumentData } from 'firebase/firestore';
@@ -199,7 +199,7 @@ export function AdminDashboard() {
     const csv = '\uFEFF' + [columns.map(escapeCsv).join(','),...rows].join('\r\n');
     const href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' }));
     const link = document.createElement('a'); link.href = href; link.download = 'moaviaseo-leads.csv';
-    document.body.appendChild(link); link.click(); link.remove(); URL.revokeObjectURL(href);
+    document.body.appendChild(link); link.click(); link.remove(); window.setTimeout(() => URL.revokeObjectURL(href), 1000);
   };
 
   if (!authReady || accessCheck) return <div className="min-h-screen grid place-items-center bg-[#f8f9fd]" role="status"><Loader2 className="animate-spin text-[#5265D8]" aria-label="Checking administrator access" /></div>;
