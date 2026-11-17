@@ -1,0 +1,31 @@
+name: Validate website and admin CMS
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Install locked dependencies
+        run: bun install --frozen-lockfile
+      - name: Type-check React and Cloudflare worker
+        run: bun run lint
+      - name: Build homepage, admin and static pages
+        run: bun run build
+      - name: Check admin and CMS production outputs
+        run: |
+          test -s dist/index.html
+          test -s dist/admin/index.html
+          grep -q 'noindex,nofollow,noarchive' dist/admin/index.html
+          grep -q 'run_worker_first' wrangler.jsonc
