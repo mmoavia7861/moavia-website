@@ -115,7 +115,7 @@ function buildDocumentPage(doc:any,route:CmsRoute,slug:string):string {
    +'<meta property="og:description" content="'+esc(seoDescription)+'"><meta property="og:url" content="'+esc(canonical)+'">'
    +'<meta property="og:image" content="'+esc(image||origin+'/social-preview.png')+'"><meta name="twitter:card" content="summary_large_image">'
    +'<script type="application/ld+json">'+escapeJson(schema)+'</script>'
-   +'<link rel="icon" type="image/png" href="/favicon.png"><link rel="stylesheet" href="/seo/pages.css">'
+   +'<link rel="icon" type="image/png" href="/favicon.png"><link rel="stylesheet" href="/seo/pages.css"><script src="/analytics-consent.js" defer></script>'
    +'<style>.cms-wrap{max-width:900px;margin:0 auto;padding:2rem 1.25rem 5rem}.cms-wrap p{line-height:1.85}.cms-category{font-weight:700;color:#5265d8;text-transform:uppercase;font-size:.85rem}.cms-wrap article h2{margin-top:2rem}.cms-wrap article h3{margin-top:1.5rem}.cms-link{display:inline-block;background:#5265d8;color:#fff;border-radius:9px;padding:.8rem 1.1rem;text-decoration:none}header nav a{margin-right:1rem}</style>'
    +'</head><body><header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" width="42" height="42" alt="Moavia Hassan logo">Moavia Hassan</a>'+nav+'</div></header>'
    +'<main><div class="cms-wrap"><p><a href="/">Home</a> / <a href="/'+route+'/">'+breadcrumb+'</a></p>'
@@ -147,6 +147,9 @@ function responseHtml(html:string,status=200):Response {
     'Cache-Control':'no-store',
     'X-Content-Type-Options':'nosniff',
     'Referrer-Policy':'strict-origin-when-cross-origin',
+    'Content-Security-Policy':"object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
+    'X-Frame-Options':'DENY',
+    'Strict-Transport-Security':'max-age=31536000',
   }});
 }
 async function injectListing(request:Request,env:CmsEnvironment,route:CmsRoute):Promise<Response> {
@@ -155,6 +158,32 @@ async function injectListing(request:Request,env:CmsEnvironment,route:CmsRoute):
   const html=await assets.text();
   if(!html.includes('</main>'))return responseHtml(html);
   return responseHtml(html.replace('</main>',indexCards(route,docs)+'</main>'));
+}
+async function staticContactAndServices(request:Request,env:CmsEnvironment,includeServices:boolean):Promise<Response> {
+  const [asset,settings,services] = await Promise.all([
+    env.ASSETS.fetch(request),
+    fetchJson(prefix+'/siteSettings/public'),
+    includeServices?listDocuments('cmsServices'):Promise.resolve(null),
+  ]);
+  if(!asset.ok)return asset;
+  if(!settings.ok && (!services || !services.length))return asset;
+  let html=await asset.text();
+  if(settings.ok){
+    const email=str(settings.data,'contactEmail');
+    const phone=str(settings.data,'whatsapp');
+    const digits=phone.replace(/\D/g,'');
+    if(/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)&&email.length<=254){
+      html=html.replaceAll('hello@moaviaseo.com',esc(email));
+    }
+    if(digits.length>=9&&digits.length<=15){
+      html=html.replaceAll('923234313869',digits);
+      html=html.replaceAll('+92 323 4313869',esc(phone));
+    }
+  }
+  if(services&&services.length&&html.includes('</main>')){
+    html=html.replace('</main>',indexCards('offerings',services)+'</main>');
+  }
+  return responseHtml(html);
 }
 async function dynamicSitemap(request:Request,env:CmsEnvironment):Promise<Response> {
   const asset=await env.ASSETS.fetch(request);
@@ -203,6 +232,10 @@ export async function handleCmsRequest(request:Request,env:CmsEnvironment):Promi
   const path=new URL(request.url).pathname;
   if(path==='/')return homepage(request,env);
   if(path==='/sitemap.xml')return dynamicSitemap(request,env);
+  if(path==='/contact/' || path==='/contact' || path==='/about/' || path==='/about')
+    return staticContactAndServices(request,env,false);
+  if(path==='/hire-me/' || path==='/hire-me')
+    return staticContactAndServices(request,env,true);
   const parts=path.split('/').filter(Boolean);
   const route=parts[0] as CmsRoute;
   if(!(route in collectionMap))return null;
