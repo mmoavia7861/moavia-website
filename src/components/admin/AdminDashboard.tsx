@@ -5,7 +5,7 @@ import {
   Mail, RefreshCw, Search, ShieldCheck, Users,
 } from 'lucide-react';
 import { onAuthStateChanged, type User } from 'firebase/auth';
-import { collection, doc, onSnapshot, updateDoc, type DocumentData } from 'firebase/firestore';
+import { collection, doc, deleteDoc, onSnapshot, updateDoc, type DocumentData } from 'firebase/firestore';
 import { auth, db, loginWithEmail, logOut, sendResetPassword, triggerEmailVerification } from '../../firebase';
 import { isPrimaryAdministrator, PRIMARY_ADMIN_EMAIL } from '../../utils/adminSecurity';
 import { CmsManager, type CmsKind } from './CmsManager';
@@ -192,6 +192,27 @@ export function AdminDashboard() {
     } catch { setWriteError('Saving failed. Your changes were not confirmed by Firebase.'); }
     finally { setWriteId(''); }
   };
+  const deleteLead = async (lead:LeadRecord) => {
+    if(!authorized || !window.confirm('Delete enquiry from '+lead.fullName+'? This cannot be undone.'))return;
+    setWriteError('');setWriteId(lead.id);
+    try {await deleteDoc(doc(db,'leads',lead.id));}
+    catch {setWriteError('Could not delete the enquiry. Firebase did not confirm the deletion.');}
+    finally {setWriteId('');}
+  };
+  const unsubscribe = async (subscriber:Subscriber) => {
+    if(!authorized || !window.confirm('Mark '+subscriber.email+' as unsubscribed?'))return;
+    setWriteError('');setWriteId(subscriber.id);
+    try {await updateDoc(doc(db,'newsletterSubscribers',subscriber.id),{status:'unsubscribed'});}
+    catch {setWriteError('Could not update the subscription. Please verify Firebase access.');}
+    finally {setWriteId('');}
+  };
+  const deleteSubscriber = async (subscriber:Subscriber) => {
+    if(!authorized || !window.confirm('Permanently remove '+subscriber.email+' from the list?'))return;
+    setWriteError('');setWriteId(subscriber.id);
+    try {await deleteDoc(doc(db,'newsletterSubscribers',subscriber.id));}
+    catch {setWriteError('Could not delete this subscriber. Firebase did not confirm deletion.');}
+    finally {setWriteId('');}
+  };
   const exportLeads = () => {
     const columns = ['ID','Full Name','Email','WhatsApp','Business','Website','Service','Budget','Status','Date'];
     const rows = filteredLeads.map(l =>
@@ -337,6 +358,8 @@ export function AdminDashboard() {
                    </select>
                  </label>
                </div>
+               <button type="button" disabled={writeId===lead.id} onClick={()=>void deleteLead(lead)}
+                 className="mt-3 text-xs font-semibold text-rose-700 underline disabled:opacity-50">Delete enquiry</button>
                <dl className="mt-4 grid sm:grid-cols-2 gap-3 text-sm">
                  <div><dt className="text-slate-500 text-xs">Service</dt><dd className="font-medium">{lead.service||'Not supplied'}</dd></div>
                  <div><dt className="text-slate-500 text-xs">Business</dt><dd>{lead.businessName||'Not supplied'}</dd></div>
@@ -354,9 +377,13 @@ export function AdminDashboard() {
              subscribersLoading?<p role="status">Loading subscribers…</p>:
              subscribers.length===0?<EmptyState text="No newsletter subscribers yet."/>:
              <div className="bg-white border border-slate-200 rounded-2xl overflow-x-auto">
-               <table className="w-full text-sm text-left"><thead className="bg-slate-50 text-slate-600"><tr><th className="p-4">Email</th><th className="p-4">Status</th><th className="p-4">Subscribed</th></tr></thead>
+               <table className="w-full text-sm text-left"><thead className="bg-slate-50 text-slate-600"><tr><th className="p-4">Email</th><th className="p-4">Status</th><th className="p-4">Subscribed</th><th className="p-4">Actions</th></tr></thead>
                  <tbody>{subscribers.map(s=><tr key={s.id} className="border-t border-slate-100">
                    <td className="p-4 break-all">{s.email}</td><td className="p-4">{s.status}</td><td className="p-4">{friendlyDate(s.createdAt)}</td>
+                   <td className="p-4"><div className="flex gap-3">
+                     {s.status==='active'&&<button type="button" disabled={writeId===s.id} onClick={()=>void unsubscribe(s)} className="underline text-[#5265D8]">Unsubscribe</button>}
+                     <button type="button" disabled={writeId===s.id} onClick={()=>void deleteSubscriber(s)} className="underline text-rose-700">Delete</button>
+                   </div></td>
                  </tr>)}</tbody></table>
              </div>}
           </>}
