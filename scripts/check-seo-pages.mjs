@@ -13,6 +13,11 @@ const routes=[
 const read=path=>readFileSync(join(dist,path),'utf8');
 const check=(ok,err)=>{if(!ok)throw Error('Site build check failed: '+err)};
 const sitemap=read('sitemap.xml'),root=read('index.html');
+const adminHtml=read('admin/index.html');
+check(adminHtml.includes('name="robots" content="noindex,nofollow,noarchive"'), 'private admin page must be noindex');
+check(adminHtml.includes('id="admin-root"'), 'admin app mount missing');
+check(adminHtml.includes('/assets/'), 'admin app JS bundle missing');
+check(!sitemap.includes('/admin/'), 'private admin URL must not appear in sitemap');
 for (const asset of ['cursor-effect.js', 'cursor-effect.css', 'theme-init.js', 'theme-switcher.js', 'theme.css']) {
  check(existsSync(join(dist, asset)), 'cursor asset missing: ' + asset);
 }
