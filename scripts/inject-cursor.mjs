@@ -14,6 +14,9 @@ function visit(folder) {
     const path = join(folder, entry.name);
     if (entry.isDirectory()) { visit(path); continue; }
     if (!entry.isFile() || !entry.name.endsWith('.html')) continue;
+    // The private administrator route is intentionally excluded from optional
+    // visitor analytics, theme controls and cursor decorations.
+    if (path === join(root, 'admin', 'index.html')) continue;
     let html = readFileSync(path, 'utf8');
     if (!/<head(?:\s[^>]*)?>/i.test(html) || !/<\/head>/i.test(html)) throw new Error('Missing head element in ' + path);
     // Add on every HTML page, including blog, tools, contact and privacy pages.
