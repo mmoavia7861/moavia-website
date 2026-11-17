@@ -201,7 +201,7 @@ export default function App() {
           </div>
         </section>
 
-        <OnView id="contact" minHeight={480}><ContactSection initialService="Website Development / SEO Project" /></OnView>
+        <OnView id="contact" minHeight={480}><ContactSection initialService="Website Development / SEO Project" contactEmail={siteSettings.contactEmail} whatsappNumber={siteSettings.whatsapp} /></OnView>
       </main>
 
       <footer className="bg-[#18243A] text-slate-200 py-12">
