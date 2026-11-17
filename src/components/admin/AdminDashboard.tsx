@@ -8,8 +8,10 @@ import { onAuthStateChanged, type User } from 'firebase/auth';
 import { collection, doc, onSnapshot, updateDoc, type DocumentData } from 'firebase/firestore';
 import { auth, db, loginWithEmail, logOut, sendResetPassword, triggerEmailVerification } from '../../firebase';
 import { isPrimaryAdministrator, PRIMARY_ADMIN_EMAIL } from '../../utils/adminSecurity';
+import { CmsManager, type CmsKind } from './CmsManager';
+import { SiteSettingsManager } from './SiteSettingsManager';
 
-type Tab = 'overview' | 'leads' | 'subscribers' | 'content';
+type Tab = 'overview' | 'leads' | 'subscribers' | 'content' | 'site' | CmsKind;
 type LeadStatus = 'New' | 'Contacted' | 'In Progress' | 'Closed' | 'Spam';
 type LeadRecord = {
   id: string; fullName: string; email: string; whatsapp: string; websiteUrl: string;
@@ -257,7 +259,12 @@ export function AdminDashboard() {
     {key:'overview',name:'Overview',icon:<LayoutDashboard size={18}/>},
     {key:'leads',name:'Leads',icon:<Users size={18}/>},
     {key:'subscribers',name:'Subscribers',icon:<Mail size={18}/>},
-    {key:'content',name:'Content & tools',icon:<FolderKanban size={18}/>},
+    {key:'site',name:'Website & SEO',icon:<FolderKanban size={18}/>},
+    {key:'blog',name:'Blog CMS',icon:<FileText size={18}/>},
+    {key:'projects',name:'Portfolio CMS',icon:<FolderKanban size={18}/>},
+    {key:'services',name:'Services CMS',icon:<FolderKanban size={18}/>},
+    {key:'pages',name:'Custom pages',icon:<FileText size={18}/>},
+    {key:'content',name:'Integrations & source',icon:<FolderKanban size={18}/>},
   ];
   return (
     <div className="min-h-screen bg-[#f8f9fd]">
@@ -353,9 +360,12 @@ export function AdminDashboard() {
                  </tr>)}</tbody></table>
              </div>}
           </>}
+          {tab==='site' && <SiteSettingsManager />}
+          {(['blog','projects','services','pages'] as CmsKind[]).includes(tab as CmsKind) &&
+            <CmsManager kind={tab as CmsKind} />}
           {tab==='content' && <>
             <h2 className="text-2xl font-extrabold">Site content & integrations</h2>
-            <p className="mt-1 mb-5 text-sm text-slate-600">Static blog posts, project pages and SEO tools deploy from GitHub. Changes are not saved from this dashboard. Analytics is viewed in its own Google account.</p>
+            <p className="mt-1 mb-5 text-sm text-slate-600">The CMS tabs manage new published Firestore content; legacy static pages and underlying tool code still deploy from GitHub. Google Analytics and Search Console data remain in their official account dashboards.</p>
             <div className="grid md:grid-cols-2 gap-4">
               {externalLinks.map(link=><a key={link.name} href={link.href} target="_blank" rel="noopener noreferrer"
                 className="block bg-white border border-slate-200 rounded-2xl p-5 hover:border-[#5265D8]">
@@ -363,7 +373,7 @@ export function AdminDashboard() {
                 <p className="mt-2 text-sm text-slate-600">{link.info}</p>
               </a>)}
             </div>
-            <p className="mt-6 text-sm text-slate-500">To publish new content, edit the linked source, review the changes and let the Cloudflare deployment run. No fake traffic or SEO results are generated here.</p>
+            <p className="mt-6 text-sm text-slate-500">Use the CMS tabs to create new public blog posts, pages, projects and services. Existing code-generated pages and changes to tool functionality must still be reviewed and deployed through GitHub. No artificial analytics or SEO scores are generated.</p>
           </>}
         </main>
       </div>
