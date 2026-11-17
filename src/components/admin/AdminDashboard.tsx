@@ -372,7 +372,8 @@ export function AdminDashboard() {
           </>}
           {tab==='subscribers' && <>
             <h2 className="text-2xl font-extrabold">Newsletter subscribers</h2>
-            <p className="mt-1 mb-5 text-sm text-slate-600">Read-only view of actual Firebase subscriber records.</p>
+            <p className="mt-1 mb-5 text-sm text-slate-600">View and manage actual Firebase subscriber records.</p>
+            {writeError && <p role="alert" className="mb-3 text-sm text-rose-700">{writeError}</p>}
             {subscribersError?<ErrorNotice text={subscribersError}/>:
              subscribersLoading?<p role="status">Loading subscribers…</p>:
              subscribers.length===0?<EmptyState text="No newsletter subscribers yet."/>:
