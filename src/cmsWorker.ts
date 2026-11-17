@@ -97,18 +97,17 @@ export async function publicSiteJson():Promise<Response> {
       if(value!==undefined)publicSettings[name]=value;
     }
   }
-  const present=(docs:any[]|null,kind:'service'|'project')=>(docs||[]).map(d=>({
-    ...(kind==='service'?{slug:str(d,'slug')}:{id:str(d,'slug')}),
+  const present=(docs:any[]|null)=>(docs||[]).map(d=>({
+    id:str(d,'slug'), slug:str(d,'slug'),
     title:str(d,'title').slice(0,140),
-    ...(kind==='service'?{excerpt:str(d,'excerpt').slice(0,320)}:{
-      description:str(d,'excerpt').slice(0,320),category:str(d,'category').slice(0,80)
-    }),
-  })).filter(row=>typeof row.title==='string' && row.title.length>0 &&
-    slugOkay('slug' in row ? String(row.slug) : String(row.id)));
+    excerpt:str(d,'excerpt').slice(0,320),
+    description:str(d,'excerpt').slice(0,320),
+    category:str(d,'category').slice(0,80),
+  })).filter(row=>row.title.length>0 && row.excerpt.length>0 && slugOkay(row.slug));
   return new Response(JSON.stringify({
     settings:publicSettings,
-    services:present(services,'service'),
-    projects:present(projects,'project'),
+    services:present(services),
+    projects:present(projects),
   }),{headers:{
     'Content-Type':'application/json; charset=utf-8',
     'Cache-Control':'no-store',
