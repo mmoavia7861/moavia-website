@@ -36,6 +36,9 @@ jobs:
           set -euo pipefail
           test -s dist/index.html
           test -s dist/admin/index.html
+          # CMS pages are served by the Cloudflare Worker after deployment.
+          grep -q 'cmsWorker' src/worker.ts
+          grep -q 'cmsServices' firestore.rules
           test -d dist/assets
           grep -q 'noindex,nofollow,noarchive' dist/admin/index.html
           test -s dist/tools/index.html
