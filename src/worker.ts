@@ -1,3 +1,5 @@
+import { handleCmsRequest } from './cmsWorker';
+
 /**
  * Same-origin API for the Moavia SEO Pro Cloudflare Worker.
  * Static files are still served by env.ASSETS; GEMINI_API_KEY is a secret,
@@ -404,6 +406,9 @@ export default {
   async fetch(request: Request, env: WorkerEnv): Promise<Response> {
     const url = new URL(request.url);
     if (url.pathname.startsWith('/api/')) return handleApi(request, env, url.pathname);
-    return env.ASSETS.fetch(request);
+    // Public CMS routes are server-rendered only from published Firestore data.
+    // Other routes keep the existing Cloudflare static asset behavior.
+    const cmsResponse = await handleCmsRequest(request, env);
+    return cmsResponse ?? env.ASSETS.fetch(request);
   },
 };
