@@ -49,15 +49,17 @@ bun run build
 
 **Do not commit API tokens, account IDs, credentials or secrets.** Live deployment uses GitHub Actions encrypted secrets. Publishing the Cloudflare Worker requires authorized account credentials; cloning the repository alone will not give you that access.
 
-## Secure administrator dashboard
+## Secure administrator dashboard and content CMS
 
-The private admin interface is available at **https://moaviaseo.com/admin/** after a successful Cloudflare deployment. The public homepage footer also links there.
+The admin interface is at **https://moaviaseo.com/admin/** after a successful Cloudflare deployment; it is also linked in the homepage footer. Sign-in requires the designated verified Firebase Email/Password owner. Firestore Security Rules, not hiding a URL, provide access control.
 
-- Firebase Email/Password sign-in is required for the existing designated administrator account. Email verification and password-provider checks are enforced by the dashboard and must also be enforced in the deployed Firebase Firestore rules.
-- The dashboard shows **real Firestore enquiries and newsletter subscribers**. It allows the owner to update lead statuses and export filtered leads to CSV; it does not display sample CRM entries.
-- Blog and project pages are generated from GitHub code and cannot be directly edited in the dashboard. Links to their actual source files are provided instead; Google Analytics and Search Console open their own official dashboards.
-- No admin data is included in the published HTML. The route is `noindex`, omitted from the sitemap and excluded from optional visitor analytics.
-- Firebase user provisioning, enabling Email/Password and deploying `firestore.rules` are separate authorized setup steps. Never paste the administrator password or Firebase service credentials into GitHub or into public code.
+- **Live operations:** real enquiries and newsletter data; lead search/status updates/deletion/CSV export; subscriber unsubscribe and deletion.
+- **Website controls:** homepage copy, SEO title/meta description, announcement, primary button, public contact details, social profile URLs and the three featured tool cards saved to `siteSettings/public`.
+- **Publish new content:** real Firestore CRUD for Blog, Portfolio, Service and Custom Pages. Only records marked published are served publicly by the Cloudflare Worker at `/blog/`, `/projects/`, `/offerings/` and `/pages/` routes. New content URLs are dynamically included in the sitemap.
+- **Separate providers:** Google Analytics/Search Console, Cloudflare deployment/DNS and Firebase rules are accessed in their respective official systems. Existing source-generated posts, project pages, tool functionality, branding assets and legal pages still require reviewed GitHub changes.
+- **Required to activate:** deploy the current `firestore.rules` to the exact named Firebase database and verify the latest GitHub Actions Cloudflare deployment. Committing these rules does not deploy them to Firebase.
+
+**Instructions and a production test checklist:** [Admin CMS Control Guide](docs/ADMIN-CMS.md). Do not paste passwords, service-account credentials, API secrets or private customer records into public GitHub files.
 
 ## SEO and privacy
 
