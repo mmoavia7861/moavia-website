@@ -31,7 +31,7 @@ check(rules.includes('request.auth.token.email_verified == true') &&
   rules.includes('validCms(id)') && rules.includes('validPublicSiteSettings()'),
   'role or input validation missing');
 check(site.includes("setDoc(doc(db,'siteSettings','public')"), 'website settings cannot save');
-check(app.includes("onSnapshot(doc(db,'siteSettings','public')"), 'homepage settings not connected');
+check(app.includes("fetch('/api/public-site'") && worker.includes('publicSiteJson'), 'public homepage CMS endpoint not connected');
 check(admin.includes('<CmsManager') && admin.includes('<SiteSettingsManager'),
   'admin navigation missing CMS managers');
 check(!get('dist/sitemap.xml').includes('/admin/'), 'private dashboard in public sitemap');
