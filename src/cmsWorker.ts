@@ -70,6 +70,52 @@ async function listDocuments(collection:CmsCollection):Promise<any[]|null> {
   if(!result.ok || !Array.isArray(result.data)) return null;
   return result.data.map((entry:any)=>entry?.document).filter((entry:any)=>entry && published(entry));
 }
+
+const publicSettingFields = [
+  'heroBadge','heroTitle','heroDescription','announcementEnabled','announcementText',
+  'ctaLabel','ctaHref','contactEmail','whatsapp','seoTitle','seoDescription',
+  'socialGithub','socialLinkedin','socialFiverr','socialUpwork',
+  'toolTitles','toolDescriptions','toolVisible','updatedAt',
+];
+function decodeFirestoreValue(value:any):unknown {
+  if(typeof value?.stringValue==='string')return value.stringValue;
+  if(typeof value?.booleanValue==='boolean')return value.booleanValue;
+  if(Array.isArray(value?.arrayValue?.values))
+    return value.arrayValue.values.map(decodeFirestoreValue);
+  return undefined;
+}
+export async function publicSiteJson():Promise<Response> {
+  // Public presentation fields only. Never forward arbitrary Firestore records
+  // or private customer data in this endpoint.
+  const [settings,services,projects]=await Promise.all([
+    fetchJson(prefix+'/siteSettings/public'),listDocuments('cmsServices'),listDocuments('portfolioProjects')
+  ]);
+  const publicSettings:Record<string,unknown> = {};
+  if(settings.ok) {
+    for(const name of publicSettingFields) {
+      const value=decodeFirestoreValue(fields(settings.data)[name]);
+      if(value!==undefined)publicSettings[name]=value;
+    }
+  }
+  const present=(docs:any[]|null,kind:'service'|'project')=>(docs||[]).map(d=>({
+    ...(kind==='service'?{slug:str(d,'slug')}:{id:str(d,'slug')}),
+    title:str(d,'title').slice(0,140),
+    ...(kind==='service'?{excerpt:str(d,'excerpt').slice(0,320)}:{
+      description:str(d,'excerpt').slice(0,320),category:str(d,'category').slice(0,80)
+    }),
+  })).filter(row=>typeof row.title==='string' && row.title.length>0 &&
+    slugOkay('slug' in row ? String(row.slug) : String(row.id)));
+  return new Response(JSON.stringify({
+    settings:publicSettings,
+    services:present(services,'service'),
+    projects:present(projects,'project'),
+  }),{headers:{
+    'Content-Type':'application/json; charset=utf-8',
+    'Cache-Control':'no-store',
+    'X-Content-Type-Options':'nosniff',
+  }});
+}
+
 function routePath(route:CmsRoute,slug:string):string{return '/'+route+'/'+slug+'/';}
 function plainTextBody(value:string):string {
   return value.split(/\n\s*\n/).slice(0,180).map(section=>{
