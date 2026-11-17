@@ -179,6 +179,16 @@ async function staticContactAndServices(request:Request,env:CmsEnvironment,inclu
       html=html.replaceAll('923234313869',digits);
       html=html.replaceAll('+92 323 4313869',esc(phone));
     }
+    const profiles=[
+      ['socialGithub','https://github.com/mmoavia7861'],
+      ['socialLinkedin','https://www.linkedin.com/in/moavia-hassan-seo/'],
+      ['socialFiverr','https://www.fiverr.com/moavia_seopro'],
+      ['socialUpwork','https://www.upwork.com/freelancers/~01c3735023b2f296fa'],
+    ];
+    for(const [field,old] of profiles){
+      const updated=httpsLink(str(settings.data,field));
+      if(updated)html=html.replaceAll(old,esc(updated));
+    }
   }
   if(services&&services.length&&html.includes('</main>')){
     html=html.replace('</main>',indexCards('offerings',services)+'</main>');
