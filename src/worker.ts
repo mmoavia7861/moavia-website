@@ -1,4 +1,4 @@
-import { handleCmsRequest } from './cmsWorker';
+import { handleCmsRequest, publicSiteJson } from './cmsWorker';
 
 /**
  * Same-origin API for the Moavia SEO Pro Cloudflare Worker.
@@ -405,6 +405,7 @@ async function handleApi(request: Request, env: WorkerEnv, path: string): Promis
 export default {
   async fetch(request: Request, env: WorkerEnv): Promise<Response> {
     const url = new URL(request.url);
+    if (url.pathname === '/api/public-site' && request.method === 'GET') return publicSiteJson();
     if (url.pathname.startsWith('/api/')) return handleApi(request, env, url.pathname);
     // Public CMS routes are server-rendered only from published Firestore data.
     // Other routes keep the existing Cloudflare static asset behavior.
