@@ -1,5 +1,6 @@
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import websiteLinks from './data/githubProjects.json';
+import { SITE_DEFAULTS, TOOL_ROUTES, mergeSiteSettings, safeHref, type PublicSiteSettings } from './siteConfig';
 import { ArrowRight, ArrowUpRight, Code2, Github, Linkedin, Mail, Menu, ShieldCheck, X } from 'lucide-react';
 
 const AiToolsSection = lazy(() => import('./components/AiToolsSection').then(m => ({ default: m.AiToolsSection })));
@@ -25,6 +26,47 @@ function OnView({ id, children, minHeight = 240 }: { id: string; children: React
 
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [siteSettings, setSiteSettings] = useState<PublicSiteSettings>(SITE_DEFAULTS);
+  const [managedServices, setManagedServices] = useState<Array<{slug:string;title:string;excerpt:string}>>([]);
+  const [managedProjects, setManagedProjects] = useState<Array<{id:string;title:string;description:string;category:string}>>([]);
+  useEffect(() => {
+    let disposed = false;
+    const offs: Array<()=>void> = [];
+    void (async () => {
+      const [{db},{onSnapshot,doc,collection,where,query}] = await Promise.all([
+        import('./firebase'),import('firebase/firestore')
+      ]);
+      if(disposed)return;
+      offs.push(onSnapshot(doc(db,'siteSettings','public'),snap=>
+        setSiteSettings(mergeSiteSettings(snap.exists()?snap.data() as Partial<PublicSiteSettings>:null)),
+        ()=>setSiteSettings(SITE_DEFAULTS)));
+      offs.push(onSnapshot(query(collection(db,'cmsServices'),where('published','==',true)),snap=>{
+        setManagedServices(snap.docs.filter(d=>/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(d.id))
+          .map(d=>({slug:d.id,title:String(d.data().title||''),excerpt:String(d.data().excerpt||'')}))
+          .filter(d=>d.title&&d.excerpt));
+      },()=>setManagedServices([])));
+      offs.push(onSnapshot(query(collection(db,'portfolioProjects'),where('published','==',true)),snap=>{
+        setManagedProjects(snap.docs.filter(d=>/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(d.id))
+          .map(d=>({id:d.id,title:String(d.data().title||''),description:String(d.data().excerpt||''),category:String(d.data().category||'Website project')}))
+          .filter(d=>d.title&&d.description));
+      },()=>setManagedProjects([])));
+    })().catch(()=>{});
+    return ()=>{disposed=true;offs.forEach(off=>off());};
+  },[]);
+  useEffect(()=>{
+    if(siteSettings.seoTitle)document.title=siteSettings.seoTitle;
+    const meta=document.querySelector('meta[name="description"]');
+    if(meta&&siteSettings.seoDescription)meta.setAttribute('content',siteSettings.seoDescription);
+  },[siteSettings.seoTitle,siteSettings.seoDescription]);
+  const featuredServices = managedServices.length?managedServices.map(s=>({
+    title:s.title,description:s.excerpt,href:'/offerings/'+s.slug+'/'
+  })): [
+    {title:'Technical & On-Page SEO',description:'Discuss crawlability, site structure, metadata, content improvements and Search Console issues.',href:'/hire-me/'},
+    {title:'Website Development',description:'Plan responsive WordPress or React websites with useful pages, clear navigation and maintainable content.',href:'/hire-me/'},
+    {title:'Web Tools & App Project Planning',description:'Explore a web utility or application idea and agree feasibility, scope and deliverables before work begins.',href:'/hire-me/'},
+  ];
+  const publicProjects=[...websiteLinks,...managedProjects.filter(item=>
+    !websiteLinks.some(original=>original.id===item.id))];
   const sections = [
     { label: 'Tools', href: '/tools/' },
     { label: 'Services', href: '/hire-me/' },
@@ -52,15 +94,17 @@ export default function App() {
         </nav>}
       </header>
 
+      {siteSettings.announcementEnabled && siteSettings.announcementText.trim() &&
+        <div className="bg-[#18243A] text-white text-center text-sm font-semibold px-5 py-3" role="status">{siteSettings.announcementText}</div>}
       <main>
         <section className="relative overflow-hidden bg-gradient-to-br from-[#EEF2FF] via-white to-[#E8F8F5] py-20 sm:py-28" aria-labelledby="homepage-title">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl">
-              <p className="inline-block rounded-full bg-white border border-[#DDE3F4] px-4 py-2 text-xs font-extrabold tracking-wide text-[#4353BC]">PERSONAL PORTFOLIO · ISLAMABAD, PAKISTAN</p>
-              <h1 id="homepage-title" className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">Moavia Hassan: <span className="text-[#5265D8]">SEO Tools, Services &amp; Web/App Projects</span></h1>
-              <p className="mt-6 max-w-2xl text-base sm:text-xl leading-relaxed text-[#52607A]">Explore free SEO tools, discuss technical SEO and website services, and browse real web project demos. App ideas can be discussed individually; no unpublished app is presented as a completed project.</p>
+              <p className="inline-block rounded-full bg-white border border-[#DDE3F4] px-4 py-2 text-xs font-extrabold tracking-wide text-[#4353BC]">{siteSettings.heroBadge}</p>
+              <h1 id="homepage-title" className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">{siteSettings.heroTitle}</h1>
+              <p className="mt-6 max-w-2xl text-base sm:text-xl leading-relaxed text-[#52607A]">{siteSettings.heroDescription}</p>
               <div className="mt-9 flex flex-wrap gap-3">
-                <a href="/tools/" className="inline-flex items-center gap-2 rounded-xl bg-[#5265D8] px-5 py-3 font-bold text-white hover:bg-[#4353BC]">Explore Tools <ArrowRight className="w-4 h-4" /></a>
+                <a href={safeHref(siteSettings.ctaHref)?siteSettings.ctaHref:'/tools/'} className="inline-flex items-center gap-2 rounded-xl bg-[#5265D8] px-5 py-3 font-bold text-white hover:bg-[#4353BC]">{siteSettings.ctaLabel} <ArrowRight className="w-4 h-4" /></a>
                 <a href="/projects/" className="inline-flex items-center gap-2 rounded-xl border border-[#C9D1E7] bg-white px-5 py-3 font-bold text-[#18243A] hover:bg-[#F4F6FF]">View Projects <Code2 className="w-4 h-4" /></a>
                 <a href="/hire-me/" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 font-bold text-[#4353BC] hover:underline">Explore Services <ArrowUpRight className="w-4 h-4" /></a>
               </div>
@@ -74,11 +118,7 @@ export default function App() {
             <h2 id="featured-tools-heading" className="mt-3 text-3xl sm:text-4xl font-extrabold">Explore 3 practical SEO tools</h2>
             <p className="mt-3 max-w-3xl text-[#52607A]">Each tool has its own page and works with information you enter. No invented SEO audit scores.</p>
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
-              {[
-                { title: 'Meta Title & Description Checker', href: '/tools/meta-title-description-checker/', description: 'Check metadata and preview an illustrative search snippet.' },
-                { title: 'JSON-LD Schema Generator', href: '/tools/json-ld-schema-generator/', description: 'Create FAQPage, Organization and Article structured data.' },
-                { title: 'Robots.txt & XML Sitemap Generator', href: '/tools/robots-txt-sitemap-generator/', description: 'Create robots.txt and sitemap.xml from real URLs.' },
-              ].map(tool => (
+              {TOOL_ROUTES.map((href,i)=>({href,title:siteSettings.toolTitles[i],description:siteSettings.toolDescriptions[i],visible:siteSettings.toolVisible[i]})).filter(tool=>tool.visible).map(tool => (
                 <article key={tool.href} className="flex flex-col rounded-2xl border border-[#DCE3F2] bg-[#F8F9FD] p-6">
                   <h3 className="text-lg font-extrabold">{tool.title}</h3>
                   <p className="mt-3 mb-6 flex-1 text-sm leading-7 text-[#52607A]">{tool.description}</p>
@@ -97,13 +137,9 @@ export default function App() {
             <h2 id="services-title" className="mt-3 text-3xl sm:text-4xl font-extrabold">SEO &amp; Web Development Services</h2>
             <p className="mt-3 max-w-3xl text-[#52607A]">Discuss a practical project before hiring. These are areas I can review or scope, not promises of specific rankings, app launches or client outcomes.</p>
             <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
-              {[
-                { title: 'Technical & On-Page SEO', description: 'Discuss crawlability, site structure, metadata, content improvements and Search Console issues.' },
-                { title: 'Website Development', description: 'Plan responsive WordPress or React websites with useful pages, clear navigation and maintainable content.' },
-                { title: 'Web Tools & App Project Planning', description: 'Explore a web utility or application idea and agree feasibility, scope and deliverables before any work begins.' },
-              ].map(service => (
+              {featuredServices.map(service => (
                 <article key={service.title} className="rounded-2xl border border-[#DCE3F2] bg-white p-6">
-                  <h3 className="text-lg font-extrabold">{service.title}</h3>
+                  <h3 className="text-lg font-extrabold"><a href={service.href} className="hover:underline">{service.title}</a></h3>
                   <p className="mt-3 text-sm leading-7 text-[#52607A]">{service.description}</p>
                 </article>
               ))}
@@ -123,7 +159,7 @@ export default function App() {
               <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">Web/App Projects</h2>
               <p className="mt-3 max-w-2xl text-[#52607A]">Browse published web projects and a source-verified Android starter. The mobile entry is a prototype, not a completed or released app; demos do not imply paid-client work.</p>
               <div className="mt-9 grid grid-cols-1 md:grid-cols-2 gap-5">
-                {websiteLinks.map(site => <a key={site.id} href={`/projects/${site.id}/`} className="group block rounded-2xl border border-[#E7EAF2] bg-[#F8F9FD] p-6 hover:border-[#5265D8] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]">
+                {publicProjects.map(site => <a key={site.id} href={`/projects/${site.id}/`} className="group block rounded-2xl border border-[#E7EAF2] bg-[#F8F9FD] p-6 hover:border-[#5265D8] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]">
                   <span className="text-xs font-bold uppercase tracking-wide text-[#5265D8]">{site.category}</span>
                   <span className="mt-2 flex items-start justify-between gap-4 text-lg font-extrabold">{site.title}<ArrowUpRight className="h-5 w-5 shrink-0 text-[#5265D8]" /></span>
                   <span className="mt-2 block text-sm leading-relaxed text-[#52607A]">{site.description}</span>
@@ -148,10 +184,10 @@ export default function App() {
               <p className="mt-5 max-w-3xl text-[#52607A] leading-8">I'm based in Islamabad, Pakistan, and I work on SEO, useful online tools and website projects. This site brings my public projects, technical interests and contact information together in one place.</p>
               <p className="mt-3 max-w-3xl text-[#52607A] leading-8">My interests include technical SEO, on-page improvements, React websites, WordPress and user-friendly design. You can inspect the website links before contacting me about a project. I don't promise Google rankings or present unverified client results.</p>
               <div className="mt-7 flex flex-wrap gap-3">
-                <a href="https://www.linkedin.com/in/moavia-hassan-seo/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]"><Linkedin className="h-4 w-4" /> LinkedIn</a>
-                <a href="https://github.com/mmoavia7861" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]"><Github className="h-4 w-4" /> GitHub</a>
-                <a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer" aria-label="View Moavia Hassan's Fiverr freelancer profile (opens in new tab)" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]">Fiverr <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
-                <a href="https://www.upwork.com/freelancers/~01c3735023b2f296fa" target="_blank" rel="noopener noreferrer" aria-label="View my Upwork freelancer profile (opens in new tab)" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]">Upwork <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
+                <a href={safeHref(siteSettings.socialLinkedin)?siteSettings.socialLinkedin:SITE_DEFAULTS.socialLinkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]"><Linkedin className="h-4 w-4" /> LinkedIn</a>
+                <a href={safeHref(siteSettings.socialGithub)?siteSettings.socialGithub:SITE_DEFAULTS.socialGithub} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]"><Github className="h-4 w-4" /> GitHub</a>
+                <a href={safeHref(siteSettings.socialFiverr)?siteSettings.socialFiverr:SITE_DEFAULTS.socialFiverr} target="_blank" rel="noopener noreferrer" aria-label="View Moavia Hassan's Fiverr freelancer profile (opens in new tab)" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]">Fiverr <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
+                <a href={safeHref(siteSettings.socialUpwork)?siteSettings.socialUpwork:SITE_DEFAULTS.socialUpwork} target="_blank" rel="noopener noreferrer" aria-label="View my Upwork freelancer profile (opens in new tab)" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]">Upwork <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
                 <a href="/about/" className="inline-flex items-center gap-2 px-3 py-3 font-bold text-sm text-[#4353BC] hover:underline">Read more <ArrowRight className="h-4 w-4" /></a>
               </div>
             </div>
@@ -171,7 +207,7 @@ export default function App() {
       <footer className="bg-[#18243A] text-slate-200 py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-between gap-7">
-            <div><p className="font-extrabold text-white">Moavia Hassan</p><p className="mt-2 text-sm text-slate-400">SEO Tools · Services · Web/App Projects · Islamabad, Pakistan</p><a href="mailto:hello@moaviaseo.com" className="mt-3 inline-flex items-center gap-2 text-sm text-slate-200 hover:text-white"><Mail className="h-4 w-4" /> hello@moaviaseo.com</a></div>
+            <div><p className="font-extrabold text-white">Moavia Hassan</p><p className="mt-2 text-sm text-slate-400">SEO Tools · Services · Web/App Projects · Islamabad, Pakistan</p><a href={'mailto:'+siteSettings.contactEmail} className="mt-3 inline-flex items-center gap-2 text-sm text-slate-200 hover:text-white"><Mail className="h-4 w-4" /> {siteSettings.contactEmail}</a></div>
             <nav aria-label="Footer" className="flex flex-wrap items-start gap-x-5 gap-y-3 text-sm">
               <a href="/tools/" className="hover:text-white">Tools</a><a href="/hire-me/" className="hover:text-white">Services</a><a href="/projects/" className="hover:text-white">Projects</a><a href="/about/" className="hover:text-white">About</a><a href="/contact/" className="hover:text-white">Contact</a><a href="/hire-me/" className="hover:text-white">Hire Me</a><a href="/blog/" className="hover:text-white">Blog</a><a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Fiverr freelancer profile (opens in new tab)">Fiverr</a><a href="https://www.upwork.com/freelancers/~01c3735023b2f296fa" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Upwork freelancer profile (opens in new tab)">Upwork</a>
             </nav>
