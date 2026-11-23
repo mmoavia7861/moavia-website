@@ -3,10 +3,10 @@ import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 const root = join(process.cwd(), 'dist');
-for (const asset of ['cursor-effect.js', 'cursor-effect.css', 'theme-init.js', 'theme-switcher.js', 'theme.css']) {
+for (const asset of ['cursor-effect.js', 'cursor-effect.css', 'theme-init.js', 'theme-switcher.js', 'theme.css', 'portfolio-premium.css']) {
   if (!existsSync(join(root, asset))) throw new Error('Missing shared public asset: ' + asset);
 }
-const snippet = '<script src="/theme-init.js"></script><link rel="stylesheet" href="/theme.css"><link rel="stylesheet" href="/cursor-effect.css"><script src="/cursor-effect.js" defer></script><script src="/theme-switcher.js" defer></script>';
+const snippet = '<script src="/theme-init.js"></script><link rel="stylesheet" href="/theme.css"><link rel="stylesheet" href="/portfolio-premium.css"><link rel="stylesheet" href="/cursor-effect.css"><script src="/cursor-effect.js" defer></script><script src="/theme-switcher.js" defer></script>';
 const analyticsSnippet = '<script src="/analytics-consent.js" defer></script>';
 let count = 0;
 function visit(folder) {
