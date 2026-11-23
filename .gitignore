@@ -6,3 +6,10 @@ coverage/
 *.log
 .env*
 !.env.example
+*.pem
+*.p12
+*.pfx
+service-account*.json
+private-uploads/
+tmp-uploads/
+.wrangler/
