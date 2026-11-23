@@ -18,12 +18,16 @@ check(adminHtml.includes('name="robots" content="noindex,nofollow,noarchive"'), 
 check(adminHtml.includes('id="admin-root"'), 'admin app mount missing');
 check(adminHtml.includes('/assets/'), 'admin app JS bundle missing');
 check(!sitemap.includes('/admin/'), 'private admin URL must not appear in sitemap');
-for (const asset of ['cursor-effect.js', 'cursor-effect.css', 'theme-init.js', 'theme-switcher.js', 'theme.css']) {
+for (const asset of ['cursor-effect.js', 'cursor-effect.css', 'theme-init.js', 'theme-switcher.js', 'theme.css', 'portfolio-premium.css']) {
  check(existsSync(join(dist, asset)), 'cursor asset missing: ' + asset);
 }
 const effectJs = read('cursor-effect.js');
 const effectCss = read('cursor-effect.css');
 check(effectJs.includes("prefers-reduced-motion: reduce"), 'cursor must respect reduced-motion preference');
+const visualCss=read('portfolio-premium.css');
+check(visualCss.includes('prefers-reduced-motion:reduce'),'portfolio transitions must respect reduced motion');
+check(visualCss.includes('.premium-hero') && visualCss.includes('.premium-skills-grid'),'portfolio visual system missing');
+check(root.includes('href="/portfolio-premium.css"'),'homepage premium stylesheet missing');
 check(effectJs.includes("pointerType !== 'mouse'"), 'cursor must ignore touch input');
 check(effectJs.includes("pointer-events: none") || effectCss.includes('pointer-events: none'), 'cursor must not intercept clicks');
 check(!effectCss.includes('cursor: none'), 'native cursor must remain accessible');
@@ -39,7 +43,7 @@ const social=readFileSync(join(dist,'social-preview.png'));
 check(social.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')),'social image not PNG');
 check(social.readUInt32BE(16)===1200&&social.readUInt32BE(20)===630,'social image not 1200x630');
 check(root.includes('<link rel="canonical" href="'+base+'/"'),'missing homepage canonical');
-check(root.includes('<h1>Moavia Hassan | Web, App, E-commerce &amp; AI Projects</h1>'),'wrong homepage fallback H1');
+check(root.includes('<h1>I build websites, apps &amp; AI-powered experiences.</h1>'),'wrong homepage fallback H1');
 check(root.includes('Moavia Hassan | Web, App, E-commerce & AI Projects'),'wrong site title');
 check(root.includes('https://moaviaseo.com/#person'),'person schema missing');
 check(root.includes('https://www.fiverr.com/moavia_seopro'),'Fiverr missing from homepage person schema');
@@ -48,6 +52,8 @@ check(root.includes('mailto:hello@moaviaseo.com'),'public homepage must use veri
 check(root.includes('href="/hire-me/">Services</a>'),'homepage Services navigation missing');
 check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes("{ label: 'Services', href: '/hire-me/' }"),'React Services navigation missing');
 check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes('Web/App Projects'),'React projects branding missing');
+check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes('premium-hero-visual'),'hero portrait showcase missing');
+check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes('premium-mobile-nav'),'accessible mobile navigation missing');
 check(readFileSync(join(process.cwd(),'src/data/githubProjects.json'),'utf8').includes('"id": "moavia-app"'),'Android app project missing from React data');
 check(existsSync(join(dist,'moavia-hassan-portrait.webp')),'Professional photo asset missing');
 check(!root.includes('Moavia SEO Pro'),'old agency branding still in homepage');
@@ -108,6 +114,7 @@ for(const route of routes){
   check(!html.includes('About the team'),'old agency byline found: '+route);
  }
  if(route.startsWith('/projects/')){
+  check(html.includes('project-case-study-page'),'project design marker missing: '+route);
   check(html.includes('property="og:image"'),'project social image missing: '+route);
   check(html.includes('name="twitter:card"'),'project Twitter card missing: '+route);
   if(route==='/projects/moavia-app/'){
@@ -165,6 +172,11 @@ for(const route of routes){
 for(const route of ['/web-development/','/android-development/','/ai-automations/']) {
  const html=read(join(route.slice(1,-1),'index.html'));
  check(html.includes('href="/projects/"'),'portfolio page missing projects link: '+route);
+}
+for(const route of ['/web-development/','/android-development/','/ai-automations/']) {
+ const html=read(join(route.slice(1,-1),'index.html'));
+ check(html.includes('portfolio-detail-page'),'portfolio layout marker missing on '+route);
+ check(html.includes('portfolio-premium.css'),'premium stylesheet not loaded on '+route);
 }
 const certificates=read('certificates/index.html');
 check(certificates.includes('noindex,follow'),'unverified certificate list must be noindex');
