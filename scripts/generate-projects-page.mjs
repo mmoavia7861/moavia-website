@@ -44,16 +44,16 @@ function snapshot(w) {
  +'<p hidden class="project-screenshot-unavailable">Screenshot preview is unavailable. Use the live project link to inspect the website.</p>'
  +'<figcaption>Live page thumbnail provided by Thum.io. It may change or be unavailable; this is not an analytics or results screenshot.</figcaption></figure>';
 }
-if(websites.length!==5||new Set(websites.map(w=>w.id)).size!==5
+if(websites.length!==7||new Set(websites.map(w=>w.id)).size!==7
  || websites.filter(w=>w.kind==='android').length!==1
  || websites.some(w=>(w.kind==='android' ? w.id!=='moavia-app'||w.repo!=='https://github.com/mmoavia7861/moavia-app'||w.url!==w.repo
-   : !/^https:\/\/mmoavia7861\.github\.io\/[A-Za-z0-9_.-]+\/$/.test(w.url))
+   : !(/^(https:\/\/mmoavia7861\.github\.io\/[A-Za-z0-9_.-]+\/|https:\/\/(toolscresta|draliwellness)\.com\/)$/.test(w.url)))
  || !/^[a-z0-9-]+$/.test(w.id) || !w.problem || !w.role || !w.result || !w.repo || !Array.isArray(w.stack) || !Array.isArray(w.work))) {
- throw Error('Project data must contain four public web demos and one verifiable Android starter repository.');
+ throw Error('Project data must contain six public web projects and one verifiable Android starter repository.');
 }
 mkdirSync(join(root,'projects'),{recursive:true});
 const directory='/projects/',directoryTitle='Web & App Projects | Moavia Hassan',
-directoryDesc='Explore four published web demos and one source-verified Android starter. Every project lists its role, stack and limitations; no invented client or app-launch results.';
+directoryDesc='Explore six public web projects and one source-verified Android starter. Every project lists its role, stack and limitations; no invented client or app-launch results.';
 const cards=websites.map(w=>
  '<article class="card project-card"><span class="pill">'+esc(w.category)+'</span><h2><a href="/projects/'+esc(w.id)+'/">'+esc(w.title)+'</a></h2>'
  +'<p>'+esc(w.description)+'</p><p class="project-card-actions"><a class="action" href="/projects/'+esc(w.id)+'/">Read project details</a> '+link(w.url,w.kind==='android'?'View GitHub source':'Open live demo')+'</p></article>'
