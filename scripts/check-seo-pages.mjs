@@ -7,7 +7,7 @@ const routes=[
  '/blog/technical-seo-playbook-2026/','/blog/ai-generated-websites-human-engineering/',
  '/blog/mastering-meta-ads-capi-cro/','/blog/local-seo-google-maps-3pack/',
  '/blog/image-video-resolution-cro/','/blog/google-search-console-discovered-vs-indexed/',
- '/blog/seo-aeo-geo-small-business-guide/','/projects/','/projects/ranknova/','/projects/dark-agency/','/projects/agency-multipage/','/projects/umm-e-aiman/','/projects/moavia-app/','/hire-me/','/contact/',
+ '/blog/seo-aeo-geo-small-business-guide/','/web-development/','/android-development/','/ai-automations/','/projects/','/projects/ranknova/','/projects/dark-agency/','/projects/agency-multipage/','/projects/umm-e-aiman/','/projects/moavia-app/','/projects/toolscresta/','/projects/draliwellness/','/hire-me/','/contact/',
  '/tools/','/tools/meta-title-description-checker/','/tools/json-ld-schema-generator/','/tools/robots-txt-sitemap-generator/'
 ];
 const read=path=>readFileSync(join(dist,path),'utf8');
@@ -39,8 +39,8 @@ const social=readFileSync(join(dist,'social-preview.png'));
 check(social.subarray(0,8).equals(Buffer.from('89504e470d0a1a0a','hex')),'social image not PNG');
 check(social.readUInt32BE(16)===1200&&social.readUInt32BE(20)===630,'social image not 1200x630');
 check(root.includes('<link rel="canonical" href="'+base+'/"'),'missing homepage canonical');
-check(root.includes('<h1>Moavia Hassan: SEO Tools, Services &amp; Web/App Projects</h1>'),'wrong homepage fallback H1');
-check(root.includes('Moavia Hassan: SEO Tools, Services & Web/App Projects'),'wrong site title');
+check(root.includes('<h1>Moavia Hassan | Web, App, E-commerce &amp; AI Projects</h1>'),'wrong homepage fallback H1');
+check(root.includes('Moavia Hassan | Web, App, E-commerce & AI Projects'),'wrong site title');
 check(root.includes('https://moaviaseo.com/#person'),'person schema missing');
 check(root.includes('https://www.fiverr.com/moavia_seopro'),'Fiverr missing from homepage person schema');
 check(root.includes('https://www.upwork.com/freelancers/~01c3735023b2f296fa'),'Upwork missing from homepage person schema');
@@ -162,6 +162,13 @@ for(const route of routes){
  check(Boolean(matched),'schema script missing: '+route);JSON.parse(matched[1]);
  if(route.startsWith('/blog/')&&route!=='/blog/')check(/<time datetime="\d{4}-\d{2}-\d{2}">/.test(html),'blog date missing: '+route);
 }
+for(const route of ['/web-development/','/android-development/','/ai-automations/']) {
+ const html=read(join(route.slice(1,-1),'index.html'));
+ check(html.includes('href="/projects/"'),'portfolio page missing projects link: '+route);
+}
+const certificates=read('certificates/index.html');
+check(certificates.includes('noindex,follow'),'unverified certificate list must be noindex');
+check(!sitemap.includes('<loc>'+base+'/certificates/</loc>'),'unverified certificates placeholder should not be in sitemap');
 for(const route of ['/services/','/services/seo/','/services/google-ads/','/services/meta-ads/']){
  const html=read(join(route.replace(/^\/|\/$/g,''),'index.html'));
  check(html.includes('noindex')&&html.includes('/hire-me/'),'retired route not redirected: '+route);
