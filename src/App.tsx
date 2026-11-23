@@ -1,7 +1,7 @@
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import websiteLinks from './data/githubProjects.json';
 import { SITE_DEFAULTS, TOOL_ROUTES, mergeSiteSettings, safeHref, type PublicSiteSettings } from './siteConfig';
-import { ArrowRight, ArrowUpRight, Code2, Github, Linkedin, Mail, Menu, ShieldCheck, X } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Code2, Github, Linkedin, Mail, Menu, ShieldCheck, X, Smartphone, ShoppingBag, Workflow, Sparkles, Globe2 } from 'lucide-react';
 
 const AiToolsSection = lazy(() => import('./components/AiToolsSection').then(m => ({ default: m.AiToolsSection })));
 const ContactSection = lazy(() => import('./components/ContactSection').then(m => ({ default: m.ContactSection })));
@@ -60,12 +60,12 @@ export default function App() {
     const meta=document.querySelector('meta[name="description"]');
     if(meta&&siteSettings.seoDescription)meta.setAttribute('content',siteSettings.seoDescription);
   },[siteSettings.seoTitle,siteSettings.seoDescription]);
-  const featuredServices = managedServices.length?managedServices.map(s=>({
-    title:s.title,description:s.excerpt,href:'/offerings/'+s.slug+'/'
-  })): [
-    {title:'Technical & On-Page SEO',description:'Discuss crawlability, site structure, metadata, content improvements and Search Console issues.',href:'/hire-me/'},
-    {title:'Website Development',description:'Plan responsive WordPress or React websites with useful pages, clear navigation and maintainable content.',href:'/hire-me/'},
-    {title:'Web Tools & App Project Planning',description:'Explore a web utility or application idea and agree feasibility, scope and deliverables before work begins.',href:'/hire-me/'},
+  const featuredServices = managedServices.length ? managedServices.map(s => ({
+    title: s.title, description: s.excerpt, href: '/offerings/' + s.slug + '/'
+  })) : [
+    { title: 'Websites & E-commerce', description: 'Responsive business websites, storefronts, product pages and practical web applications.', href: '/web-development/' },
+    { title: 'AI & Workflow Automation', description: 'Explore AI integrations, API-backed utilities and carefully scoped workflow automation.', href: '/ai-automations/' },
+    { title: 'SEO & Website Improvements', description: 'Review search visibility, site structure, page performance and technical SEO opportunities.', href: '/hire-me/' },
   ];
   const publicProjects=[...websiteLinks,...managedProjects.filter(item=>
     !websiteLinks.some(original=>original.id===item.id))];
@@ -81,87 +81,143 @@ export default function App() {
     { label: 'Contact', href: '/contact/' },
   ];
   const skillAreas = [
-    { title: 'Web Development', href: '/web-development/', text: 'Responsive websites, React interfaces, WordPress and practical web applications.', tags: ['React', 'TypeScript', 'WordPress'] },
-    { title: 'E-commerce Websites', href: '/web-development/', text: 'Storefront UX, product pages, shopping flows and maintainable online-store projects.', tags: ['Online Stores', 'Responsive UI', 'Product UX'] },
-    { title: 'Android Applications', href: '/android-development/', text: 'Mobile development journey and source-verifiable Kotlin/Jetpack Compose starter.', tags: ['Kotlin', 'Compose', 'Learning Projects'] },
-    { title: 'AI & Automation', href: '/ai-automations/', text: 'AI-assisted tools, workflow design and responsible API integration experiments.', tags: ['AI APIs', 'Make', 'Workflows'] },
+    { number:'01', title: 'Web Development', href: '/web-development/', text: 'Responsive websites and reliable interfaces shaped for real people.', tags: ['React', 'TypeScript', 'WordPress'], icon: Globe2 },
+    { number:'02', title: 'E-commerce Websites', href: '/web-development/', text: 'Product pages, storefront journeys and online shopping experiences.', tags: ['Storefronts', 'Product UX', 'Responsive'], icon: ShoppingBag },
+    { number:'03', title: 'Android Applications', href: '/android-development/', text: 'Mobile-first development and source-verifiable Android prototypes.', tags: ['Kotlin', 'Jetpack Compose', 'Learning'], icon: Smartphone },
+    { number:'04', title: 'AI & Automation', href: '/ai-automations/', text: 'Practical AI-powered tools, integrations and workflow experiments.', tags: ['AI APIs', 'Make', 'Workflows'], icon: Workflow },
   ];
   return (
-    <div className="min-h-screen bg-[#F8F9FD] text-[#18243A]">
-      <header className="sticky top-0 z-40 border-b border-[#E7EAF2] bg-white/95 backdrop-blur-lg">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 min-h-20 flex items-center justify-between gap-4">
-          <a href="/" aria-label="Moavia Hassan - homepage" className="flex items-center gap-3 font-extrabold min-w-0">
-            <img src="/site-logo.png" width="44" height="44" alt="Moavia Hassan logo" className="w-11 h-11 rounded-xl object-contain border border-[#E7EAF2]" />
-            <span className="min-w-0 leading-tight"><span className="block text-base sm:text-lg">Moavia Hassan</span><span className="block text-[11px] font-semibold text-[#5265D8]">Web · Apps · AI · SEO Projects</span></span>
+    <div className="portfolio-home min-h-screen bg-[#F8F9FD] text-[#18243A]">
+      <a className="premium-skip-link" href="#homepage-title">Skip to main content</a>
+      <header className="premium-header">
+        <div className="premium-container premium-header-inner">
+          <a href="/" aria-label="Moavia Hassan — homepage" className="premium-brand">
+            <img src="/site-logo.png" width="46" height="46" alt="" className="premium-brand-mark" />
+            <span>Moavia Hassan<small>Developer & Digital Creator</small></span>
           </a>
-          <nav aria-label="Primary" className="hidden xl:flex items-center gap-1">
-            {sections.map(link => <a key={link.label} href={link.href} className="rounded-lg px-2.5 py-2 text-sm font-semibold text-[#263854] hover:bg-[#EEF2FF] hover:text-[#4353BC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]">{link.label}</a>)}
+          <nav aria-label="Primary" className="premium-desktop-nav">
+            {sections.filter(link => ['Projects','Web','Android','AI Automation','Certificates','About'].includes(link.label)).map(link =>
+              <a key={link.label} href={link.href}>{link.label}</a>
+            )}
           </nav>
-          <button type="button" aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'} aria-controls="mobile-primary" aria-expanded={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)} className="xl:hidden p-2 rounded-lg hover:bg-slate-100">
-            {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <div className="premium-header-actions">
+            <a href="/tools/" className="premium-header-tools">Free tools</a>
+            <a href="/contact/" className="premium-header-cta">Let's talk <ArrowUpRight size={17} aria-hidden="true" /></a>
+          </div>
+          <button type="button" className="premium-menu-toggle" aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={mobileOpen} aria-controls="mobile-primary" onClick={() => setMobileOpen(!mobileOpen)}>
+            {mobileOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
           </button>
         </div>
-        {mobileOpen && <nav id="mobile-primary" aria-label="Mobile primary" className="xl:hidden px-4 pb-4 flex flex-col gap-1 border-t border-[#E7EAF2]">
-          {sections.map(link => <a key={link.label} href={link.href} onClick={() => setMobileOpen(false)} className="py-3 px-3 rounded-lg font-semibold hover:bg-[#EEF2FF]">{link.label}</a>)}
-        </nav>}
+        {mobileOpen &&
+          <nav id="mobile-primary" aria-label="Mobile primary" className="premium-mobile-nav">
+            {sections.map(link => <a key={link.label} href={link.href} onClick={() => setMobileOpen(false)}>{link.label}<ArrowUpRight size={16} aria-hidden="true" /></a>)}
+          </nav>}
       </header>
 
       {siteSettings.announcementEnabled && siteSettings.announcementText.trim() &&
         <div className="bg-[#18243A] text-white text-center text-sm font-semibold px-5 py-3" role="status">{siteSettings.announcementText}</div>}
       <main>
-        <section className="relative overflow-hidden bg-gradient-to-br from-[#EEF2FF] via-white to-[#E8F8F5] py-20 sm:py-28" aria-labelledby="homepage-title">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl">
-              <p className="inline-block rounded-full bg-white border border-[#DDE3F4] px-4 py-2 text-xs font-extrabold tracking-wide text-[#4353BC]">{siteSettings.heroBadge}</p>
-              <h1 id="homepage-title" className="mt-6 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">{siteSettings.heroTitle}</h1>
-              <p className="mt-6 max-w-2xl text-base sm:text-xl leading-relaxed text-[#52607A]">{siteSettings.heroDescription}</p>
-              <div className="mt-9 flex flex-wrap gap-3">
-                <a href={safeHref(siteSettings.ctaHref)?siteSettings.ctaHref:'/tools/'} className="inline-flex items-center gap-2 rounded-xl bg-[#5265D8] px-5 py-3 font-bold text-white hover:bg-[#4353BC]">{siteSettings.ctaLabel} <ArrowRight className="w-4 h-4" /></a>
-                <a href="/projects/" className="inline-flex items-center gap-2 rounded-xl border border-[#C9D1E7] bg-white px-5 py-3 font-bold text-[#18243A] hover:bg-[#F4F6FF]">View Projects <Code2 className="w-4 h-4" /></a>
-                <a href="/hire-me/" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 font-bold text-[#4353BC] hover:underline">Explore Services <ArrowUpRight className="w-4 h-4" /></a>
+        <section className="premium-hero" aria-labelledby="homepage-title">
+          <div className="premium-hero-aura" aria-hidden="true"></div>
+          <div className="premium-container premium-hero-grid">
+            <div className="premium-hero-content">
+              <p className="premium-eyebrow"><span className="premium-status-dot"></span> PERSONAL DEVELOPER PORTFOLIO <span className="premium-eyebrow-divider">/</span> ISLAMABAD, PAKISTAN</p>
+              <p className="premium-hero-intro">Hello, I'm Moavia Hassan <span aria-hidden="true">✳</span></p>
+              <h1 id="homepage-title">{siteSettings.heroTitle}</h1>
+              <p className="premium-hero-description">{siteSettings.heroDescription}</p>
+              <div className="premium-hero-actions">
+                <a href={safeHref(siteSettings.ctaHref) ? siteSettings.ctaHref : '/projects/'} className="premium-button premium-button-primary">{siteSettings.ctaLabel}<ArrowUpRight size={19} aria-hidden="true" /></a>
+                <a href="/contact/" className="premium-button premium-button-ghost">Discuss a project <ArrowRight size={19} aria-hidden="true" /></a>
+              </div>
+              <div className="premium-hero-tags" aria-label="Main focus areas">
+                <span>Web development</span><span>Online stores</span><span>AI & automation</span>
               </div>
             </div>
+            <div className="premium-hero-visual">
+              <div className="premium-orbit premium-orbit-one" aria-hidden="true"></div>
+              <div className="premium-orbit premium-orbit-two" aria-hidden="true"></div>
+              <figure className="premium-portrait">
+                <img src="/moavia-hassan-portrait.webp" alt="Portrait of Moavia Hassan" width="440" height="550" fetchPriority="high" decoding="async" />
+                <figcaption><span className="premium-portrait-name">Moavia Hassan</span><span className="premium-portrait-role">Web · Android · AI</span></figcaption>
+              </figure>
+              <div className="premium-float premium-float-code" aria-hidden="true"><Code2 size={20} /> <span>Building for the web</span></div>
+              <div className="premium-float premium-float-ai" aria-hidden="true"><Sparkles size={19} /> <span>Exploring AI</span></div>
+            </div>
+          </div>
+          <div className="premium-container premium-hero-footer">
+            <span><strong>{websiteLinks.length}</strong> public portfolio projects</span>
+            <span>Focused on thoughtful design and maintainable code</span>
+            <a href="/about/">Get to know me <ArrowRight size={16} aria-hidden="true" /></a>
           </div>
         </section>
 
-
-        <section id="expertise" className="scroll-mt-20 bg-[#101D35] text-white py-16 sm:py-20" aria-labelledby="expertise-heading">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <p className="text-xs font-extrabold uppercase tracking-widest text-[#9CE8D5]">Personal portfolio · What I build and explore</p>
-            <h2 id="expertise-heading" className="mt-3 max-w-4xl text-3xl sm:text-4xl font-extrabold">Websites, e-commerce, Android &amp; AI automation</h2>
-            <p className="mt-4 max-w-3xl text-slate-300 leading-8">I'm a student developer based in Islamabad, Pakistan. This portfolio shares my real public projects, my technical skills and the areas I'm actively learning. Each project is labelled honestly as a demo, prototype or website project.</p>
-            <div className="mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-              {skillAreas.map(area => (
-                <article key={area.title} className="flex flex-col rounded-2xl border border-white/15 bg-white/10 p-6">
-                  <h3 className="text-xl font-bold"><a href={area.href} className="hover:text-[#9CE8D5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9CE8D5]">{area.title}</a></h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-200 flex-1">{area.text}</p>
-                  <div className="mt-5 flex flex-wrap gap-2">{area.tags.map(tag => <span key={tag} className="rounded-full border border-white/20 px-2.5 py-1 text-xs text-slate-100">{tag}</span>)}</div>
-                  <a href={area.href} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#9CE8D5]">Explore this area <ArrowRight className="w-4 h-4" /></a>
-                </article>
-              ))}
+        <section id="expertise" className="premium-expertise" aria-labelledby="expertise-heading">
+          <div className="premium-container">
+            <div className="premium-section-heading premium-section-heading-split">
+              <div>
+                <p className="premium-kicker">WHAT I BUILD</p>
+                <h2 id="expertise-heading">Every good idea deserves<br /><em>a great digital experience.</em></h2>
+              </div>
+              <p>From responsive websites and online stores to Android prototypes and AI-powered workflows, here's where I focus my work and learning.</p>
             </div>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <a href="/projects/" className="rounded-xl bg-white px-5 py-3 text-sm font-bold text-[#101D35] hover:bg-slate-100">See all projects</a>
-              <a href="/certificates/" className="rounded-xl border border-white/30 px-5 py-3 text-sm font-bold hover:bg-white/10">Learning &amp; certificates</a>
-              <a href="/contact/" className="rounded-xl border border-white/30 px-5 py-3 text-sm font-bold hover:bg-white/10">Discuss a project</a>
+            <div className="premium-skills-grid">
+              {skillAreas.map(area => {
+                const Icon = area.icon;
+                return (
+                  <article key={area.title} className="premium-skill-card">
+                    <div className="premium-skill-header"><span>{area.number} / EXPERTISE</span><span className="premium-skill-icon"><Icon size={25} strokeWidth={1.8} aria-hidden="true" /></span></div>
+                    <h3>{area.title}</h3>
+                    <p>{area.text}</p>
+                    <div className="premium-skill-tags">{area.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
+                    <a href={area.href} className="premium-skill-link">Explore focus area <ArrowUpRight size={18} aria-hidden="true" /></a>
+                  </article>
+                );
+              })}
             </div>
           </div>
         </section>
 
-        <section className="bg-white py-12 sm:py-16" aria-labelledby="selected-projects-heading">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <p className="text-xs font-extrabold uppercase tracking-widest text-[#5265D8]">Selected public projects</p>
-            <h2 id="selected-projects-heading" className="mt-2 text-3xl font-extrabold">A closer look at my work</h2>
-            <div className="mt-7 grid grid-cols-1 md:grid-cols-3 gap-5">
+        <section className="premium-work" aria-labelledby="selected-projects-heading">
+          <div className="premium-container">
+            <div className="premium-section-heading premium-section-heading-split">
+              <div>
+                <p className="premium-kicker">SELECTED WORK / WEB & APP PROJECTS</p>
+                <h2 id="selected-projects-heading">Proof is in <em>the projects.</em></h2>
+              </div>
+              <p>Explore public work, from helpful online tools to e-commerce websites and Android prototypes. Each project is described according to its actual development status.</p>
+            </div>
+            <div className="premium-project-grid">
               {[
-                { title: 'ToolsCresta', detail: 'Online tools platform · web project', href: '/projects/toolscresta/' },
-                { title: 'Dr. Ali Hassan Health & Wellness', detail: 'Product-focused e-commerce website project', href: '/projects/draliwellness/' },
-                { title: 'Android App Starter', detail: 'Kotlin / Compose prototype · not a released app', href: '/projects/moavia-app/' },
-              ].map(item => <a key={item.href} href={item.href} className="group rounded-2xl border border-[#DCE3F2] bg-[#F8F9FD] p-6 hover:border-[#5265D8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]">
-                <h3 className="text-lg font-extrabold group-hover:text-[#4353BC]">{item.title}</h3>
-                <p className="mt-2 text-sm text-[#52607A]">{item.detail}</p>
-                <span className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-[#4353BC]">Project details <ArrowUpRight className="h-4 w-4" /></span>
-              </a>)}
+                {title:'ToolsCresta',category:'ONLINE UTILITIES',subtitle:'Everyday tools, built for a simpler digital workflow.',href:'/projects/toolscresta/',visual:'tools',icon:Code2},
+                {title:'Dr. Ali Hassan Health & Wellness',category:'E-COMMERCE WEBSITE',subtitle:'A product-focused storefront for a wellness brand.',href:'/projects/draliwellness/',visual:'store',icon:ShoppingBag},
+                {title:'Android App Starter',category:'MOBILE PROTOTYPE',subtitle:'A Kotlin & Jetpack Compose starter — source project, not a published app.',href:'/projects/moavia-app/',visual:'mobile',icon:Smartphone}
+              ].map(item => {
+                const Icon = item.icon;
+                return (
+                  <article key={item.href} className={'premium-project-card premium-project-' + item.visual}>
+                    <div className={'premium-project-visual premium-visual-' + item.visual} aria-hidden="true">
+                      <div className="premium-preview-window">
+                        <div className="premium-preview-chrome"><i></i><i></i><i></i><span>PORTFOLIO CONCEPT</span></div>
+                        <div className="premium-preview-body">
+                          <span className="premium-preview-icon"><Icon size={38} strokeWidth={1.5} /></span>
+                          <div className="premium-preview-lines"><i></i><i></i><i></i></div>
+                          <div className="premium-preview-tiles"><i></i><i></i><i></i></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="premium-project-content">
+                      <p className="premium-project-category">{item.category}</p>
+                      <h3>{item.title}</h3>
+                      <p>{item.subtitle}</p>
+                      <a href={item.href} className="premium-project-link">Explore project <ArrowUpRight size={19} aria-hidden="true" /></a>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+            <div className="premium-work-bottom">
+              <p>All previews above are illustrative designs, not captured product screenshots.</p>
+              <a href="/projects/" className="premium-text-link">View all Web/App Projects <ArrowRight size={19} aria-hidden="true" /></a>
             </div>
           </div>
         </section>
@@ -203,55 +259,67 @@ export default function App() {
         </section>
 
 
-        <section id="projects" className="scroll-mt-20" aria-label="Web and app projects">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 text-center">
-            <a href="/projects/" className="text-sm font-bold text-[#4353BC] underline underline-offset-4">Open the full projects directory</a>
-          </div>
-          <div className="bg-white py-16 sm:py-20">
-            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <p className="text-xs font-extrabold uppercase tracking-widest text-[#4353BC]">Real public links</p>
-              <h2 className="mt-3 text-3xl sm:text-4xl font-extrabold">Web/App Projects</h2>
-              <p className="mt-3 max-w-2xl text-[#52607A]">Browse published web projects and a source-verified Android starter. The mobile entry is a prototype, not a completed or released app; demos do not imply paid-client work.</p>
-              <div className="mt-9 grid grid-cols-1 md:grid-cols-2 gap-5">
-                {publicProjects.map(site => <a key={site.id} href={`/projects/${site.id}/`} className="group block rounded-2xl border border-[#E7EAF2] bg-[#F8F9FD] p-6 hover:border-[#5265D8] hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]">
-                  <span className="text-xs font-bold uppercase tracking-wide text-[#5265D8]">{site.category}</span>
-                  <span className="mt-2 flex items-start justify-between gap-4 text-lg font-extrabold">{site.title}<ArrowUpRight className="h-5 w-5 shrink-0 text-[#5265D8]" /></span>
-                  <span className="mt-2 block text-sm leading-relaxed text-[#52607A]">{site.description}</span>
-                  <span className="mt-3 block text-sm font-bold text-[#4353BC]">Read project brief, stack and results →</span>
-                </a>)}
+        <section id="projects" className="premium-more-projects" aria-labelledby="more-projects-heading">
+          <div className="premium-container">
+            <div className="premium-section-heading premium-section-heading-split">
+              <div>
+                <p className="premium-kicker">PROJECT ARCHIVE</p>
+                <h2 id="more-projects-heading">More things I've <em>worked on.</em></h2>
               </div>
+              <p>Browse source-linked experiments and design prototypes, without invented client metrics or app releases.</p>
+            </div>
+            <div className="premium-more-grid">
+              {publicProjects.filter(site => !['toolscresta', 'draliwellness', 'moavia-app'].includes(site.id)).slice(0, 6).map((site, index) => (
+                <a href={'/projects/' + site.id + '/'} key={site.id} className="premium-more-item">
+                  <span className="premium-more-number">0{index + 1}</span>
+                  <span className="premium-more-copy"><strong>{site.title}</strong><small>{site.category}</small></span>
+                  <ArrowUpRight size={20} aria-hidden="true" />
+                </a>
+              ))}
+            </div>
+            <div className="premium-more-footer"><a href="/projects/" className="premium-text-link">Browse the complete project directory <ArrowRight size={18} aria-hidden="true" /></a></div>
+          </div>
+        </section>
+
+        <section id="about" className="premium-about" aria-labelledby="about-title">
+          <div className="premium-container premium-about-grid">
+            <div className="premium-about-intro">
+              <p className="premium-kicker">A LITTLE ABOUT ME</p>
+              <h2 id="about-title">Curious by nature.<br /><em>Focused on building.</em></h2>
+              <p>I'm Moavia Hassan, a student developer based in Islamabad, Pakistan. I work on SEO, practical web tools, responsive websites and software projects while growing my skills in Android development and AI automation.</p>
+              <p>I believe good software should feel easy to use, communicate clearly and be built with care. This site shares genuine public work rather than unverified agency claims.</p>
+              <div className="premium-social-links">
+                <a href={safeHref(siteSettings.socialGithub) ? siteSettings.socialGithub : SITE_DEFAULTS.socialGithub} target="_blank" rel="noopener noreferrer"><Github size={17} aria-hidden="true" /> GitHub</a>
+                <a href={safeHref(siteSettings.socialLinkedin) ? siteSettings.socialLinkedin : SITE_DEFAULTS.socialLinkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={17} aria-hidden="true" /> LinkedIn</a>
+                <a href="/about/">Full story <ArrowUpRight size={17} aria-hidden="true" /></a>
+              </div>
+            </div>
+            <div className="premium-process">
+              <p className="premium-process-label">MY APPROACH</p>
+              {[
+                ['01','Understand the problem','Start with real goals, users and constraints.'],
+                ['02','Build deliberately','Work with thoughtful UI, maintainable code and sensible integrations.'],
+                ['03','Test and improve','Review real behavior, accessibility and device performance.']
+              ].map(step => <div className="premium-process-step" key={step[0]}>
+                <span>{step[0]}</span>
+                <div><h3>{step[1]}</h3><p>{step[2]}</p></div>
+                <ArrowUpRight size={17} aria-hidden="true" />
+              </div>)}
             </div>
           </div>
         </section>
 
-        <section id="about" className="scroll-mt-20 border-t border-[#E7EAF2] py-20 sm:py-24" aria-labelledby="about-title">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-[minmax(0,290px)_1fr] items-center gap-10 lg:gap-16">
-            <figure className="rounded-3xl border border-[#E7EAF2] bg-white p-5 shadow-sm">
-              <div className="aspect-square overflow-hidden rounded-2xl bg-[#EEF2FF] flex items-center justify-center">
-                <img src="/moavia-hassan-portrait.webp" alt="Moavia Hassan professional headshot in a charcoal suit and white shirt" width="400" height="500" loading="lazy" decoding="async" className="h-full w-full object-cover object-top" />
-              </div>
-              <figcaption className="mt-3 text-xs leading-relaxed text-[#65738B]">Moavia Hassan · SEO tools and web projects</figcaption>
-            </figure>
+        <section className="premium-final-cta" aria-labelledby="final-cta-heading">
+          <div className="premium-container premium-final-inner">
             <div>
-              <p className="text-xs font-extrabold uppercase tracking-widest text-[#5265D8]">About me</p>
-              <h2 id="about-title" className="mt-3 text-3xl sm:text-4xl font-extrabold">Hi, I'm Moavia Hassan.</h2>
-              <p className="mt-5 max-w-3xl text-[#52607A] leading-8">I'm based in Islamabad, Pakistan, and I work on SEO, useful online tools and website projects. This site brings my public projects, technical interests and contact information together in one place.</p>
-              <p className="mt-3 max-w-3xl text-[#52607A] leading-8">My interests include technical SEO, on-page improvements, React websites, WordPress and user-friendly design. You can inspect the website links before contacting me about a project. I don't promise Google rankings or present unverified client results.</p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                <a href={safeHref(siteSettings.socialLinkedin)?siteSettings.socialLinkedin:SITE_DEFAULTS.socialLinkedin} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]"><Linkedin className="h-4 w-4" /> LinkedIn</a>
-                <a href={safeHref(siteSettings.socialGithub)?siteSettings.socialGithub:SITE_DEFAULTS.socialGithub} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]"><Github className="h-4 w-4" /> GitHub</a>
-                <a href={safeHref(siteSettings.socialFiverr)?siteSettings.socialFiverr:SITE_DEFAULTS.socialFiverr} target="_blank" rel="noopener noreferrer" aria-label="View Moavia Hassan's Fiverr freelancer profile (opens in new tab)" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]">Fiverr <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
-                <a href={safeHref(siteSettings.socialUpwork)?siteSettings.socialUpwork:SITE_DEFAULTS.socialUpwork} target="_blank" rel="noopener noreferrer" aria-label="View my Upwork freelancer profile (opens in new tab)" className="inline-flex items-center gap-2 rounded-xl border border-[#D8DEEF] bg-white px-4 py-3 font-bold text-sm hover:bg-[#EEF2FF]">Upwork <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
-                <a href="/about/" className="inline-flex items-center gap-2 px-3 py-3 font-bold text-sm text-[#4353BC] hover:underline">Read more <ArrowRight className="h-4 w-4" /></a>
-              </div>
+              <p className="premium-kicker">HAVE AN IDEA?</p>
+              <h2 id="final-cta-heading">Let's build something <em>worth sharing.</em></h2>
+              <p>Tell me about your website, store or software concept. We can discuss feasibility, scope and next steps.</p>
             </div>
-          </div>
-        </section>
-
-        <section className="bg-white border-t border-[#E7EAF2] py-12">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-wrap items-center justify-between gap-5">
-            <div><h2 className="text-xl sm:text-2xl font-extrabold">Have a website project in mind?</h2><p className="mt-2 text-sm text-[#52607A]">See a short overview of the work I can discuss.</p></div>
-            <a className="inline-flex items-center gap-2 rounded-xl bg-[#18243A] px-5 py-3 text-white font-bold hover:bg-[#2C4163]" href="/hire-me/">Hire Me <ArrowRight className="h-4 w-4" /></a>
+            <div className="premium-final-actions">
+              <a href="/contact/" className="premium-button premium-button-dark">Start a conversation <ArrowUpRight size={19} aria-hidden="true" /></a>
+              <a href="/hire-me/" className="premium-final-secondary">Explore services <ArrowRight size={17} aria-hidden="true" /></a>
+            </div>
           </div>
         </section>
 
