@@ -222,25 +222,6 @@ export default function App() {
           </div>
         </section>
 
-        <section id="tools" className="scroll-mt-20 bg-white border-y border-[#E7EAF2] py-16 sm:py-20" aria-labelledby="featured-tools-heading">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <p className="text-xs font-extrabold uppercase tracking-widest text-[#5265D8]">Free browser-based utilities</p>
-            <h2 id="featured-tools-heading" className="mt-3 text-3xl sm:text-4xl font-extrabold">Explore 3 practical SEO tools</h2>
-            <p className="mt-3 max-w-3xl text-[#52607A]">Each tool has its own page and works with information you enter. No invented SEO audit scores.</p>
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
-              {TOOL_ROUTES.map((href,i)=>({href,title:siteSettings.toolTitles[i],description:siteSettings.toolDescriptions[i],visible:siteSettings.toolVisible[i]})).filter(tool=>tool.visible).map(tool => (
-                <article key={tool.href} className="flex flex-col rounded-2xl border border-[#DCE3F2] bg-[#F8F9FD] p-6">
-                  <h3 className="text-lg font-extrabold">{tool.title}</h3>
-                  <p className="mt-3 mb-6 flex-1 text-sm leading-7 text-[#52607A]">{tool.description}</p>
-                  <a href={tool.href} className="inline-flex items-center gap-2 font-bold text-[#4353BC] hover:underline">Open tool <ArrowRight className="w-4 h-4" /></a>
-                </article>
-              ))}
-            </div>
-            <a href="/tools/" className="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#5265D8] px-5 py-3 font-bold text-white hover:bg-[#4353BC]">View All Tools <ArrowRight className="w-4 h-4" /></a>
-          </div>
-        </section>
-        <OnView id="experiments" minHeight={540}><AiToolsSection /></OnView>
-
         <section id="services" className="scroll-mt-20 border-y border-[#E7EAF2] bg-[#F8F9FD] py-16 sm:py-20" aria-labelledby="services-title">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p className="text-xs font-extrabold uppercase tracking-widest text-[#5265D8]">Freelance services · Scope agreed individually</p>
@@ -308,6 +289,25 @@ export default function App() {
             </div>
           </div>
         </section>
+
+        <section id="tools" className="scroll-mt-20 bg-white border-y border-[#E7EAF2] py-16 sm:py-20" aria-labelledby="featured-tools-heading">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p className="text-xs font-extrabold uppercase tracking-widest text-[#5265D8]">Free browser-based utilities</p>
+            <h2 id="featured-tools-heading" className="mt-3 text-3xl sm:text-4xl font-extrabold">Explore 3 practical SEO tools</h2>
+            <p className="mt-3 max-w-3xl text-[#52607A]">Each tool has its own page and works with information you enter. No invented SEO audit scores.</p>
+            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
+              {TOOL_ROUTES.map((href,i)=>({href,title:siteSettings.toolTitles[i],description:siteSettings.toolDescriptions[i],visible:siteSettings.toolVisible[i]})).filter(tool=>tool.visible).map(tool => (
+                <article key={tool.href} className="flex flex-col rounded-2xl border border-[#DCE3F2] bg-[#F8F9FD] p-6">
+                  <h3 className="text-lg font-extrabold">{tool.title}</h3>
+                  <p className="mt-3 mb-6 flex-1 text-sm leading-7 text-[#52607A]">{tool.description}</p>
+                  <a href={tool.href} className="inline-flex items-center gap-2 font-bold text-[#4353BC] hover:underline">Open tool <ArrowRight className="w-4 h-4" /></a>
+                </article>
+              ))}
+            </div>
+            <a href="/tools/" className="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#5265D8] px-5 py-3 font-bold text-white hover:bg-[#4353BC]">View All Tools <ArrowRight className="w-4 h-4" /></a>
+          </div>
+        </section>
+        <OnView id="experiments" minHeight={540}><AiToolsSection /></OnView>
 
         <section className="premium-final-cta" aria-labelledby="final-cta-heading">
           <div className="premium-container premium-final-inner">
