@@ -1,6 +1,10 @@
-# Moavia Hassan — SEO Tools & Web Projects
+# Moavia Hassan — Developer Portfolio
 
-Personal portfolio and free browser-based SEO utilities at **https://moaviaseo.com/**.
+Personal website at **https://moaviaseo.com/** focused on web and e-commerce projects, Android development, AI automation, SEO utilities and verified credentials.
+
+**Portfolio sections:** [Web & E-commerce](https://moaviaseo.com/web-development/) · [Android](https://moaviaseo.com/android-development/) · [AI Automation](https://moaviaseo.com/ai-automations/) · [Certificates & Learning](https://moaviaseo.com/certificates/) · [All Projects](https://moaviaseo.com/projects/) · [Contact](https://moaviaseo.com/contact/).
+
+The site represents an individual developer's portfolio, **not a registered software house or an agency with an established team**. Website demos, an Android starter app and workflow experiments are labelled by their actual verification status. The certificates page is deliberately `noindex` until genuine credential evidence is provided.
 
 **Start here:** [All free SEO tools](https://moaviaseo.com/tools/) · [Projects](https://moaviaseo.com/projects/) · [About](https://moaviaseo.com/about/) · [Contact](https://moaviaseo.com/contact/)
 
@@ -28,9 +32,9 @@ Enter a website origin, any intended crawl directives, and real canonical URLs o
 
 These three static tools operate on text entered into your browser; they do not require an account or a paid API for the listed functions.
 
-## Web projects
+## Web, e-commerce and Android projects
 
-The [project directory](https://moaviaseo.com/projects/) contains public GitHub-linked demos with project briefs, technology stacks and source links. They are not presented as verified paid-client case studies, and no unverified traffic or ranking gains are claimed.
+The [project directory](https://moaviaseo.com/projects/) contains public GitHub-linked projects, including ToolsCresta and an online-store website, alongside demos with project briefs, technology stacks and source links. They are not presented as verified paid-client case studies, and no unverified traffic or ranking gains are claimed.
 
 ## Website stack and development
 
@@ -39,6 +43,7 @@ The [project directory](https://moaviaseo.com/projects/) contains public GitHub-
 - Cloudflare Workers for the live site and backend-dependent optional features; GitHub Actions for deployments.
 - Firebase and selected external services for some optional site functions.
 - The `public/` directory contains the static tools, `robots.txt` and `sitemap.xml`; generators in `scripts/` update the production pages and sitemap during the build.
+- `scripts/generate-portfolio-pages.mjs` builds dedicated Web, Android, AI Automation and Certificates pages; the unverified certificates placeholder remains excluded from the sitemap.
 
 Build locally using the repository's Bun lockfile:
 
