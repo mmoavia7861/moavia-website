@@ -23,7 +23,7 @@ export interface PublicSiteSettings {
 export const SITE_DEFAULTS: PublicSiteSettings = {
   heroBadge: 'STUDENT DEVELOPER · ISLAMABAD, PAKISTAN',
   heroTitle: 'Web, App, E-commerce & AI Automation Projects',
-  heroDescription: 'Hi, I’m Moavia Hassan. I build and explore responsive websites, online stores, useful web tools, Android prototypes and AI-assisted workflows. Explore real work, technical interests and areas I am developing.',
+  heroDescription: 'From responsive websites and e-commerce interfaces to AI integrations and Android prototypes, I turn ideas into useful digital projects. Explore my real public work and what I am learning next.',
   announcementEnabled: false,
   announcementText: '',
   ctaLabel: 'View My Projects',

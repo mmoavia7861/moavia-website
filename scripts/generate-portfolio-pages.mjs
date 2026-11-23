@@ -53,7 +53,7 @@ function buildPage({path, title, intro, body, index = true}) {
     + '<meta property="og:image" content="' + origin + '/social-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
     + '<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="' + origin + '/social-preview.png">'
     + '<link rel="stylesheet" href="/seo/pages.css">' + style
-    + '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, '\\u003c') + '</script></head><body>'
+    + '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, '\\u003c') + '</script></head><body class="portfolio-detail-page">'
     + '<header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" width="42" height="42" alt="Moavia Hassan logo">Moavia Hassan</a>' + nav + '</div></header>'
     + '<main><div class="wrap subnav"><a href="/">Home</a> / ' + esc(title.replace(' | Moavia Hassan','')) + '</div>'
     + '<div class="hero"><div class="wrap"><span class="pill">Personal developer portfolio</span>'

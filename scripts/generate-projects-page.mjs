@@ -9,7 +9,7 @@ const json=s=>JSON.stringify(s).replace(/</g,'\\u003c');
 const canonical=path=>origin+path;
 const image=origin+'/social-preview.png';
 const thumb=url=>'https://image.thum.io/get/width/960/crop/680/maxAge/72/'+url;
-const nav='<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/hire-me/">Services</a><a href="/projects/" aria-current="page">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
+const nav='<nav aria-label="Main navigation"><a href="/web-development/">Web</a><a href="/android-development/">Android</a><a href="/ai-automations/">AI</a><a href="/tools/">Tools</a><a href="/hire-me/">Services</a><a href="/projects/" aria-current="page">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
 const foot='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>SEO Tools · Services · Web/App Projects</p></div><div><a href="/tools/">Tools</a> · <a href="/hire-me/">Services</a> · <a href="/projects/">Projects</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/contact/">Contact</a></div></div></footer>';
 const sep='<div class="wrap"><p class="project-note">The portfolio includes real published website demos and a separately labeled Android source-code starter. The Android entry is not a live app, and none of these are verified paid-client case studies or proof of traffic, rankings or revenue.</p></div>';
 function head(path,title,description,entity,crumbs) {
@@ -23,7 +23,7 @@ function head(path,title,description,entity,crumbs) {
  +'<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="'+esc(title)+'"><meta name="twitter:description" content="'+esc(description)+'"><meta name="twitter:image" content="'+image+'">'
  +'<link rel="icon" href="/favicon.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">'
  +'<link rel="stylesheet" href="/seo/pages.css"><link rel="stylesheet" href="/projects/projects.css">'
- +'<script type="application/ld+json">'+json({'@context':'https://schema.org','@graph':[entity,{'@type':'BreadcrumbList',itemListElement:crumbs}]})+'</script></head><body>'
+ +'<script type="application/ld+json">'+json({'@context':'https://schema.org','@graph':[entity,{'@type':'BreadcrumbList',itemListElement:crumbs}]})+'</script></head><body class="project-case-study-page">'
  +'<header><div class="wrap"><a class="brand" href="/">Moavia Hassan</a>'+nav+'</div></header>';
 }
 function link(href,label) { return '<a href="'+esc(href)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>'; }
