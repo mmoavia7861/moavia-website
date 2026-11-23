@@ -14,9 +14,37 @@ const noCacheHeaders = {
   'Content-Type': 'application/json; charset=utf-8',
   'Cache-Control': 'no-store',
   'X-Content-Type-Options': 'nosniff',
+  'Referrer-Policy': 'no-referrer',
+  'Strict-Transport-Security': 'max-age=31536000',
+  'X-Frame-Options': 'DENY',
+  'Content-Security-Policy': "default-src 'none'; frame-ancestors 'none'",
 };
 function json(payload: unknown, status = 200): Response {
   return new Response(JSON.stringify(payload), { status, headers: noCacheHeaders });
+}
+const MAX_REQUEST_BYTES = 16_000;
+
+/** Stop reading at the byte cap; never buffer an unbounded request body. */
+async function readLimitedBody(request: Request): Promise<string> {
+  if (!request.body) return '';
+  const reader = request.body.getReader();
+  const decoder = new TextDecoder();
+  let size = 0;
+  let output = '';
+  try {
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.byteLength;
+      if (size > MAX_REQUEST_BYTES) {
+        throw new ApiError(413, 'Request too large.');
+      }
+      output += decoder.decode(value, { stream: true });
+    }
+    return output + decoder.decode();
+  } finally {
+    await reader.cancel().catch(() => {});
+  }
 }
 function field(data: Record<string, unknown>, name: string, length = 1000): string {
   const value = data[name];
@@ -279,20 +307,33 @@ async function handleApi(request: Request, env: WorkerEnv, path: string): Promis
   if (request.method !== 'POST') return json({ error: 'Method not allowed.' }, 405);
   const origin = request.headers.get('Origin');
   if (origin && origin !== new URL(request.url).origin) return json({error: 'Cross-origin requests are not permitted.'}, 403);
-  if (Number(request.headers.get('content-length') || 0) > 16000) return json({ error: 'Request too large.' }, 413);
+  if (request.headers.get('Sec-Fetch-Site') === 'cross-site') {
+    return json({ error: 'Cross-site requests are not permitted.' }, 403);
+  }
+  if ((request.headers.get('content-type') || '').split(';')[0].trim().toLowerCase() !== 'application/json') {
+    return json({ error: 'Content-Type must be application/json.' }, 415);
+  }
+  if (Number(request.headers.get('content-length') || 0) > MAX_REQUEST_BYTES) return json({ error: 'Request too large.' }, 413);
+  // A missing Cloudflare limiter must not leave billable AI or external-fetch endpoints unprotected.
+  const requiresLimiter = path === '/api/chat' || path === '/api/video-analysis' || path === '/api/audit';
+  if (requiresLimiter && !env.AI_LIMITER) {
+    return json({ error: 'This tool is temporarily unavailable.' }, 503);
+  }
   const ip = request.headers.get('cf-connecting-ip') || 'unknown';
   if (env.AI_LIMITER) {
     const result = await env.AI_LIMITER.limit({ key: ip });
     if (!result.success) return json({ error: 'Too many tool requests. Please try again later.' }, 429);
   }
-  const input = await request.text();
-  if (input.length > 16000) return json({ error: 'Request too large.' }, 413);
   let data: Record<string, unknown>;
   try {
+    const input = await readLimitedBody(request);
     const parsed = JSON.parse(input);
-    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw Error();
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) throw new ApiError(400, 'Invalid JSON request.');
     data = parsed as Record<string, unknown>;
-  } catch { return json({ error: 'Invalid JSON request.' }, 400); }
+  } catch (error) {
+    if (error instanceof ApiError) return json({ error: error.message }, error.status);
+    return json({ error: 'Invalid JSON request.' }, 400);
+  }
   try {
     if (path === '/api/quick-optimize') return json(quickMeta(data));
     if (path === '/api/image-studio') {
@@ -398,7 +439,8 @@ async function handleApi(request: Request, env: WorkerEnv, path: string): Promis
     return json({ error: 'Unknown API endpoint.' }, 404);
   } catch (error) {
     if (error instanceof ApiError) return json({ error: error.message }, error.status);
-    if (error instanceof TypeError || error instanceof Error) return json({ error: error.message.slice(0, 220) }, 400);
+    // Unexpected exceptions may include internals; never reflect them to visitors.
+    if (error instanceof TypeError || error instanceof Error) return json({ error: 'Unable to complete the request.' }, 500);
     return json({ error: 'Unable to complete the request.' }, 500);
   }
 }
