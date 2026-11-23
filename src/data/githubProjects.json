@@ -84,6 +84,46 @@
     "repo": "https://github.com/mmoavia7861/Umm-E-Aiman"
   },
   {
+    "id": "toolscresta",
+    "title": "ToolsCresta — Online Utilities Platform",
+    "url": "https://toolscresta.com/",
+    "repo": "https://github.com/mmoavia7861/tools-website",
+    "category": "Web Tool Platform",
+    "description": "A separate online utility project with document, image and everyday productivity tool interfaces. Individual feature availability should be checked on the live site.",
+    "problem": "How can a collection of everyday online tools be organized into a fast, mobile-friendly website?",
+    "role": "Project development, interface iterations and technical integration work represented in a public GitHub repository.",
+    "stack": [
+      "Web development",
+      "Cloudflare",
+      "Firebase"
+    ],
+    "work": [
+      "Mobile-focused tool discovery and individual utility interfaces.",
+      "Project configuration and integration work documented in a public repository."
+    ],
+    "result": "Public project domain and source repository are available. No claim is made that every tool or third-party API currently works, or that the project has verified usage or revenue."
+  },
+  {
+    "id": "draliwellness",
+    "title": "Dr. Ali Hassan Health & Wellness — E-commerce Website",
+    "url": "https://draliwellness.com/",
+    "repo": "https://github.com/mmoavia7861/draliwellness",
+    "category": "E-commerce Project",
+    "description": "Health and wellness website project featuring product-focused pages and an online-store experience; product or payment functionality requires live verification.",
+    "problem": "How can health and wellness information and product listings be presented clearly in a responsive online store?",
+    "role": "Website design and development project with publicly accessible project repository; no paid-client engagement is asserted.",
+    "stack": [
+      "Web development",
+      "Responsive UI",
+      "E-commerce architecture"
+    ],
+    "work": [
+      "Product-oriented site pages, navigation and customer journey design.",
+      "Responsive interface and storefront-related development."
+    ],
+    "result": "A project repository and domain exist. Checkout, payments, clinical claims and current product availability are not independently verified here."
+  },
+  {
     "id": "moavia-app",
     "title": "Moavia SEO Pro — Android App Starter",
     "url": "https://github.com/mmoavia7861/moavia-app",
