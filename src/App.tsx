@@ -70,11 +70,21 @@ export default function App() {
   const publicProjects=[...websiteLinks,...managedProjects.filter(item=>
     !websiteLinks.some(original=>original.id===item.id))];
   const sections = [
+    { label: 'Web', href: '/web-development/' },
+    { label: 'Android', href: '/android-development/' },
+    { label: 'AI Automation', href: '/ai-automations/' },
+    { label: 'Certificates', href: '/certificates/' },
+    { label: 'Projects', href: '/projects/' },
     { label: 'Tools', href: '/tools/' },
     { label: 'Services', href: '/hire-me/' },
-    { label: 'Projects', href: '/projects/' },
     { label: 'About', href: '/about/' },
     { label: 'Contact', href: '/contact/' },
+  ];
+  const skillAreas = [
+    { title: 'Web Development', href: '/web-development/', text: 'Responsive websites, React interfaces, WordPress and practical web applications.', tags: ['React', 'TypeScript', 'WordPress'] },
+    { title: 'E-commerce Websites', href: '/web-development/', text: 'Storefront UX, product pages, shopping flows and maintainable online-store projects.', tags: ['Online Stores', 'Responsive UI', 'Product UX'] },
+    { title: 'Android Applications', href: '/android-development/', text: 'Mobile development journey and source-verifiable Kotlin/Jetpack Compose starter.', tags: ['Kotlin', 'Compose', 'Learning Projects'] },
+    { title: 'AI & Automation', href: '/ai-automations/', text: 'AI-assisted tools, workflow design and responsible API integration experiments.', tags: ['AI APIs', 'Make', 'Workflows'] },
   ];
   return (
     <div className="min-h-screen bg-[#F8F9FD] text-[#18243A]">
@@ -82,16 +92,16 @@ export default function App() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 min-h-20 flex items-center justify-between gap-4">
           <a href="/" aria-label="Moavia Hassan - homepage" className="flex items-center gap-3 font-extrabold min-w-0">
             <img src="/site-logo.png" width="44" height="44" alt="Moavia Hassan logo" className="w-11 h-11 rounded-xl object-contain border border-[#E7EAF2]" />
-            <span className="min-w-0 leading-tight"><span className="block text-base sm:text-lg">Moavia Hassan</span><span className="block text-[11px] font-semibold text-[#5265D8]">SEO Tools · Services · Web/App Projects</span></span>
+            <span className="min-w-0 leading-tight"><span className="block text-base sm:text-lg">Moavia Hassan</span><span className="block text-[11px] font-semibold text-[#5265D8]">Web · Apps · AI · SEO Projects</span></span>
           </a>
-          <nav aria-label="Primary" className="hidden sm:flex items-center gap-1 md:gap-4">
+          <nav aria-label="Primary" className="hidden xl:flex items-center gap-1">
             {sections.map(link => <a key={link.label} href={link.href} className="rounded-lg px-2.5 py-2 text-sm font-semibold text-[#263854] hover:bg-[#EEF2FF] hover:text-[#4353BC] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]">{link.label}</a>)}
           </nav>
-          <button type="button" aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'} aria-controls="mobile-primary" aria-expanded={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)} className="sm:hidden p-2 rounded-lg hover:bg-slate-100">
+          <button type="button" aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'} aria-controls="mobile-primary" aria-expanded={mobileOpen} onClick={() => setMobileOpen(!mobileOpen)} className="xl:hidden p-2 rounded-lg hover:bg-slate-100">
             {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
-        {mobileOpen && <nav id="mobile-primary" aria-label="Mobile primary" className="sm:hidden px-4 pb-4 flex flex-col gap-1 border-t border-[#E7EAF2]">
+        {mobileOpen && <nav id="mobile-primary" aria-label="Mobile primary" className="xl:hidden px-4 pb-4 flex flex-col gap-1 border-t border-[#E7EAF2]">
           {sections.map(link => <a key={link.label} href={link.href} onClick={() => setMobileOpen(false)} className="py-3 px-3 rounded-lg font-semibold hover:bg-[#EEF2FF]">{link.label}</a>)}
         </nav>}
       </header>
@@ -110,6 +120,48 @@ export default function App() {
                 <a href="/projects/" className="inline-flex items-center gap-2 rounded-xl border border-[#C9D1E7] bg-white px-5 py-3 font-bold text-[#18243A] hover:bg-[#F4F6FF]">View Projects <Code2 className="w-4 h-4" /></a>
                 <a href="/hire-me/" className="inline-flex items-center gap-2 rounded-xl px-5 py-3 font-bold text-[#4353BC] hover:underline">Explore Services <ArrowUpRight className="w-4 h-4" /></a>
               </div>
+            </div>
+          </div>
+        </section>
+
+
+        <section id="expertise" className="scroll-mt-20 bg-[#101D35] text-white py-16 sm:py-20" aria-labelledby="expertise-heading">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p className="text-xs font-extrabold uppercase tracking-widest text-[#9CE8D5]">Personal portfolio · What I build and explore</p>
+            <h2 id="expertise-heading" className="mt-3 max-w-4xl text-3xl sm:text-4xl font-extrabold">Websites, e-commerce, Android &amp; AI automation</h2>
+            <p className="mt-4 max-w-3xl text-slate-300 leading-8">I'm a student developer based in Islamabad, Pakistan. This portfolio shares my real public projects, my technical skills and the areas I'm actively learning. Each project is labelled honestly as a demo, prototype or website project.</p>
+            <div className="mt-9 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {skillAreas.map(area => (
+                <article key={area.title} className="flex flex-col rounded-2xl border border-white/15 bg-white/10 p-6">
+                  <h3 className="text-xl font-bold"><a href={area.href} className="hover:text-[#9CE8D5] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#9CE8D5]">{area.title}</a></h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-200 flex-1">{area.text}</p>
+                  <div className="mt-5 flex flex-wrap gap-2">{area.tags.map(tag => <span key={tag} className="rounded-full border border-white/20 px-2.5 py-1 text-xs text-slate-100">{tag}</span>)}</div>
+                  <a href={area.href} className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#9CE8D5]">Explore this area <ArrowRight className="w-4 h-4" /></a>
+                </article>
+              ))}
+            </div>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <a href="/projects/" className="rounded-xl bg-white px-5 py-3 text-sm font-bold text-[#101D35] hover:bg-slate-100">See all projects</a>
+              <a href="/certificates/" className="rounded-xl border border-white/30 px-5 py-3 text-sm font-bold hover:bg-white/10">Learning &amp; certificates</a>
+              <a href="/contact/" className="rounded-xl border border-white/30 px-5 py-3 text-sm font-bold hover:bg-white/10">Discuss a project</a>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white py-12 sm:py-16" aria-labelledby="selected-projects-heading">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p className="text-xs font-extrabold uppercase tracking-widest text-[#5265D8]">Selected public projects</p>
+            <h2 id="selected-projects-heading" className="mt-2 text-3xl font-extrabold">A closer look at my work</h2>
+            <div className="mt-7 grid grid-cols-1 md:grid-cols-3 gap-5">
+              {[
+                { title: 'ToolsCresta', detail: 'Online tools platform · web project', href: '/projects/toolscresta/' },
+                { title: 'Dr. Ali Hassan Health & Wellness', detail: 'Product-focused e-commerce website project', href: '/projects/draliwellness/' },
+                { title: 'Android App Starter', detail: 'Kotlin / Compose prototype · not a released app', href: '/projects/moavia-app/' },
+              ].map(item => <a key={item.href} href={item.href} className="group rounded-2xl border border-[#DCE3F2] bg-[#F8F9FD] p-6 hover:border-[#5265D8] focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#5265D8]">
+                <h3 className="text-lg font-extrabold group-hover:text-[#4353BC]">{item.title}</h3>
+                <p className="mt-2 text-sm text-[#52607A]">{item.detail}</p>
+                <span className="mt-5 inline-flex items-center gap-1 text-sm font-bold text-[#4353BC]">Project details <ArrowUpRight className="h-4 w-4" /></span>
+              </a>)}
             </div>
           </div>
         </section>
@@ -211,7 +263,7 @@ export default function App() {
           <div className="flex flex-wrap justify-between gap-7">
             <div><p className="font-extrabold text-white">Moavia Hassan</p><p className="mt-2 text-sm text-slate-400">SEO Tools · Services · Web/App Projects · Islamabad, Pakistan</p><a href={'mailto:'+siteSettings.contactEmail} className="mt-3 inline-flex items-center gap-2 text-sm text-slate-200 hover:text-white"><Mail className="h-4 w-4" /> {siteSettings.contactEmail}</a></div>
             <nav aria-label="Footer" className="flex flex-wrap items-start gap-x-5 gap-y-3 text-sm">
-              <a href="/tools/" className="hover:text-white">Tools</a><a href="/hire-me/" className="hover:text-white">Services</a><a href="/projects/" className="hover:text-white">Projects</a><a href="/about/" className="hover:text-white">About</a><a href="/contact/" className="hover:text-white">Contact</a><a href="/hire-me/" className="hover:text-white">Hire Me</a><a href="/blog/" className="hover:text-white">Blog</a><a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Fiverr freelancer profile (opens in new tab)">Fiverr</a><a href="https://www.upwork.com/freelancers/~01c3735023b2f296fa" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Upwork freelancer profile (opens in new tab)">Upwork</a>
+              <a href="/web-development/" className="hover:text-white">Web</a><a href="/android-development/" className="hover:text-white">Android</a><a href="/ai-automations/" className="hover:text-white">AI Automations</a><a href="/certificates/" className="hover:text-white">Certificates</a><a href="/tools/" className="hover:text-white">Tools</a><a href="/hire-me/" className="hover:text-white">Services</a><a href="/projects/" className="hover:text-white">Projects</a><a href="/about/" className="hover:text-white">About</a><a href="/contact/" className="hover:text-white">Contact</a><a href="/hire-me/" className="hover:text-white">Hire Me</a><a href="/blog/" className="hover:text-white">Blog</a><a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Fiverr freelancer profile (opens in new tab)">Fiverr</a><a href="https://www.upwork.com/freelancers/~01c3735023b2f296fa" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Upwork freelancer profile (opens in new tab)">Upwork</a>
             </nav>
           </div>
           <div className="mt-9 border-t border-slate-700 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">
