@@ -112,6 +112,10 @@ export async function publicSiteJson():Promise<Response> {
     'Content-Type':'application/json; charset=utf-8',
     'Cache-Control':'no-store',
     'X-Content-Type-Options':'nosniff',
+    'Referrer-Policy':'no-referrer',
+    'Strict-Transport-Security':'max-age=31536000',
+    'X-Frame-Options':'DENY',
+    'Content-Security-Policy':"default-src 'none'; frame-ancestors 'none'",
   }});
 }
 
@@ -192,9 +196,10 @@ function responseHtml(html:string,status=200):Response {
     'Cache-Control':'no-store',
     'X-Content-Type-Options':'nosniff',
     'Referrer-Policy':'strict-origin-when-cross-origin',
-    'Content-Security-Policy':"object-src 'none'; base-uri 'self'; frame-ancestors 'none'",
+    'Content-Security-Policy':"object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests",
     'X-Frame-Options':'DENY',
     'Strict-Transport-Security':'max-age=31536000',
+    'Permissions-Policy':'camera=(), microphone=(), geolocation=(), payment=()',
   }});
 }
 async function injectListing(request:Request,env:CmsEnvironment,route:CmsRoute):Promise<Response> {
