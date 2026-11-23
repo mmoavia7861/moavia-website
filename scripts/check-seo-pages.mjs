@@ -163,7 +163,7 @@ for(const route of routes){
  if(route.startsWith('/blog/')&&route!=='/blog/')check(/<time datetime="\d{4}-\d{2}-\d{2}">/.test(html),'blog date missing: '+route);
 }
 for(const route of ['/web-development/','/android-development/','/ai-automations/']) {
- const html=read(join(route.replace(/^\\/|\\/$/g,''),'index.html'));
+ const html=read(join(route.slice(1,-1),'index.html'));
  check(html.includes('href="/projects/"'),'portfolio page missing projects link: '+route);
 }
 const certificates=read('certificates/index.html');
