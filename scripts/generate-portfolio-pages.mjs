@@ -36,7 +36,7 @@ const projectCard = item => '<article class="portfolio-card"><span class="label"
 
 // Actual public front pages are requested via the same live-screenshot service
 // used by the individual project case studies. Never replace captures with fake UI.
-const screenshotUrl = item => '/project-captures/' + item.id + '.webp';
+const screenshotUrl = item => '/project-captures/' + item.id + '.jpg';
 const screenshotFallback = url => 'https://s.wordpress.com/mshots/v1/' + encodeURIComponent(url) + '?w=960';
 const hostname = url => new URL(url).hostname.replace(/^www\./, '');
 const screenshot = (item, eager = false) => '<span class="webcase-image">'
