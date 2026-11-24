@@ -37,7 +37,7 @@ const projectCard = item => '<article class="portfolio-card"><span class="label"
 // Actual public front pages are requested via the same live-screenshot service
 // used by the individual project case studies. Never replace captures with fake UI.
 const screenshotUrl = url => 'https://image.thum.io/get/width/960/crop/680/maxAge/72/' + url;
-const hostname = url => new URL(url).hostname.replace(/^www\\./, '');
+const hostname = url => new URL(url).hostname.replace(/^www\./, '');
 const screenshot = (item, eager = false) => '<span class="webcase-image">'
   + '<img data-portfolio-shot src="' + esc(screenshotUrl(item.url)) + '" alt="Front-page screenshot preview of ' + esc(item.title) + '"'
   + ' width="960" height="680" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async" referrerpolicy="no-referrer">'
