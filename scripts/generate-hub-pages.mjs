@@ -33,7 +33,7 @@ function page(path,title,description,body,kind){
  +(isHire?hireHero():(isContact?contactHero():'<div class="hero"><div class="wrap"><span class="pill">Web Development · SEO Services · App Projects</span><h1>'+clean(title.replace(' | Moavia Hassan',''))+'</h1><p>'+clean(description)+'</p></div></div>'))
  +'<div class="wrap'+(isContact?' contact-premium-content':(isHire?' hire-premium-content':''))+'">'+body+'</div></main>'
  +'<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>Islamabad, Pakistan</p></div>'
- +'<div><a href="/tools/">Tools</a> · <a href="/hire-me/">Services</a> · <a href="/projects/">Projects</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></div>'
+ +'<div><a href="/hire-me/">Services</a> · <a href="/projects/">Projects</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></div>'
  +'<div><a href="mailto:hello@moaviaseo.com">Email</a></div></div></footer></body></html>\n';
  const dir=join(root,path.replace(/^\/|\/$/g,''));mkdirSync(dir,{recursive:true});
  writeFileSync(join(dir,'index.html'),html,'utf8');
