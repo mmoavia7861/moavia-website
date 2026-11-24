@@ -30,13 +30,16 @@ jobs:
       - name: Build production assets for Cloudflare root path
         run: bun run build
 
-      - name: Install browser for authentic portfolio screenshots
+      - name: Install isolated browser for authentic portfolio screenshots
         shell: bash
         run: |
-          npm install --no-save --package-lock=false playwright@1.56.1
-          npx playwright install --with-deps chromium
+          # Keep the existing Bun dependency tree and esbuild/Vite peer versions intact.
+          npm install --prefix /tmp/moavia-playwright --no-save --package-lock=false playwright@1.56.1
+          /tmp/moavia-playwright/node_modules/.bin/playwright install --with-deps chromium
 
       - name: Capture real public website homepages
+        env:
+          MOAVIA_PLAYWRIGHT_PACKAGE: /tmp/moavia-playwright/node_modules/playwright
         run: node scripts/capture-project-previews.mjs dist
 
       - name: Verify standalone tool pages are in production output
