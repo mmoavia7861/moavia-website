@@ -312,3 +312,36 @@ html[data-theme="dark"] body.portfolio-detail-page .portfolio-note{background:#1
   .portfolio-home .premium-skill-card,.portfolio-home .premium-project-card,.portfolio-home .premium-button,.portfolio-home .premium-header-cta{transition:none}
   .portfolio-home .premium-skill-card:hover,.portfolio-home .premium-project-card:hover,.portfolio-home .premium-button:hover{transform:none}
 }
+
+
+/* Real homepage screenshot cards in the featured-work area. Replaces
+   illustrative mock browser windows for public live sites only. */
+.portfolio-home .premium-real-preview-link{
+  position:relative;z-index:2;display:flex;flex-direction:column;text-decoration:none;
+  width:min(100%,390px);height:217px;border:1px solid rgba(233,242,255,.54);
+  overflow:hidden;border-radius:13px;background:#192844;transform:rotate(-3deg);
+  box-shadow:0 25px 42px rgba(2,11,30,.32);outline-offset:5px;
+  transition:transform .3s ease,box-shadow .3s ease;
+}
+.portfolio-home .premium-visual-store .premium-real-preview-link{transform:rotate(3deg)}
+.portfolio-home .premium-real-preview-link:hover{transform:rotate(0deg) translateY(-4px);box-shadow:0 30px 50px rgba(2,11,30,.4)}
+.portfolio-home .premium-real-preview-chrome{display:flex;align-items:center;gap:5px;flex-shrink:0;
+  height:29px;padding:8px 11px;background:#1b2941}
+.portfolio-home .premium-real-preview-chrome i{display:block;width:7px;height:7px;border-radius:50%;background:#efaca0}
+.portfolio-home .premium-real-preview-chrome i:nth-child(2){background:#f2d499}
+.portfolio-home .premium-real-preview-chrome i:nth-child(3){background:#90e6c9}
+.portfolio-home .premium-real-preview-chrome small{margin-left:7px;color:#c4d6ec;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.65rem;font-weight:700}
+.portfolio-home .premium-real-preview-image{position:relative;display:block;flex:1;min-height:0;background:#213752}
+.portfolio-home .premium-real-preview-image img{display:block;width:100%;height:100%;object-fit:cover;object-position:top center}
+.portfolio-home .premium-real-preview-image img[hidden]{display:none}
+.portfolio-home .premium-real-preview-fallback{display:grid;place-items:center;text-align:center;color:#e2eeff;
+  font-size:.8rem;line-height:1.5;padding:24px;height:100%;background:linear-gradient(135deg,#172a45,#2e3f62)}
+.portfolio-home .premium-real-preview-fallback[hidden]{display:none!important}
+@media(max-width:540px){
+  .portfolio-home .premium-real-preview-link{height:180px;max-width:335px}
+}
+@media(prefers-reduced-motion:reduce){
+  .portfolio-home .premium-real-preview-link{transition:none}
+  .portfolio-home .premium-real-preview-link:hover{transform:none}
+}
