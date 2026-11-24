@@ -1,6 +1,8 @@
 import { readFileSync, mkdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { chromium } from 'playwright';
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
+const { chromium } = require(process.env.MOAVIA_PLAYWRIGHT_PACKAGE || 'playwright');
 
 /**
  * Build-time, browser-rendered homepage screenshots.
