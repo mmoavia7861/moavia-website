@@ -10,16 +10,10 @@ const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>
 const par = s => '<p>'+esc(s)+'</p>';
 const a = (href,name) => '<a href="'+esc(href)+'">'+esc(name)+'</a>';
 const content = [
- {path:'/about/',title:'About Moavia Hassan | SEO Tools & Web Projects',name:'About Moavia Hassan',
- intro:'Moavia Hassan is based in Islamabad, Pakistan. This personal website shares public web projects, practical SEO tools, technical interests and ways to make contact.',
- sections:[
- ['Who I am','I work on SEO, website projects and useful online tools. My interests include technical SEO, on-page improvements, React, WordPress and user-friendly website design.'],
- ['Public projects','You can visit the published website projects directly, including RankNova and other public web previews. A publicly linked demo is not presented as proof of a paid client engagement or guaranteed outcome.'],
- ['Professional portrait','The About page includes the professional portrait provided for this website.'],
- ['Profiles and contact','Find my work on GitHub at https://github.com/mmoavia7861, my LinkedIn profile at https://www.linkedin.com/in/moavia-hassan-seo/, my Fiverr profile at https://www.fiverr.com/moavia_seopro, and my Upwork freelancer profile at https://www.upwork.com/freelancers/~01c3735023b2f296fa. For enquiries use hello@moaviaseo.com.'],
- ['Working approach','For new projects, I first review the website or idea, the requested features, constraints and goals. I can discuss availability, scope and deliverables before agreeing to paid work.'],
- ['Honest claims','I do not guarantee search rankings, advertising revenue or AI-search citations. I avoid displaying fabricated results, reviews, client testimonials or certifications.']
- ],extra:[['LinkedIn profile','https://www.linkedin.com/in/moavia-hassan-seo/'],['GitHub profile','https://github.com/mmoavia7861'],['Fiverr freelancer profile','https://www.fiverr.com/moavia_seopro'],['Upwork freelancer profile','https://www.upwork.com/freelancers/~01c3735023b2f296fa'],['Website projects','/projects/'],['SEO and web tools','/tools/'],['Hire Me','/hire-me/'],['Contact','/contact/']]},
+ {path:'/about/',title:'About Moavia Hassan | Web Development, SEO & AI Projects',name:'About Moavia Hassan',
+ intro:'Meet Moavia Hassan, a student developer based in Islamabad building responsive websites and SEO tools while developing Android and AI automation skills.',
+ sections:[['My background','Independent student developer based in Islamabad, Pakistan.'],['Current work','Responsive web experiences, SEO tools and online utilities.']],
+ extra:[['GitHub','https://github.com/mmoavia7861'],['LinkedIn','https://www.linkedin.com/in/moavia-hassan-seo/'],['Projects','/projects/'],['Contact','/contact/']]},
  {path:'/privacy-policy/',title:'Privacy Policy | Moavia Hassan',name:'Privacy Policy',
  intro:'This policy describes the information that may be processed when visiting moaviaseo.com, sending an enquiry, subscribing to updates, signing in to administrative features, or choosing to use interactive AI tools. Last updated: 17 November 2026.',
  sections:[
@@ -124,7 +118,7 @@ const commonLinks='<nav aria-label="Main navigation"><a href="/tools/">Tools</a>
 const footer='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>Islamabad, Pakistan</p></div><div>'+[['About Us','/about/'],['Services','/hire-me/'],['Blog','/blog/'],['Privacy Policy','/privacy-policy/'],['Terms & Conditions','/terms-and-conditions/']].map(([name,href])=>a(href,name)).join(' · ')+'</div><div><a href="mailto:hello@moaviaseo.com">Contact by email</a></div></div></footer>';
 const schemaText = x => JSON.stringify(x).replace(/</g,'\\u003c');
 function layout(info,inner){
- const url=host+info.path;const article=info.type==='article';
+ const url=host+info.path;const article=info.type==='article';const about=info.path==='/about/';
  const published=article?(info.published||date):date;
  const displayedDate=article?new Intl.DateTimeFormat('en-GB',{day:'numeric',month:'long',year:'numeric',timeZone:'UTC'}).format(new Date(published+'T12:00:00Z')):dateText;
  const pageTitle=info.seoTitle || (info.name.includes('Moavia Hassan') ? info.name : info.name+' | Moavia Hassan');
@@ -135,7 +129,13 @@ function layout(info,inner){
  const crumbs=[{'@type':'ListItem',position:1,name:'Home',item:host+'/'}];
  if(article)crumbs.push({'@type':'ListItem',position:2,name:'Blog',item:host+'/blog/'});
  crumbs.push({'@type':'ListItem',position:article?3:2,name:info.name,item:url});
- const json=schemaText({'@context':'https://schema.org','@graph':[entity,{'@type':'BreadcrumbList',itemListElement:crumbs}]});
+ const graph=[entity,{'@type':'BreadcrumbList',itemListElement:crumbs}];
+  if(about){entity.mainEntity={'@id':host+'/about/#person'};
+    graph.push({'@type':'Person','@id':host+'/about/#person',name:'Moavia Hassan',
+      url:host+'/about/',image:host+'/moavia-hassan-portrait.webp',
+      knowsAbout:['Web development','Technical SEO','AI workflows','Android development'],
+      sameAs:['https://github.com/mmoavia7861','https://www.linkedin.com/in/moavia-hassan-seo/']});}
+  const json=schemaText({'@context':'https://schema.org','@graph':graph});
  return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
   +'<title>'+esc(pageTitle)+'</title><meta name="description" content="'+esc(info.desc)+'">'
   +'<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="'+esc(url)+'">'
@@ -144,8 +144,8 @@ function layout(info,inner){
   +'<meta property="og:url" content="'+esc(url)+'"><meta property="og:image" content="'+host+'/social-preview.png">'
   +'<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
    +'<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="'+esc(info.name)+'"><meta name="twitter:description" content="'+esc(info.desc)+'"><meta name="twitter:image" content="'+host+'/social-preview.png">'
-  +'<link rel="stylesheet" href="/seo/pages.css">'
-  +'<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="stylesheet" href="/blog/editorial.css"><script type="application/ld+json">'+json+'</script></head><body>'
+  +'<link rel="stylesheet" href="/seo/pages.css">'+(about?'<link rel="stylesheet" href="/about-profile.css">':'')
+  +'<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="stylesheet" href="/blog/editorial.css"><script type="application/ld+json">'+json+'</script></head><body'+(about?' class="about-profile-page"':'')+'>'
   +'<header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" alt="Moavia Hassan logo" width="42" height="42">Moavia Hassan</a>'+commonLinks+'</div></header>'
   +'<main><div class="wrap subnav">'+a('/','Home')+' / '+(article?a('/blog/','Blog')+' / ':'')+esc(info.name)+'</div>'
   +'<div class="hero"><div class="wrap"><span class="pill">'+esc(info.topic||'Moavia Hassan')+'</span><h1>'+esc(info.name)+'</h1>'
