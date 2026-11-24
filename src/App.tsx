@@ -26,6 +26,14 @@ function OnView({ id, children, minHeight = 240 }: { id: string; children: React
 
 export default function App() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  // This tiny local renderer runs after React mounts the decorative scene hosts.
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = import.meta.env.BASE_URL + 'skill-scenes.js';
+    script.async = true;
+    document.body.appendChild(script);
+    return () => script.remove();
+  }, []);
   const [siteSettings, setSiteSettings] = useState<PublicSiteSettings>(SITE_DEFAULTS);
   const [managedServices, setManagedServices] = useState<Array<{slug:string;title:string;excerpt:string}>>([]);
   const [managedProjects, setManagedProjects] = useState<Array<{id:string;title:string;description:string;category:string}>>([]);
@@ -148,6 +156,49 @@ export default function App() {
             <span><strong>{websiteLinks.length}</strong> public portfolio projects</span>
             <span>Focused on thoughtful design and maintainable code</span>
             <a href="/about/">Get to know me <ArrowRight size={16} aria-hidden="true" /></a>
+          </div>
+        </section>
+
+
+
+        <section className="craft3d-showcase" aria-labelledby="craft3d-showcase-title">
+          <div className="premium-container">
+            <div className="craft3d-showcase-head">
+              <div>
+                <p className="premium-kicker">CRAFT / ENGINEERING / PRODUCT THINKING</p>
+                <h2 id="craft3d-showcase-title">Three disciplines.<br /><em>One connected approach.</em></h2>
+              </div>
+              <p>From expressive web experiences to mobile interfaces and intelligent workflows, explore the kind of systems I focus on building.</p>
+            </div>
+            <div className="craft3d-scene-grid">
+              <article className="craft3d-scene-card">
+                <div className="craft3d-canvas" data-skill-scene="web" role="img" aria-label="Animated three-dimensional browser and website interface illustration"></div>
+                <div className="craft3d-scene-card-body">
+                  <span className="craft3d-card-eyebrow">01 / DIGITAL EXPERIENCES</span>
+                  <h3>Web &amp; E-commerce</h3>
+                  <p>Responsive websites, purposeful interfaces and carefully considered storefronts.</p>
+                  <a href="/web-development/">Explore web development <ArrowUpRight size={16} aria-hidden="true" /></a>
+                </div>
+              </article>
+              <article className="craft3d-scene-card">
+                <div className="craft3d-canvas" data-skill-scene="android" role="img" aria-label="Animated three-dimensional Android phone interface illustration"></div>
+                <div className="craft3d-scene-card-body">
+                  <span className="craft3d-card-eyebrow">02 / MOBILE INTERFACES</span>
+                  <h3>Android Development</h3>
+                  <p>Thoughtful mobile interaction design and source-verifiable Kotlin/Compose prototypes.</p>
+                  <a href="/android-development/">Explore Android work <ArrowUpRight size={16} aria-hidden="true" /></a>
+                </div>
+              </article>
+              <article className="craft3d-scene-card">
+                <div className="craft3d-canvas" data-skill-scene="ai" role="img" aria-label="Animated three-dimensional AI chip with connected automation steps"></div>
+                <div className="craft3d-scene-card-body">
+                  <span className="craft3d-card-eyebrow">03 / CONNECTED SYSTEMS</span>
+                  <h3>AI &amp; Automation</h3>
+                  <p>API integrations, AI utilities and reliable workflow orchestration experiments.</p>
+                  <a href="/ai-automations/">Explore AI workflows <ArrowUpRight size={16} aria-hidden="true" /></a>
+                </div>
+              </article>
+            </div>
           </div>
         </section>
 
