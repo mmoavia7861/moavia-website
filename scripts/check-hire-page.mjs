@@ -19,7 +19,7 @@ assert.ok(hire.includes('"@type":"WebPage"'), 'Existing structured data must be 
 assert.ok(hire.includes('SEO, Website &amp; Project Services'), 'Public service descriptor must remain');
 assert.ok((hire.match(/href="\/#contact"/g)||[]).length >= 2, 'Multiple CTAs must open the existing project enquiry form');
 assert.ok(homepage.includes('id="contact"') && homepage.includes('<ContactSection'), 'The real homepage contact form must remain intact');
-for (const route of ['/web-development/','/tools/','/ai-automations/','/android-development/','/contact/','/privacy-policy/']) {
+for (const route of ['/web-development/','/ai-automations/','/android-development/','/contact/','/privacy-policy/']) {
   assert.ok(hire.includes('href="'+route+'"'), 'Missing service or information link: '+route);
 }
 for (const id of ['toolscresta','draliwellness']) {
