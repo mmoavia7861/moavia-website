@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -50,6 +51,24 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist
+
+      - name: Wait for GitHub Pages artifact to be indexed
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 15); do
+            count=$(gh api "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/artifacts?per_page=100" --jq '[.artifacts[] | select(.name == "github-pages" and .expired == false)] | length' 2>/dev/null || printf '0')
+            if [ "$count" = "1" ]; then
+              echo "One Pages artifact is indexed and ready to deploy."
+              exit 0
+            fi
+            echo "Pages artifact indexing pending (matching artifacts: $count; attempt $attempt/15)"
+            sleep 5
+          done
+          echo "::error::Expected exactly one indexed github-pages artifact. Deployment stopped before the Pages API call."
+          exit 1
 
       - name: Deploy compiled website
         id: deployment
