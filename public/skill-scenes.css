@@ -147,3 +147,13 @@
   .craft3d-scene-card{transition:none}
   .craft3d-scene-card:hover{transform:none}
 }
+
+/* Match the site's existing manual dark-mode switch. */
+html[data-theme="dark"] .craft3d-showcase{background:#0e1828;color:#eef3ff}
+html[data-theme="dark"] .craft3d-showcase-head h2,
+html[data-theme="dark"] .craft3d-scene-card-body h3{color:#f0f5ff}
+html[data-theme="dark"] .craft3d-showcase-head>p,
+html[data-theme="dark"] .craft3d-scene-card-body p{color:#b4c4df}
+html[data-theme="dark"] .craft3d-scene-card{background:#19273c;border-color:#364864;box-shadow:0 16px 42px rgba(0,0,0,.17)}
+html[data-theme="dark"] .craft3d-scene-card-body .craft3d-card-eyebrow,
+html[data-theme="dark"] .craft3d-scene-card-body a{color:#bbc6ff}
