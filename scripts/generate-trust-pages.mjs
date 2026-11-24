@@ -1,5 +1,6 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { aboutProfileHero, aboutProfileContent } from './about-profile-template.mjs';
 
 // Run after scripts/generate-seo-pages.mjs and before Vite.
 const root = join(process.cwd(), 'public');
@@ -148,9 +149,12 @@ function layout(info,inner){
   +'<link rel="icon" type="image/png" href="/favicon.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="stylesheet" href="/blog/editorial.css"><script type="application/ld+json">'+json+'</script></head><body'+(about?' class="about-profile-page"':'')+'>'
   +'<header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" alt="Moavia Hassan logo" width="42" height="42">Moavia Hassan</a>'+commonLinks+'</div></header>'
   +'<main><div class="wrap subnav">'+a('/','Home')+' / '+(article?a('/blog/','Blog')+' / ':'')+esc(info.name)+'</div>'
-  +'<div class="hero"><div class="wrap"><span class="pill">'+esc(info.topic||'Moavia Hassan')+'</span><h1>'+esc(info.name)+'</h1>'
-  +(info.intro?par(info.intro):'')+(article?'<p class="note">Published <time datetime="'+published+'">'+displayedDate+'</time> · By <a href="/about/">Moavia Hassan</a></p>':'')
-  +'</div></div><div class="wrap editorial-content">'+inner+'</div></main>'+footer+'</body></html>\n';
+  +(about ? aboutProfileHero()
+     :'<div class="hero"><div class="wrap"><span class="pill">'+esc(info.topic||'Moavia Hassan')+'</span><h1>'+esc(info.name)+'</h1>'
+      +(info.intro?par(info.intro):'')+(article?'<p class="note">Published <time datetime="'+published+'">'+displayedDate+'</time> · By <a href="/about/">Moavia Hassan</a></p>':'')+'</div></div>')
+   +(about ? '<div class="wrap about-profile-content">'+inner+'</div>'
+     : '<div class="wrap editorial-content">'+inner+'</div>')
+   +'</main>'+footer+'</body></html>\n';
 }
 function save(path,html) {
  const d=join(root,path.replace(/^\/|\/$/g,''));mkdirSync(d,{recursive:true});writeFileSync(join(d,'index.html'),html,'utf8');
@@ -158,10 +162,10 @@ function save(path,html) {
 mkdirSync(join(root,'blog'),{recursive:true});
 writeFileSync(join(root,'blog/editorial.css'),'.editorial-content{max-width:900px;margin:2.5rem auto 5rem}.editorial-content section{margin-top:2.5rem}.editorial-content p{font-size:1.04rem;color:#485872;line-height:1.85}.editorial-content h2{font-size:clamp(1.3rem,3vw,1.85rem);margin-bottom:.7rem}.editorial-content .cards{margin-top:1.3rem}.editorial-content .card{margin:0}.editorial-content .card h2{font-size:1.2rem}.editorial-content a{overflow-wrap:anywhere}footer a{margin-right:.7rem}footer p{font-size:.9rem;margin:0}.hero .note{font-size:.9rem}.hero .note a{font-size:inherit}\n','utf8');
 for(const p of content){
- const inner=p.sections.map(([heading,...paragraphs])=>'<section><h2>'+esc(heading)+'</h2>'+paragraphs.map(par).join('')+'</section>').join('')
- +(p.path==='/about/'?'<section class="card"><h2>Profile and work</h2><p><strong>Moavia Hassan</strong> maintains this personal SEO tools and website portfolio. See the <a href="https://www.linkedin.com/in/moavia-hassan-seo/" target="_blank" rel="noopener noreferrer">LinkedIn profile</a>, <a href="https://github.com/mmoavia7861" target="_blank" rel="noopener noreferrer">GitHub projects</a>, <a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer">my Fiverr freelancer profile</a>, <a href="https://www.upwork.com/freelancers/~01c3735023b2f296fa" target="_blank" rel="noopener noreferrer">my Upwork freelancer profile</a>, and <a href="/projects/">public website portfolio</a>.</p><figure><img src="/moavia-hassan-portrait.webp" width="320" height="400" loading="lazy" decoding="async" alt="Professional portrait of Moavia Hassan wearing a charcoal suit and white shirt" style="border-radius:14px;max-width:100%;height:auto;object-fit:cover"><figcaption>Moavia Hassan · SEO tools and website projects</figcaption></figure></section>':'')
- +'<section class="card"><h2>Related pages</h2><ul class="clean">'+p.extra.map(([title,url])=>'<li>'+a(url,title)+'</li>').join('')+'</ul></section>';
- save(p.path,layout({path:p.path,name:p.name,seoTitle:p.title,desc:p.intro,intro:p.intro,topic:'About and policies'},inner));
+ const inner=p.path==='/about/'?aboutProfileContent()
+   :p.sections.map(([heading,...paragraphs])=>'<section><h2>'+esc(heading)+'</h2>'+paragraphs.map(par).join('')+'</section>').join('')
+    +'<section class="card"><h2>Related pages</h2><ul class="clean">'+p.extra.map(([title,url])=>'<li>'+a(url,title)+'</li>').join('')+'</ul></section>';
+  save(p.path,layout({path:p.path,name:p.name,seoTitle:p.title,desc:p.intro,intro:p.intro,topic:'About and policies'},inner));
 }
 for(const p of articles){
  const path='/blog/'+p.slug+'/';
