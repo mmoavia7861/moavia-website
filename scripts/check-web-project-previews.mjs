@@ -24,7 +24,7 @@ assert.ok(page.includes('webcase-page-hero') && page.includes('webcase-grid'),'S
 assert.equal((page.match(/data-portfolio-shot/g)||[]).length,visibleWeb.length+1,'One featured shot and five visible project screenshots');
 for(const item of web){
   const detail=read('dist/projects/'+item.id+'/index.html');
-  for(const html of [directory,detail]){
+  for(const html of (item.id==='ranknova' ? [detail] : [directory,detail])){
     assert.ok(html.includes(item.url),'Missing project live link for '+item.id);
     assert.ok(html.includes('/project-captures/'+item.id+'.jpg'),'Missing deploy-time screenshot for '+item.id);
     assert.ok(html.includes('data-fallback-src='),'A failed screenshot must have an alternate source for '+item.id);
@@ -36,7 +36,8 @@ for(const item of web){
   }
   assert.ok(detail.includes('data-portfolio-shot'),'Case study must include screenshot for '+item.id);
 }
-assert.equal((directory.match(/data-portfolio-shot/g)||[]).length,web.length,'Directory must preview all web sites');
+assert.equal((directory.match(/data-portfolio-shot/g)||[]).length,visibleWeb.length,'Directory must preview the five public web sites excluding RankNova');
+assert.ok(!directory.includes('/projects/ranknova/') && !directory.includes('RankNova — SEO Tools Website'),'RankNova must not appear in the project directory');
 assert.ok(!read('dist/projects/'+android.id+'/index.html').includes('data-portfolio-shot'),
  'An unfinished Android starter must not be shown as a released app screenshot');
 assert.ok(directory.includes('No released app or verified screen capture'),'Label source-only Android project honestly');

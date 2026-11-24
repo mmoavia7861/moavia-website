@@ -53,20 +53,21 @@ if(websites.length!==7||new Set(websites.map(w=>w.id)).size!==7
  throw Error('Project data must contain six public web projects and one verifiable Android starter repository.');
 }
 mkdirSync(join(root,'projects'),{recursive:true});
+const directoryWebsites=websites.filter(w=>w.id!=='ranknova');
 const directory='/projects/',directoryTitle='Web & App Projects | Moavia Hassan',
-directoryDesc='Explore six public web projects and one source-verified Android starter. Every project lists its role, stack and limitations; no invented client or app-launch results.';
+directoryDesc='Explore five public web projects and one source-verified Android starter. Every project lists its role, stack and limitations; no invented client or app-launch results.';
 const directoryPreview = w => w.kind === 'android'
  ? '<div class="project-directory-no-live"><span class="project-directory-device" aria-hidden="true"></span><strong>Android starter · source project</strong><small>No released app or verified screen capture</small></div>'
  : '<a class="project-directory-preview" href="' + esc(w.url) + '" target="_blank" rel="noopener noreferrer" aria-label="Visit live website for ' + esc(w.title) + '">'
    + '<span class="project-directory-preview-bar" aria-hidden="true"><i></i><i></i><i></i><span>' + esc(new URL(w.url).hostname) + '</span></span>'
    + '<span class="project-directory-image"><img data-portfolio-shot src="' + esc(thumb(w)) + '" data-fallback-src="' + esc(fallback(w.url)) + '" width="1440" height="680" loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="Homepage screenshot of ' + esc(w.title) + '">'
    + '<span data-portfolio-fallback hidden class="project-screenshot-unavailable">Live preview unavailable. Click to open the website.</span></span></a>';
-const cards=websites.map(w=>
+const cards=directoryWebsites.map(w=>
  '<article class="card project-card">' + directoryPreview(w) + '<div class="project-directory-body"><span class="pill">'+esc(w.category)+'</span><h2><a href="/projects/'+esc(w.id)+'/">'+esc(w.title)+'</a></h2>'
  +'<p>'+esc(w.description)+'</p><p class="project-card-actions"><a class="action" href="/projects/'+esc(w.id)+'/">Read project details</a> '+link(w.url,w.kind==='android'?'View GitHub source':'Open live website')+'</p></div></article>'
 ).join('');
 const listSchema={'@type':'CollectionPage',url:canonical(directory),name:directoryTitle,description:directoryDesc,
- mainEntity:{'@type':'ItemList',itemListElement:websites.map((w,i)=>({'@type':'ListItem',position:i+1,name:w.title,url:canonical('/projects/'+w.id+'/')}))}};
+ mainEntity:{'@type':'ItemList',itemListElement:directoryWebsites.map((w,i)=>({'@type':'ListItem',position:i+1,name:w.title,url:canonical('/projects/'+w.id+'/')}))}};
 const breadcrumbs=path=>[{'@type':'ListItem',position:1,name:'Home',item:origin+'/'},{'@type':'ListItem',position:2,name:'Projects',item:canonical(directory)},...(path!==directory?[{'@type':'ListItem',position:3,name:websites.find(w=>'/projects/'+w.id+'/'===path)?.title||'Project',item:canonical(path)}]:[])];
 const index=head(directory,directoryTitle,directoryDesc,listSchema,breadcrumbs(directory))
  +'<main><div class="wrap subnav"><a href="/">Home</a> / Projects</div><div class="hero"><div class="wrap"><span class="pill">Portfolio</span><h1>Web &amp; App Projects</h1><p>'+esc(directoryDesc)+'</p></div></div>'

@@ -102,7 +102,7 @@ for(const route of routes){
   if(route!=='/tools/')check(html.includes('src="/tools/toolkit.js"'),'tool JavaScript missing: '+route);
  }
  if(route==='/projects/') {
-  check(html.includes('href="/projects/ranknova/"'),'RankNova missing from project directory');
+  check(!html.includes('href="/projects/ranknova/"'),'RankNova must be hidden from the project directory');
   check(html.includes('href="/projects/moavia-app/"'),'Android app missing from projects directory');
   check(html.includes('View GitHub source'),'Android source link missing from projects directory');
   check(html.includes('Web &amp; App Projects'),'Web/App project directory heading missing');
