@@ -54,12 +54,6 @@ const moved=[old,'/services/seo/','/services/local-seo-islamabad/','/services/ae
 writeFileSync(join(root,'_redirects'),moved.map(p=>p+' '+target+' 301').join('\n')+'\n','utf8');
 const sitemapFile=join(root,'sitemap.xml');let xml=readFileSync(sitemapFile,'utf8');
 if(!xml.includes('</urlset>')||xml.includes('<loc>'+origin+'/hire-me/</loc>'))throw Error('Sitemap generator ordering invalid');
-const toolRoutes=['/tools/','/tools/meta-title-description-checker/','/tools/json-ld-schema-generator/','/tools/robots-txt-sitemap-generator/'];
-for(const route of toolRoutes){
- if(xml.includes('<loc>'+origin+route+'</loc>'))throw Error('Duplicate tool sitemap entry: '+route);
- const pageFile=join(root,route.slice(1,-1),'index.html');
- if(!readFileSync(pageFile,'utf8').includes('href="'+origin+route+'"'))throw Error('Tool page canonical missing: '+route);
-}
-xml=xml.replace('</urlset>','  <url><loc>'+origin+'/hire-me/</loc></url>\n  <url><loc>'+origin+'/contact/</loc></url>\n'+toolRoutes.map(route=>'  <url><loc>'+origin+route+'</loc></url>').join('\n')+'\n</urlset>');
+xml=xml.replace('</urlset>','  <url><loc>'+origin+'/hire-me/</loc></url>\n  <url><loc>'+origin+'/contact/</loc></url>\n</urlset>');
 writeFileSync(sitemapFile,xml,'utf8');
 console.log('Generated Hire Me and Contact pages with redirects for retired service URLs.');
