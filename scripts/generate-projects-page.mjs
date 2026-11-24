@@ -8,7 +8,7 @@ const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'
 const json=s=>JSON.stringify(s).replace(/</g,'\\u003c');
 const canonical=path=>origin+path;
 const image=origin+'/social-preview.png';
-const thumb=item=>'/project-captures/'+item.id+'.webp';
+const thumb=item=>'/project-captures/'+item.id+'.jpg';
 const fallback=url=>'https://s.wordpress.com/mshots/v1/'+encodeURIComponent(url)+'?w=960';
 const nav='<nav aria-label="Main navigation"><a href="/web-development/">Web</a><a href="/android-development/">Android</a><a href="/ai-automations/">AI</a><a href="/tools/">Tools</a><a href="/hire-me/">Services</a><a href="/projects/" aria-current="page">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
 const foot='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>SEO Tools · Services · Web/App Projects</p></div><div><a href="/tools/">Tools</a> · <a href="/hire-me/">Services</a> · <a href="/projects/">Projects</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/contact/">Contact</a></div></div></footer>';
