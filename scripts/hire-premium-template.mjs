@@ -90,7 +90,7 @@ export function hireContent(){
 
  return [
   '<section id="hire-services" class="hire-premium-services" aria-labelledby="hire-services-title">',
-  '<div class="hire-premium-section-head"><span class="hire-premium-kicker">WHAT I CAN HELP WITH</span>',
+  '<div class="hire-premium-section-head"><span class="hire-premium-kicker">SEO, Website &amp; Project Services</span>',
   '<h2 id="hire-services-title">Services for the ideas you want to bring to life.</h2>',
   '<p>Choose a starting point. Every request is evaluated for scope and technical feasibility rather than sold as a one-size-fits-all package.</p></div>',
   '<div class="hire-premium-service-grid">'+services+'</div></section>',
