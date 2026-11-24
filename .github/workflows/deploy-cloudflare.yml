@@ -15,7 +15,8 @@ concurrency:
 jobs:
   deploy:
     name: Build and deploy existing moaviaseo Worker
-    runs-on: ubuntu-latest
+    # Playwright 1.56 requires a supported Ubuntu base; ubuntu-latest is now 26.04.
+    runs-on: ubuntu-24.04
     timeout-minutes: 20
     steps:
       - name: Checkout main
