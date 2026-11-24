@@ -33,7 +33,12 @@ const projectCard = item => '<article class="portfolio-card"><span class="label"
   + '<h2>' + esc(item.title) + '</h2><p>' + esc(item.description) + '</p>'
   + '<p><a href="/projects/' + esc(item.id) + '/">Read project details</a></p>'
   + '<p>' + link(item.url, item.kind === 'android' ? 'View actual source repository' : 'Open public website') + '</p></article>';
-function buildPage({path, title, intro, body, index = true}) {
+function buildPage({path, title, intro, body, index = true, scene = null}) {
+  const sceneLabels = {
+    web: 'Animated three-dimensional browser showcasing a modern website',
+    android: 'Animated three-dimensional Android smartphone interface',
+    ai: 'Animated three-dimensional AI processor surrounded by an automation workflow',
+  };
   const url = origin + path;
   const description = intro.length > 165 ? intro.slice(0, 160).trimEnd() + '…' : intro;
   const schema = { '@context': 'https://schema.org', '@graph': [
@@ -52,12 +57,17 @@ function buildPage({path, title, intro, body, index = true}) {
     + '<meta property="og:description" content="' + esc(description) + '">'
     + '<meta property="og:image" content="' + origin + '/social-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
     + '<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="' + origin + '/social-preview.png">'
-    + '<link rel="stylesheet" href="/seo/pages.css">' + style
+    + '<link rel="stylesheet" href="/seo/pages.css">'
+    + (scene ? '<link rel="stylesheet" href="/skill-scenes.css"><script src="/skill-scenes.js" defer></script>' : '')
+    + style
     + '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, '\\u003c') + '</script></head><body class="portfolio-detail-page">'
     + '<header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" width="42" height="42" alt="Moavia Hassan logo">Moavia Hassan</a>' + nav + '</div></header>'
     + '<main><div class="wrap subnav"><a href="/">Home</a> / ' + esc(title.replace(' | Moavia Hassan','')) + '</div>'
-    + '<div class="hero"><div class="wrap"><span class="pill">Personal developer portfolio</span>'
-    + '<h1>' + esc(title.replace(' | Moavia Hassan','')) + '</h1><p class="portfolio-intro">' + esc(intro) + '</p></div></div>'
+    + '<div class="hero"><div class="wrap">' + (scene ? '<div class="craft3d-detail-hero"><div class="craft3d-detail-copy">' : '')
+    + '<span class="pill">Personal developer portfolio</span>'
+    + '<h1>' + esc(title.replace(' | Moavia Hassan','')) + '</h1><p class="portfolio-intro">' + esc(intro) + '</p>'
+    + (scene ? '</div><div class="craft3d-canvas craft3d-canvas--large" data-skill-scene="' + scene + '" role="img" aria-label="' + esc(sceneLabels[scene]) + '"></div></div>' : '')
+    + '</div></div>'
     + '<div class="wrap">' + body + '<p><a class="portfolio-cta" href="/contact/">Discuss a project</a></p></div></main>'
     + '<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>Student developer · Islamabad, Pakistan</p></div>'
     + '<div><a href="/web-development/">Web</a> · <a href="/android-development/">Android</a> · <a href="/ai-automations/">AI</a> · <a href="/certificates/">Certificates</a> · <a href="/projects/">Projects</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/contact/">Contact</a></div></div></footer>'
@@ -74,6 +84,7 @@ const paths = [];
 paths.push(buildPage({
   path: '/web-development/',
   title: 'Web & E-commerce Development | Moavia Hassan',
+  scene: 'web',
   intro: 'Explore public website projects, responsive interfaces, online tool platforms and e-commerce work by Moavia Hassan. Project descriptions distinguish demos from production claims.',
   body: '<section><h2>Web development interests and skills</h2><p>Responsive UI, React, TypeScript, WordPress, SEO-friendly information architecture, online stores, web utilities and practical usability.</p></section>'
     + '<section aria-label="Website projects"><h2>Public web and e-commerce projects</h2><div class="portfolio-cards">'
@@ -83,6 +94,7 @@ paths.push(buildPage({
 paths.push(buildPage({
   path: '/android-development/',
   title: 'Android App Development | Moavia Hassan',
+  scene: 'android',
   intro: 'My Android development learning journey and source-verifiable mobile application prototypes. I do not label unfinished starter projects as published Play Store apps.',
   body: '<section><h2>Mobile development</h2><p>My Android work currently includes Kotlin and Jetpack Compose exploration. I plan further mobile interfaces and will add releases only after there is a verifiable build or store listing.</p></section>'
     + '<section><h2>Android project</h2><div class="portfolio-cards">' + androidProjects.map(projectCard).join('') + '</div></section>'
@@ -91,6 +103,7 @@ paths.push(buildPage({
 paths.push(buildPage({
   path: '/ai-automations/',
   title: 'AI Tools & Automation Projects | Moavia Hassan',
+  scene: 'ai',
   intro: 'An overview of my AI-assisted web tools, workflow experiments and automation interests, with clear distinctions between project concepts, demos and verified services.',
   body: '<section><h2>AI and automation focus</h2><div class="portfolio-cards">'
     + '<article class="portfolio-card"><span class="label">AI-assisted web tools</span><h3>ToolsCresta integrations</h3><p>Tool website experiments including AI-assisted card creation concepts and backend API integrations. Third-party feature availability is not guaranteed.</p><p><a href="/projects/toolscresta/">View website project</a></p></article>'
