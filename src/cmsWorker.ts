@@ -150,7 +150,7 @@ function buildDocumentPage(doc:any,route:CmsRoute,slug:string):string {
   };
   if(route==='blog'){schema.headline=title;if(day)schema.datePublished=day;}
   if(image)schema.image=image;
-  const nav='<nav aria-label="Main navigation"><a href="/">Home</a><a href="/tools/">Tools</a><a href="/hire-me/">Services</a><a href="/projects/">Projects</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></nav>';
+  const nav='<nav aria-label="Main navigation"><a href="/">Home</a><a href="/hire-me/">Services</a><a href="/projects/">Projects</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></nav>';
   const button=route==='projects'&&link?'<p><a class="cms-link" href="'+esc(link)+'" rel="noopener noreferrer" target="_blank">Visit live project</a></p>':'';
   const source=route==='projects'&&repo?'<p><a href="'+esc(repo)+'" rel="noopener noreferrer" target="_blank">View source repository</a></p>':'';
   const cta=route==='offerings'&&link?'<p><a class="cms-link" href="'+esc(link)+'">Get in touch</a></p>':'';
