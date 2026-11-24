@@ -10,7 +10,7 @@ const css = read('dist/hire-premium.css');
 const homepage = read('src/App.tsx');
 
 assert.ok(hire.includes('<body class="hire-premium-page">'), 'Hire page must use its own scoped premium design');
-assert.ok(hire.includes('href="/hire-premium.css"'), 'Hire page stylesheet must be included');
+assert.ok(hire.includes('<link rel="stylesheet" href="/seo/pages.css"><link rel="stylesheet" href="/hire-premium.css">'), 'Hire CSS links must be valid and separately parsed');
 assert.ok(hire.includes('src="/web-showcase.js"'), 'Hire screenshots require the existing image error handler');
 assert.equal((hire.match(/<h1(?:\s[^>]*)?>/g)||[]).length,1,'One accessible H1 per Hire page');
 assert.ok(hire.includes('id="hire-premium-title"'), 'Hire hero requires an accessible heading ID');

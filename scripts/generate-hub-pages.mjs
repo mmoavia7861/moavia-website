@@ -23,7 +23,7 @@ function page(path,title,description,body,kind){
  +'<meta property="og:site_name" content="Moavia Hassan"><meta property="og:title" content="'+clean(title)+'">'
  +'<meta property="og:description" content="'+clean(description)+'"><meta property="og:url" content="'+url+'">'
  +'<meta property="og:image" content="'+origin+'/social-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="'+origin+'/social-preview.png"><link rel="icon" type="image/png" href="/favicon.png">'
- +'<link rel="stylesheet" href="/seo/pages.css"'
+ +'<link rel="stylesheet" href="/seo/pages.css">'
  +(isContact?'<link rel="stylesheet" href="/contact-premium.css">':'')
  +(isHire?'<link rel="stylesheet" href="/hire-premium.css"><script src="/web-showcase.js" defer></script>':'')
  +'<script type="application/ld+json">'+JSON.stringify(schema).replace(/</g,'\u003c')+'</script>'
