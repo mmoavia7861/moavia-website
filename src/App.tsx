@@ -1,9 +1,8 @@
 import React, { Suspense, lazy, useEffect, useRef, useState } from 'react';
 import websiteLinks from './data/githubProjects.json';
-import { SITE_DEFAULTS, TOOL_ROUTES, mergeSiteSettings, safeHref, type PublicSiteSettings } from './siteConfig';
+import { SITE_DEFAULTS, mergeSiteSettings, safeHref, type PublicSiteSettings } from './siteConfig';
 import { ArrowRight, ArrowUpRight, Code2, Github, Linkedin, Mail, Menu, ShieldCheck, X, Smartphone, ShoppingBag, Workflow, Sparkles, Globe2 } from 'lucide-react';
 
-const AiToolsSection = lazy(() => import('./components/AiToolsSection').then(m => ({ default: m.AiToolsSection })));
 const ContactSection = lazy(() => import('./components/ContactSection').then(m => ({ default: m.ContactSection })));
 
 
@@ -83,7 +82,6 @@ export default function App() {
     { label: 'AI Automation', href: '/ai-automations/' },
     { label: 'Certificates', href: '/certificates/' },
     { label: 'Projects', href: '/projects/' },
-    { label: 'Tools', href: '/tools/' },
     { label: 'Services', href: '/hire-me/' },
     { label: 'About', href: '/about/' },
     { label: 'Contact', href: '/contact/' },
@@ -109,7 +107,6 @@ export default function App() {
             )}
           </nav>
           <div className="premium-header-actions">
-            <a href="/tools/" className="premium-header-tools">Free tools</a>
             <a href="/contact/" className="premium-header-cta">Let's talk <ArrowUpRight size={17} aria-hidden="true" /></a>
           </div>
           <button type="button" className="premium-menu-toggle" aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'} aria-expanded={mobileOpen} aria-controls="mobile-primary" onClick={() => setMobileOpen(!mobileOpen)}>
@@ -235,7 +232,7 @@ export default function App() {
                 <p className="premium-kicker">SELECTED WORK / WEB & APP PROJECTS</p>
                 <h2 id="selected-projects-heading">Proof is in <em>the projects.</em></h2>
               </div>
-              <p>Explore public work, from helpful online tools to e-commerce websites and Android prototypes. Each project is described according to its actual development status.</p>
+              <p>Explore public work, from responsive websites and e-commerce platforms to Android prototypes. Each project is described according to its actual development status.</p>
             </div>
             <div className="premium-project-grid">
               {[
@@ -388,25 +385,6 @@ export default function App() {
           </div>
         </section>
 
-        <section id="tools" className="scroll-mt-20 bg-white border-y border-[#E7EAF2] py-16 sm:py-20" aria-labelledby="featured-tools-heading">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <p className="text-xs font-extrabold uppercase tracking-widest text-[#5265D8]">Free browser-based utilities</p>
-            <h2 id="featured-tools-heading" className="mt-3 text-3xl sm:text-4xl font-extrabold">Explore 3 practical SEO tools</h2>
-            <p className="mt-3 max-w-3xl text-[#52607A]">Each tool has its own page and works with information you enter. No invented SEO audit scores.</p>
-            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-5">
-              {TOOL_ROUTES.map((href,i)=>({href,title:siteSettings.toolTitles[i],description:siteSettings.toolDescriptions[i],visible:siteSettings.toolVisible[i]})).filter(tool=>tool.visible).map(tool => (
-                <article key={tool.href} className="flex flex-col rounded-2xl border border-[#DCE3F2] bg-[#F8F9FD] p-6">
-                  <h3 className="text-lg font-extrabold">{tool.title}</h3>
-                  <p className="mt-3 mb-6 flex-1 text-sm leading-7 text-[#52607A]">{tool.description}</p>
-                  <a href={tool.href} className="inline-flex items-center gap-2 font-bold text-[#4353BC] hover:underline">Open tool <ArrowRight className="w-4 h-4" /></a>
-                </article>
-              ))}
-            </div>
-            <a href="/tools/" className="mt-8 inline-flex items-center gap-2 rounded-xl bg-[#5265D8] px-5 py-3 font-bold text-white hover:bg-[#4353BC]">View All Tools <ArrowRight className="w-4 h-4" /></a>
-          </div>
-        </section>
-        <OnView id="experiments" minHeight={540}><AiToolsSection /></OnView>
-
         <section className="premium-final-cta" aria-labelledby="final-cta-heading">
           <div className="premium-container premium-final-inner">
             <div>
@@ -427,9 +405,9 @@ export default function App() {
       <footer className="bg-[#18243A] text-slate-200 py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap justify-between gap-7">
-            <div><p className="font-extrabold text-white">Moavia Hassan</p><p className="mt-2 text-sm text-slate-400">SEO Tools · Services · Web/App Projects · Islamabad, Pakistan</p><a href={'mailto:'+siteSettings.contactEmail} className="mt-3 inline-flex items-center gap-2 text-sm text-slate-200 hover:text-white"><Mail className="h-4 w-4" /> {siteSettings.contactEmail}</a></div>
+            <div><p className="font-extrabold text-white">Moavia Hassan</p><p className="mt-2 text-sm text-slate-400">Web & App Development · SEO Services · Islamabad, Pakistan</p><a href={'mailto:'+siteSettings.contactEmail} className="mt-3 inline-flex items-center gap-2 text-sm text-slate-200 hover:text-white"><Mail className="h-4 w-4" /> {siteSettings.contactEmail}</a></div>
             <nav aria-label="Footer" className="flex flex-wrap items-start gap-x-5 gap-y-3 text-sm">
-              <a href="/web-development/" className="hover:text-white">Web</a><a href="/android-development/" className="hover:text-white">Android</a><a href="/ai-automations/" className="hover:text-white">AI Automations</a><a href="/certificates/" className="hover:text-white">Certificates</a><a href="/tools/" className="hover:text-white">Tools</a><a href="/hire-me/" className="hover:text-white">Services</a><a href="/projects/" className="hover:text-white">Projects</a><a href="/about/" className="hover:text-white">About</a><a href="/contact/" className="hover:text-white">Contact</a><a href="/hire-me/" className="hover:text-white">Hire Me</a><a href="/blog/" className="hover:text-white">Blog</a><a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Fiverr freelancer profile (opens in new tab)">Fiverr</a><a href="https://www.upwork.com/freelancers/~01c3735023b2f296fa" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Upwork freelancer profile (opens in new tab)">Upwork</a>
+              <a href="/web-development/" className="hover:text-white">Web</a><a href="/android-development/" className="hover:text-white">Android</a><a href="/ai-automations/" className="hover:text-white">AI Automations</a><a href="/certificates/" className="hover:text-white">Certificates</a><a href="/hire-me/" className="hover:text-white">Services</a><a href="/projects/" className="hover:text-white">Projects</a><a href="/about/" className="hover:text-white">About</a><a href="/contact/" className="hover:text-white">Contact</a><a href="/hire-me/" className="hover:text-white">Hire Me</a><a href="/blog/" className="hover:text-white">Blog</a><a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Fiverr freelancer profile (opens in new tab)">Fiverr</a><a href="https://www.upwork.com/freelancers/~01c3735023b2f296fa" target="_blank" rel="noopener noreferrer" className="hover:text-white" aria-label="Upwork freelancer profile (opens in new tab)">Upwork</a>
             </nav>
           </div>
           <div className="mt-9 border-t border-slate-700 pt-6 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-400">

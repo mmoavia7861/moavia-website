@@ -10,8 +10,8 @@ const canonical=path=>origin+path;
 const image=origin+'/social-preview.png';
 const thumb=item=>'/project-captures/'+item.id+'.jpg';
 const fallback=url=>'https://s.wordpress.com/mshots/v1/'+encodeURIComponent(url)+'?w=960';
-const nav='<nav aria-label="Main navigation"><a href="/web-development/">Web</a><a href="/android-development/">Android</a><a href="/ai-automations/">AI</a><a href="/tools/">Tools</a><a href="/hire-me/">Services</a><a href="/projects/" aria-current="page">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
-const foot='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>SEO Tools · Services · Web/App Projects</p></div><div><a href="/tools/">Tools</a> · <a href="/hire-me/">Services</a> · <a href="/projects/">Projects</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/contact/">Contact</a></div></div></footer>';
+const nav='<nav aria-label="Main navigation"><a href="/web-development/">Web</a><a href="/android-development/">Android</a><a href="/ai-automations/">AI</a><a href="/hire-me/">Services</a><a href="/projects/" aria-current="page">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
+const foot='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>Web Development · SEO Services · App Projects</p></div><div><a href="/hire-me/">Services</a> · <a href="/projects/">Projects</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/contact/">Contact</a></div></div></footer>';
 const sep='<div class="wrap"><p class="project-note projects-trust-note"><strong>Portfolio transparency:</strong> These are published personal projects and design prototypes, not verified paid-client case studies or evidence of traffic, rankings or revenue. The Android starter is source code, not a released app.</p></div>';
 function head(path,title,description,entity,crumbs) {
  const url=canonical(path);
@@ -20,7 +20,7 @@ function head(path,title,description,entity,crumbs) {
  +'<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="'+esc(url)+'">'
  +'<meta property="og:type" content="website"><meta property="og:site_name" content="Moavia Hassan">'
  +'<meta property="og:title" content="'+esc(title)+'"><meta property="og:description" content="'+esc(description)+'">'
- +'<meta property="og:url" content="'+esc(url)+'"><meta property="og:image" content="'+image+'"><meta property="og:image:alt" content="Moavia Hassan SEO tools and web projects banner"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
+ +'<meta property="og:url" content="'+esc(url)+'"><meta property="og:image" content="'+image+'"><meta property="og:image:alt" content="Moavia Hassan web development and app project portfolio banner"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
  +'<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="'+esc(title)+'"><meta name="twitter:description" content="'+esc(description)+'"><meta name="twitter:image" content="'+image+'">'
  +'<link rel="icon" href="/favicon.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">'
  +'<link rel="stylesheet" href="/seo/pages.css"><link rel="stylesheet" href="/projects/projects.css"><script src="/web-showcase.js" defer></script>'

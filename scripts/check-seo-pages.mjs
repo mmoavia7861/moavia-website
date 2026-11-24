@@ -8,7 +8,7 @@ const routes=[
  '/blog/mastering-meta-ads-capi-cro/','/blog/local-seo-google-maps-3pack/',
  '/blog/image-video-resolution-cro/','/blog/google-search-console-discovered-vs-indexed/',
  '/blog/seo-aeo-geo-small-business-guide/','/web-development/','/android-development/','/ai-automations/','/projects/','/projects/ranknova/','/projects/dark-agency/','/projects/agency-multipage/','/projects/umm-e-aiman/','/projects/moavia-app/','/projects/toolscresta/','/projects/draliwellness/','/hire-me/','/contact/',
- '/tools/','/tools/meta-title-description-checker/','/tools/json-ld-schema-generator/','/tools/robots-txt-sitemap-generator/'
+
 ];
 const read=path=>readFileSync(join(dist,path),'utf8');
 const check=(ok,err)=>{if(!ok)throw Error('Site build check failed: '+err)};
@@ -62,7 +62,7 @@ check(root.includes('https://moaviaseo.com/social-preview.png'),'homepage social
 check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes("{ label: 'About', href: '/about/' }"),'homepage About link must open About page');
 check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes("{ label: 'Contact', href: '/contact/' }"),'homepage Contact link must open Contact page');
 check(!root.includes('moaviahassan124@gmail.com'),'legacy personal email should not appear on public homepage');
-for(const href of ['/tools/','/projects/','/about/','/contact/','/hire-me/','/tools/meta-title-description-checker/','/tools/json-ld-schema-generator/','/tools/robots-txt-sitemap-generator/']){
+for(const href of ['/projects/','/about/','/contact/','/hire-me/']){
  check(root.includes('href="'+href+'"'),'homepage link missing: '+href);
 }
 for(const asset of ['favicon.png','site-logo.png','apple-touch-icon.png','site.webmanifest'])check(existsSync(join(dist,asset)),'asset missing: '+asset);
@@ -80,27 +80,6 @@ for(const route of routes){
  check(html.includes('href="/hire-me/">Services</a>'),'Services link missing: '+route);
  check(html.includes('src="/cursor-effect.js"') && html.includes('href="/cursor-effect.css"'),'cursor missing on page: '+route);
  check(html.includes('src="/theme-init.js"') && html.includes('href="/theme.css"') && html.includes('src="/theme-switcher.js"'),'theme support missing on page: '+route);
- if(route.startsWith('/tools/')){
-  check(html.includes('href="/tools/toolkit.css"'),'tool CSS missing: '+route);
-  check(html.includes('alt="Moavia Hassan logo"'),'logo alt text missing: '+route);
-  if(route!=='/tools/'){
-   check((html.match(/<details class="faq-entry">/g)||[]).length===4,'4 FAQs missing: '+route);
-   check(html.includes('Your entered text stays in the browser'),'privacy note missing: '+route);
-   check(html.includes('Worked example'),'worked example missing: '+route);
-  }
-  if(route==='/tools/meta-title-description-checker/')check(html.includes('Meta Title & Description Checker | Moavia Hassan'),'short title missing');
-  if(route==='/tools/json-ld-schema-generator/'){
-   check(html.includes('developers.google.com/search/updates'),'FAQ Google source missing');
-   check(html.includes('Schema Markup Validator'),'validator instructions missing');
-   check(!html.includes('Download valid JSON-LD'),'unverified validity claim remains');
-  }
-  if(route==='/tools/robots-txt-sitemap-generator/'){
-   check(html.includes('noindex'),'robots noindex help missing');
-   check(html.includes('Disallow'),'robots disallow help missing');
-  }
-  check(html.includes('href="/tools/"'),'tools navigation missing: '+route);
-  if(route!=='/tools/')check(html.includes('src="/tools/toolkit.js"'),'tool JavaScript missing: '+route);
- }
  if(route==='/projects/') {
   check(!html.includes('href="/projects/ranknova/"'),'RankNova must be hidden from the project directory');
   check(html.includes('href="/projects/moavia-app/"'),'Android app missing from projects directory');
@@ -108,7 +87,7 @@ for(const route of routes){
   check(html.includes('Web &amp; App Projects'),'Web/App project directory heading missing');
  }
  if(route.startsWith('/blog/')||route.startsWith('/guides/')){
-  check(html.includes('href="/tools/"'),'old tools navigation found: '+route);
+  check(!html.includes('href="/tools/"'),'retired tools navigation remains: '+route);
   check(!html.includes('href="/services/seo/"'),'old SEO agency page linked: '+route);
   check(!html.includes('href="/#contact"'),'old contact anchor found: '+route);
   check(!html.includes('About the team'),'old agency byline found: '+route);
@@ -143,7 +122,7 @@ for(const route of routes){
  check(sitemap.includes('<loc>'+base+route+'</loc>'),'sitemap missing: '+route);
  check(html.includes('href="/favicon.png"'),'favicon missing: '+route);
  if(route==='/privacy-policy/'){
-   check(html.includes('Standalone SEO tools and optional AI services'),'tool privacy policy missing');
+   check(html.includes('Portfolio pages and external project links'),'updated portfolio privacy policy missing');
    check(html.includes('Cloudflare Web Analytics'),'analytics privacy policy missing');
    check(!html.includes('Google advertising disclosures'),'old ad boilerplate remains');
  }
@@ -189,7 +168,11 @@ for(const route of ['/services/','/services/seo/','/services/google-ads/','/serv
 }
 check(read('_redirects').includes('/services/meta-ads/ /hire-me/ 301'),'Cloudflare redirect missing');
 check(existsSync(join(dist,'404.html')),'404 missing');
-for(const asset of ['tools/toolkit.js','tools/toolkit.css'])check(existsSync(join(dist,asset)),'tool asset missing: '+asset);
-const clientJs=read('tools/toolkit.js');
-for(const marker of ['initMeta','initSchema','initCrawler','downloadRobots','downloadSitemap','downloadSchema','snippetTitle'])check(clientJs.includes(marker),'tool functionality marker missing: '+marker);
-console.log('Validated '+routes.length+' canonical pages, personal homepage, retired service redirects, and sitemap.');
+for(const old of ['/tools/','/tools/meta-title-description-checker/','/tools/json-ld-schema-generator/','/tools/robots-txt-sitemap-generator/']){
+ check(!sitemap.includes('<loc>'+base+old+'</loc>'),'retired tool still indexed: '+old);
+ check(!existsSync(join(dist,old.replace(/^\/|\/$/g,''),'index.html')),'retired tool page still exists: '+old);
+}
+for(const asset of ['tools/toolkit.js','tools/toolkit.css'])
+ check(!existsSync(join(dist,asset)),'retired tool asset still deployed: '+asset);
+check(!root.includes('href="/tools/"') && !root.includes('id="tools"'),'homepage still advertises removed tools');
+console.log('Validated '+routes.length+' canonical pages and verified retired tools are absent.');

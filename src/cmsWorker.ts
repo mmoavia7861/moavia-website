@@ -75,7 +75,7 @@ const publicSettingFields = [
   'heroBadge','heroTitle','heroDescription','announcementEnabled','announcementText',
   'ctaLabel','ctaHref','contactEmail','whatsapp','seoTitle','seoDescription',
   'socialGithub','socialLinkedin','socialFiverr','socialUpwork',
-  'toolTitles','toolDescriptions','toolVisible','updatedAt',
+  'updatedAt',
 ];
 function decodeFirestoreValue(value:any):unknown {
   if(typeof value?.stringValue==='string')return value.stringValue;
@@ -150,7 +150,7 @@ function buildDocumentPage(doc:any,route:CmsRoute,slug:string):string {
   };
   if(route==='blog'){schema.headline=title;if(day)schema.datePublished=day;}
   if(image)schema.image=image;
-  const nav='<nav aria-label="Main navigation"><a href="/">Home</a><a href="/tools/">Tools</a><a href="/hire-me/">Services</a><a href="/projects/">Projects</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></nav>';
+  const nav='<nav aria-label="Main navigation"><a href="/">Home</a><a href="/hire-me/">Services</a><a href="/projects/">Projects</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a></nav>';
   const button=route==='projects'&&link?'<p><a class="cms-link" href="'+esc(link)+'" rel="noopener noreferrer" target="_blank">Visit live project</a></p>':'';
   const source=route==='projects'&&repo?'<p><a href="'+esc(repo)+'" rel="noopener noreferrer" target="_blank">View source repository</a></p>':'';
   const cta=route==='offerings'&&link?'<p><a class="cms-link" href="'+esc(link)+'">Get in touch</a></p>':'';
@@ -277,13 +277,12 @@ async function homepage(request:Request,env:CmsEnvironment):Promise<Response> {
   const heroTitle=str(d,'heroTitle');
   const heroDescription=str(d,'heroDescription');
   if(title)html=html.replace(/<title>[^<]*<\/title>/i,'<title>'+esc(title.slice(0,160))+'</title>');
-  if(description)html=html.replace(/<meta name="description" content="[^"]*" *\/?>/i,
-    '<meta name="description" content="'+esc(description.slice(0,320))+'"/>');
-  if(heroTitle)html=html.replace(/<h1>Moavia Hassan: SEO Tools, Services &amp; Web\/App Projects<\/h1>/,
-    '<h1>'+esc(heroTitle.slice(0,140))+'</h1>');
-  if(heroDescription)html=html.replace(
-    'Explore SEO tools, discuss SEO and web development services, and browse real public website projects by Moavia Hassan in Islamabad, Pakistan.',
-    esc(heroDescription.slice(0,500)));
+  if(description && !/(?:free|three|online|seo)\s+(?:seo\s+)?tools|\/tools\//i.test(description)) {
+    html=html.replace(/<meta name="description" content="[^"]*" *\/?>/i,
+      '<meta name="description" content="'+esc(description.slice(0,320))+'"/>');
+  }
+  // React renders the homepage hero from sanitized public settings. The
+  // previous tool-oriented HTML fallback is retired and must not reappear.
   return responseHtml(html);
 }
 

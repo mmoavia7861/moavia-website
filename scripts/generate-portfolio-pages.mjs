@@ -13,7 +13,6 @@ const siteLinks = [
   ['/ai-automations/', 'AI Automation'],
   ['/certificates/', 'Certificates'],
   ['/projects/', 'Projects'],
-  ['/tools/', 'Tools'],
   ['/hire-me/', 'Services'],
   ['/about/', 'About'],
   ['/contact/', 'Contact']
@@ -205,7 +204,7 @@ paths.push(buildPage({
 }));
 paths.push(buildPage({
   path: '/ai-automations/',
-  title: 'AI Tools & Automation Projects | Moavia Hassan',
+  title: 'AI Automation Projects | Moavia Hassan',
   scene: 'ai',
   intro: 'An overview of my AI-assisted web tools, workflow experiments and automation interests, with clear distinctions between project concepts, demos and verified services.',
   body: '<section><h2>AI and automation focus</h2><div class="portfolio-cards">'

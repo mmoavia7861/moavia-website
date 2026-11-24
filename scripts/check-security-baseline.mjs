@@ -8,16 +8,17 @@ const headers = text('public/_headers');
 const rules = text('firestore.rules');
 
 const checks = [
-  ['Bounded API request streams', worker.includes('size > MAX_REQUEST_BYTES') &&
-    worker.includes('readLimitedBody(request)') && !worker.includes('await request.text()')],
-  ['Rate-limit failure closes billable/external-fetch API paths',
-    worker.includes('requiresLimiter && !env.AI_LIMITER') &&
-    worker.includes("path === '/api/chat'") &&
-    worker.includes("path === '/api/audit'")],
-  ['Same-origin API restriction', worker.includes("request.headers.get('Origin')") &&
-    worker.includes("request.headers.get('Sec-Fetch-Site')")],
-  ['JSON API payload only', worker.includes("request.headers.get('content-type')") &&
-    worker.includes('application/json')],
+  ['Retired tools always receive 410 Gone',
+    worker.includes("url.pathname.startsWith('/tools/')") && worker.includes('status:410') &&
+    worker.includes("'X-Robots-Tag':'noindex, nofollow'")],
+  ['All old tool API endpoints permanently retired',
+    worker.includes("url.pathname.startsWith('/api/')") &&
+    !worker.includes('GEMINI_API_KEY') && !worker.includes('/api/chat') && !worker.includes('/api/audit')],
+  ['Public CMS and health endpoints kept active',
+    worker.includes("url.pathname==='/api/public-site'") &&
+    worker.includes('handleCmsRequest(request,env)') && worker.includes("url.pathname==='/api/health'")],
+  ['API retirement applies before CMS or asset lookup',
+    worker.indexOf("url.pathname.startsWith('/api/')") < worker.indexOf('handleCmsRequest(request,env)')],
   ['Admin Firestore rule restricted to verified password owner',
     rules.includes('request.auth.token.email_verified == true') &&
     rules.includes("request.auth.token.firebase.sign_in_provider == 'password'") &&
