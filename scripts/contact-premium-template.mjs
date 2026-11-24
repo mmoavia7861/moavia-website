@@ -46,7 +46,7 @@ export function contactHero() {
 export function contactContent(){
   const services=[
     ['01','Web &amp; e-commerce','Responsive websites, storefront interfaces and practical web functionality.','/web-development/'],
-    ['02','SEO &amp; discoverability','Technical SEO, page structure, website reviews and useful search tools.','/tools/'],
+    ['02','SEO &amp; discoverability','Technical SEO, page structure and website reviews.','/hire-me/'],
     ['03','AI &amp; automation','Workflow ideas, API integration plans and AI-assisted utilities.','/ai-automations/'],
     ['04','Android &amp; app ideas','Early mobile concepts, UI prototypes and feasibility discussions.','/android-development/']
   ].map(([index,title,description,url])=>
