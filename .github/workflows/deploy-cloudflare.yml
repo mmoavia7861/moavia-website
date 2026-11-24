@@ -43,6 +43,17 @@ jobs:
           MOAVIA_PLAYWRIGHT_PACKAGE: /tmp/moavia-playwright/node_modules/playwright
         run: node scripts/capture-project-previews.mjs dist
 
+      - name: Browser-check mobile portfolio screenshot and hero contrast
+        shell: bash
+        env:
+          MOAVIA_PLAYWRIGHT_PACKAGE: /tmp/moavia-playwright/node_modules/playwright
+        run: |
+          set -euo pipefail
+          python3 -m http.server 4173 --bind 127.0.0.1 --directory dist >/tmp/android-preview-http.log 2>&1 &
+          PID=$!
+          trap 'kill "$PID" 2>/dev/null || true' EXIT
+          node scripts/check-android-layout-browser.mjs http://127.0.0.1:4173/android-development/
+
       - name: Verify standalone tool pages are in production output
         shell: bash
         run: |
