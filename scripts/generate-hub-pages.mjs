@@ -5,7 +5,7 @@ import { hireHero, hireContent } from './hire-premium-template.mjs';
 const origin='https://moaviaseo.com';
 const root=join(process.cwd(),'public');
 const clean=x=>String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-const nav='<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/hire-me/">Services</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
+const nav='<nav aria-label="Main navigation"><a href="/hire-me/">Services</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
 function page(path,title,description,body,kind){
  const url=origin+path;
  const isContact=kind==='contact';
@@ -30,7 +30,7 @@ function page(path,title,description,body,kind){
  +'</head><body'+(isContact?' class="contact-premium-page"':(isHire?' class="hire-premium-page"':''))+'><header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" width="42" height="42" alt="Moavia Hassan logo">Moavia Hassan</a>'
  +nav+'</div></header>'
  +'<main><div class="wrap subnav"><a href="/">Home</a> / '+(kind==='hire'?'Hire Me':'Contact')+'</div>'
- +(isHire?hireHero():(isContact?contactHero():'<div class="hero"><div class="wrap"><span class="pill">SEO Tools · Services · Web/App Projects</span><h1>'+clean(title.replace(' | Moavia Hassan',''))+'</h1><p>'+clean(description)+'</p></div></div>'))
+ +(isHire?hireHero():(isContact?contactHero():'<div class="hero"><div class="wrap"><span class="pill">Web Development · SEO Services · App Projects</span><h1>'+clean(title.replace(' | Moavia Hassan',''))+'</h1><p>'+clean(description)+'</p></div></div>'))
  +'<div class="wrap'+(isContact?' contact-premium-content':(isHire?' hire-premium-content':''))+'">'+body+'</div></main>'
  +'<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>Islamabad, Pakistan</p></div>'
  +'<div><a href="/tools/">Tools</a> · <a href="/hire-me/">Services</a> · <a href="/projects/">Projects</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></div>'
