@@ -23,7 +23,7 @@ for(const item of web){
   const detail=read('dist/projects/'+item.id+'/index.html');
   for(const html of [page,directory,detail]){
     assert.ok(html.includes(item.url),'Missing project live link for '+item.id);
-    assert.ok(html.includes('/project-captures/'+item.id+'.webp'),'Missing deploy-time screenshot for '+item.id);
+    assert.ok(html.includes('/project-captures/'+item.id+'.jpg'),'Missing deploy-time screenshot for '+item.id);
     assert.ok(html.includes('data-fallback-src='),'A failed screenshot must have an alternate source for '+item.id);
   }
   assert.ok(page.includes('href="/projects/'+item.id+'/'),'Missing details link for '+item.id);

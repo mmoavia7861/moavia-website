@@ -129,7 +129,7 @@ for(const route of routes){
    for(const label of ['Project screenshot','My portfolio role','Technology stack','Results and verification','View live project']){
     check(html.includes(label),'project section missing '+label+': '+route);
    }
-   check(html.includes('/project-captures/'+route.split('/')[2]+'.webp'),'local project screenshot source missing: '+route);
+   check(html.includes('/project-captures/'+route.split('/')[2]+'.jpg'),'local project screenshot source missing: '+route);
    check(html.includes('data-fallback-src='),'project screenshot failure fallback missing: '+route);
   }
  } 

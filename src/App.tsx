@@ -253,7 +253,7 @@ export default function App() {
                           <span className="premium-real-preview-chrome" aria-hidden="true"><i></i><i></i><i></i><small>{new URL(originalProject.url).hostname}</small></span>
                           <span className="premium-real-preview-image">
                             <img
-                              src={'/project-captures/' + originalProject.id + '.webp'}
+                              src={'/project-captures/' + originalProject.id + '.jpg'}
                               alt={'Live homepage screenshot preview of ' + item.title}
                               width="960" height="680" loading="lazy" decoding="async" referrerPolicy="no-referrer"
                               onError={event => {

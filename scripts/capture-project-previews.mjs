@@ -62,8 +62,8 @@ try {
       if (meaningful.chars < 45 || meaningful.visible < 300) {
         throw Error('Page did not render substantive content');
       }
-      const path = join(output,project.id+'.webp');
-      await page.screenshot({path,type:'webp',quality:79,fullPage:false,animations:'disabled'});
+      const path = join(output,project.id+'.jpg');
+      await page.screenshot({path,type:'jpeg',quality:82,fullPage:false,animations:'disabled'});
       if (statSync(path).size < 4000) throw Error('Screenshot appears unexpectedly small');
       console.log('Captured:',project.id,statSync(path).size,'bytes');
       captured++;
