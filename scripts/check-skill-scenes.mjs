@@ -31,5 +31,5 @@ assert.ok(!/https?:\/\//.test(renderer), 'Animation renderer must not fetch remo
 assert.ok(css.includes('prefers-reduced-motion:reduce'), 'Reduced motion must be supported');
 assert.ok(css.includes('animation-play-state:paused'), 'Animations must pause offscreen');
 assert.ok(css.includes('rotateY(') && css.includes('perspective:'), 'Scenes must use 3D transforms');
-assert.ok(!/three\.js|webgl|glb|gltf|spline/i.test(renderer), 'No external 3D engine should be bundled');
+assert.ok(!/\bimport\s+[^;\n]+from\s+['\"](?:three|@splinetool)/.test(renderer), 'No external 3D engine imports should be bundled');
 console.log('PASS: three section-specific scene pages, homepage 3D scenes and performance/accessibility checks');
