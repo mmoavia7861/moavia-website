@@ -109,6 +109,31 @@ jobs:
           MOAVIA_PLAYWRIGHT_PACKAGE: /tmp/moavia-playwright/node_modules/playwright
         run: node scripts/check-hire-layout-browser.mjs https://moaviaseo.com/hire-me/
 
+      - name: Verify retired SEO and AI tools are gone on the live domain
+        shell: bash
+        run: |
+          set -euo pipefail
+          for path in "/tools/" "/tools/meta-title-description-checker/" "/tools/json-ld-schema-generator/" "/tools/robots-txt-sitemap-generator/" "/api/chat" "/api/audit"; do
+            status=""
+            for retry in 1 2 3 4; do
+              status=$(curl --max-time 20 -sS -o /tmp/retired-route.txt -w '%{http_code}' "https://moaviaseo.com$path" || true)
+              if [ "$status" = "410" ]; then break; fi
+              sleep 2
+            done
+            if [ "$status" != "410" ]; then
+              echo "::error::Expected HTTP 410 for $path, got $status"
+              exit 1
+            fi
+            echo "PASS retired $path → HTTP 410"
+          done
+          curl --max-time 20 -fsS "https://moaviaseo.com/api/public-site" -o /tmp/site-settings.json
+          grep -q '"settings"' /tmp/site-settings.json
+          if grep -q '"toolTitles"\|"toolVisible"\|"toolDescriptions"' /tmp/site-settings.json; then
+            echo "::error::Public API still exposes removed tool cards"
+            exit 1
+          fi
+          echo "PASS public CMS available, removed tool controls absent"
+
       - name: Verify live social image and metadata (diagnostic)
         shell: bash
         run: |
