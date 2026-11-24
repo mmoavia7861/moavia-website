@@ -22,7 +22,7 @@ function head(path,title,description,entity,crumbs) {
  +'<meta property="og:url" content="'+esc(url)+'"><meta property="og:image" content="'+image+'"><meta property="og:image:alt" content="Moavia Hassan SEO tools and web projects banner"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">'
  +'<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="'+esc(title)+'"><meta name="twitter:description" content="'+esc(description)+'"><meta name="twitter:image" content="'+image+'">'
  +'<link rel="icon" href="/favicon.png" type="image/png"><link rel="apple-touch-icon" href="/apple-touch-icon.png">'
- +'<link rel="stylesheet" href="/seo/pages.css"><link rel="stylesheet" href="/projects/projects.css">'
+ +'<link rel="stylesheet" href="/seo/pages.css"><link rel="stylesheet" href="/projects/projects.css"><script src="/web-showcase.js" defer></script>'
  +'<script type="application/ld+json">'+json({'@context':'https://schema.org','@graph':[entity,{'@type':'BreadcrumbList',itemListElement:crumbs}]})+'</script></head><body class="project-case-study-page">'
  +'<header><div class="wrap"><a class="brand" href="/">Moavia Hassan</a>'+nav+'</div></header>';
 }
@@ -40,8 +40,8 @@ function snapshot(w) {
    +'<p>'+link(source,'Inspect the actual MainActivity.kt file')+'</p></div></div>'
    +'<figcaption>Illustration based on verified source code, not an emulator screenshot or Play Store listing.</figcaption></figure>';
  }
- return '<figure class="project-screenshot"><img src="'+esc(thumb(w.url))+'" width="960" height="544" loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="Live screenshot preview of '+esc(w.title)+'" onerror="this.hidden=true;this.nextElementSibling.hidden=false">'
- +'<p hidden class="project-screenshot-unavailable">Screenshot preview is unavailable. Use the live project link to inspect the website.</p>'
+ return '<figure class="project-screenshot"><span class="project-screenshot-image"><img data-portfolio-shot src="'+esc(thumb(w.url))+'" width="960" height="680" loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="Public homepage screenshot preview of '+esc(w.title)+'">'
+ +'<span data-portfolio-fallback hidden class="project-screenshot-unavailable">Screenshot preview is unavailable. Use the live project link to inspect the website.</span></span>'
  +'<figcaption>Live page thumbnail provided by Thum.io. It may change or be unavailable; this is not an analytics or results screenshot.</figcaption></figure>';
 }
 if(websites.length!==7||new Set(websites.map(w=>w.id)).size!==7
@@ -54,9 +54,15 @@ if(websites.length!==7||new Set(websites.map(w=>w.id)).size!==7
 mkdirSync(join(root,'projects'),{recursive:true});
 const directory='/projects/',directoryTitle='Web & App Projects | Moavia Hassan',
 directoryDesc='Explore six public web projects and one source-verified Android starter. Every project lists its role, stack and limitations; no invented client or app-launch results.';
+const directoryPreview = w => w.kind === 'android'
+ ? '<div class="project-directory-no-live"><span class="project-directory-device" aria-hidden="true"></span><strong>Android starter · source project</strong><small>No released app or verified screen capture</small></div>'
+ : '<a class="project-directory-preview" href="' + esc(w.url) + '" target="_blank" rel="noopener noreferrer" aria-label="Visit live website for ' + esc(w.title) + '">'
+   + '<span class="project-directory-preview-bar" aria-hidden="true"><i></i><i></i><i></i><span>' + esc(new URL(w.url).hostname) + '</span></span>'
+   + '<span class="project-directory-image"><img data-portfolio-shot src="' + esc(thumb(w.url)) + '" width="960" height="680" loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="Homepage screenshot of ' + esc(w.title) + '">'
+   + '<span data-portfolio-fallback hidden class="project-screenshot-unavailable">Live preview unavailable. Click to open the website.</span></span></a>';
 const cards=websites.map(w=>
- '<article class="card project-card"><span class="pill">'+esc(w.category)+'</span><h2><a href="/projects/'+esc(w.id)+'/">'+esc(w.title)+'</a></h2>'
- +'<p>'+esc(w.description)+'</p><p class="project-card-actions"><a class="action" href="/projects/'+esc(w.id)+'/">Read project details</a> '+link(w.url,w.kind==='android'?'View GitHub source':'Open live demo')+'</p></article>'
+ '<article class="card project-card">' + directoryPreview(w) + '<div class="project-directory-body"><span class="pill">'+esc(w.category)+'</span><h2><a href="/projects/'+esc(w.id)+'/">'+esc(w.title)+'</a></h2>'
+ +'<p>'+esc(w.description)+'</p><p class="project-card-actions"><a class="action" href="/projects/'+esc(w.id)+'/">Read project details</a> '+link(w.url,w.kind==='android'?'View GitHub source':'Open live website')+'</p></div></article>'
 ).join('');
 const listSchema={'@type':'CollectionPage',url:canonical(directory),name:directoryTitle,description:directoryDesc,
  mainEntity:{'@type':'ItemList',itemListElement:websites.map((w,i)=>({'@type':'ListItem',position:i+1,name:w.title,url:canonical('/projects/'+w.id+'/')}))}};
