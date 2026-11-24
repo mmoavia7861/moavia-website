@@ -1,0 +1,179 @@
+/* Android portfolio: a real, user-provided mobile UI capture in a dimensional
+ * phone, with lightweight CSS depth sculpture behind it. No external 3D runtime. */
+html body.portfolio-detail-page .hero.androidcase-hero {
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  background:radial-gradient(ellipse at 79% 28%,rgba(21,198,161,.17),transparent 48%),
+    radial-gradient(ellipse at 38% 93%,rgba(94,118,237,.14),transparent 52%),
+    linear-gradient(119deg,#071521 0%,#12273c 58%,#0b172a 100%)!important;
+  color:#f3faff!important;
+  border-color:transparent!important;
+  padding:72px 0 82px;
+}
+.androidcase-hero-grid {
+  display:grid;
+  grid-template-columns:minmax(0,.89fr) minmax(0,1.11fr);
+  align-items:center;
+  gap:clamp(24px,4vw,68px);
+}
+.androidcase-copy {position:relative;z-index:5;min-width:0}
+.androidcase-eyebrow {display:inline-flex;align-items:center;gap:9px;color:#86f3d3;
+  font-weight:850;font-size:.75rem;letter-spacing:.13em}
+.androidcase-eyebrow:before {content:"";width:7px;height:7px;border-radius:50%;background:#45d8a9;
+  box-shadow:0 0 0 5px rgba(69,216,169,.14)}
+html body.portfolio-detail-page .hero.androidcase-hero h1 {
+  max-width:590px;margin:24px 0 19px;font-size:clamp(2.5rem,4.8vw,4.4rem);
+  line-height:1.09;letter-spacing:-.06em;font-weight:850;color:#fff!important
+}
+.androidcase-copy h1 span{color:#70edb9}
+html body.portfolio-detail-page .hero.androidcase-hero .androidcase-intro {
+  font-size:clamp(.95rem,1.28vw,1.07rem);line-height:1.83;max-width:54ch;
+  color:#c7d9e8!important
+}
+.androidcase-hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:27px}
+.androidcase-hero-actions a,.androidcase-card-actions a{display:inline-flex;align-items:center;
+  justify-content:center;gap:8px;border-radius:11px;font-size:.89rem;font-weight:850;
+  text-decoration:none;min-height:46px;padding:12px 18px;transition:transform .25s ease,filter .25s ease}
+.androidcase-primary{background:#41dba2;color:#072337!important}
+.androidcase-secondary{border:1px solid rgba(207,230,255,.35);background:rgba(255,255,255,.07);color:#f8fcff!important}
+.androidcase-hero-actions a:hover,.androidcase-card-actions a:hover{filter:brightness(1.07);transform:translateY(-2px)}
+.androidcase-hero-note{font-size:.76rem;line-height:1.65;color:#9eb5cc;margin-top:16px}
+.androidcase-hero-tags{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 0}
+.androidcase-hero-tags span{border:1px solid rgba(167,209,228,.19);border-radius:100px;
+  padding:7px 11px;background:rgba(213,242,255,.055);color:#b6d1df;font-size:.76rem;font-weight:750}
+.androidcase-stage{--px:0;--py:0;position:relative;min-height:595px;perspective:1100px;isolation:isolate}
+.androidcase-stage .craft3d-canvas{position:absolute;inset:0;min-height:0;height:100%;width:100%;opacity:.36;
+  border:0;box-shadow:none;pointer-events:none;
+  background:transparent!important;z-index:0;filter:blur(1px);
+  transform:translate3d(calc(var(--px) * -12px),calc(var(--py) * -10px),-65px) scale(1.08)}
+.androidcase-stage .craft3d-canvas .craft3d-stage{transform:scale(.95)}
+.androidcase-depth-grid{position:absolute;inset:32px 0;z-index:1;opacity:.38;pointer-events:none;
+  background-image:linear-gradient(rgba(122,223,210,.1) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(122,223,210,.1) 1px,transparent 1px);background-size:34px 34px;
+  transform:perspective(480px) rotateY(-26deg) rotateX(24deg) translate3d(calc(var(--px) * 6px),calc(var(--py) * 4px),0);
+  mask-image:radial-gradient(ellipse,black 14%,transparent 75%)}
+.androidcase-orbit{position:absolute;z-index:1;inset:10% 6%;border:1px solid rgba(101,234,206,.28);
+  border-radius:50%;transform:rotate(25deg) rotateY(35deg);animation:androidcase-pulse 9s ease-in-out infinite;pointer-events:none}
+.androidcase-orbit--two{inset:15% 0;transform:rotate(-35deg) rotateX(34deg);border-color:rgba(125,146,243,.25);animation-delay:-3s}
+.androidcase-device-wrap{position:absolute;z-index:4;inset:3% 0 1%;display:grid;place-items:center;pointer-events:none;
+  transform:translate3d(calc(var(--px) * 11px),calc(var(--py) * 9px),0);
+  transition:transform .28s ease;transform-style:preserve-3d}
+.androidcase-device-link{pointer-events:auto;display:block;outline-offset:9px;text-decoration:none;
+  transform:rotateY(-10deg) rotateX(5deg) rotateZ(4deg);
+  transition:transform .3s ease;filter:drop-shadow(12px 27px 32px rgba(0,0,0,.42))}
+.androidcase-device-link:hover{transform:rotateY(-3deg) rotateX(2deg) rotateZ(0)}
+.androidcase-phone{position:relative;display:block;width:244px;max-width:100%;padding:11px;
+  border-radius:43px;box-sizing:border-box;
+  background:linear-gradient(125deg,#8198aa,#17273b 17%,#080e1b 66%,#607985 95%);
+  border:2px solid rgba(207,247,245,.55);box-shadow:inset 0 0 0 2px rgba(8,16,27,.8),18px 18px 0 rgba(5,13,24,.36)}
+.androidcase-phone:before{content:"";position:absolute;right:-5px;top:94px;width:4px;height:51px;
+  border-radius:0 3px 3px 0;background:#9cb8c0}
+.androidcase-phone:after{content:"";position:absolute;left:50%;top:12px;transform:translateX(-50%);
+  width:57px;height:12px;background:#091321;border-radius:0 0 12px 12px;z-index:2;box-shadow:0 1px 6px rgba(0,0,0,.5)}
+.androidcase-screen{display:block;width:100%;height:auto;aspect-ratio:176/367;object-fit:cover;
+  border-radius:32px;background:#101d30;box-shadow:inset 0 0 0 2px #081322}
+.androidcase-shadow{position:absolute;z-index:2;left:27%;right:20%;bottom:22px;height:45px;border-radius:50%;
+  background:rgba(0,0,0,.68);filter:blur(28px)}
+.androidcase-float{position:absolute;z-index:6;border-radius:14px;padding:11px 14px;color:#163147;
+  background:rgba(245,253,252,.96);border:1px solid #fff;box-shadow:0 19px 42px rgba(0,0,0,.24);
+  font-size:.75rem;font-weight:850;white-space:nowrap;pointer-events:none;
+  animation:androidcase-float 6s ease-in-out infinite}
+.androidcase-float--left{left:0;top:24%;transform:rotate(-7deg)}
+.androidcase-float--left:before{content:"<>";margin-right:7px;color:#2e9e90;font-weight:950}
+.androidcase-float--right{right:-1%;bottom:24%;transform:rotate(5deg);animation-delay:-2.5s}
+.androidcase-float--right:before{content:"●";margin-right:8px;color:#40c99c}
+.androidcase-annotation{position:absolute;z-index:2;right:4%;top:16%;font-size:10px;
+  color:#79b9ad;letter-spacing:.18em;font-weight:900;pointer-events:none}
+.androidcase-portfolio{padding:56px 0 17px}
+.androidcase-portfolio-heading{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:26px}
+.androidcase-portfolio-heading .androidcase-overline{display:block;font-size:.73rem;font-weight:900;letter-spacing:.17em;color:#177f74}
+.androidcase-portfolio-heading h2{font-size:clamp(1.85rem,3.4vw,2.6rem);letter-spacing:-.045em;color:#162841;margin:9px 0}
+.androidcase-portfolio-heading p{color:#60748b;max-width:60ch;line-height:1.7}
+.androidcase-project{display:grid;grid-template-columns:minmax(250px,.9fr) minmax(0,1.1fr);
+  gap:0;background:#fff;border-radius:25px;overflow:hidden;border:1px solid #e0e7ed;
+  box-shadow:0 20px 60px rgba(18,36,62,.07)}
+.androidcase-project-media{position:relative;min-height:528px;background:
+  radial-gradient(circle at 50% 37%,rgba(67,216,173,.23),transparent 45%),
+  linear-gradient(140deg,#102538,#101b2e 78%);
+  display:flex;align-items:center;justify-content:center;overflow:hidden}
+.androidcase-project-media:before{content:"";position:absolute;inset:0;opacity:.29;
+  background-image:radial-gradient(rgba(128,219,210,.4) 1px,transparent 1px);
+  background-size:25px 25px;mask-image:radial-gradient(ellipse,black,transparent 68%)}
+.androidcase-project-media .androidcase-phone{width:213px;position:relative;z-index:2;
+  box-shadow:inset 0 0 0 2px rgba(8,16,27,.8),14px 19px 0 rgba(5,13,24,.37);
+  transform:rotate(-3deg);transition:transform .28s ease}
+.androidcase-project-media a:hover .androidcase-phone{transform:rotate(0deg) translateY(-5px)}
+.androidcase-project-media a{z-index:2;text-decoration:none;display:block;outline-offset:7px}
+.androidcase-project-content{padding:clamp(28px,4vw,54px);align-self:center}
+.androidcase-project-kicker{color:#198b7b;letter-spacing:.14em;font-size:.73rem;font-weight:900;text-transform:uppercase}
+.androidcase-project-content h3{font-size:clamp(1.65rem,2.6vw,2.2rem);letter-spacing:-.045em;line-height:1.18;
+  color:#162841;margin:14px 0 17px}
+.androidcase-project-content p{font-size:.96rem;line-height:1.76;color:#5e718b}
+.androidcase-features{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:24px 0}
+.androidcase-features span{display:flex;align-items:center;gap:10px;border-radius:11px;background:#f1f7f8;
+  padding:12px 13px;font-size:.84rem;font-weight:800;color:#2e5965}
+.androidcase-features span:before{content:"✓";color:#199e78}
+.androidcase-card-actions{display:flex;gap:11px;flex-wrap:wrap;margin:25px 0}
+.androidcase-card-actions .androidcase-card-primary{background:#122942;color:#fff}
+.androidcase-card-actions .androidcase-card-secondary{color:#1d4b5a;border:1px solid #d0e3e4}
+.androidcase-disclosure{padding:13px 15px;border-left:3px solid #3ec99d;background:#edf8f5;
+  border-radius:8px;font-size:.78rem!important;line-height:1.65!important;color:#456a6b!important}
+.androidcase-source{margin:35px 0;padding:32px 38px;display:flex;gap:28px;justify-content:space-between;
+  align-items:center;border-radius:20px;background:#eff4fa;border:1px solid #dce5f0}
+.androidcase-source h2{font-size:1.3rem;color:#18334e;letter-spacing:-.03em;margin:0 0 10px}
+.androidcase-source p{font-size:.89rem;line-height:1.75;color:#5b7189;max-width:730px}
+.androidcase-source a{flex-shrink:0;border-radius:10px;background:#18324d;color:#fff;text-decoration:none;
+  padding:13px 19px;font-weight:800;font-size:.85rem}
+@keyframes androidcase-float{0%,100%{translate:0 0}50%{translate:0 -10px}}
+@keyframes androidcase-pulse{0%,100%{opacity:.45;scale:1}50%{opacity:.87;scale:1.035}}
+@media(max-width:1080px){
+  .androidcase-hero-grid{gap:18px}
+  .androidcase-float--left{left:2%}.androidcase-float--right{right:2%}
+}
+@media(max-width:860px){
+  .androidcase-hero-grid{grid-template-columns:1fr;gap:10px}
+  .androidcase-stage{min-height:540px}
+  .androidcase-project{grid-template-columns:1fr}
+  .androidcase-project-media{min-height:460px}
+  .androidcase-project-media .androidcase-phone{width:188px}
+}
+@media(max-width:580px){
+  html body.portfolio-detail-page .hero.androidcase-hero{padding:45px 0 48px}
+  .androidcase-hero-grid{gap:0}
+  html body.portfolio-detail-page .hero.androidcase-hero h1{font-size:clamp(2.25rem,9vw,3rem)}
+  .androidcase-hero-actions a{flex:1;min-width:145px}
+  .androidcase-stage{min-height:500px}
+  .androidcase-device-link{transform:rotateY(-6deg) rotateX(3deg) rotateZ(2deg)}
+  .androidcase-phone{width:220px}
+  .androidcase-float{font-size:.65rem;padding:9px}
+  .androidcase-float--left{left:0;top:22%}
+  .androidcase-float--right{right:0;bottom:19%}
+  .androidcase-portfolio{padding-top:38px}
+  .androidcase-project-content{padding:26px 23px}
+  .androidcase-project-media{min-height:428px}
+  .androidcase-project-media .androidcase-phone{width:180px}
+  .androidcase-project-content h3{font-size:1.7rem}
+  .androidcase-features{gap:7px}
+  .androidcase-features span{padding:10px 9px;font-size:.75rem}
+  .androidcase-source{padding:25px;display:block}
+  .androidcase-source a{display:inline-flex;margin-top:15px}
+}
+html[data-theme="dark"] .androidcase-portfolio-heading h2,
+html[data-theme="dark"] .androidcase-project-content h3,
+html[data-theme="dark"] .androidcase-source h2{color:#f1f6ff}
+html[data-theme="dark"] .androidcase-portfolio-heading p,
+html[data-theme="dark"] .androidcase-project-content p,
+html[data-theme="dark"] .androidcase-source p{color:#c5d4e7}
+html[data-theme="dark"] .androidcase-project{background:#19293d;border-color:#3a5065}
+html[data-theme="dark"] .androidcase-features span{background:#263d4b;color:#c7e9dc}
+html[data-theme="dark"] .androidcase-source{background:#1d3044;border-color:#384f67}
+html[data-theme="dark"] .androidcase-disclosure{background:#193d36;color:#bfe4d5!important}
+@media(prefers-reduced-motion:reduce){
+  .androidcase-float,.androidcase-orbit{animation:none!important}
+  .androidcase-device-wrap{transform:none!important;transition:none!important}
+  .androidcase-device-link,.androidcase-project-media .androidcase-phone{transition:none!important}
+  .androidcase-device-link:hover,.androidcase-project-media a:hover .androidcase-phone{transform:none!important}
+  .androidcase-hero-actions a,.androidcase-card-actions a{transition:none!important}
+  .androidcase-hero-actions a:hover,.androidcase-card-actions a:hover{transform:none!important}
+}
