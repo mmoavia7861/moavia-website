@@ -342,27 +342,48 @@ export default function App() {
         <section id="about" className="premium-about" aria-labelledby="about-title">
           <div className="premium-container premium-about-grid">
             <div className="premium-about-intro">
-              <p className="premium-kicker">A LITTLE ABOUT ME</p>
-              <h2 id="about-title">Curious by nature.<br /><em>Focused on building.</em></h2>
-              <p>I'm Moavia Hassan, a student developer based in Islamabad, Pakistan. I work on SEO, practical web tools, responsive websites and software projects while growing my skills in Android development and AI automation.</p>
-              <p>I believe good software should feel easy to use, communicate clearly and be built with care. This site shares genuine public work rather than unverified agency claims.</p>
-              <div className="premium-social-links">
+              <p className="premium-kicker">THE PERSON BEHIND THE PROJECTS</p>
+              <h2 id="about-title">Hi, I'm Moavia.<br /><em>I turn ideas into useful digital experiences.</em></h2>
+              <p className="premium-about-lead">I'm a student developer based in Islamabad, Pakistan, combining practical website development, technical SEO and interface design to build things people can actually use.</p>
+              <p>My public work includes ToolsCresta, an online utilities platform, and responsive web and e-commerce projects. I'm also expanding my hands-on skills in Android development and AI-driven automation.</p>
+              <div className="premium-about-specialties" aria-label="Focus areas">
+                <span><Code2 size={16} aria-hidden="true" /> Web &amp; e-commerce</span>
+                <span><Globe2 size={16} aria-hidden="true" /> Technical SEO</span>
+                <span><Smartphone size={16} aria-hidden="true" /> Android learning</span>
+                <span><Workflow size={16} aria-hidden="true" /> AI workflows</span>
+              </div>
+              <div className="premium-about-actions">
+                <a className="premium-about-cta" href="/about/">More about me <ArrowUpRight size={18} aria-hidden="true" /></a>
+                <a className="premium-about-plain" href="/projects/">See real projects <ArrowRight size={17} aria-hidden="true" /></a>
+              </div>
+              <div className="premium-social-links" aria-label="Professional profiles">
                 <a href={safeHref(siteSettings.socialGithub) ? siteSettings.socialGithub : SITE_DEFAULTS.socialGithub} target="_blank" rel="noopener noreferrer"><Github size={17} aria-hidden="true" /> GitHub</a>
                 <a href={safeHref(siteSettings.socialLinkedin) ? siteSettings.socialLinkedin : SITE_DEFAULTS.socialLinkedin} target="_blank" rel="noopener noreferrer"><Linkedin size={17} aria-hidden="true" /> LinkedIn</a>
-                <a href="/about/">Full story <ArrowUpRight size={17} aria-hidden="true" /></a>
+                <a href="/contact/"><Mail size={17} aria-hidden="true" /> Contact</a>
               </div>
             </div>
-            <div className="premium-process">
-              <p className="premium-process-label">MY APPROACH</p>
+            <div className="premium-process premium-about-panel">
+              <div className="premium-about-panel-top">
+                <span className="premium-about-panel-orb" aria-hidden="true"><Code2 size={24} /></span>
+                <div>
+                  <p className="premium-process-label">MY WORKING PHILOSOPHY</p>
+                  <h3>Clarity first. Quality always.</h3>
+                </div>
+              </div>
+              <p className="premium-about-panel-intro">A thoughtful project starts with understanding the problem—not with adding unnecessary features.</p>
               {[
-                ['01','Understand the problem','Start with real goals, users and constraints.'],
-                ['02','Build deliberately','Work with thoughtful UI, maintainable code and sensible integrations.'],
-                ['03','Test and improve','Review real behavior, accessibility and device performance.']
+                ['01','Discover','Learn the audience, goal and real-world constraints.'],
+                ['02','Design & develop','Create clear flows, responsive layouts and maintainable code.'],
+                ['03','Review & refine','Check performance, accessibility and actual user journeys.']
               ].map(step => <div className="premium-process-step" key={step[0]}>
                 <span>{step[0]}</span>
-                <div><h3>{step[1]}</h3><p>{step[2]}</p></div>
-                <ArrowUpRight size={17} aria-hidden="true" />
+                <div><h4>{step[1]}</h4><p>{step[2]}</p></div>
               </div>)}
+              <div className="premium-about-panel-proof">
+                <span className="premium-about-proof-dot" aria-hidden="true" />
+                <div><strong>Open work, real links</strong><small>Explore public demos and source repositories in my portfolio.</small></div>
+                <a href="/projects/" aria-label="Explore public portfolio projects"><ArrowUpRight size={19} /></a>
+              </div>
             </div>
           </div>
         </section>
