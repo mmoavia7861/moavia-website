@@ -138,6 +138,10 @@
   .craft3d-detail-hero .craft3d-canvas{height:265px;min-height:265px}
   .craft3d-scene-card-body{padding:21px 22px 24px}
 }
+/* Stop GPU/compositor animation work whenever the scene is well off-screen. */
+.craft3d-canvas:not(.craft3d-in-view) .craft3d-float-main,
+.craft3d-canvas:not(.craft3d-in-view) .craft3d-floating-panel,
+.craft3d-canvas:not(.craft3d-in-view) .craft3d-flow-node{animation-play-state:paused}
 @media(prefers-reduced-motion:reduce){
   .craft3d-float-main,.craft3d-floating-panel,.craft3d-flow-node{animation:none!important}
   .craft3d-scene-card{transition:none}
