@@ -76,6 +76,54 @@ const webHero = (title, intro, featured) => '<div class="hero webcase-page-hero"
   + '<span class="webcase-floating webcase-floating--layout" aria-hidden="true">Responsive interfaces</span>'
   + '</div></div></div>';
 
+const androidScreenshot = '/android/moavia-seo-pro-ui.jpg';
+const androidSource = projects.find(item => item.kind === 'android');
+if (!androidSource || androidSource.id !== 'moavia-app') {
+  throw Error('Expected the independently verifiable Kotlin/Compose starter.');
+}
+const androidPhone = (className = '') => '<span class="androidcase-phone ' + className + '">'
+  + '<img class="androidcase-screen" src="' + androidScreenshot + '" width="176" height="367"'
+  + ' alt="Moavia SEO Pro mobile interface screenshot showing an agency introduction, consultation buttons and SEO, Web Dev, Meta Ads and Google Ads sections">'
+  + '</span>';
+const androidHero = (title, intro) => '<div class="hero androidcase-hero"><div class="wrap androidcase-hero-grid">'
+  + '<div class="androidcase-copy"><span class="androidcase-eyebrow">MOBILE DESIGN / ANDROID DEVELOPMENT</span>'
+  + '<h1>Android apps.<br><span>Thoughtfully designed.</span></h1>'
+  + '<p class="portfolio-intro androidcase-intro">' + esc(intro) + '</p>'
+  + '<div class="androidcase-hero-actions"><a class="androidcase-primary" href="#android-project">Explore the mobile UI ↓</a>'
+  + '<a class="androidcase-secondary" href="' + esc(androidSource.repo) + '" target="_blank" rel="noopener noreferrer">View Kotlin starter source ↗</a></div>'
+  + '<div class="androidcase-hero-tags"><span>Responsive interfaces</span><span>Android UI</span><span>Kotlin / Compose learning</span></div>'
+  + '<p class="androidcase-hero-note">Screenshot provided for this portfolio. Not represented as a Play Store release.</p></div>'
+  + '<div class="androidcase-stage" data-webcase-parallax>'
+  + '<div class="craft3d-canvas craft3d-canvas--large" data-skill-scene="android" role="img" aria-label="Dimensional Android development illustration behind the real UI screenshot"></div>'
+  + '<span class="androidcase-depth-grid" aria-hidden="true"></span>'
+  + '<span class="androidcase-orbit" aria-hidden="true"></span><span class="androidcase-orbit androidcase-orbit--two" aria-hidden="true"></span>'
+  + '<span class="androidcase-shadow" aria-hidden="true"></span>'
+  + '<div class="androidcase-device-wrap"><a class="androidcase-device-link" href="' + androidScreenshot + '"'
+  + ' target="_blank" rel="noopener noreferrer" aria-label="Open the supplied mobile interface screenshot">'
+  + androidPhone() + '</a></div>'
+  + '<span class="androidcase-float androidcase-float--left" aria-hidden="true">Android UI design</span>'
+  + '<span class="androidcase-float androidcase-float--right" aria-hidden="true">Kotlin · Jetpack Compose</span>'
+  + '<span class="androidcase-annotation" aria-hidden="true">MOBILE / EXPERIENCE</span></div></div></div>';
+const androidBody = '<section class="androidcase-portfolio" id="android-project" aria-labelledby="androidcase-project-heading">'
+  + '<div class="androidcase-portfolio-heading"><div><span class="androidcase-overline">01 / SELECTED MOBILE INTERFACE</span>'
+  + '<h2 id="androidcase-project-heading">Explore the Android UI</h2>'
+  + '<p>A real mobile-screen image provided for the portfolio, displayed in a dimensional device and paired with transparent project links.</p>'
+  + '</div></div>'
+  + '<article class="androidcase-project"><div class="androidcase-project-media">'
+  + '<a href="' + androidScreenshot + '" target="_blank" rel="noopener noreferrer" aria-label="View supplied Moavia SEO Pro mobile screenshot">'
+  + androidPhone() + '</a></div>'
+  + '<div class="androidcase-project-content"><span class="androidcase-project-kicker">ANDROID UI / PORTFOLIO PREVIEW</span>'
+  + '<h3>Moavia SEO Pro — Mobile Experience</h3>'
+  + '<p>This supplied interface screenshot presents a marketing and development agency experience with clear navigation, consultation actions and a department overview.</p>'
+  + '<div class="androidcase-features"><span>SEO</span><span>Web development</span><span>Meta Ads</span><span>Google Ads</span></div>'
+  + '<div class="androidcase-card-actions"><a class="androidcase-card-primary" href="' + androidScreenshot + '" target="_blank" rel="noopener noreferrer">View actual screenshot ↗</a>'
+  + '<a class="androidcase-card-secondary" href="/contact/">Discuss an Android project →</a></div>'
+  + '<p class="androidcase-disclosure">The displayed screen is a user-supplied UI preview. Its implementation, release status and working features are not independently verified; it is not a Play Store listing.</p></div></article>'
+  + '</section><section class="androidcase-source" aria-label="Verified Android source repository"><div>'
+  + '<h2>Kotlin &amp; Jetpack Compose — Source Starter</h2>'
+  + '<p>The linked GitHub repository currently contains a basic Android scaffold showing “Hello Android!”. It is a separate code starter, not verified source for the full mobile screen shown above.</p>'
+  + '</div><a href="' + esc(androidSource.repo) + '" target="_blank" rel="noopener noreferrer">Open GitHub source ↗</a></section>';
+
 function buildPage({path, title, intro, body, index = true, scene = null, featured = null}) {
   const sceneLabels = {
     web: 'Animated three-dimensional browser showcasing a modern website',
@@ -103,11 +151,13 @@ function buildPage({path, title, intro, body, index = true, scene = null, featur
     + '<link rel="stylesheet" href="/seo/pages.css">'
     + (scene ? '<link rel="stylesheet" href="/skill-scenes.css"><script src="/skill-scenes.js" defer></script>' : '')
     + (scene === 'web' ? '<link rel="stylesheet" href="/web-showcase.css"><script src="/web-showcase.js" defer></script>' : '')
+    + (scene === 'android' ? '<link rel="stylesheet" href="/android-showcase.css"><script src="/web-showcase.js" defer></script>' : '')
     + style
     + '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, '\\u003c') + '</script></head><body class="portfolio-detail-page">'
     + '<header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" width="42" height="42" alt="Moavia Hassan logo">Moavia Hassan</a>' + nav + '</div></header>'
     + '<main><div class="wrap subnav"><a href="/">Home</a> / ' + esc(title.replace(' | Moavia Hassan','')) + '</div>'
     + (scene === 'web' && featured ? webHero(title,intro,featured)
+    : scene === 'android' ? androidHero(title,intro)
     : '<div class="hero"><div class="wrap">' + (scene ? '<div class="craft3d-detail-hero"><div class="craft3d-detail-copy">' : '')
       + '<span class="pill">Personal developer portfolio</span>'
       + '<h1>' + esc(title.replace(' | Moavia Hassan','')) + '</h1><p class="portfolio-intro">' + esc(intro) + '</p>'
@@ -150,10 +200,8 @@ paths.push(buildPage({
   path: '/android-development/',
   title: 'Android App Development | Moavia Hassan',
   scene: 'android',
-  intro: 'My Android development learning journey and source-verifiable mobile application prototypes. I do not label unfinished starter projects as published Play Store apps.',
-  body: '<section><h2>Mobile development</h2><p>My Android work currently includes Kotlin and Jetpack Compose exploration. I plan further mobile interfaces and will add releases only after there is a verifiable build or store listing.</p></section>'
-    + '<section><h2>Android project</h2><div class="portfolio-cards">' + androidProjects.map(projectCard).join('') + '</div></section>'
-    + '<p class="portfolio-note">The current Android starter displays a simple Hello Android! greeting. It is not a released product. The source repository is linked for direct verification.</p>'
+  intro: 'Explore a supplied Moavia SEO Pro mobile interface screenshot with Android-inspired depth animation. My independently verifiable Kotlin and Jetpack Compose starter is linked separately.',
+  body: androidBody
 }));
 paths.push(buildPage({
   path: '/ai-automations/',
