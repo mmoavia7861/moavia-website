@@ -147,3 +147,22 @@ html[data-theme="dark"] .webcase-tags span{color:#d9e4ff;border-color:#40516d}
 html[data-theme="dark"] .webcase-photo-note{color:#c0cce1}
 html[data-theme="dark"] .webcase-photo-note strong{color:#e4eeff}
 html[data-theme="dark"] .webcase-card-actions a:last-child{border-color:#475574;color:#d2dcff}
+
+
+/* IMPORTANT: portfolio-premium.css is injected after this stylesheet and its
+   generic .hero selector otherwise replaces the cinematic navy surface.
+   Target this specific hero with greater specificity than the shared .hero. */
+html body.portfolio-detail-page .hero.webcase-page-hero{
+  background:radial-gradient(ellipse at 82% 24%,rgba(116,112,255,.20),transparent 46%),
+    linear-gradient(125deg,#0a1428 5%,#152646 62%,#0e2a3c 100%)!important;
+  color:#f7fbff!important;
+  border-color:transparent!important;
+}
+html body.portfolio-detail-page .hero.webcase-page-hero .webcase-hero-copy h1{color:#fff!important}
+html body.portfolio-detail-page .hero.webcase-page-hero .webcase-hero-copy p{color:#d1def2!important}
+html body.portfolio-detail-page .hero.webcase-page-hero .webcase-secondary{color:#f4f8ff!important}
+html body.portfolio-detail-page .hero.webcase-page-hero .webcase-primary{color:#12283b!important}
+/* The entire decorative surface must remain BEHIND the tangible screenshot. */
+html body.portfolio-detail-page .webcase-stage>.craft3d-canvas{z-index:0}
+html body.portfolio-detail-page .webcase-shot-wrap{z-index:5}
+html body.portfolio-detail-page .webcase-floating{z-index:6}
