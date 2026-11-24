@@ -22,7 +22,7 @@ export function aboutProfileHero() {
 export function aboutProfileContent(){
   const focus=[
     ['01','Web development','Responsive websites, clear user interfaces, React, TypeScript and accessible web experiences.','/web-development/','Web development'],
-    ['02','Technical SEO','Metadata, crawlability, information architecture and practical browser-based SEO tools.','/tools/','SEO tools'],
+    ['02','Technical SEO','Metadata, crawlability, information architecture and practical technical SEO services.','/hire-me/','SEO services'],
     ['03','Android development','Kotlin and Jetpack Compose learning, with a source-verifiable starter and a separate UI preview.','/android-development/','Android portfolio'],
     ['04','AI automation','APIs, AI-assisted utilities and experiments in reliable workflows with human review.','/ai-automations/','AI experiments']
   ].map(([id,title,description,href,label])=>
