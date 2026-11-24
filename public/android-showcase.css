@@ -177,3 +177,12 @@ html[data-theme="dark"] .androidcase-disclosure{background:#193d36;color:#bfe4d5
   .androidcase-hero-actions a,.androidcase-card-actions a{transition:none!important}
   .androidcase-hero-actions a:hover,.androidcase-card-actions a:hover{transform:none!important}
 }
+
+
+/* Explicitly win against the global dark-mode .hero !important rule loaded later. */
+html[data-theme="dark"] body.portfolio-detail-page .hero.androidcase-hero{
+  background:radial-gradient(ellipse at 79% 28%,rgba(21,198,161,.17),transparent 48%),
+    radial-gradient(ellipse at 38% 93%,rgba(94,118,237,.14),transparent 52%),
+    linear-gradient(119deg,#071521 0%,#12273c 58%,#0b172a 100%)!important;
+  color:#f3faff!important;
+}
