@@ -27,7 +27,9 @@ for (const id of ['toolscresta','draliwellness']) {
   assert.ok(hire.includes('href="/projects/'+id+'/'), 'Public project needs details link: '+id);
 }
 assert.ok(hire.includes('href="https://toolscresta.com/"') && hire.includes('href="https://draliwellness.com/"'), 'Real project website links required');
-assert.ok((hire.match(/data-portfolio-shot/g)||[]).length >= 3, 'Featured hero and selected projects should show real captured pages');
+assert.equal((hire.match(/data-portfolio-shot/g)||[]).length,2, 'Only two real project thumbnails should load below the hero');
+assert.ok(hire.includes('class="hire-premium-ui-board"'),'Hero should display a bounded original illustration');
+assert.ok(!hire.split('</section>')[0].includes('data-portfolio-shot'),'Hero must not embed a giant full-page screenshot');
 assert.ok(hire.includes('data-portfolio-fallback') && hire.includes('data-fallback-src'), 'Unavailable images must have alternative preview and readable fallback');
 for (const link of ['mailto:hello@moaviaseo.com','https://wa.me/923234313869','https://www.fiverr.com/moavia_seopro','https://www.upwork.com/freelancers/~01c3735023b2f296fa']) {
   assert.ok(hire.includes(link), 'Missing contact channel: '+link);
@@ -38,6 +40,8 @@ assert.ok(css.includes('@media(max-width:600px)'), 'Narrow mobile support requir
 assert.ok(css.includes('prefers-reduced-motion:reduce'), 'Reduced motion support required');
 assert.ok(css.includes('html[data-theme="dark"]'), 'Manual dark-mode support required');
 assert.ok(css.includes('body.hire-premium-page .hire-premium-hero'), 'High-contrast hero style must be scoped to this route');
+assert.ok(css.includes('body.hire-premium-page .hire-premium-ui-board'), 'Illustration needs bounded 3D styling');
+assert.ok(css.includes('body.hire-premium-page .hire-premium-project-visual .hire-premium-shot img'), 'Project screenshots need containment rules');
 assert.ok(!hire.includes('10 years experience') && !hire.includes('100% guaranteed ranking') && !hire.includes('50+ clients'), 'Do not fabricate proof or guarantee outcomes');
 assert.ok(contact.includes('<body class="contact-premium-page">') && contact.includes('href="/contact-premium.css"'), 'Contact page must stay untouched');
 assert.ok(existsSync(join(root,'dist/hire-premium.css')), 'Hire stylesheet must ship in dist');

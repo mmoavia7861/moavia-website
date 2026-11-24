@@ -5,13 +5,13 @@ const shot = (id, url, title, eager=false) =>
   '<span class="hire-premium-shot">'
   +'<img data-portfolio-shot src="/project-captures/'+id+'.jpg"'
   +' data-fallback-src="https://s.wordpress.com/mshots/v1/'+encodeURIComponent(url)+'?w=960"'
-  +' alt="Captured homepage preview of '+title+'" width="1440" height="900"'
+  +' alt="Captured homepage preview of '+title+'" width="580" height="363"'
+  +' style="display:block;width:100%;max-width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top center"'
   +' loading="'+(eager?'eager':'lazy')+'" decoding="async" referrerpolicy="no-referrer">'
   +'<span data-portfolio-fallback hidden class="hire-premium-shot-fallback">Homepage screenshot temporarily unavailable. Open the live website to view the current project.</span>'
   +'</span>';
 
 export function hireHero(){
- const url='https://toolscresta.com/';
  return [
   '<section class="hire-premium-hero" aria-labelledby="hire-premium-title">',
   '<div class="hire-premium-hero-grid" aria-hidden="true"></div>',
@@ -30,15 +30,22 @@ export function hireHero(){
   '<span><i aria-hidden="true"></i>Responsive design</span>',
   '<span><i aria-hidden="true"></i>Honest communication</span>',
   '</div></div>',
-  '<div class="hire-premium-hero-visual" aria-label="Featured public web development project">',
+  '<div class="hire-premium-hero-visual" aria-label="Decorative visual illustrating website layout and front-end development">',
   '<div class="hire-premium-visual-rings" aria-hidden="true"></div>',
-  '<span class="hire-premium-float hire-premium-float--one" aria-hidden="true">&lt;/&gt; Web engineering</span>',
-  '<span class="hire-premium-float hire-premium-float--two" aria-hidden="true">✦ Thoughtful UX</span>',
-  '<a class="hire-premium-featured-browser" href="'+url+'" target="_blank" rel="noopener noreferrer" aria-label="Open ToolsCresta live website">',
-  '<span class="hire-premium-browser-top" aria-hidden="true"><i></i><i></i><i></i><span>toolscresta.com</span></span>',
-  shot('toolscresta',url,'ToolsCresta',true),
-  '<span class="hire-premium-feature-label">LIVE PROJECT EXAMPLE <b>VIEW WEBSITE ↗</b></span>',
-  '</a>',
+  '<span class="hire-premium-float hire-premium-float--one" aria-hidden="true">&lt;/&gt; Front-end</span>',
+  '<span class="hire-premium-float hire-premium-float--two" aria-hidden="true">✦ Responsive design</span>',
+  '<div class="hire-premium-ui-board" role="img" aria-label="Original illustration of a responsive website interface with code and layout panels">',
+  '<div class="hire-premium-ui-top" aria-hidden="true"><i></i><i></i><i></i><span>PROJECT WORKSPACE</span></div>',
+  '<div class="hire-premium-ui-shell" aria-hidden="true">',
+  '<div class="hire-premium-ui-sidebar"><span></span><span></span><span></span><span></span></div>',
+  '<div class="hire-premium-ui-main">',
+  '<span class="hire-premium-ui-label">USER EXPERIENCE · DEVELOPMENT</span>',
+  '<strong>Digital experiences,<br>carefully crafted.</strong>',
+  '<div class="hire-premium-ui-line hire-premium-ui-line--long"></div>',
+  '<div class="hire-premium-ui-line hire-premium-ui-line--short"></div>',
+  '<div class="hire-premium-ui-panels"><i></i><i></i><i></i></div>',
+  '<span class="hire-premium-ui-pill">Design → Build → Refine</span>',
+  '</div></div></div>',
   '</div>',
   '</div></section>'
  ].join('');

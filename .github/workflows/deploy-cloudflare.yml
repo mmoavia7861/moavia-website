@@ -53,6 +53,7 @@ jobs:
           PID=$!
           trap 'kill "$PID" 2>/dev/null || true' EXIT
           node scripts/check-android-layout-browser.mjs http://127.0.0.1:4173/android-development/
+          node scripts/check-hire-layout-browser.mjs http://127.0.0.1:4173/hire-me/
 
       - name: Verify standalone tool pages are in production output
         shell: bash
@@ -108,6 +109,11 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: deploy --keep-vars
+
+      - name: Verify production Hire Me layout, CSS and screen widths
+        env:
+          MOAVIA_PLAYWRIGHT_PACKAGE: /tmp/moavia-playwright/node_modules/playwright
+        run: node scripts/check-hire-layout-browser.mjs https://moaviaseo.com/hire-me/
 
       - name: Verify live social image and metadata (diagnostic)
         shell: bash

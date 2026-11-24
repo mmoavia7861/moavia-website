@@ -237,3 +237,86 @@ html[data-theme="dark"] body.hire-premium-page .hire-premium-project-links a:las
  body.hire-premium-page .hire-premium-service-card:hover,
  body.hire-premium-page .hire-premium-project-visual:hover .hire-premium-shot img{transform:none!important}
 }
+
+
+/* Reworked hero: a native vector-like UI illustration, never a giant screenshot.
+   Project screenshots appear only in the bounded, below-fold case study cards. */
+body.hire-premium-page,
+body.hire-premium-page main{max-width:100%;overflow-x:clip}
+body.hire-premium-page .hire-premium-hero-layout,
+body.hire-premium-page .hire-premium-hero-layout>*{min-width:0;max-width:100%}
+body.hire-premium-page .hire-premium-hero-visual{position:relative;width:100%;max-width:100%;
+ min-height:390px;overflow:hidden;isolation:isolate;perspective:980px}
+body.hire-premium-page .hire-premium-ui-board{position:absolute;inset:36px 8% 36px 5%;z-index:3;
+ display:flex;flex-direction:column;max-width:100%;overflow:hidden;border-radius:19px;
+ background:linear-gradient(145deg,#192943,#253d64);border:1px solid rgba(229,244,255,.60);
+ box-shadow:0 29px 70px rgba(3,11,27,.46),15px 16px 0 rgba(57,81,128,.28);
+ transform:rotateY(-7deg) rotateX(3deg) rotateZ(-2deg)}
+body.hire-premium-page .hire-premium-ui-top{flex:none;display:flex;align-items:center;gap:6px;
+ background:#13223b;padding:10px 13px;min-height:34px}
+body.hire-premium-page .hire-premium-ui-top i{display:block;width:7px;height:7px;border-radius:50%;background:#f3ad9a}
+body.hire-premium-page .hire-premium-ui-top i:nth-child(2){background:#f6d798}
+body.hire-premium-page .hire-premium-ui-top i:nth-child(3){background:#a1e6ca}
+body.hire-premium-page .hire-premium-ui-top span{font-size:.61rem;color:#a6bce1;
+ letter-spacing:.12em;font-weight:850;margin-left:13px}
+body.hire-premium-page .hire-premium-ui-shell{min-height:0;display:flex;flex:1;padding:13px;gap:12px}
+body.hire-premium-page .hire-premium-ui-sidebar{width:15%;max-width:65px;min-width:32px;flex:none;
+ padding:17px 11px;display:flex;flex-direction:column;gap:17px;
+ background:#12233e;border:1px solid #29415f;border-radius:11px}
+body.hire-premium-page .hire-premium-ui-sidebar span{display:block;width:100%;height:7px;
+ border-radius:20px;background:#385477}
+body.hire-premium-page .hire-premium-ui-sidebar span:first-child{background:#b2a7fb;height:20px;border-radius:7px}
+body.hire-premium-page .hire-premium-ui-main{flex:1;min-width:0;display:flex;flex-direction:column;
+ align-items:flex-start;padding:22px 20px;border:1px solid #304967;border-radius:12px;
+ background:radial-gradient(ellipse at 83% 13%,rgba(151,149,255,.15),transparent 50%),
+ linear-gradient(140deg,#1b3153,#142640)}
+body.hire-premium-page .hire-premium-ui-label{font-size:.56rem;letter-spacing:.14em;
+ color:#9ce9d4;font-weight:860}
+body.hire-premium-page .hire-premium-ui-main strong{color:#f5f9ff;font-size:clamp(1rem,2.2vw,1.66rem);
+ line-height:1.25;letter-spacing:-.045em;margin:14px 0 16px}
+body.hire-premium-page .hire-premium-ui-line{height:7px;border-radius:10px;
+ background:linear-gradient(90deg,#6480b1,#405879);margin:0 0 9px}
+body.hire-premium-page .hire-premium-ui-line--long{width:82%}
+body.hire-premium-page .hire-premium-ui-line--short{width:56%}
+body.hire-premium-page .hire-premium-ui-panels{display:grid;grid-template-columns:repeat(3,1fr);
+ gap:9px;width:100%;margin:21px 0;flex:1;min-height:31px}
+body.hire-premium-page .hire-premium-ui-panels i{display:block;
+ min-height:41px;border:1px solid #3b567c;border-radius:9px;
+ background:linear-gradient(145deg,#365482,#203754)}
+body.hire-premium-page .hire-premium-ui-panels i:nth-child(2){background:linear-gradient(145deg,#277d7c,#1d4d62)}
+body.hire-premium-page .hire-premium-ui-panels i:nth-child(3){background:linear-gradient(145deg,#705bc0,#2e4179)}
+body.hire-premium-page .hire-premium-ui-pill{display:inline-flex;padding:9px 12px;border-radius:8px;
+ background:#9debd0;color:#173045;font-size:.61rem;font-weight:870}
+body.hire-premium-page .hire-premium-project-visual{width:calc(100% - 26px);max-width:100%;
+ height:auto;max-height:390px;min-width:0;overflow:hidden}
+body.hire-premium-page .hire-premium-project-visual .hire-premium-shot{width:100%;min-width:0;max-width:100%;
+ max-height:345px;overflow:hidden}
+body.hire-premium-page .hire-premium-project-visual .hire-premium-shot img{max-width:100%;max-height:345px;
+ width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:top center}
+body.hire-premium-page .hire-premium-project-card{min-width:0;max-width:100%;overflow:hidden}
+@media(max-width:820px){
+ body.hire-premium-page .hire-premium-hero-visual{max-width:620px;margin:0 auto}
+ body.hire-premium-page .hire-premium-ui-board{inset:34px 10% 30px 8%}
+}
+@media(max-width:600px){
+ body.hire-premium-page .hire-premium-hero-visual{height:265px;min-height:265px}
+ body.hire-premium-page .hire-premium-ui-board{inset:26px 7% 22px 6%;
+  transform:rotateY(-3deg) rotateZ(-1deg);border-radius:14px}
+ body.hire-premium-page .hire-premium-ui-shell{padding:8px;gap:8px}
+ body.hire-premium-page .hire-premium-ui-main{padding:12px}
+ body.hire-premium-page .hire-premium-ui-top{min-height:25px;padding:7px 9px}
+ body.hire-premium-page .hire-premium-ui-main strong{font-size:clamp(.83rem,4.4vw,1.15rem);margin:9px 0}
+ body.hire-premium-page .hire-premium-ui-line{height:5px;margin-bottom:6px}
+ body.hire-premium-page .hire-premium-ui-panels{margin:10px 0;gap:6px;min-height:25px}
+ body.hire-premium-page .hire-premium-ui-panels i{min-height:25px}
+ body.hire-premium-page .hire-premium-ui-sidebar{min-width:25px;padding:10px 6px;gap:12px}
+ body.hire-premium-page .hire-premium-ui-sidebar span{height:5px}
+ body.hire-premium-page .hire-premium-ui-sidebar span:first-child{height:14px}
+ body.hire-premium-page .hire-premium-ui-pill{padding:5px 8px;font-size:.5rem}
+ body.hire-premium-page .hire-premium-float--one{top:4%;left:1%}
+ body.hire-premium-page .hire-premium-float--two{right:1%;bottom:3%}
+ body.hire-premium-page .hire-premium-project-visual{max-height:315px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.hire-premium-page .hire-premium-ui-board{transform:none}
+}
