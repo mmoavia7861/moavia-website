@@ -36,11 +36,12 @@ const projectCard = item => '<article class="portfolio-card"><span class="label"
 
 // Actual public front pages are requested via the same live-screenshot service
 // used by the individual project case studies. Never replace captures with fake UI.
-const screenshotUrl = url => 'https://image.thum.io/get/width/960/crop/680/maxAge/72/' + url;
+const screenshotUrl = item => '/project-captures/' + item.id + '.webp';
+const screenshotFallback = url => 'https://s.wordpress.com/mshots/v1/' + encodeURIComponent(url) + '?w=960';
 const hostname = url => new URL(url).hostname.replace(/^www\./, '');
 const screenshot = (item, eager = false) => '<span class="webcase-image">'
-  + '<img data-portfolio-shot src="' + esc(screenshotUrl(item.url)) + '" alt="Front-page screenshot preview of ' + esc(item.title) + '"'
-  + ' width="960" height="680" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async" referrerpolicy="no-referrer">'
+  + '<img data-portfolio-shot src="' + esc(screenshotUrl(item)) + '" data-fallback-src="' + esc(screenshotFallback(item.url)) + '" alt="Real homepage screenshot preview of ' + esc(item.title) + '"'
+  + ' width="1440" height="900" loading="' + (eager ? 'eager' : 'lazy') + '" decoding="async" referrerpolicy="no-referrer">'
   + '<span class="webcase-fallback" data-portfolio-fallback hidden>Live front-page screenshot is temporarily unavailable. Open the website to view the real project.</span>'
   + '</span>';
 const browserBar = item => '<span class="webcase-preview-chrome" aria-hidden="true"><i></i><i></i><i></i>'
@@ -139,7 +140,7 @@ paths.push(buildPage({
     + '<p>Every preview links to a public website; each project has a detailed case study and its technology stack.</p></div>'
     + '<span class="webcase-counter">' + webProjects.length + ' PUBLIC WEBSITES</span></div>'
     + '<div class="webcase-grid">' + webProjects.map(webProjectCard).join('') + '</div>'
-    + '<p class="webcase-photo-note"><strong>About screenshots:</strong> Previews are fetched by an external thumbnail service from the listed public homepages. They can become outdated or temporarily unavailable. Open each live website for its current appearance.</p>'
+    + '<p class="webcase-photo-note"><strong>About screenshots:</strong> Previews are browser-rendered captures of public website homepages at deployment time, not fabricated product mockups. If a capture is unavailable, a third-party thumbnail may be used as a fallback. Visit each website for its current version.</p>'
     + '<p class="portfolio-note">These are public projects and design prototypes. Screenshots are not evidence of paid client work, website traffic, sales, or search rankings.</p>'
     + '</section>'
 }));
