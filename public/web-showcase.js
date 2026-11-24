@@ -5,6 +5,13 @@
   document.querySelectorAll('img[data-portfolio-shot]').forEach(image => {
     const fallback = image.parentElement?.querySelector('[data-portfolio-fallback]');
     const onError = () => {
+      // The local capture is the preferred, stable asset. Fall back only when
+      // the browser really cannot load it; never leave a blank screenshot box.
+      if (image.dataset.fallbackAttempted !== 'true' && image.dataset.fallbackSrc) {
+        image.dataset.fallbackAttempted = 'true';
+        image.src = image.dataset.fallbackSrc;
+        return;
+      }
       image.hidden = true;
       if (fallback) fallback.hidden = false;
     };
