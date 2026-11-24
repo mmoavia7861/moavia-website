@@ -10,7 +10,7 @@ const css=read('dist/contact-premium.css');
 const home=read('src/App.tsx');
 
 assert.ok(contact.includes('<body class="contact-premium-page">'),'Contact must get its own isolated premium page layout');
-assert.ok(contact.includes('href="/contact-premium.css"'),'Contact-specific style must load');
+assert.ok(contact.includes('<link rel="stylesheet" href="/seo/pages.css"><link rel="stylesheet" href="/contact-premium.css">'),'Contact CSS link tags must be syntactically well formed');
 assert.ok((contact.match(/<h1(?:\s[^>]*)?>/g)||[]).length===1,'Contact page must have one semantic H1');
 assert.ok(contact.includes('id="contact-premium-heading"'),'Contact H1 should be named for accessibility');
 assert.ok(contact.includes('"@type":"ContactPage"'),'ContactPage structured data should be preserved');
