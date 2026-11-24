@@ -38,6 +38,11 @@ for(const item of web){
 }
 assert.equal((directory.match(/data-portfolio-shot/g)||[]).length,visibleWeb.length,'Directory must preview the five public web sites excluding RankNova');
 assert.ok(!directory.includes('/projects/ranknova/') && !directory.includes('RankNova — SEO Tools Website'),'RankNova must not appear in the project directory');
+assert.ok(directory.includes('projects-featured-grid') && directory.includes('projects-concept-grid'),'Project directory must have featured and prototype galleries');
+assert.ok(directory.indexOf('/projects/toolscresta/') < directory.indexOf('/projects/draliwellness/'),'ToolsCresta and Dr Ali should lead the featured gallery');
+assert.ok(directory.includes('projects-hero-stats') && directory.includes('projects-contact-cta'),'Portfolio intro and contact CTA missing');
+assert.ok(directory.includes('Source-only starter'),'Android must be clearly labeled as source-only');
+assert.equal((directory.match(/class="card project-card/g)||[]).length,visibleWeb.length+1,'Directory must show five web cards and one Android starter');
 assert.ok(!read('dist/projects/'+android.id+'/index.html').includes('data-portfolio-shot'),
  'An unfinished Android starter must not be shown as a released app screenshot');
 assert.ok(directory.includes('No released app or verified screen capture'),'Label source-only Android project honestly');

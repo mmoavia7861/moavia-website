@@ -16,7 +16,7 @@ const projects = JSON.parse(readFileSync('src/data/githubProjects.json','utf8'))
 const allowed = new Set([
   'mmoavia7861.github.io', 'toolscresta.com', 'draliwellness.com'
 ]);
-const targets = projects.filter(item => item.kind !== 'android');
+const targets = projects.filter(item => item.kind !== 'android' && item.id !== 'ranknova');
 const output = join(outputRoot, 'project-captures');
 mkdirSync(output, { recursive: true });
 const browser = await chromium.launch({ headless:true, args:['--disable-dev-shm-usage','--no-sandbox'] });
