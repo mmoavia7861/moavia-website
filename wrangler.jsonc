@@ -16,18 +16,10 @@
       "/sitemap.xml",
       "/about/*",
       "/contact/*",
-      "/hire-me/*"
+      "/hire-me/*",
+      "/tools",
+      "/tools/*"
     ],
     "not_found_handling": "404-page"
-  },
-  "ratelimits": [
-    {
-      "name": "AI_LIMITER",
-      "namespace_id": "819471",
-      "simple": {
-        "limit": 12,
-        "period": 60
-      }
-    }
-  ]
+  }
 }
