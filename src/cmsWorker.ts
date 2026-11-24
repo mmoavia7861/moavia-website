@@ -277,8 +277,8 @@ async function homepage(request:Request,env:CmsEnvironment):Promise<Response> {
   const heroTitle=str(d,'heroTitle');
   const heroDescription=str(d,'heroDescription');
   if(title)html=html.replace(/<title>[^<]*<\/title>/i,'<title>'+esc(title.slice(0,160))+'</title>');
-  if(description && !/(?:free|three|online|seo)\\s+(?:seo\\s+)?tools|\\/tools\\//i.test(description)) {
-    html=html.replace(/<meta name="description" content="[^"]*" *\\/?>/i,
+  if(description && !/(?:free|three|online|seo)\s+(?:seo\s+)?tools|\/tools\//i.test(description)) {
+    html=html.replace(/<meta name="description" content="[^"]*" *\/?>/i,
       '<meta name="description" content="'+esc(description.slice(0,320))+'"/>');
   }
   // React renders the homepage hero from sanitized public settings. The
