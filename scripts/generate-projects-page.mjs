@@ -8,7 +8,8 @@ const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'
 const json=s=>JSON.stringify(s).replace(/</g,'\\u003c');
 const canonical=path=>origin+path;
 const image=origin+'/social-preview.png';
-const thumb=url=>'https://image.thum.io/get/width/960/crop/680/maxAge/72/'+url;
+const thumb=item=>'/project-captures/'+item.id+'.webp';
+const fallback=url=>'https://s.wordpress.com/mshots/v1/'+encodeURIComponent(url)+'?w=960';
 const nav='<nav aria-label="Main navigation"><a href="/web-development/">Web</a><a href="/android-development/">Android</a><a href="/ai-automations/">AI</a><a href="/tools/">Tools</a><a href="/hire-me/">Services</a><a href="/projects/" aria-current="page">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
 const foot='<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>SEO Tools · Services · Web/App Projects</p></div><div><a href="/tools/">Tools</a> · <a href="/hire-me/">Services</a> · <a href="/projects/">Projects</a> · <a href="/privacy-policy/">Privacy</a> · <a href="/contact/">Contact</a></div></div></footer>';
 const sep='<div class="wrap"><p class="project-note">The portfolio includes real published website demos and a separately labeled Android source-code starter. The Android entry is not a live app, and none of these are verified paid-client case studies or proof of traffic, rankings or revenue.</p></div>';
@@ -40,9 +41,9 @@ function snapshot(w) {
    +'<p>'+link(source,'Inspect the actual MainActivity.kt file')+'</p></div></div>'
    +'<figcaption>Illustration based on verified source code, not an emulator screenshot or Play Store listing.</figcaption></figure>';
  }
- return '<figure class="project-screenshot"><span class="project-screenshot-image"><img data-portfolio-shot src="'+esc(thumb(w.url))+'" width="960" height="680" loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="Public homepage screenshot preview of '+esc(w.title)+'">'
+ return '<figure class="project-screenshot"><span class="project-screenshot-image"><img data-portfolio-shot src="'+esc(thumb(w))+'" data-fallback-src="'+esc(fallback(w.url))+'" width="1440" height="680" loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="Public homepage screenshot preview of '+esc(w.title)+'">'
  +'<span data-portfolio-fallback hidden class="project-screenshot-unavailable">Screenshot preview is unavailable. Use the live project link to inspect the website.</span></span>'
- +'<figcaption>Live page thumbnail provided by Thum.io. It may change or be unavailable; this is not an analytics or results screenshot.</figcaption></figure>';
+ +'<figcaption>Browser-rendered capture of the public website homepage at deployment time. Open the live project for the latest version.</figcaption></figure>';
 }
 if(websites.length!==7||new Set(websites.map(w=>w.id)).size!==7
  || websites.filter(w=>w.kind==='android').length!==1
@@ -58,7 +59,7 @@ const directoryPreview = w => w.kind === 'android'
  ? '<div class="project-directory-no-live"><span class="project-directory-device" aria-hidden="true"></span><strong>Android starter · source project</strong><small>No released app or verified screen capture</small></div>'
  : '<a class="project-directory-preview" href="' + esc(w.url) + '" target="_blank" rel="noopener noreferrer" aria-label="Visit live website for ' + esc(w.title) + '">'
    + '<span class="project-directory-preview-bar" aria-hidden="true"><i></i><i></i><i></i><span>' + esc(new URL(w.url).hostname) + '</span></span>'
-   + '<span class="project-directory-image"><img data-portfolio-shot src="' + esc(thumb(w.url)) + '" width="960" height="680" loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="Homepage screenshot of ' + esc(w.title) + '">'
+   + '<span class="project-directory-image"><img data-portfolio-shot src="' + esc(thumb(w)) + '" data-fallback-src="' + esc(fallback(w.url)) + '" width="1440" height="680" loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="Homepage screenshot of ' + esc(w.title) + '">'
    + '<span data-portfolio-fallback hidden class="project-screenshot-unavailable">Live preview unavailable. Click to open the website.</span></span></a>';
 const cards=websites.map(w=>
  '<article class="card project-card">' + directoryPreview(w) + '<div class="project-directory-body"><span class="pill">'+esc(w.category)+'</span><h2><a href="/projects/'+esc(w.id)+'/">'+esc(w.title)+'</a></h2>'

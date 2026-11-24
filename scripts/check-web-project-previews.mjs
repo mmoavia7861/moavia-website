@@ -23,7 +23,8 @@ for(const item of web){
   const detail=read('dist/projects/'+item.id+'/index.html');
   for(const html of [page,directory,detail]){
     assert.ok(html.includes(item.url),'Missing project live link for '+item.id);
-    assert.ok(html.includes('image.thum.io/get/width/960/'),'Missing public screenshot capture for '+item.id);
+    assert.ok(html.includes('/project-captures/'+item.id+'.webp'),'Missing deploy-time screenshot for '+item.id);
+    assert.ok(html.includes('data-fallback-src='),'A failed screenshot must have an alternate source for '+item.id);
   }
   assert.ok(page.includes('href="/projects/'+item.id+'/'),'Missing details link for '+item.id);
   assert.ok(detail.includes('data-portfolio-shot'),'Case study must include screenshot for '+item.id);
@@ -35,9 +36,12 @@ assert.ok(directory.includes('No released app or verified screen capture'),'Labe
 assert.ok(page.includes('data-portfolio-fallback'),'Screenshot failures need readable fallback');
 assert.ok(css.includes('prefers-reduced-motion:reduce'),'Reduced motion is required');
 assert.ok(js.includes('pointer: fine') && js.includes('pointerleave'),'Parallax must be optional and reset');
-assert.ok(js.includes('naturalWidth === 0'),'Broken screenshots need a fallback');
+assert.ok(js.includes('naturalWidth === 0') && js.includes('fallbackAttempted'),'Broken screenshots must try fallback then show text');
+assert.ok(css.includes('html body.portfolio-detail-page .hero.webcase-page-hero'),
+  'Web hero colors must override later-loaded generic portfolio hero styles');
 assert.ok(homepage.includes('premium-real-preview-link'),'Homepage selected work should feature real web site captures');
 assert.ok(homepage.includes('premium-real-preview-fallback'),'Homepage preview failures must not be blank');
+assert.ok(homepage.includes("'/project-captures/' + originalProject.id"),'Featured project should use local real screenshot');
 assert.ok(homepage.includes("item.visual !== 'mobile'"),'Android starter must keep a truthful illustration rather than a fake screenshot');
 assert.ok(!/\.glb|\.gltf|WebGLRenderingContext/.test(code),'Avoid heavy assets for the decorative background');
 console.log('PASS: featured real homepage preview, six screenshot-first web cards, directory case-study screenshots, mobile and motion safety');

@@ -253,12 +253,18 @@ export default function App() {
                           <span className="premium-real-preview-chrome" aria-hidden="true"><i></i><i></i><i></i><small>{new URL(originalProject.url).hostname}</small></span>
                           <span className="premium-real-preview-image">
                             <img
-                              src={'https://image.thum.io/get/width/960/crop/680/maxAge/72/' + originalProject.url}
+                              src={'/project-captures/' + originalProject.id + '.webp'}
                               alt={'Live homepage screenshot preview of ' + item.title}
                               width="960" height="680" loading="lazy" decoding="async" referrerPolicy="no-referrer"
                               onError={event => {
-                                event.currentTarget.hidden = true;
-                                const fallback = event.currentTarget.nextElementSibling as HTMLElement | null;
+                                const shot = event.currentTarget;
+                                if (shot.dataset.fallbackAttempted !== 'true') {
+                                  shot.dataset.fallbackAttempted = 'true';
+                                  shot.src = 'https://s.wordpress.com/mshots/v1/' + encodeURIComponent(originalProject.url) + '?w=960';
+                                  return;
+                                }
+                                shot.hidden = true;
+                                const fallback = shot.nextElementSibling as HTMLElement | null;
                                 if (fallback) fallback.hidden = false;
                               }}
                             />
@@ -287,7 +293,7 @@ export default function App() {
               })}
             </div>
             <div className="premium-work-bottom">
-              <p>Web previews display third-party captures of public homepage URLs. The Android starter remains a labeled source-based illustration.</p>
+              <p>Web previews show browser-rendered captures of real public homepages. If a local capture fails, a third-party preview may appear. The Android starter remains a labeled illustration.</p>
               <a href="/projects/" className="premium-text-link">View all Web/App Projects <ArrowRight size={19} aria-hidden="true" /></a>
             </div>
           </div>
