@@ -145,7 +145,7 @@ export default function App() {
               <div className="premium-orbit premium-orbit-one" aria-hidden="true"></div>
               <div className="premium-orbit premium-orbit-two" aria-hidden="true"></div>
               <figure className="premium-portrait">
-                <img src="/moavia-hassan-portrait.webp" alt="Portrait of Moavia Hassan" width="440" height="550" fetchPriority="high" decoding="async" />
+                <img src="/moavia-hassan-portrait.jpg" alt="Portrait of Moavia Hassan" width="440" height="550" fetchPriority="high" decoding="async" />
                 <figcaption><span className="premium-portrait-name">Moavia Hassan</span><span className="premium-portrait-role">Web · Android · AI</span></figcaption>
               </figure>
               <div className="premium-float premium-float-code" aria-hidden="true"><Code2 size={20} /> <span>Building for the web</span></div>
@@ -253,7 +253,7 @@ export default function App() {
                           <span className="premium-real-preview-chrome" aria-hidden="true"><i></i><i></i><i></i><small>{new URL(originalProject.url).hostname}</small></span>
                           <span className="premium-real-preview-image">
                             <img
-                              src={'/project-captures/' + originalProject.id + '.webp'}
+                              src={'/project-captures/' + originalProject.id + '.jpg'}
                               alt={'Live homepage screenshot preview of ' + item.title}
                               width="960" height="680" loading="lazy" decoding="async" referrerPolicy="no-referrer"
                               onError={event => {
