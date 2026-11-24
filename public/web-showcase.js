@@ -15,7 +15,7 @@
       image.hidden = true;
       if (fallback) fallback.hidden = false;
     };
-    image.addEventListener('error', onError, { once: true });
+    image.addEventListener('error', onError);
     if (image.complete && image.naturalWidth === 0) onError();
   });
   const stage = document.querySelector('[data-webcase-parallax]');
