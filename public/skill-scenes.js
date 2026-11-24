@@ -105,10 +105,9 @@
   }
   const observer = new IntersectionObserver(entries => {
     for (const entry of entries) {
-      if (!entry.isIntersecting) continue;
-      render(entry.target);
-      observer.unobserve(entry.target);
+      entry.target.classList.toggle('craft3d-in-view', entry.isIntersecting);
+      if (entry.isIntersecting) render(entry.target);
     }
-  }, { rootMargin: '200px 0px' });
+  }, { rootMargin: '160px 0px' });
   hosts.forEach(host => observer.observe(host));
 })();
