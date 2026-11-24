@@ -123,10 +123,12 @@ function buildPage({path, title, intro, body, index = true, scene = null, featur
   return index ? path : null;
 }
 
-const webProjects = projects.filter(item => item.kind !== 'android');
+// RankNova's public demo currently resolves to a 404; omit it from this
+// visual Web Development showcase without deleting its project record.
+const webProjects = projects.filter(item => item.kind !== 'android' && item.id !== 'ranknova');
 const androidProjects = projects.filter(item => item.kind === 'android');
 const featuredWebProject = webProjects.find(item => item.id === 'toolscresta') || webProjects[0];
-if (!featuredWebProject || webProjects.length !== 6) throw Error('Expected six verified public web projects.');
+if (!featuredWebProject || webProjects.length !== 5) throw Error('Expected five visible public web projects excluding RankNova.');
 const paths = [];
 paths.push(buildPage({
   path: '/web-development/',
