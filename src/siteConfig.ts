@@ -14,6 +14,8 @@ export interface PublicSiteSettings {
   socialLinkedin: string;
   socialFiverr: string;
   socialUpwork: string;
+  // Legacy Firestore compatibility: deployed security rules currently require these
+  // persisted arrays. They are not rendered, edited or exposed as public tools.
   toolTitles: string[];
   toolDescriptions: string[];
   toolVisible: boolean[];
@@ -31,7 +33,7 @@ export const SITE_DEFAULTS: PublicSiteSettings = {
   contactEmail: 'hello@moaviaseo.com',
   whatsapp: '+92 323 4313869',
   seoTitle: 'Moavia Hassan | Web, App, E-commerce & AI Projects',
-  seoDescription: 'Moavia Hassan’s personal developer portfolio: websites, e-commerce projects, Android starter projects, AI automation work and free SEO tools.',
+  seoDescription: 'Moavia Hassan’s personal developer portfolio: websites, e-commerce projects, Android starter projects, AI automation work, web development and technical SEO services.',
   socialGithub: 'https://github.com/mmoavia7861',
   socialLinkedin: 'https://www.linkedin.com/in/moavia-hassan-seo/',
   socialFiverr: 'https://www.fiverr.com/moavia_seopro',
@@ -49,12 +51,6 @@ export const SITE_DEFAULTS: PublicSiteSettings = {
   toolVisible: [true, true, true],
   updatedAt: '',
 };
-
-export const TOOL_ROUTES = [
-  '/tools/meta-title-description-checker/',
-  '/tools/json-ld-schema-generator/',
-  '/tools/robots-txt-sitemap-generator/',
-] as const;
 
 // Allow only local links or HTTPS external destinations, never javascript/data URLs.
 export const safeHref = (href: string): boolean =>
@@ -82,6 +78,15 @@ export function mergeSiteSettings(incoming: Partial<PublicSiteSettings> | null |
   settings.toolVisible = Array.isArray(incoming.toolVisible) && incoming.toolVisible.length === 3
     ? incoming.toolVisible.map(v=>v===true)
     : SITE_DEFAULTS.toolVisible;
+  // Retire legacy tool destinations and tool-oriented homepage metadata already
+  // stored in Firestore. The published site never links to removed /tools/ URLs.
+  if (/^\/tools(?:\/|$)/i.test(settings.ctaHref)) {
+    settings.ctaHref = SITE_DEFAULTS.ctaHref;
+    settings.ctaLabel = SITE_DEFAULTS.ctaLabel;
+  }
+  if (/(?:free|three|online|seo)\s+(?:seo\s+)?tools|\/tools\//i.test(settings.seoDescription)) {
+    settings.seoDescription = SITE_DEFAULTS.seoDescription;
+  }
   settings.updatedAt=typeof incoming.updatedAt==='string'?incoming.updatedAt:'';
   return settings;
 }
