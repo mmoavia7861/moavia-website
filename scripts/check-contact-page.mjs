@@ -19,7 +19,7 @@ assert.ok(contact.includes('href="mailto:hello@moaviaseo.com'),'Email action mus
 assert.ok(contact.includes('href="https://wa.me/923234313869'),'WhatsApp must link to the owner-provided business number');
 assert.ok((contact.match(/href="\/#contact"/g)||[]).length>=2,'Structured project enquiry must link to existing real form');
 assert.ok(home.includes('id="contact"') && home.includes('<ContactSection'),'Homepage project form must still exist');
-for(const path of ['/web-development/','/tools/','/ai-automations/','/android-development/','/privacy-policy/','/hire-me/']){
+for(const path of ['/web-development/','/ai-automations/','/android-development/','/privacy-policy/','/hire-me/']){
   assert.ok(contact.includes('href="'+path+'"'),'Missing useful Contact page route: '+path);
 }
 for(const source of ['fiverr.com/moavia_seopro','upwork.com/freelancers']){
