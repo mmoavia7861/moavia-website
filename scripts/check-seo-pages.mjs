@@ -133,7 +133,7 @@ for(const route of routes){
    check(html.includes('data-fallback-src='),'project screenshot failure fallback missing: '+route);
   }
  } 
- check(html.includes('<h1>')&&html.includes('</h1>'),'page H1 missing: '+route);
+ check((html.match(/<h1(?:\\s[^>]*)?>/g)||[]).length===1 && html.includes('</h1>'),'page H1 missing or duplicated: '+route);
  check(html.includes('<meta name="description"'),'description missing: '+route);
  check(html.includes('application/ld+json'),'schema missing: '+route);
  check(html.includes('property="og:image"'),'social preview image missing: '+route);
