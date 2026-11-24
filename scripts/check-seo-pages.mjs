@@ -55,7 +55,7 @@ check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes('Web/App P
 check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes('premium-hero-visual'),'hero portrait showcase missing');
 check(readFileSync(join(process.cwd(),'src/App.tsx'),'utf8').includes('premium-mobile-nav'),'accessible mobile navigation missing');
 check(readFileSync(join(process.cwd(),'src/data/githubProjects.json'),'utf8').includes('"id": "moavia-app"'),'Android app project missing from React data');
-check(existsSync(join(dist,'moavia-hassan-portrait.webp')),'Professional photo asset missing');
+check(existsSync(join(dist,'moavia-hassan-portrait.jpg')),'Professional photo asset missing');
 check(!root.includes('Moavia SEO Pro'),'old agency branding still in homepage');
 check(root.includes('name="twitter:card"'),'homepage twitter card missing');
 check(root.includes('https://moaviaseo.com/social-preview.png'),'homepage social image missing');
@@ -129,7 +129,7 @@ for(const route of routes){
    for(const label of ['Project screenshot','My portfolio role','Technology stack','Results and verification','View live project']){
     check(html.includes(label),'project section missing '+label+': '+route);
    }
-   check(html.includes('/project-captures/'+route.split('/')[2]+'.webp'),'local project screenshot source missing: '+route);
+   check(html.includes('/project-captures/'+route.split('/')[2]+'.jpg'),'local project screenshot source missing: '+route);
    check(html.includes('data-fallback-src='),'project screenshot failure fallback missing: '+route);
   }
  } 
@@ -153,12 +153,12 @@ for(const route of routes){
  if(route==='/hire-me/')check(html.includes('href="https://www.upwork.com/freelancers/~01c3735023b2f296fa"'),'Hire Me Upwork contact option missing');
  if(route==='/about/') {
   check(html.includes('https://github.com/mmoavia7861'),'About missing GitHub');
-  check(html.includes('/moavia-hassan-portrait.webp'),'About portrait missing');
+  check(html.includes('/moavia-hassan-portrait.jpg'),'About portrait missing');
   check(html.includes('https://www.linkedin.com/in/moavia-hassan-seo/'),'About missing LinkedIn');
   check(html.includes('href="https://www.fiverr.com/moavia_seopro"'),'About missing Fiverr freelancer profile');
   check(html.includes('href="https://www.upwork.com/freelancers/~01c3735023b2f296fa"'),'About missing Upwork freelancer profile');
   check(!html.includes('Illustrative founder portrait'),'Unverified portrait still shown');
-  check(html.includes('src="/moavia-hassan-portrait.webp"'),'About portrait not rendered');
+  check(html.includes('src="/moavia-hassan-portrait.jpg"'),'About portrait not rendered');
   check(html.includes('href="https://github.com/mmoavia7861"'),'GitHub profile not linked');
   check(html.includes('href="https://www.linkedin.com/in/moavia-hassan-seo/"'),'LinkedIn profile not linked');
  }
