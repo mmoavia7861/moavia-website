@@ -54,7 +54,7 @@ export function hireHero(){
 export function hireContent(){
  const services=[
   ['01','Websites &amp; e-commerce','Responsive business websites, WordPress or React interfaces, landing pages and storefront work.','Page structure · Responsive UI · Integrations','/web-development/','Explore web work'],
-  ['02','SEO &amp; discoverability','Technical SEO checks, structured metadata, search-friendly architecture and practical site improvements.','Technical review · On-page SEO · Site quality','/tools/','Explore SEO tools'],
+  ['02','SEO &amp; discoverability','Technical SEO checks, structured metadata, search-friendly architecture and practical site improvements.','Technical review · On-page SEO · Site quality','/hire-me/','Discuss SEO services'],
   ['03','AI tools &amp; automation','Useful AI features, API integrations and workflow ideas assessed for safety, cost and feasibility.','Workflow planning · APIs · AI utilities','/ai-automations/','Explore AI work'],
   ['04','Android &amp; app planning','Mobile interface design, Kotlin/Compose starter work and early-stage app requirements.','Mobile UI · App concepts · Prototyping','/android-development/','Explore Android work']
  ].map(([num,title,desc,tags,href,label])=>
