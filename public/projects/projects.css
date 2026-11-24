@@ -33,3 +33,52 @@
 html[data-theme="dark"] .project-android-preview{background:#192942}
 html[data-theme="dark"] .project-app-explainer :is(h3,p){color:#e2eafa}
 html[data-theme="dark"] .project-app-explainer a{color:#bdcbff}
+
+
+/* The project directory also shows real public homepage captures, not invented
+   mockups. The Android source-only starter is deliberately labeled differently. */
+.project-card{padding:0!important;overflow:hidden;min-height:0}
+.project-directory-body{display:flex;flex-direction:column;gap:8px;padding:20px 22px 23px;flex:1}
+.project-directory-body .pill{align-self:flex-start}
+.project-directory-body h2{font-size:clamp(1.05rem,2vw,1.28rem);line-height:1.26;margin:7px 0 4px}
+.project-directory-body h2 a{color:#192b49;text-decoration:none}
+.project-directory-body h2 a:hover{text-decoration:underline}
+.project-directory-body>p{line-height:1.64;font-size:.88rem;color:#596b83}
+.project-directory-body .project-card-actions{gap:10px;margin-top:auto;padding-top:12px;font-size:.82rem}
+.project-directory-preview{display:block;padding:12px 12px 0;color:inherit;text-decoration:none}
+.project-directory-preview:focus-visible{outline:3px solid #9a9cf5;outline-offset:-2px}
+.project-directory-preview-bar{display:flex;align-items:center;gap:5px;background:#17263b;border-radius:9px 9px 0 0;
+ color:#cbd7eb;padding:9px 12px;min-height:33px}
+.project-directory-preview-bar i{display:block;width:7px;height:7px;border-radius:50%;background:#f6a69b}
+.project-directory-preview-bar i:nth-child(2){background:#f5d6a1}
+.project-directory-preview-bar i:nth-child(3){background:#9de6cb}
+.project-directory-preview-bar span{font-size:10px;margin-left:7px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.project-directory-image{position:relative;display:grid;place-items:center;width:100%;aspect-ratio:16/10;
+ border-radius:0 0 9px 9px;overflow:hidden;background:#18283f}
+.project-directory-image img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;
+ transition:transform .35s ease}
+.project-directory-image img[hidden]{display:none}
+.project-directory-preview:hover .project-directory-image img{transform:scale(1.025)}
+.project-directory-image .project-screenshot-unavailable{width:100%;height:100%;margin:0;padding:28px;
+ color:#dce7ff;background:linear-gradient(140deg,#18283f,#233757);display:grid;place-items:center;text-align:center}
+.project-directory-image .project-screenshot-unavailable[hidden],
+.project-screenshot-image .project-screenshot-unavailable[hidden]{display:none!important}
+.project-screenshot-image{position:relative;display:block}
+.project-screenshot-image img[hidden]{display:none}
+.project-directory-no-live{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;
+ min-height:225px;margin:12px 12px 0;border-radius:9px;background:linear-gradient(140deg,#172a44,#304b73);
+ color:#edf5ff;text-align:center;padding:22px}
+.project-directory-no-live strong{font-size:.9rem}
+.project-directory-no-live small{font-size:.73rem;color:#bdcee5}
+.project-directory-device{width:66px;height:116px;display:block;position:relative;border:6px solid #778aad;border-radius:17px;
+ background:linear-gradient(145deg,#d4e7ff,#8fb3e3);box-shadow:10px 14px 0 rgba(6,17,37,.33);
+ transform:rotate(-10deg)}
+.project-directory-device:before{content:'';position:absolute;top:3px;left:20px;width:19px;height:5px;border-radius:8px;background:#263957}
+.project-directory-device:after{content:'';position:absolute;left:16px;top:42px;width:20px;height:20px;
+ background:#7489e4;box-shadow:0 0 0 8px #c6d4fc;border-radius:50%}
+html[data-theme="dark"] .project-directory-body h2 a{color:#e9f0ff}
+html[data-theme="dark"] .project-directory-body>p{color:#c3d1e7}
+@media(prefers-reduced-motion:reduce){
+ .project-directory-image img{transition:none}
+ .project-directory-preview:hover .project-directory-image img{transform:none}
+}

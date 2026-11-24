@@ -239,22 +239,42 @@ export default function App() {
             </div>
             <div className="premium-project-grid">
               {[
-                {title:'ToolsCresta',category:'ONLINE UTILITIES',subtitle:'Everyday tools, built for a simpler digital workflow.',href:'/projects/toolscresta/',visual:'tools',icon:Code2},
-                {title:'Dr. Ali Hassan Health & Wellness',category:'E-COMMERCE WEBSITE',subtitle:'A product-focused storefront for a wellness brand.',href:'/projects/draliwellness/',visual:'store',icon:ShoppingBag},
-                {title:'Android App Starter',category:'MOBILE PROTOTYPE',subtitle:'A Kotlin & Jetpack Compose starter — source project, not a published app.',href:'/projects/moavia-app/',visual:'mobile',icon:Smartphone}
+                {id:'toolscresta',title:'ToolsCresta',category:'ONLINE UTILITIES',subtitle:'Everyday tools, built for a simpler digital workflow.',href:'/projects/toolscresta/',visual:'tools',icon:Code2},
+                {id:'draliwellness',title:'Dr. Ali Hassan Health & Wellness',category:'E-COMMERCE WEBSITE',subtitle:'A product-focused storefront for a wellness brand.',href:'/projects/draliwellness/',visual:'store',icon:ShoppingBag},
+                {id:'moavia-app',title:'Android App Starter',category:'MOBILE PROTOTYPE',subtitle:'A Kotlin & Jetpack Compose starter — source project, not a published app.',href:'/projects/moavia-app/',visual:'mobile',icon:Smartphone}
               ].map(item => {
                 const Icon = item.icon;
+                const originalProject = websiteLinks.find(project => project.id === item.id);
                 return (
                   <article key={item.href} className={'premium-project-card premium-project-' + item.visual}>
-                    <div className={'premium-project-visual premium-visual-' + item.visual} aria-hidden="true">
-                      <div className="premium-preview-window">
-                        <div className="premium-preview-chrome"><i></i><i></i><i></i><span>PORTFOLIO CONCEPT</span></div>
-                        <div className="premium-preview-body">
-                          <span className="premium-preview-icon"><Icon size={38} strokeWidth={1.5} /></span>
-                          <div className="premium-preview-lines"><i></i><i></i><i></i></div>
-                          <div className="premium-preview-tiles"><i></i><i></i><i></i></div>
+                    <div className={'premium-project-visual premium-visual-' + item.visual}>
+                      {originalProject && item.visual !== 'mobile' ? (
+                        <a className="premium-real-preview-link" href={originalProject.url} target="_blank" rel="noopener noreferrer" aria-label={'Open actual live homepage for ' + item.title}>
+                          <span className="premium-real-preview-chrome" aria-hidden="true"><i></i><i></i><i></i><small>{new URL(originalProject.url).hostname}</small></span>
+                          <span className="premium-real-preview-image">
+                            <img
+                              src={'https://image.thum.io/get/width/960/crop/680/maxAge/72/' + originalProject.url}
+                              alt={'Live homepage screenshot preview of ' + item.title}
+                              width="960" height="680" loading="lazy" decoding="async" referrerPolicy="no-referrer"
+                              onError={event => {
+                                event.currentTarget.hidden = true;
+                                const fallback = event.currentTarget.nextElementSibling as HTMLElement | null;
+                                if (fallback) fallback.hidden = false;
+                              }}
+                            />
+                            <span className="premium-real-preview-fallback" hidden>Live screenshot unavailable. Open website to see the project.</span>
+                          </span>
+                        </a>
+                      ) : (
+                        <div className="premium-preview-window" role="img" aria-label="Illustration of the Android source-only starter prototype, not an app screenshot">
+                          <div className="premium-preview-chrome"><i></i><i></i><i></i><span>ANDROID PROTOTYPE</span></div>
+                          <div className="premium-preview-body">
+                            <span className="premium-preview-icon"><Icon size={38} strokeWidth={1.5} /></span>
+                            <div className="premium-preview-lines"><i></i><i></i><i></i></div>
+                            <div className="premium-preview-tiles"><i></i><i></i><i></i></div>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                     <div className="premium-project-content">
                       <p className="premium-project-category">{item.category}</p>
@@ -267,7 +287,7 @@ export default function App() {
               })}
             </div>
             <div className="premium-work-bottom">
-              <p>All previews above are illustrative designs, not captured product screenshots.</p>
+              <p>Web previews display third-party captures of public homepage URLs. The Android starter remains a labeled source-based illustration.</p>
               <a href="/projects/" className="premium-text-link">View all Web/App Projects <ArrowRight size={19} aria-hidden="true" /></a>
             </div>
           </div>
