@@ -12,6 +12,7 @@ const directory=read('dist/projects/index.html');
 const css=read('dist/web-showcase.css');
 const js=read('dist/web-showcase.js');
 const code=read('scripts/generate-portfolio-pages.mjs');
+const homepage=read('src/App.tsx');
 assert.equal(web.length,6,'Expected six public web sites');
 assert.equal(android?.id,'moavia-app','Android starter must remain source-only');
 assert.ok(page.includes('data-webcase-parallax'),'The web page needs a layered depth scene');
@@ -35,5 +36,8 @@ assert.ok(page.includes('data-portfolio-fallback'),'Screenshot failures need rea
 assert.ok(css.includes('prefers-reduced-motion:reduce'),'Reduced motion is required');
 assert.ok(js.includes('pointer: fine') && js.includes('pointerleave'),'Parallax must be optional and reset');
 assert.ok(js.includes('naturalWidth === 0'),'Broken screenshots need a fallback');
+assert.ok(homepage.includes('premium-real-preview-link'),'Homepage selected work should feature real web site captures');
+assert.ok(homepage.includes('premium-real-preview-fallback'),'Homepage preview failures must not be blank');
+assert.ok(homepage.includes("item.visual !== 'mobile'"),'Android starter must keep a truthful illustration rather than a fake screenshot');
 assert.ok(!/\.glb|\.gltf|WebGLRenderingContext/.test(code),'Avoid heavy assets for the decorative background');
 console.log('PASS: featured real homepage preview, six screenshot-first web cards, directory case-study screenshots, mobile and motion safety');
