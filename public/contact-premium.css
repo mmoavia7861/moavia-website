@@ -1,0 +1,171 @@
+/* Contact page redesign: purposeful hierarchy, live channels and subtle depth.
+ * Zero external fonts, images, trackers or animation dependencies. */
+body.contact-premium-page{background:#f7f9fd;color:#192941}
+body.contact-premium-page .subnav{font-size:.82rem;margin:23px auto 19px;color:#73809a}
+body.contact-premium-page .subnav a{color:#4c56a8}
+body.contact-premium-page .contact-premium-hero{position:relative;isolation:isolate;overflow:hidden;
+  padding:70px 0 79px;color:#f7faff;background:radial-gradient(ellipse at 83% 17%,rgba(123,114,245,.22),transparent 42%),
+  radial-gradient(ellipse at 0% 100%,rgba(66,203,180,.09),transparent 47%),
+  linear-gradient(124deg,#0c1930 3%,#182b4f 68%,#122d40 100%);border-radius:0 0 30px 30px}
+body.contact-premium-page .contact-premium-grid{position:absolute;z-index:-1;inset:0;opacity:.48;pointer-events:none;
+  background-image:linear-gradient(rgba(164,190,252,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(164,190,252,.07) 1px,transparent 1px);
+  background-size:61px 61px;mask-image:linear-gradient(90deg,transparent 20%,black 96%)}
+body.contact-premium-page .contact-premium-hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.9fr);
+  gap:clamp(31px,6vw,86px);align-items:center}
+body.contact-premium-page .contact-premium-copy{min-width:0}
+body.contact-premium-page .contact-premium-eyebrow{display:inline-flex;align-items:center;gap:11px;
+  color:#a0f5d6;font-size:.71rem;font-weight:850;letter-spacing:.155em;line-height:1.5}
+body.contact-premium-page .contact-premium-eyebrow i{height:9px;width:9px;display:block;flex-shrink:0;border-radius:50%;background:#8bf2cb;box-shadow:0 0 0 5px rgba(128,242,204,.10)}
+body.contact-premium-page .contact-premium-copy h1{font-size:clamp(2.6rem,5.9vw,5.4rem);line-height:1.06;
+  letter-spacing:-.067em;max-width:780px;font-weight:890;color:#fff!important;margin:22px 0 23px}
+body.contact-premium-page .contact-premium-copy h1 em{display:block;font-style:normal;color:#a2f3d7}
+body.contact-premium-page .contact-premium-lead{font-size:clamp(.97rem,1.4vw,1.09rem);
+  color:#cbdaf0;max-width:610px;line-height:1.85}
+body.contact-premium-page .contact-premium-actions{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin-top:31px}
+body.contact-premium-page .contact-premium-button{display:inline-flex;align-items:center;justify-content:center;gap:12px;
+  text-decoration:none;padding:14px 18px;min-height:49px;border-radius:12px;font-size:.84rem;font-weight:850;
+  transition:transform .23s ease,background .23s ease,box-shadow .23s ease}
+body.contact-premium-page .contact-premium-button:hover{transform:translateY(-2px)}
+body.contact-premium-page .contact-premium-button--mint{background:#9ff3d4;color:#142a3c!important;
+  box-shadow:0 14px 29px rgba(3,18,32,.18)}
+body.contact-premium-page .contact-premium-button--mint:hover{background:#b2ffe3}
+body.contact-premium-page .contact-premium-button--outline{background:rgba(234,245,255,.07);
+  border:1px solid rgba(218,234,255,.3);color:#f5f8ff!important}
+body.contact-premium-page .contact-premium-button--outline:hover{background:rgba(244,249,255,.14)}
+body.contact-premium-page .contact-premium-hero-note{font-size:.76rem;letter-spacing:.008em;
+  color:#a7b9d2;line-height:1.6;margin:23px 0 0}
+body.contact-premium-page .contact-premium-hub{position:relative;min-width:0;padding:30px;
+  background:linear-gradient(145deg,rgba(246,250,255,.98),rgba(229,238,253,.96));
+  color:#203451;border:1px solid rgba(248,253,255,.95);border-radius:23px;
+  box-shadow:0 32px 66px rgba(0,0,0,.26),19px 20px 0 rgba(55,75,128,.12);transform:rotateY(-4deg) rotateZ(1deg)}
+body.contact-premium-page .contact-premium-hub:before{content:"";position:absolute;z-index:-1;inset:-14px 16px 14px -12px;
+  border:1px solid rgba(171,199,253,.24);border-radius:27px;pointer-events:none;transform:rotate(-3deg)}
+body.contact-premium-page .contact-premium-hub-top{display:flex;align-items:center;gap:10px}
+body.contact-premium-page .contact-premium-hub-symbol{width:41px;height:41px;display:grid;place-items:center;
+  border-radius:13px;background:linear-gradient(145deg,#ab9dfd,#6c6de3);box-shadow:0 9px 21px rgba(98,100,207,.23);
+  color:#fff;font-size:1.22rem;font-weight:900}
+body.contact-premium-page .contact-premium-hub-head{font-size:.67rem;letter-spacing:.145em;color:#637495;font-weight:890;flex:1}
+body.contact-premium-page .contact-premium-hub-decoration{font-size:1.35rem;color:#8481e8}
+body.contact-premium-page .contact-premium-hub h2{font-size:clamp(1.35rem,2.5vw,1.75rem);font-weight:860;
+  color:#1a2d4a;letter-spacing:-.047em;line-height:1.2;margin:21px 0 7px}
+body.contact-premium-page .contact-premium-hub>p{margin:0;color:#687995;line-height:1.65;font-size:.87rem}
+body.contact-premium-page .contact-premium-channel-list{display:flex;flex-direction:column;gap:11px;margin-top:22px}
+body.contact-premium-page .contact-premium-channel{display:flex;gap:12px;align-items:center;min-width:0;
+  padding:15px 13px;color:#203451;text-decoration:none;background:#fff;border-radius:13px;
+  border:1px solid #dde5f1;box-shadow:0 8px 20px rgba(27,47,80,.035);
+  transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+body.contact-premium-page .contact-premium-channel:hover{transform:translateX(3px);border-color:#a5a8e8;box-shadow:0 11px 28px rgba(35,49,93,.07)}
+body.contact-premium-page .contact-premium-channel-glyph{display:grid;place-items:center;flex-shrink:0;width:43px;height:43px;
+  font-size:1.15rem;font-weight:900;border-radius:12px}
+body.contact-premium-page .contact-premium-channel-glyph--email{background:#e9e8ff;color:#5856b6}
+body.contact-premium-page .contact-premium-channel-glyph--chat{background:#def8e9;color:#218768}
+body.contact-premium-page .contact-premium-channel-glyph--form{background:#e2f2fc;color:#266d9f}
+body.contact-premium-page .contact-premium-channel-content{display:flex;flex:1;flex-direction:column;min-width:0;gap:4px}
+body.contact-premium-page .contact-premium-channel-content strong{font-size:.87rem;font-weight:880;color:#263854}
+body.contact-premium-page .contact-premium-channel-content small{font-size:.73rem;color:#6b7990;word-break:break-word;line-height:1.35}
+body.contact-premium-page .contact-premium-channel-arrow{color:#5661aa;font-size:1.1rem;font-weight:800;flex-shrink:0}
+body.contact-premium-page .contact-premium-hub-footer{display:flex;align-items:flex-start;gap:9px;color:#667995;
+  font-size:.72rem;line-height:1.55;padding-top:20px}
+body.contact-premium-page .contact-premium-online-dot{width:8px;height:8px;margin-top:3px;background:#64cdb0;border-radius:50%;flex-shrink:0}
+body.contact-premium-page .contact-premium-content{max-width:1180px;margin:0 auto;padding:0 0 78px}
+body.contact-premium-page .contact-premium-content>section{margin-top:73px}
+body.contact-premium-page .contact-premium-section-head{max-width:780px;margin-bottom:28px}
+body.contact-premium-page .contact-premium-kicker{color:#635cd4;font-size:.7rem;font-weight:890;letter-spacing:.14em;text-transform:uppercase}
+body.contact-premium-page .contact-premium-section-head h2,body.contact-premium-page .contact-premium-process h2{
+  font-size:clamp(1.9rem,3.8vw,3.05rem);font-weight:870;letter-spacing:-.058em;line-height:1.15;color:#1a2c47;margin:13px 0}
+body.contact-premium-page .contact-premium-section-head>p{font-size:.95rem;line-height:1.8;color:#65758f;margin:0}
+body.contact-premium-page .contact-premium-focus-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+body.contact-premium-page .contact-premium-focus-card{position:relative;min-width:0;
+  display:flex;flex-direction:column;padding:26px 22px 31px;text-decoration:none;color:#1a2c47;
+  border:1px solid #e0e6f0;background:#fff;border-radius:19px;box-shadow:0 13px 33px rgba(20,39,72,.04);
+  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease}
+body.contact-premium-page .contact-premium-focus-card:hover{transform:translateY(-4px);border-color:#c7c6f3;box-shadow:0 20px 48px rgba(22,39,77,.09)}
+body.contact-premium-page .contact-premium-focus-index{display:grid;place-items:center;width:42px;height:42px;border-radius:12px;background:#e7e6ff;color:#5752b5;font-size:.81rem;font-weight:900}
+body.contact-premium-page .contact-premium-focus-card:nth-child(2) .contact-premium-focus-index{background:#dbf6eb;color:#1b8268}
+body.contact-premium-page .contact-premium-focus-card:nth-child(3) .contact-premium-focus-index{background:#f0e7ff;color:#7757b6}
+body.contact-premium-page .contact-premium-focus-card:nth-child(4) .contact-premium-focus-index{background:#e1effc;color:#326eaa}
+body.contact-premium-page .contact-premium-focus-card h3{margin:18px 0 10px;font-size:1.09rem;font-weight:860;letter-spacing:-.032em;color:#1c2c47;line-height:1.3}
+body.contact-premium-page .contact-premium-focus-card p{margin:0 0 18px;font-size:.83rem;color:#63738a;line-height:1.73;flex:1}
+body.contact-premium-page .contact-premium-card-arrow{font-size:1.11rem;font-weight:800;color:#645fc1}
+body.contact-premium-page .contact-premium-bottom-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch}
+body.contact-premium-page .contact-premium-process{min-width:0;padding:35px;background:#fff;border:1px solid #e1e7f0;border-radius:22px;box-shadow:0 16px 38px rgba(20,35,70,.05)}
+body.contact-premium-page .contact-premium-process h2{font-size:clamp(1.65rem,3vw,2.26rem)}
+body.contact-premium-page .contact-premium-steps{margin-top:22px}
+body.contact-premium-page .contact-premium-step{display:flex;align-items:start;gap:16px;padding:17px 0;border-bottom:1px solid #e9edf5}
+body.contact-premium-page .contact-premium-step:last-child{border:0}
+body.contact-premium-page .contact-premium-step>span{font-size:.83rem;color:#6563ce;font-weight:870;padding-top:3px;flex-shrink:0}
+body.contact-premium-page .contact-premium-step h3{margin:0 0 7px;color:#1c2c47;font-size:.95rem;font-weight:850}
+body.contact-premium-page .contact-premium-step p{margin:0;color:#65748a;line-height:1.7;font-size:.82rem}
+body.contact-premium-page .contact-premium-brief{position:relative;overflow:hidden;min-width:0;
+  display:flex;flex-direction:column;align-items:flex-start;padding:clamp(28px,3vw,39px);
+  background:linear-gradient(135deg,#e4fff5,#e7edff);border:1px solid #d5e4eb;border-radius:22px}
+body.contact-premium-page .contact-premium-brief-art{position:absolute;right:-14px;top:-28px;color:rgba(83,111,192,.13);font-size:12rem;line-height:1;pointer-events:none}
+body.contact-premium-page .contact-premium-brief h2{position:relative;font-size:clamp(1.8rem,3.4vw,2.6rem);max-width:390px;margin:15px 0 15px;color:#1c304b;font-weight:880;letter-spacing:-.053em;line-height:1.16}
+body.contact-premium-page .contact-premium-brief>p{position:relative;font-size:.88rem;line-height:1.83;color:#496078;margin:0}
+body.contact-premium-page .contact-premium-brief-button{position:relative;display:inline-flex;align-items:center;gap:14px;
+  text-decoration:none;margin-top:26px;padding:14px 19px;background:#182c4c;color:#fff!important;border-radius:11px;font-weight:850;font-size:.85rem}
+body.contact-premium-page .contact-premium-brief-button:hover{background:#4551a4}
+body.contact-premium-page .contact-premium-brief>p.contact-premium-privacy{font-size:.75rem;margin-top:19px;color:#567089}
+body.contact-premium-page .contact-premium-privacy a{color:#404eaa;text-decoration:underline}
+body.contact-premium-page .contact-premium-footer-links{display:flex;align-items:center;justify-content:space-between;gap:35px;padding:27px 0;border-top:1px solid #dde5f0}
+body.contact-premium-page .contact-premium-footer-links h2{font-size:1.65rem;margin:10px 0;color:#1b2b45;letter-spacing:-.05em}
+body.contact-premium-page .contact-premium-footer-links p{font-size:.85rem;color:#68778f;line-height:1.7;margin:0}
+body.contact-premium-page .contact-premium-footer-actions{display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap}
+body.contact-premium-page .contact-premium-footer-actions a{display:inline-flex;align-items:center;padding:12px 15px;min-height:45px;border-radius:11px;
+  border:1px solid #dce4f0;color:#4554a0;text-decoration:none;font-size:.84rem;font-weight:840;background:#fff}
+body.contact-premium-page .contact-premium-footer-actions a:hover{border-color:#8989d6}
+html[data-theme="dark"] body.contact-premium-page{background:#101b2d;color:#edf3ff}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-hero{background:radial-gradient(ellipse at 83% 17%,rgba(123,114,245,.18),transparent 42%),linear-gradient(124deg,#0c1930,#182b4f 68%,#122d40)}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-section-head h2,
+html[data-theme="dark"] body.contact-premium-page .contact-premium-process h2,
+html[data-theme="dark"] body.contact-premium-page .contact-premium-footer-links h2{color:#f1f6ff}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-section-head>p,
+html[data-theme="dark"] body.contact-premium-page .contact-premium-footer-links p{color:#c0ccde}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-focus-card,
+html[data-theme="dark"] body.contact-premium-page .contact-premium-process,
+html[data-theme="dark"] body.contact-premium-page .contact-premium-footer-actions a{background:#1b2c45;border-color:#344967}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-focus-card h3,
+html[data-theme="dark"] body.contact-premium-page .contact-premium-step h3{color:#eff5ff}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-focus-card p,
+html[data-theme="dark"] body.contact-premium-page .contact-premium-step p{color:#bccce3}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-brief{background:linear-gradient(125deg,#1b3944,#25375d);border-color:#365465}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-brief h2{color:#fff}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-brief>p{color:#cad7e9}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-brief>p.contact-premium-privacy{color:#bcd1e1}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-privacy a{color:#c9c0ff}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-footer-links{border-color:#344967}
+html[data-theme="dark"] body.contact-premium-page .contact-premium-footer-actions a{color:#d1dbff}
+@media(max-width:1000px){
+ body.contact-premium-page .contact-premium-hero-grid{gap:30px}
+ body.contact-premium-page .contact-premium-hub{transform:none;box-shadow:0 26px 48px rgba(0,0,0,.24)}
+ body.contact-premium-page .contact-premium-focus-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:760px){
+ body.contact-premium-page .contact-premium-hero{padding:48px 0 55px;border-radius:0 0 23px 23px}
+ body.contact-premium-page .contact-premium-hero-grid{grid-template-columns:1fr;gap:28px}
+ body.contact-premium-page .contact-premium-hub{max-width:590px;width:100%}
+ body.contact-premium-page .contact-premium-content>section{margin-top:54px}
+ body.contact-premium-page .contact-premium-bottom-grid{grid-template-columns:1fr}
+ body.contact-premium-page .contact-premium-footer-links{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:480px){
+ body.contact-premium-page .contact-premium-copy h1{font-size:clamp(2.48rem,10.5vw,3.2rem)}
+ body.contact-premium-page .contact-premium-eyebrow{font-size:.63rem;letter-spacing:.09em}
+ body.contact-premium-page .contact-premium-actions{flex-direction:column;align-items:stretch}
+ body.contact-premium-page .contact-premium-button{width:100%}
+ body.contact-premium-page .contact-premium-hub{padding:22px}
+ body.contact-premium-page .contact-premium-hub:before{display:none}
+ body.contact-premium-page .contact-premium-focus-grid{grid-template-columns:1fr}
+ body.contact-premium-page .contact-premium-process{padding:25px}
+ body.contact-premium-page .contact-premium-brief{padding:27px}
+ body.contact-premium-page .contact-premium-footer-actions{width:100%}
+ body.contact-premium-page .contact-premium-footer-actions a{flex:1;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+ body.contact-premium-page .contact-premium-channel,
+ body.contact-premium-page .contact-premium-focus-card,
+ body.contact-premium-page .contact-premium-button{transition:none}
+ body.contact-premium-page .contact-premium-channel:hover,
+ body.contact-premium-page .contact-premium-focus-card:hover,
+ body.contact-premium-page .contact-premium-button:hover{transform:none}
+}

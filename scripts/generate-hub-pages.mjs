@@ -1,11 +1,13 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { contactHero, contactContent } from './contact-premium-template.mjs';
 const origin='https://moaviaseo.com';
 const root=join(process.cwd(),'public');
 const clean=x=>String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 const nav='<nav aria-label="Main navigation"><a href="/tools/">Tools</a><a href="/hire-me/">Services</a><a href="/projects/">Projects</a><a href="/about/">About</a><a href="/contact/">Contact</a></nav>';
 function page(path,title,description,body,kind){
  const url=origin+path;
+ const isContact=kind==='contact';
  const schema={'@context':'https://schema.org','@graph':[
   {'@type':kind==='hire'?'WebPage':'ContactPage',name:title,description,url},
   {'@type':'BreadcrumbList',itemListElement:[
@@ -19,13 +21,13 @@ function page(path,title,description,body,kind){
  +'<meta property="og:site_name" content="Moavia Hassan"><meta property="og:title" content="'+clean(title)+'">'
  +'<meta property="og:description" content="'+clean(description)+'"><meta property="og:url" content="'+url+'">'
  +'<meta property="og:image" content="'+origin+'/social-preview.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="'+origin+'/social-preview.png"><link rel="icon" type="image/png" href="/favicon.png">'
- +'<link rel="stylesheet" href="/seo/pages.css">'
+ +'<link rel="stylesheet" href="/seo/pages.css">'+(isContact?'<link rel="stylesheet" href="/contact-premium.css">':'')
  +'<script type="application/ld+json">'+JSON.stringify(schema).replace(/</g,'\u003c')+'</script>'
- +'</head><body><header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" width="42" height="42" alt="Moavia Hassan logo">Moavia Hassan</a>'
+ +'</head><body'+(isContact?' class="contact-premium-page"':'')+'><header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" width="42" height="42" alt="Moavia Hassan logo">Moavia Hassan</a>'
  +nav+'</div></header>'
  +'<main><div class="wrap subnav"><a href="/">Home</a> / '+(kind==='hire'?'Hire Me':'Contact')+'</div>'
- +'<div class="hero"><div class="wrap"><span class="pill">SEO Tools · Services · Web/App Projects</span><h1>'+clean(title.replace(' | Moavia Hassan',''))+'</h1><p>'+clean(description)+'</p></div></div>'
- +'<div class="wrap">'+body+'</div></main>'
+ +(isContact?contactHero():'<div class="hero"><div class="wrap"><span class="pill">SEO Tools · Services · Web/App Projects</span><h1>'+clean(title.replace(' | Moavia Hassan',''))+'</h1><p>'+clean(description)+'</p></div></div>')
+ +'<div class="wrap'+(isContact?' contact-premium-content':'')+'">'+body+'</div></main>'
  +'<footer><div class="wrap"><div><strong>Moavia Hassan</strong><p>Islamabad, Pakistan</p></div>'
  +'<div><a href="/tools/">Tools</a> · <a href="/hire-me/">Services</a> · <a href="/projects/">Projects</a> · <a href="/about/">About</a> · <a href="/contact/">Contact</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="/terms-and-conditions/">Terms</a></div>'
  +'<div><a href="mailto:hello@moaviaseo.com">Email</a></div></div></footer></body></html>\n';
@@ -39,13 +41,10 @@ page('/hire-me/','Hire Me | Moavia Hassan',
 +'<section><h2>How to get started</h2><ol class="clean"><li>Send your website URL or project idea.</li><li>Describe the goal, audience and required features.</li><li>We can agree scope, timeline and pricing in writing before any paid work.</li></ol></section>'
 +'<section class="card"><h2>Contact me</h2><p>Email <a href="mailto:hello@moaviaseo.com">hello@moaviaseo.com</a> or <a href="/contact/">use the contact page</a>.</p><a class="action" href="mailto:hello@moaviaseo.com?subject=Website%20or%20SEO%20project%20enquiry">Send an enquiry</a><p>Prefer Fiverr? <a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer">View my Fiverr freelancer profile</a> or <a href="https://www.upwork.com/freelancers/~01c3735023b2f296fa" target="_blank" rel="noopener noreferrer">view my Upwork freelancer profile</a> to review the available services on the respective freelance platforms.</p></section>',
 'hire');
-page('/contact/','Contact Moavia Hassan',
-'Contact Moavia Hassan about an SEO tool, web project or possible collaboration. Email and WhatsApp available.',
-'<section><h2>Contact details</h2><p>Based in Islamabad, Pakistan, working online. No walk-in office is advertised.</p>'
-+'<div class="cards"><article class="card"><h3>Email</h3><p><a href="mailto:hello@moaviaseo.com">hello@moaviaseo.com</a></p><p>Include your website and the purpose of your message.</p></article>'
-+'<article class="card"><h3>WhatsApp</h3><p><a href="https://wa.me/923234313869" target="_blank" rel="noopener noreferrer">+92 323 4313869</a></p><p>Use for project enquiries.</p></article></div></section>'
-+'<section><h2>Project enquiries</h2><p>Share the website address, problem, goal and preferred reply channel. Do not send passwords or sensitive customer data.</p><p><a href="/#contact">Open the website contact form</a> · <a href="/hire-me/">Hire Me</a> · <a href="/privacy-policy/">Privacy Policy</a> · <a href="https://www.fiverr.com/moavia_seopro" target="_blank" rel="noopener noreferrer">Fiverr freelancer profile</a> · <a href="https://www.upwork.com/freelancers/~01c3735023b2f296fa" target="_blank" rel="noopener noreferrer">Upwork freelancer profile</a></p></section>',
-'contact');
+page('/contact/','Contact Moavia Hassan | Website, SEO & Automation Projects',
+ 'Contact Moavia Hassan about website development, technical SEO, online tools or automation ideas. Reach out by email, WhatsApp or the project enquiry form.',
+ contactContent(),
+ 'contact');
 const old='/services/';
 const target='/hire-me/';
 const d=join(root,'services');mkdirSync(d,{recursive:true});
