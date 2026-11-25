@@ -174,7 +174,19 @@ function buildPage({path, title, intro, body, index = true, scene = null, featur
 
 // RankNova's public demo currently resolves to a 404; omit it from this
 // visual Web Development showcase without deleting its project record.
-const webProjects = projects.filter(item => item.kind !== 'android' && item.id !== 'ranknova');
+const featuredWebOrder = ['toolscresta', 'draliwellness'];
+// The web-development gallery always leads with the two live flagship sites.
+// Remaining projects preserve their original relative order from the catalog.
+const webProjects = projects
+  .filter(item => item.kind !== 'android' && item.id !== 'ranknova')
+  .sort((a,b) => {
+    const pa = featuredWebOrder.indexOf(a.id);
+    const pb = featuredWebOrder.indexOf(b.id);
+    if (pa !== -1 && pb !== -1) return pa - pb;
+    if (pa !== -1) return -1;
+    if (pb !== -1) return 1;
+    return 0;
+  });
 const androidProjects = projects.filter(item => item.kind === 'android');
 const featuredWebProject = webProjects.find(item => item.id === 'toolscresta') || webProjects[0];
 if (!featuredWebProject || webProjects.length !== 5) throw Error('Expected five visible public web projects excluding RankNova.');
