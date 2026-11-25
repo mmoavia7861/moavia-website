@@ -54,6 +54,7 @@ jobs:
           trap 'kill "$PID" 2>/dev/null || true' EXIT
           node scripts/check-android-layout-browser.mjs http://127.0.0.1:4173/android-development/
           node scripts/check-hire-layout-browser.mjs http://127.0.0.1:4173/hire-me/
+          node scripts/check-ai-layout-browser.mjs http://127.0.0.1:4173/ai-automations/
 
       - name: Verify standalone tool pages are in production output
         shell: bash
@@ -108,6 +109,11 @@ jobs:
         env:
           MOAVIA_PLAYWRIGHT_PACKAGE: /tmp/moavia-playwright/node_modules/playwright
         run: node scripts/check-hire-layout-browser.mjs https://moaviaseo.com/hire-me/
+
+      - name: Verify live AI Automation layout and image containment
+        env:
+          MOAVIA_PLAYWRIGHT_PACKAGE: /tmp/moavia-playwright/node_modules/playwright
+        run: node scripts/check-ai-layout-browser.mjs https://moaviaseo.com/ai-automations/
 
       - name: Verify retired SEO and AI tools are gone on the live domain
         shell: bash
