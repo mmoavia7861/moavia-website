@@ -1,4 +1,5 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { aiHero, aiContent } from './ai-premium-template.mjs';
 import { join } from 'node:path';
 
 // Build after the normal project, SEO and hub page generators.
@@ -189,12 +190,14 @@ function buildPage({path, title, intro, body, index = true, scene = null, featur
     + (scene ? '<link rel="stylesheet" href="/skill-scenes.css"><script src="/skill-scenes.js" defer></script>' : '')
     + (scene === 'web' ? '<link rel="stylesheet" href="/web-showcase.css"><script src="/web-showcase.js" defer></script>' : '')
     + (scene === 'android' ? '<link rel="stylesheet" href="/android-showcase.css"><script src="/web-showcase.js" defer></script>' : '')
+    + (scene === 'ai' ? '<link rel="stylesheet" href="/ai-showcase.css"><script src="/web-showcase.js" defer></script>' : '')
     + style
-    + '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, '\\u003c') + '</script></head><body class="portfolio-detail-page">'
+    + '<script type="application/ld+json">' + JSON.stringify(schema).replace(/</g, '\\u003c') + '</script></head><body class="portfolio-detail-page' + (scene === 'ai' ? ' aicase-page' : '') + '">'
     + '<header><div class="wrap"><a class="brand" href="/"><img src="/site-logo.png" width="42" height="42" alt="Moavia Hassan logo">Moavia Hassan</a>' + nav + '</div></header>'
     + '<main><div class="wrap subnav"><a href="/">Home</a> / ' + esc(title.replace(' | Moavia Hassan','')) + '</div>'
     + (scene === 'web' && featured ? webHero(title,intro,featured)
     : scene === 'android' ? androidHero(title,intro)
+    : scene === 'ai' ? aiHero()
     : '<div class="hero"><div class="wrap">' + (scene ? '<div class="craft3d-detail-hero"><div class="craft3d-detail-copy">' : '')
       + '<span class="pill">Personal developer portfolio</span>'
       + '<h1>' + esc(title.replace(' | Moavia Hassan','')) + '</h1><p class="portfolio-intro">' + esc(intro) + '</p>'
@@ -254,14 +257,10 @@ paths.push(buildPage({
 }));
 paths.push(buildPage({
   path: '/ai-automations/',
-  title: 'AI Automation Projects | Moavia Hassan',
+  title: 'AI Automations & Integration Projects | Moavia Hassan',
   scene: 'ai',
-  intro: 'An overview of my AI-assisted web tools, workflow experiments and automation interests, with clear distinctions between project concepts, demos and verified services.',
-  body: '<section><h2>AI and automation focus</h2><div class="portfolio-cards">'
-    + '<article class="portfolio-card"><span class="label">AI-assisted web tools</span><h3>ToolsCresta integrations</h3><p>Tool website experiments including AI-assisted card creation concepts and backend API integrations. Third-party feature availability is not guaranteed.</p><p><a href="/projects/toolscresta/">View website project</a></p></article>'
-    + '<article class="portfolio-card"><span class="label">Workflow exploration</span><h3>Business discovery & outreach automation</h3><p>Planning and experimenting with structured business research, evidence checks, spreadsheet tracking and permission-aware email workflows using Make and connected services. No private data or unverifiable success rates are published.</p></article>'
-    + '<article class="portfolio-card"><span class="label">Learning</span><h3>AI agents and automation</h3><p>Studying AI agents, tool calling, workflow orchestration and API security. Coursework alone is not represented as a certification.</p></article>'
-    + '</div></section><section><h2>Responsible automation</h2><p>Automation should protect API credentials, respect user consent and platform rules, use human review when necessary and never fabricate outcomes.</p></section>'
+  intro: 'Explore source-backed AI assistants and workflow integration examples across web and Android projects, plus a clearly labeled automation design exercise.',
+  body: aiContent()
 }));
 buildPage({
   path: '/certificates/',
