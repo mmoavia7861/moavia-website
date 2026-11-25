@@ -7,7 +7,7 @@ const routes=[
  '/blog/technical-seo-playbook-2026/','/blog/ai-generated-websites-human-engineering/',
  '/blog/mastering-meta-ads-capi-cro/','/blog/local-seo-google-maps-3pack/',
  '/blog/image-video-resolution-cro/','/blog/google-search-console-discovered-vs-indexed/',
- '/blog/seo-aeo-geo-small-business-guide/','/web-development/','/android-development/','/ai-automations/','/projects/','/projects/ranknova/','/projects/dark-agency/','/projects/agency-multipage/','/projects/umm-e-aiman/','/projects/moavia-app/','/projects/toolscresta/','/projects/draliwellness/','/hire-me/','/contact/',
+ '/blog/seo-aeo-geo-small-business-guide/','/web-development/','/android-development/','/ai-automations/','/projects/','/projects/ranknova/','/projects/dark-agency/','/projects/agency-multipage/','/projects/umm-e-aiman/','/projects/moavia-app/','/projects/mealverse/','/projects/toolscresta/','/projects/draliwellness/','/hire-me/','/contact/',
 
 ];
 const read=path=>readFileSync(join(dist,path),'utf8');
@@ -82,7 +82,9 @@ for(const route of routes){
  check(html.includes('src="/theme-init.js"') && html.includes('href="/theme.css"') && html.includes('src="/theme-switcher.js"'),'theme support missing on page: '+route);
  if(route==='/projects/') {
   check(!html.includes('href="/projects/ranknova/"'),'RankNova must be hidden from the project directory');
-  check(html.includes('href="/projects/moavia-app/"'),'Android app missing from projects directory');
+  check(html.includes('href="/projects/moavia-app/"'),'Android starter missing from projects directory');
+  check(html.includes('href="/projects/mealverse/"'),'MealVerse Android project missing from directory');
+  check(html.includes('https://github.com/mmoavia7861/mobile-application'),'MealVerse GitHub source link missing');
   check(html.includes('View GitHub source'),'Android source link missing from projects directory');
   check(html.includes('Web &amp; App Projects'),'Web/App project directory heading missing');
  }
@@ -104,6 +106,14 @@ for(const route of routes){
    check(html.includes('app/src/main/java/com/example/MainActivity.kt'),'Android code reference missing');
    check(html.includes('SoftwareSourceCode'),'Android software source JSON-LD missing');
    check(!html.includes('image.thum.io/get/'),'Android prototype should not use a fabricated live screenshot');
+  } else if(route==='/projects/mealverse/'){
+   for(const label of ['Source-based app illustration','My portfolio role','Technology stack','Results and verification','View Android source repository','No live app or store download']){
+    check(html.includes(label),'MealVerse source disclosure missing '+label);
+   }
+   check(html.includes('MealVerse') && html.includes('Customer / Shopkeeper'),'MealVerse illustrated source summary missing');
+   check(html.includes('app/src/main/java/com/example/ui/navigation/MealVerseApp.kt'),'MealVerse verified source link missing');
+   check(html.includes('SoftwareSourceCode'),'MealVerse source JSON-LD missing');
+   check(!html.includes('data-portfolio-shot'),'Do not fabricate MealVerse emulator screenshots');
   } else if(route!=='/projects/'){
    for(const label of ['Project screenshot','My portfolio role','Technology stack','Results and verification','View live project']){
     check(html.includes(label),'project section missing '+label+': '+route);
