@@ -76,7 +76,11 @@ const webHero = (title, intro, featured) => '<div class="hero webcase-page-hero"
   + '</div></div></div>';
 
 const androidScreenshot = '/android/moavia-seo-pro-ui.jpg';
-const androidSource = projects.find(item => item.kind === 'android');
+const androidSource = projects.find(item => item.id === 'moavia-app');
+const mealverseSource = projects.find(item => item.id === 'mealverse');
+if (!mealverseSource || mealverseSource.kind !== 'android' || mealverseSource.repo !== 'https://github.com/mmoavia7861/mobile-application') {
+  throw Error('Expected source-backed MealVerse Android project.');
+}
 if (!androidSource || androidSource.id !== 'moavia-app') {
   throw Error('Expected the independently verifiable Kotlin/Compose starter.');
 }
@@ -88,7 +92,7 @@ const androidHero = (title, intro) => '<div class="hero androidcase-hero"><div c
   + '<div class="androidcase-copy"><span class="androidcase-eyebrow">MOBILE DESIGN / ANDROID DEVELOPMENT</span>'
   + '<h1>Android apps.<br><span>Thoughtfully designed.</span></h1>'
   + '<p class="portfolio-intro androidcase-intro">' + esc(intro) + '</p>'
-  + '<div class="androidcase-hero-actions"><a class="androidcase-primary" href="#android-project">Explore the mobile UI ↓</a>'
+  + '<div class="androidcase-hero-actions"><a class="androidcase-primary" href="#android-project">Explore Android projects ↓</a>'
   + '<a class="androidcase-secondary" href="' + esc(androidSource.repo) + '" target="_blank" rel="noopener noreferrer">View Kotlin starter source ↗</a></div>'
   + '<div class="androidcase-hero-tags"><span>Responsive interfaces</span><span>Android UI</span><span>Kotlin / Compose learning</span></div>'
   + '<p class="androidcase-hero-note">Screenshot provided for this portfolio. Not represented as a Play Store release.</p></div>'
@@ -103,6 +107,40 @@ const androidHero = (title, intro) => '<div class="hero androidcase-hero"><div c
   + '<span class="androidcase-float androidcase-float--left" aria-hidden="true">Android UI design</span>'
   + '<span class="androidcase-float androidcase-float--right" aria-hidden="true">Kotlin · Jetpack Compose</span>'
   + '<span class="androidcase-annotation" aria-hidden="true">MOBILE / EXPERIENCE</span></div></div></div>';
+
+const mealverseBody = `<section class="mealverse-case" id="mealverse-project" aria-labelledby="mealverse-project-title">
+  <div class="androidcase-portfolio-heading"><div>
+    <span class="androidcase-overline">02 / NATIVE ANDROID SOURCE PROJECT</span>
+    <h2 id="mealverse-project-title">MealVerse — Food Ordering Android App</h2>
+    <p>A separate Kotlin and Jetpack Compose codebase for food discovery, customer ordering and shopkeeper management. The design shown below is an illustration, not a captured running app.</p>
+  </div></div>
+  <article class="androidcase-project mealverse-case-card">
+    <div class="androidcase-project-media mealverse-case-media">
+      <div class="mealverse-concept-device" role="img" aria-label="Illustrative food-ordering mobile interface, not an actual MealVerse application screenshot">
+        <div class="mealverse-concept-screen" aria-hidden="true">
+          <span class="mealverse-concept-eyebrow">MealVerse <small>FOOD DISCOVERY</small></span>
+          <strong>Discover your next favourite meal.</strong>
+          <span class="mealverse-concept-promo"><span>Local flavours, one place</span><b>🍜</b></span>
+          <span class="mealverse-concept-search">⌕ &nbsp; Search meals &amp; stores</span>
+          <span class="mealverse-concept-grid"><i>🍔<small>Burgers</small></i><i>🍛<small>Meals</small></i><i>☕<small>Drinks</small></i></span>
+          <span class="mealverse-concept-bottom">Home &nbsp; · &nbsp; Orders &nbsp; · &nbsp; Profile</span>
+        </div>
+      </div>
+      <span class="mealverse-concept-caption">SOURCE-INSPIRED ILLUSTRATION · NOT A SCREENSHOT</span>
+    </div>
+    <div class="androidcase-project-content">
+      <span class="androidcase-project-kicker">KOTLIN · COMPOSE · FIREBASE CODEBASE</span>
+      <h3>Customer &amp; Shopkeeper Mobile Experience</h3>
+      <p>The public repository includes code for customer and shopkeeper registration, store discovery, menu management, cart and checkout flows, order tracking and role-aware navigation.</p>
+      <div class="androidcase-features"><span>Food discovery UI</span><span>Customer &amp; shopkeeper roles</span><span>Order tracking screens</span><span>Firebase integration code</span></div>
+      <div class="androidcase-card-actions">
+        <a class="androidcase-card-primary" href="https://github.com/mmoavia7861/mobile-application" target="_blank" rel="noopener noreferrer">View MealVerse GitHub source ↗</a>
+        <a class="androidcase-card-secondary" href="/projects/mealverse/">Project details →</a>
+      </div>
+      <p class="androidcase-disclosure">The phone is a clearly labeled illustrative UI concept, not a verified app screenshot. Source code was inspected; APK build, live payment handling, real deliveries and Play Store publication have not been independently verified.</p>
+    </div>
+  </article>
+</section>`;
 const androidBody = '<section class="androidcase-portfolio" id="android-project" aria-labelledby="androidcase-project-heading">'
   + '<div class="androidcase-portfolio-heading"><div><span class="androidcase-overline">01 / SELECTED MOBILE INTERFACE</span>'
   + '<h2 id="androidcase-project-heading">Explore the Android UI</h2>'
@@ -211,8 +249,8 @@ paths.push(buildPage({
   path: '/android-development/',
   title: 'Android App Development | Moavia Hassan',
   scene: 'android',
-  intro: 'Explore a supplied Moavia SEO Pro mobile interface screenshot with Android-inspired depth animation. My independently verifiable Kotlin and Jetpack Compose starter is linked separately.',
-  body: androidBody
+  intro: 'Explore two Android portfolio projects: a supplied Moavia SEO Pro mobile interface preview and MealVerse, a separate Kotlin and Jetpack Compose food-ordering application source project.',
+  body: androidBody + mealverseBody
 }));
 paths.push(buildPage({
   path: '/ai-automations/',
