@@ -186,3 +186,33 @@ html[data-theme="dark"] body.portfolio-detail-page .hero.androidcase-hero{
     linear-gradient(119deg,#071521 0%,#12273c 58%,#0b172a 100%)!important;
   color:#f3faff!important;
 }
+
+
+/* MealVerse Android source project: source-inspired artwork, explicitly NOT a screenshot. */
+.mealverse-case{padding:32px 0 50px}
+.mealverse-case .androidcase-portfolio-heading .androidcase-overline{color:#e58f48}
+.mealverse-case-media{background:radial-gradient(ellipse at 52% 35%,rgba(255,158,85,.3),transparent 55%),linear-gradient(145deg,#2c1c22,#171c31 78%);display:flex;flex-direction:column;gap:19px}
+.mealverse-case-media:before{background-image:radial-gradient(rgba(255,183,121,.39) 1px,transparent 1px)}
+.mealverse-concept-device{position:relative;z-index:1;width:226px;max-width:75%;height:454px;max-height:85%;border-radius:37px;border:8px solid #1e2438;outline:2px solid #c9aca1;
+  padding:7px;background:#111827;box-shadow:16px 23px 0 rgba(2,6,19,.34),0 26px 55px rgba(0,0,0,.34);transform:rotate(-4deg);overflow:hidden}
+.mealverse-concept-device:before{content:"";position:absolute;top:10px;left:50%;transform:translateX(-50%);width:65px;height:15px;z-index:3;background:#1e2438;border-radius:0 0 12px 12px}
+.mealverse-concept-screen{height:100%;width:100%;padding:32px 14px 15px;display:flex;flex-direction:column;gap:14px;box-sizing:border-box;border-radius:26px;
+  background:linear-gradient(170deg,#fffaf5,#fff2e6);color:#422e26;font-family:system-ui,-apple-system,sans-serif}
+.mealverse-concept-eyebrow{font-size:15px;font-weight:900;letter-spacing:-.04em;color:#b25b2f}
+.mealverse-concept-eyebrow small{display:block;letter-spacing:.16em;font-weight:790;font-size:7px;margin-top:3px;color:#ae8f83}
+.mealverse-concept-screen>strong{font-size:21px;font-weight:900;line-height:1.12;letter-spacing:-.06em;max-width:160px;margin:3px 0 0}
+.mealverse-concept-promo{min-height:91px;padding:12px;box-sizing:border-box;border-radius:15px;background:linear-gradient(125deg,#fc9d53,#f2bd8d);
+  display:flex;justify-content:space-between;gap:7px;align-items:center;font-size:11px;color:#64331c;font-weight:850}
+.mealverse-concept-promo b{font-size:41px}
+.mealverse-concept-search{border:1px solid #f1dfd2;background:#fff;border-radius:11px;padding:10px;font-size:9px;font-weight:730;color:#a38675}
+.mealverse-concept-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+.mealverse-concept-grid i{background:#fff;border:1px solid #f1e1d5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border-radius:11px;min-height:58px;font-size:25px;font-style:normal}
+.mealverse-concept-grid small{font-size:8px;font-weight:800;color:#795a49}
+.mealverse-concept-bottom{margin-top:auto;padding:10px 2px 0;border-top:1px solid #ecdbcf;letter-spacing:.01em;text-align:center;color:#a7775a;font-size:9px;font-weight:850}
+.mealverse-concept-caption{z-index:2;color:#ffd7b6;font-size:10px;font-weight:850;letter-spacing:.08em;text-align:center;padding:0 16px}
+.mealverse-case .androidcase-card-actions .androidcase-card-primary{background:#8c4e34}
+.mealverse-case .androidcase-disclosure{background:#fff6ee;border-left-color:#edac6b;color:#795640!important}
+html[data-theme="dark"] .mealverse-case .androidcase-disclosure{background:#3b302c;color:#f4d5bd!important}
+@media(max-width:860px){.mealverse-case-media{min-height:510px}}
+@media(max-width:580px){.mealverse-case{padding:20px 0 36px}.mealverse-case-media{min-height:500px}.mealverse-concept-device{height:421px;width:214px;max-width:70%}.mealverse-concept-screen{gap:11px}.mealverse-concept-caption{font-size:9px}}
+@media(prefers-reduced-motion:reduce){.mealverse-concept-device{transform:none}}
