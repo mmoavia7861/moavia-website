@@ -1,0 +1,178 @@
+/* AI Automation portfolio · custom dimensional hero and bounded real project captures.
+ * No remote assets, 3D library, or fictional screenshots are needed. */
+body.aicase-page{overflow-x:clip;background:#f7f9fd}
+body.aicase-page main{overflow-x:clip;max-width:100%}
+body.aicase-page .aicase-hero{position:relative;isolation:isolate;overflow:hidden;
+  padding:66px 0 75px;background:radial-gradient(ellipse at 75% 25%,rgba(117,93,233,.3),transparent 45%),
+  radial-gradient(ellipse at 5% 80%,rgba(67,215,197,.11),transparent 46%),linear-gradient(115deg,#0d1530 0%,#172348 56%,#101d3d 100%);
+  border-radius:0 0 26px 26px;color:#f5f7ff}
+body.aicase-page .aicase-hero-grid{position:absolute;inset:0;z-index:-1;opacity:.25;pointer-events:none;
+  background-image:linear-gradient(rgba(185,198,247,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(185,198,247,.12) 1px,transparent 1px);
+  background-size:52px 52px;mask-image:linear-gradient(90deg,transparent,black)}
+body.aicase-page .aicase-hero-layout{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:center;gap:clamp(26px,4vw,67px)}
+body.aicase-page .aicase-hero-layout>*{min-width:0;max-width:100%}
+body.aicase-page .aicase-eyebrow{display:inline-flex;align-items:center;gap:12px;font-size:.73rem;font-weight:880;
+ letter-spacing:.15em;color:#a8f7e0;line-height:1.55}
+body.aicase-page .aicase-eyebrow i{width:8px;height:8px;border-radius:50%;background:#b4ffe4;box-shadow:0 0 0 5px rgba(180,255,228,.12)}
+body.aicase-page .aicase-hero h1{color:#fff!important;font-size:clamp(2.8rem,5.5vw,5.1rem);font-weight:900;line-height:1.065;
+ letter-spacing:-.068em;max-width:725px;margin:24px 0}
+body.aicase-page .aicase-hero h1 span{display:block;color:#b6a8ff}
+body.aicase-page .aicase-lead{font-size:clamp(1rem,1.4vw,1.14rem);color:#e1eaff;line-height:1.8;max-width:650px}
+body.aicase-page .aicase-intro{font-size:.88rem;color:#afbfdf;line-height:1.78;max-width:635px;margin:17px 0 0}
+body.aicase-page .aicase-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:27px}
+body.aicase-page .aicase-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:11px;
+ min-height:46px;padding:12px 17px;font-size:.86rem;font-weight:850;text-decoration:none;transition:transform .22s ease,background-color .22s ease}
+body.aicase-page .aicase-btn:hover{transform:translateY(-3px)}
+body.aicase-page .aicase-btn-primary{background:#b6f9dc;color:#122742!important}
+body.aicase-page .aicase-btn-primary:hover{background:#ddffef}
+body.aicase-page .aicase-btn-outline{border:1px solid rgba(226,231,255,.36);color:#fff!important;background:rgba(255,255,255,.07)}
+body.aicase-page .aicase-hero-badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px}
+body.aicase-page .aicase-hero-badges span{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(188,211,255,.2);
+ border-radius:30px;padding:7px 10px;font-size:.7rem;font-weight:760;color:#cbd8ef;background:rgba(255,255,255,.055)}
+body.aicase-page .aicase-hero-badges span:before{content:"";width:5px;height:5px;background:#b6f9dc;border-radius:50%}
+body.aicase-page .aicase-stage{position:relative;min-width:0;overflow:hidden;min-height:418px;max-height:520px;border-radius:22px;
+ border:1px solid rgba(192,185,255,.2);background:#111932;box-shadow:0 33px 75px rgba(2,9,26,.24)}
+body.aicase-page .aicase-stage .craft3d-canvas{width:100%;height:418px;min-height:418px;border:0;border-radius:0;overflow:hidden}
+body.aicase-page .aicase-stage-top{position:absolute;left:17px;top:17px;z-index:5;color:#c4c7ff;
+ background:rgba(8,19,43,.75);border:1px solid rgba(203,202,255,.2);font-size:.62rem;
+ letter-spacing:.11em;font-weight:900;border-radius:8px;padding:10px 12px;pointer-events:none}
+body.aicase-page .aicase-stage-bottom{position:absolute;z-index:5;left:12px;right:12px;bottom:15px;display:flex;
+ flex-wrap:wrap;justify-content:center;align-items:center;gap:7px;pointer-events:none}
+body.aicase-page .aicase-stage-bottom span{font-weight:900;letter-spacing:.06em;font-size:.58rem;white-space:nowrap;
+ background:rgba(14,29,59,.88);color:#f0efff;padding:9px 9px;border:1px solid rgba(181,172,255,.22);border-radius:8px}
+body.aicase-page .aicase-stage-bottom b{color:#b8f6e6;font-size:.8rem}
+body.aicase-page .aicase-hero+.wrap{max-width:1180px}
+body.aicase-page .aicase-projects{padding:77px 0 0}
+body.aicase-page .aicase-heading{max-width:825px;margin:0 0 26px}
+body.aicase-page .aicase-source-tag{display:inline-flex;align-items:center;gap:6px;font-size:.68rem;letter-spacing:.13em;
+ font-weight:900;color:#655ac7;text-transform:uppercase;line-height:1.55}
+body.aicase-page .aicase-heading h2,body.aicase-page .aicase-workflow h2,body.aicase-page .aicase-final h2{
+ color:#1c2943;font-size:clamp(1.9rem,3.7vw,3rem);line-height:1.13;letter-spacing:-.058em;font-weight:890;margin:12px 0 15px}
+body.aicase-page .aicase-heading p{color:#65758e;font-size:.96rem;line-height:1.83;margin:0}
+body.aicase-page .aicase-card-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
+body.aicase-page .aicase-card{display:flex;flex-direction:column;min-width:0;max-width:100%;background:#fff;
+ border:1px solid #e2e7f2;border-radius:22px;overflow:hidden;box-shadow:0 16px 42px rgba(22,31,61,.05)}
+body.aicase-page .aicase-preview{display:flex;flex-direction:column;min-width:0;max-width:100%;aspect-ratio:16/10;
+ margin:12px 12px 0;border-radius:13px;overflow:hidden;background:#16213b;text-decoration:none}
+body.aicase-page .aicase-browser-bar{display:flex;align-items:center;gap:5px;min-height:35px;flex:none;background:#172740;padding:8px 12px}
+body.aicase-page .aicase-browser-bar i{width:7px;height:7px;display:block;border-radius:50%;background:#e5a5a3}
+body.aicase-page .aicase-browser-bar i:nth-child(2){background:#ebce91}
+body.aicase-page .aicase-browser-bar i:nth-child(3){background:#88d6b5}
+body.aicase-page .aicase-browser-bar span{font-size:.69rem;color:#bed0ef;margin-left:8px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+body.aicase-page .aicase-capture{display:block;position:relative;min-width:0;flex:1;overflow:hidden;max-height:355px}
+body.aicase-page .aicase-capture img{display:block;width:100%;max-width:100%;height:100%!important;
+ aspect-ratio:auto;object-fit:cover;object-position:top center;transition:transform .25s ease}
+body.aicase-page .aicase-preview:hover img{transform:scale(1.018)}
+body.aicase-page .aicase-capture-fallback{display:grid;place-items:center;text-align:center;padding:24px;
+ height:100%;color:#ecf2ff;background:linear-gradient(145deg,#1d2a4d,#3f4475);font-size:.8rem;line-height:1.6}
+body.aicase-page .aicase-capture-fallback[hidden]{display:none!important}
+body.aicase-page .aicase-card-body{padding:25px 27px 26px;display:flex;align-items:flex-start;flex-direction:column;flex:1}
+body.aicase-page .aicase-card h3,body.aicase-page .aicase-mealverse h3{font-size:clamp(1.25rem,2.2vw,1.65rem);
+ font-weight:880;letter-spacing:-.043em;line-height:1.24;color:#1a2a45;margin:14px 0 12px}
+body.aicase-page .aicase-card-body>p,body.aicase-page .aicase-mealverse-text>p{font-size:.88rem;line-height:1.77;color:#5e718c;margin:0 0 17px}
+body.aicase-page .aicase-stack{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 19px}
+body.aicase-page .aicase-stack span{font-size:.72rem;font-weight:780;padding:7px 9px;border-radius:8px;
+ color:#555f9d;background:#f1f2ff;border:1px solid #e4e5fc}
+body.aicase-page .aicase-links{display:flex;align-items:center;flex-wrap:wrap;gap:9px;margin:0 0 15px}
+body.aicase-page .aicase-links a{display:inline-flex;align-items:center;justify-content:center;gap:6px;
+ border-radius:9px;padding:10px 12px;font-size:.78rem;line-height:1.35;font-weight:850;text-decoration:none;color:#545bb1}
+body.aicase-page .aicase-links .aicase-link-primary{background:#182a49;color:#fff}
+body.aicase-page .aicase-links a:not(.aicase-link-primary){background:#f5f7ff;border:1px solid #e1e6f7}
+body.aicase-page .aicase-links a:hover{filter:brightness(.94)}
+body.aicase-page .aicase-note{padding:12px 13px!important;background:#f3f7fd;border-radius:9px;
+ margin-top:auto!important;border-left:3px solid #a6a1e8;font-size:.73rem!important;color:#67778f!important}
+body.aicase-page .aicase-mealverse{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
+ align-items:stretch;overflow:hidden;border-radius:22px;margin-top:22px;border:1px solid #e0e6f2;background:#fff;
+ box-shadow:0 16px 42px rgba(22,31,61,.05)}
+body.aicase-page .aicase-mealverse-visual{min-height:330px;padding:38px 22px;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;gap:12px;background:radial-gradient(ellipse at 50% 44%,rgba(141,116,244,.28),transparent 60%),#121b35;overflow:hidden}
+body.aicase-page .aicase-mealverse-browser{display:flex;align-items:center;gap:6px;background:#252f52;
+ border:1px solid rgba(206,211,255,.2);border-radius:13px 13px 0 0;padding:11px 14px;width:min(100%,355px)}
+body.aicase-page .aicase-mealverse-browser i{width:7px;height:7px;border-radius:50%;background:#f7b1a2}
+body.aicase-page .aicase-mealverse-browser i:nth-child(2){background:#f6d995}
+body.aicase-page .aicase-mealverse-browser i:nth-child(3){background:#9be3bd}
+body.aicase-page .aicase-mealverse-browser span{font-size:.64rem;color:#ccdcfa;margin-left:8px}
+body.aicase-page .aicase-chat{width:min(100%,355px);display:flex;flex-direction:column;align-items:flex-start;gap:13px;
+ border-radius:0 0 15px 15px;padding:22px;background:#fff;box-shadow:0 16px 34px rgba(0,0,0,.19)}
+body.aicase-page .aicase-chat-head{font-size:.85rem;color:#493c9e;font-weight:900}
+body.aicase-page .aicase-chat-bubble{padding:12px 13px;border-radius:12px;font-size:.79rem;line-height:1.55;max-width:94%}
+body.aicase-page .aicase-chat-user{background:#e4e7ff;color:#35377d;align-self:flex-end}
+body.aicase-page .aicase-chat-bot{background:#eff9f4;color:#2c6b51;align-self:flex-start}
+body.aicase-page .aicase-chat-foot{font-size:.59rem;line-height:1.5;color:#687388;font-weight:840;letter-spacing:.04em}
+body.aicase-page .aicase-mealverse-text{align-self:center;padding:clamp(25px,4vw,51px)}
+body.aicase-page .aicase-workflow{margin-top:80px;padding:clamp(24px,5vw,53px);border-radius:25px;display:grid;
+ grid-template-columns:minmax(0,.98fr) minmax(0,1.02fr);gap:clamp(24px,4vw,53px);
+ background:linear-gradient(128deg,#132343,#202d56);color:#eff4ff}
+body.aicase-page .aicase-workflow .aicase-source-tag{color:#a7f1d6}
+body.aicase-page .aicase-workflow h2{color:#fff}
+body.aicase-page .aicase-workflow-intro>p{color:#c4d2e9;line-height:1.81;font-size:.9rem}
+body.aicase-page .aicase-workflow-cta{display:inline-block;margin-top:19px;padding:12px 16px;text-decoration:none;border-radius:10px;
+ background:#a7f1d6;color:#102644;font-size:.83rem;font-weight:850}
+body.aicase-page .aicase-workflow-diagram{display:flex;flex-direction:column;gap:0;min-width:0;justify-content:center}
+body.aicase-page .aicase-flow-step{display:grid;grid-template-columns:35px 1fr;gap:2px 11px;
+ background:rgba(255,255,255,.075);border:1px solid rgba(204,220,255,.19);border-radius:12px;
+ padding:14px 16px}
+body.aicase-page .aicase-flow-step span{grid-row:span 2;color:#a4f7dd;font-size:.76rem;font-weight:900}
+body.aicase-page .aicase-flow-step strong{color:#fff;font-size:.89rem;font-weight:840}
+body.aicase-page .aicase-flow-step small{color:#c2d0e7;line-height:1.5;font-size:.77rem}
+body.aicase-page .aicase-flow-arrow{align-self:center;font-size:1rem;color:#a5e9da;line-height:1.2;margin:4px 0}
+body.aicase-page .aicase-principles{margin-top:77px}
+body.aicase-page .aicase-principles-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+body.aicase-page .aicase-principles-grid>div{border:1px solid #e0e6f0;border-radius:16px;background:#fff;padding:24px}
+body.aicase-page .aicase-principles-grid strong{font-size:.9rem;color:#233351;font-weight:870}
+body.aicase-page .aicase-principles-grid p{font-size:.82rem;line-height:1.78;color:#637590;margin:11px 0 0}
+body.aicase-page .aicase-final{margin:77px 0 35px;display:flex;align-items:center;justify-content:space-between;gap:28px;
+ padding:clamp(26px,4vw,48px);border-radius:23px;background:linear-gradient(120deg,#e3f8fb,#e8e5ff 85%);border:1px solid #d4e5f5}
+body.aicase-page .aicase-final>div:first-child{max-width:730px}
+body.aicase-page .aicase-final h2{font-size:clamp(1.8rem,3.1vw,2.7rem)}
+body.aicase-page .aicase-final p{color:#596b86;font-size:.9rem;line-height:1.8;margin:0}
+body.aicase-page .aicase-final-actions{display:flex;flex-direction:column;gap:10px;min-width:210px}
+body.aicase-page .aicase-final-actions a{padding:12px 16px;font-size:.82rem;border-radius:10px;text-align:center;
+ text-decoration:none;font-weight:850;color:#4c549f;background:#fff;border:1px solid #cad2ed}
+body.aicase-page .aicase-final-actions a.aicase-final-main{background:#192a4b;color:#fff}
+html[data-theme="dark"] body.aicase-page{background:#101b2d}
+html[data-theme="dark"] body.aicase-page .aicase-heading h2,
+html[data-theme="dark"] body.aicase-page .aicase-final h2{color:#f1f4ff}
+html[data-theme="dark"] body.aicase-page .aicase-heading p{color:#c7d2e8}
+html[data-theme="dark"] body.aicase-page .aicase-card,
+html[data-theme="dark"] body.aicase-page .aicase-mealverse,
+html[data-theme="dark"] body.aicase-page .aicase-principles-grid>div{background:#1c2b44;border-color:#344660}
+html[data-theme="dark"] body.aicase-page .aicase-card h3,
+html[data-theme="dark"] body.aicase-page .aicase-mealverse h3,
+html[data-theme="dark"] body.aicase-page .aicase-principles-grid strong{color:#f5f7ff}
+html[data-theme="dark"] body.aicase-page .aicase-card-body>p,
+html[data-theme="dark"] body.aicase-page .aicase-mealverse-text>p,
+html[data-theme="dark"] body.aicase-page .aicase-principles-grid p{color:#c5d2e4}
+html[data-theme="dark"] body.aicase-page .aicase-stack span{background:#293752;border-color:#3e517b;color:#c7c7ff}
+html[data-theme="dark"] body.aicase-page .aicase-note{background:#253650;color:#c8d6e9!important}
+html[data-theme="dark"] body.aicase-page .aicase-final{background:linear-gradient(120deg,#153d49,#2a3158);border-color:#384f68}
+html[data-theme="dark"] body.aicase-page .aicase-final p{color:#d3dfee}
+@media(max-width:920px){
+ body.aicase-page .aicase-hero-layout{grid-template-columns:1fr;gap:27px}
+ body.aicase-page .aicase-stage{min-height:350px;max-width:640px;width:100%;justify-self:center}
+ body.aicase-page .aicase-stage .craft3d-canvas{height:350px;min-height:350px}
+ body.aicase-page .aicase-workflow{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+ body.aicase-page .aicase-hero{padding:43px 0 50px;border-radius:0 0 20px 20px}
+ body.aicase-page .aicase-hero h1{font-size:clamp(2.45rem,10vw,3.6rem)}
+ body.aicase-page .aicase-actions{flex-direction:column}
+ body.aicase-page .aicase-btn{width:100%}
+ body.aicase-page .aicase-stage{min-height:275px}
+ body.aicase-page .aicase-stage .craft3d-canvas{height:275px;min-height:275px}
+ body.aicase-page .aicase-stage-bottom span{font-size:.5rem;padding:7px 5px}
+ body.aicase-page .aicase-stage-bottom{gap:4px;left:6px;right:6px}
+ body.aicase-page .aicase-projects{padding-top:53px}
+ body.aicase-page .aicase-card-grid,body.aicase-page .aicase-principles-grid,body.aicase-page .aicase-mealverse{grid-template-columns:1fr;gap:16px}
+ body.aicase-page .aicase-card-body{padding:22px}
+ body.aicase-page .aicase-mealverse-visual{min-height:290px}
+ body.aicase-page .aicase-mealverse-text{padding:24px}
+ body.aicase-page .aicase-workflow,body.aicase-page .aicase-principles,body.aicase-page .aicase-final{margin-top:55px}
+ body.aicase-page .aicase-workflow{padding:26px 20px}
+ body.aicase-page .aicase-final{flex-direction:column;align-items:stretch;padding:25px}
+ body.aicase-page .aicase-final-actions{width:100%}
+}
+@media(prefers-reduced-motion:reduce){
+ body.aicase-page .aicase-btn,body.aicase-page .aicase-capture img{transition:none!important}
+ body.aicase-page .aicase-btn:hover,body.aicase-page .aicase-preview:hover img{transform:none!important}
+}
