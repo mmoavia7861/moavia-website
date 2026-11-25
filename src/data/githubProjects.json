@@ -146,5 +146,29 @@
       "Gradle build configuration, launcher icons, theme resources and placeholder tests."
     ],
     "result": "The public GitHub code shows a basic starter screen, not a finished mobile SEO application. No Play Store listing, published APK, working Gemini assistant, production integration or user results are claimed."
+  },
+  {
+    "id": "mealverse",
+    "title": "MealVerse — Food Ordering Android Application",
+    "url": "https://github.com/mmoavia7861/mobile-application",
+    "repo": "https://github.com/mmoavia7861/mobile-application",
+    "kind": "android",
+    "category": "Android Application — Source Project",
+    "description": "Public Kotlin and Jetpack Compose food-ordering app codebase with customer and shopkeeper flows, menu management, cart/checkout, order tracking and Firebase integrations. App release and end-to-end operation are not independently verified.",
+    "problem": "How can a food-ordering app connect customers and shopkeepers through organized menus, order workflows and accessible mobile navigation?",
+    "role": "Android app source project featuring a Compose navigation graph, role-aware screens, food discovery UI and Firebase-related integration code.",
+    "stack": [
+      "Kotlin",
+      "Jetpack Compose",
+      "Material 3",
+      "Firebase",
+      "Android"
+    ],
+    "work": [
+      "MealVerseApp navigation routes for welcome, customer/shopkeeper registration, customer home, store details, cart/checkout and order tracking.",
+      "Shopkeeper dashboard, menu management and role-based access screens present in the public source.",
+      "Code modules for Firebase authentication, Firestore, notifications and an AI food assistant; production configuration and real-world operation are not independently verified."
+    ],
+    "result": "The public repository contains a substantial Android application codebase. No verified emulator screenshot, Google Play listing, completed payment processing or launched customer service is claimed."
   }
 ]
