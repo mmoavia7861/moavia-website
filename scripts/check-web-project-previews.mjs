@@ -22,6 +22,17 @@ assert.ok(page.includes('data-webcase-parallax'),'The web page needs a layered d
 assert.ok(page.includes('data-skill-scene="web"'),'Keep the existing web sculpture behind the screenshot');
 assert.ok(page.includes('webcase-page-hero') && page.includes('webcase-grid'),'Showcase requires a featured screenshot and a project grid');
 assert.equal((page.match(/data-portfolio-shot/g)||[]).length,visibleWeb.length+1,'One featured shot and five visible project screenshots');
+const galleryHtml=page.slice(page.indexOf('<div class="webcase-grid">'));
+const galleryCards=[...galleryHtml.matchAll(/<article class="webcase-card">([\s\S]*?)<\/article>/g)].map(match=>match[1]);
+assert.equal(galleryCards.length,visibleWeb.length,'Web Development gallery must show all five project cards');
+for (const [index,id] of ['toolscresta','draliwellness'].entries()) {
+  const card=galleryCards[index];
+  const item=visibleWeb.find(project=>project.id===id);
+  assert.ok(item && card.includes('href="'+item.url+'"'),'Web Development '+(index+1)+' card must link to '+id+' live site');
+  assert.ok(card.includes('src="/project-captures/'+id+'.jpg"'),'Web Development '+(index+1)+' card needs actual '+id+' homepage screenshot');
+  assert.ok(card.includes('href="/projects/'+id+'/'),'Web Development '+(index+1)+' card needs '+id+' project details');
+}
+assert.ok(page.indexOf('aria-label="Open the featured live website') < page.indexOf('class="webcase-grid"'),'Featured hero must remain above web project cards');
 for(const item of web){
   const detail=read('dist/projects/'+item.id+'/index.html');
   for(const html of (item.id==='ranknova' ? [detail] : [directory,detail])){
